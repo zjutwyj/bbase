@@ -3,13 +3,13 @@
  * @class BbaseApp - 用户后台
  * @author yongjin<zjut_wyj@163.com> 2014/12/28
  */
-var BbaseApplication = function(options) {
+var BbaseApplication = function (options) {
   this.options = options;
   BbaseEst.extend(this, options);
   this.initialize.apply(this, arguments);
 };
 BbaseEst.extend(BbaseApplication.prototype, {
-  initialize: function() {
+  initialize: function () {
     this.data = { itemActiveList: [], sessionId: '' }; // 全局数据
     this.instance = {}; // 实例对象
     this.modules = {}; // 所有模块
@@ -33,7 +33,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @return {string}
    * @author wyj 15.5.20
    */
-  getAppType: function() {
+  getAppType: function () {
     return 'backbone';
   },
   /**
@@ -50,7 +50,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    *        args: args
    *      });
    */
-  addRegion: function(name, instance, options) {
+  addRegion: function (name, instance, options) {
     var panel = BbaseEst.nextUid('region');
 
     if (!options.__panelId) {
@@ -92,7 +92,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    *          viewId: 'alipayView'
    *        }));
    */
-  addPanel: function(name, panel, options) {
+  addPanel: function (name, panel, options) {
     var isObject = BbaseEst.typeOf(panel.cid) === 'string' ? false : true;
     options = options || {};
     BbaseUtils.addLoading();
@@ -115,16 +115,16 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @param name
    * @author wyj 14.12.29
    */
-  removePanel: function(name, panel) {
+  removePanel: function (name, panel) {
     try {
       var views = [];
       if (!panel) panel = this.panels[name];
       if (panel.el !== 'body') {
-        $('.region', $(panel.el)).each(function() {
+        $('.region', $(panel.el)).each(function () {
           views.push($(this).attr('data-view'));
         });
         views.reverse();
-        BbaseEst.each(views, function(name) {
+        BbaseEst.each(views, function (name) {
           app.removeView(name);
         });
       }
@@ -144,12 +144,14 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *      app.addView('productList', new ProductList());
    */
-  addView: function(name, instance) {
+  addView: function (name, instance) {
     if (name in this.instance) this.removeView(name);
     this.instance[name] = instance;
-     if (!instance.options.viewId){
-      instance.options.viewId = name;
-    }
+
+    instance = instance || {};
+    instance.options = instance.options || {};
+    instance.options.viewId = instance.options.viewId || name;
+
     this.setCurrentView(name);
     return this.instance[name];
   },
@@ -163,14 +165,14 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *        app.removeView('productList');
    */
-  removeView: function(name) {
+  removeView: function (name) {
     try {
       if (this.getView(name)) {
-       if (this.getView(name).destroy) this.getView(name).destroy();
+        if (this.getView(name).destroy) this.getView(name).destroy();
         if (this.getView(name)._destroy) this.getView(name)._destroy()
         if (this.getView(name)._empty) this.getView(name)._empty();
         if (this.getView(name).stopListening) this.getView(name).stopListening();
-        if (this.getView(name).$el)this.getView(name).$el.off().remove();
+        if (this.getView(name).$el) this.getView(name).$el.off().remove();
       }
       delete this.instance[name];
     } catch (e) {
@@ -179,7 +181,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
     return this;
   },
 
-  panel: function(name, panel) {
+  panel: function (name, panel) {
     return this.addPanel(name, panel);
   },
   /**
@@ -189,7 +191,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @param view
    * @author wyj 14.12.29
    */
-  show: function(view) {
+  show: function (view) {
     this.addView(this.currentView, view);
   },
 
@@ -203,11 +205,11 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *      app.getPanelf('panel');
    */
-  getPanel: function(name) {
+  getPanel: function (name) {
     return this.panels[name];
   },
 
-  add: function(name, instance) {
+  add: function (name, instance) {
     return this.addView(name, instance);
   },
 
@@ -218,7 +220,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *      app.setCurrentView('list', new List());
    */
-  setCurrentView: function(name) {
+  setCurrentView: function (name) {
     this.currentView = name;
   },
   /**
@@ -229,7 +231,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *        app.getCurrentView('list');
    */
-  getCurrentView: function() {
+  getCurrentView: function () {
     return this.currentView;
   },
   /**
@@ -242,7 +244,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *        app.getView('productList');
    */
-  getView: function(name) {
+  getView: function (name) {
     return this.instance[name];
   },
   /**
@@ -254,7 +256,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *      app.addDialog(dialog, id);
    */
-  addDialog: function(dialog, id) {
+  addDialog: function (dialog, id) {
     this.dialog.push(dialog);
     if (id) {
       app.addData('_curDialog', id);
@@ -268,7 +270,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @return {*}
    * @author wyj 15.1.23
    */
-  getDialogs: function() {
+  getDialogs: function () {
     return this.dialog;
   },
   /**
@@ -277,7 +279,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @author wyj 15.03.20
    *
    */
-  getDialog: function(id) {
+  getDialog: function (id) {
     if (BbaseEst.isEmpty(id)) return this.dialogs;
     return this.dialogs[id];
   },
@@ -287,7 +289,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @return {*}
    * @author wyj 15.10.25
    */
-  getCurrentDialog: function() {
+  getCurrentDialog: function () {
     if (app.getData('_curDialog')) {
       return this.dialogs[app.getData('_curDialog')];
     }
@@ -301,8 +303,8 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *      app.emptyDialog();
    */
-  emptyDialog: function() {
-    BbaseEst.each(this.dialog, function(item) {
+  emptyDialog: function () {
+    BbaseEst.each(this.dialog, function (item) {
       if (item && item.close) {
         item.close().remove();
       }
@@ -316,7 +318,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @method [模型] - addModel ( 添加模型类 )
    * @author wyj 15.1.23
    */
-  addModel: function(model) {
+  addModel: function (model) {
     this.models.push(model);
     return model;
   },
@@ -325,7 +327,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @method [模型] - getModels ( 获取所有模型类 )
    * @author wyj 15.1.23
    */
-  getModels: function() {
+  getModels: function () {
     return this.models;
   },
 
@@ -339,7 +341,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *      app.addData('productList', productList);
    */
-  addData: function(name, data) {
+  addData: function (name, data) {
     this.data[name] = data;
   },
   /**
@@ -352,7 +354,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *        app.getData('productList');
    */
-  getData: function(name) {
+  getData: function (name) {
     return this.data[name];
   },
   /**
@@ -366,7 +368,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *        app.addModule('ProductList', '/modules/product/controllers/ProductList.js');
    */
-  addModule: function(name, val) {
+  addModule: function (name, val) {
     if (name in this['modules']) {
       console.log('module:' + name + ' isExisted');
     }
@@ -381,7 +383,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *
    */
-  getModules: function() {
+  getModules: function () {
     return this.modules;
   },
   /**
@@ -397,7 +399,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    *          });
    *      });
    */
-  addRoute: function(name, fn) {
+  addRoute: function (name, fn) {
     if (name in this['routes']) {
       console.log('route:' + name + ' isExisted');
     }
@@ -411,7 +413,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @author wyj 14.12.28
    *
    */
-  getRoutes: function() {
+  getRoutes: function () {
     return this.routes;
   },
   /**
@@ -426,7 +428,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
               module.exports = require('modules/album/views/photo_item.html');
             });
    */
-  addTemplate: function(name, fn) {
+  addTemplate: function (name, fn) {
     this.templates[name] = fn;
   },
   /**
@@ -438,7 +440,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *        app.getTemplates();
    */
-  getTemplates: function() {
+  getTemplates: function () {
     return this.templates;
   },
   /**
@@ -453,7 +455,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *      App.addSession('__USER__', {username: 'ggggfj'});
    */
-  addSession: function(name, value, isSession) {
+  addSession: function (name, value, isSession) {
     try {
       var sessionId = BbaseEst.typeOf(isSession) === 'undefined' ? '' : isSession ? this.data.sessionId : '';
       localStorage['___JHW_BACKBONE__' + BbaseEst.hash(sessionId + name)] = JSON.stringify(value);
@@ -471,7 +473,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *      App.getSession('__USER__'); => {username: 'ggggfj'}
    */
-  getSession: function(name, isSession) {
+  getSession: function (name, isSession) {
     try {
       var sessionId = BbaseEst.typeOf(isSession) === 'undefined' ? '' : isSession ? this.data.sessionId : '';
       return JSON.parse(localStorage['___JHW_BACKBONE__' + BbaseEst.hash(sessionId + name)]);
@@ -487,7 +489,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @param name
    * @param compile
    */
-  addCompileTemp: function(name, compile) {
+  addCompileTemp: function (name, compile) {
     this.compileTemps[name] = compile;
   },
   /**
@@ -496,7 +498,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @param name
    * @return {*}
    */
-  getCompileTemp: function(name) {
+  getCompileTemp: function (name) {
     return this.compileTemps[name];
   },
   /**
@@ -507,7 +509,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @param value
    * @author wyj 15.1.7
    */
-  addStatus: function(name, value) {
+  addStatus: function (name, value) {
     this.status[name] = value;
   },
   /**
@@ -518,7 +520,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @param value
    * @author wyj 15.1.7
    */
-  getStatus: function(name) {
+  getStatus: function (name) {
     return this.status[name];
   },
   /**
@@ -528,7 +530,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @return {{}|*|BbaseApp.status}
    * @author wyj 15.1.9
    */
-  getAllStatus: function() {
+  getAllStatus: function () {
     return this.status;
   },
   /**
@@ -537,7 +539,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @method [配置] - addOption ( 添加配置对象 )
    * @author wyj 15.9.19
    */
-  addOption: function(name, value) {
+  addOption: function (name, value) {
     this.options[name] = value;
   },
   /**
@@ -548,7 +550,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @return {*}
    * @author wyj 15.9.19
    */
-  getOption: function(name) {
+  getOption: function (name) {
     return BbaseEst.cloneDeep(this.options[name]);
   },
   /**
@@ -561,7 +563,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *
    */
-  addFilter: function(name, fn) {
+  addFilter: function (name, fn) {
     if (name === 'navigator') {
       this.filters[name].push(fn);
     } else {
@@ -578,7 +580,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *      App.getFilter('navigator');
    */
-  getFilter: function(name) {
+  getFilter: function (name) {
     return this.filters[name];
   },
   /**
@@ -591,7 +593,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @example
    *      App.getFilters('navigator');
    */
-  getFilters: function(name) {
+  getFilters: function (name) {
     return this.filters[name];
   },
   /**
@@ -601,7 +603,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @param options
    * @author wyj 15.10.25
    */
-  getParamsHash: function(options) {
+  getParamsHash: function (options) {
     var params = '',
       cacheId = '';
 
@@ -618,7 +620,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @param options
    * @author wyj 15.10.25
    */
-  addCache: function(options, result) {
+  addCache: function (options, result) {
     try {
       var cacheId = '';
 
@@ -642,7 +644,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @author wyj 15.10.25
    * @return {*}
    */
-  getCache: function(options) {
+  getCache: function (options) {
     var result = null;
     var cacheId = this.getParamsHash(options);
     // localStorage缓存
@@ -665,7 +667,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    *      app.removeCache();
    *      app.removeCache(options);
    */
-  removeCache: function(options) {
+  removeCache: function (options) {
     var cacheId = null;
     if (options) {
       cacheId = this.getParamsHash(options);
@@ -680,7 +682,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @method [cookie] - addCookie ( 添加cookie )
    * @author wyj 15.1.13
    */
-  addCookie: function(name) {
+  addCookie: function (name) {
     if (BbaseEst.findIndex(this.cookies, name) !== -1) {
       return;
     }
@@ -693,7 +695,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @return {Array}
    * @author wyj 15.1.13
    */
-  getCookies: function() {
+  getCookies: function () {
     return this.cookies;
   },
   /**
@@ -703,7 +705,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @param {[type]} name [description]
    * @param {[type]} obj  [description]
    */
-  addDirective: function(name, obj) {
+  addDirective: function (name, obj) {
     this.directives[name] = obj;
   },
   /**
@@ -712,7 +714,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
    * @method getDirective
    * @return {[type]} [description]
    */
-  getDirective: function(name) {
+  getDirective: function (name) {
     return this.directives[name];
   }
 });

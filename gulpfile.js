@@ -284,9 +284,9 @@ gulp.task('bbase_zepto', function () {
 });
 
 gulp.task('publish', function(){
-  gulp.src(dist.bbase).pipe(gulp.dest('C:/software/WorkProjects/UserManagement/app/vendor/bbase'));
-  gulp.src(dist.bbase).pipe(gulp.dest('C:/software/WorkProjects/Mobile/app/vendor/bbase'));
-  gulp.src(dist.bbase).pipe(gulp.dest('C:/software/WebstormProjects/Leaflet/app/vendor/bbase'));
+  gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WorkProjects/UserManagement/app/vendor/bbase'));
+  gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WorkProjects/Mobile/app/vendor/bbase'));
+  gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WebstormProjects/Leaflet/app/vendor/bbase'));
 });
 
 gulp.task('dist', function (callback) {
