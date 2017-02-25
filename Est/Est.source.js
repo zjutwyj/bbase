@@ -2964,7 +2964,7 @@
         subscribers[len].func(topic, args);
       }
       subscribers.timer = null;
-    }, 10);
+    }, 8);
 
     return true;
   }

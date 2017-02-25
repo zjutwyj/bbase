@@ -157,8 +157,13 @@ var BbaseItem = BbaseSuperView.extend({
    */
   _render: function() {
     this._onBeforeRender();
-    if (this._options && this._options.filter)
-      this._options.filter.call(this, this.model);
+    if (this._options && this._options.filter){
+      var fresult = this._options.filter.call(this, this.model);
+      if (typeof fresult !== 'undefined' && !fresult){
+        this.$el.remove();
+        return ;
+      }
+    }
     // 添加判断是否存在this.$el
     this._beforeTransition();
     this.$el.html(this.hbstemplate ? this.hbstemplate(this.model.attributes) :
@@ -540,7 +545,7 @@ var BbaseItem = BbaseSuperView.extend({
       return;
     }
     BbaseApp.addData('delItemDialog', BbaseUtils.confirm({
-      title: CONST.LANG.WARM_TIP,
+      title: null,
       content: '<div class="item-delete-confirm">' + CONST.LANG.DEL_CONFIRM + '</div>',
       target: e && this._getTarget(e).get(0),
       success: function(resp) {

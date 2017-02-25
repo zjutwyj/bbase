@@ -1,187 +1,299 @@
-### 基于Backbone的MVP-VM、Restful风格的架构
+### 适合对性能要求不高的后台管理类软件的双向绑定框架
 
-### 组件类型
+### 使用流程
+
+第一步：视图定义
 ```js
-// 普通视图
-var BbaseView = BbaseView.extend({
-  template: ``
-});
-
-// 列表视图
-var list = BbaseList.extend({
-  initialize: fucntion(){
+var FlyHeader = BbaseView.extend({
+  initialize: function(){
     this._super({
-      model: BbaseModel.extend({
-        fields: ['name'], // 最终要获取的字段
-        baseId: 'id',     // 映射数据库主键字段
-        baseUrl: CONST.API + '/product/detail',
-        // 保存修改删除提示
-        continueAdd: true,  // 继续添加
-        saveTip: true,     // 保存修改提示
-        deleteTip: true   // 删除提示
-      }),
-     collection: BaseCollection.extend({
-        url: CONST.PAGE_API + '/index/list'
-      }),
-      item: BbaseItem.extend({
-        tagName: 'li',
-        className: 'item-li'
-      }),
-      render: '.list' // 需要把列表渲染到当前视图中的某个位置
+      template: `<div>content</div>`
     });
   }
 });
+```
 
-// 表单提交视图
-var detail = BbaseDetail.extend({
-  initialize: function(){
-    this._super({
-      model: BbaseModel.extend({
-        fields: ['name'], // 最终要获取的字段
-        baseId: 'id',
-        baseUrl: CONST.API + '/product/detail'
-      }),
-      form: '#form:#submit', // 表单提交配置,#form为提交作用域，#submit为提交按钮
-    });
-  },
-
-  // 模型类保存前
-  beforeSave: function(){},
-
-  // 模型类保存后
-  afterSave: function(model, response){},
-
-  // 保存失败回调
-  errorSave: function(response){},
-
-   // 获取数据出错
-  errorFetch: function(response){}
-});
-var instancd = new BbaseDetail({
-  id: 1    // 如果传入ID参数， 则系统会自动请求详细表单内容
+第二步：将视图添加到DOM中
+```js
+BbaseApp.addRegion('FlyHeader', FlyHeader, {
+   el: '#leaflet-main',
+   viewId: 'FlyHeader' // 选填
 });
 ```
 
-### 组件生命周期及初始配置参数说明
+### 最简视图类型(必填项)
+
+```js
+// 普通视图
+var FlyHeader = BbaseView.extend({
+  initialize: function(){
+    this._super({
+      template: `<div>content</div>`
+    });
+  }
+});
+```
+
+```js
+// 列表视图
+var ProductList = BbaseList.extend({
+  initialize: function(){
+    this._super({
+      template: `<div><ul class="list-ul"></ul></div>`,
+      model: BbaseModel.extend({
+        baseId: 'productId',
+        baseUrl: CONST.API + '/product/detail'
+      }),
+      collection: BbaseCollection.extend({
+        url: CONST.API + '/product/list'
+      }),
+      item: BbaseItem.extend({
+        tagName: 'li',
+        template: `<div>item</div>`
+      }),
+      render: '.list-ul'
+    });
+  }
+});
+```
+
+```js
+// 表单提交视图
+var ProductDetail = BbaseDetail.extend({
+  initialize: function(){
+    this._super({
+      template: `
+        <div id="product-detail-form"><input type="text" class="text" value=""/><input type="button" id="submit" value="添加表单"/></div>
+      `,
+      model: BbaseModel.extend({
+        baseId: 'productId',
+        baseUrl: CONST.API + '/product/detail'
+      }),
+      form: '#product-detail-form:#submit'
+    });
+  }
+})
+```
+
+### 视图详细说明
+```js
+// 普通视图
+var FlyHeader = BbaseView.extend({
+  initialize: function(){
+    this._super({
+      template: `<div>content</div>`,                   // 字符串模板
+      toolTip: true,                                    // 是否显示title提示框   html代码： <div class="tool-tip" data-title="提示内容">内容</div>
+      enter: '#submit',                                 // 当按下回车键后，系统将会点击这个按钮
+      data: {}                                          // 传递给模型类的数据， 常放于new一个视图的参数里
+    });
+  },
+  init: function(){                                     // 初始化模型类数据
+    this._setDefault('args.name', 'a');                 // 初始化数据
+    return {
+      message: '我是一条消息'
+    }
+  },
+  beforeRender: function(){                             // 视图插入到DOM前
+
+  },
+  afterRender: function(){                              // 视图插入到DOM后
+
+  },
+  update: function(name){                               // 监听的字段改变时回调
+
+  },
+  change: fucntion(){                                   // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+
+  },
+  destory: function(){                                  // 组件销毁时
+});
+```
+
+```js
+// 列表视图
+var ProductList = BbaseList.extend({
+  initialize: function(){
+    this._super({
+      template: `<div><ul class="list-ul"></ul></div>`, // 字符串模板
+      model: BbaseModel.extend({
+        baseId: 'productId',                            // 映射数据库主键字段
+        baseUrl: CONST.API + '/product/detail',         // 对应RESTFUL地址
+        fields: ['name'],                               // 最终要获取的字段,即提交到服务器上的字段
+      }),
+      collection: BbaseCollection.extend({
+        url: CONST.API + '/product/list'                // 对应RESTFUL地址
+      }),
+      item: BbaseItem.extend({
+        tagName: 'li',                                  // 定义单视图包裹层DOM元素类型
+        template: `<div>item</div>`,                    // 单视图模板
+        className: 'item-li'                            // 在li标签上定义class选择符
+        filter: function(model){ return false;},        // 当返回false时 该单视图不在列表中显示出来
+      }),
+      render: '.list-ul',                               // 列表渲染到哪个DOM元素上
+      empty: false,                                     // 是否清空列表内的html代码，默认为true
+      toolTip: true,                                    // 是否显示title提示框   html代码： <div class="tool-tip" data-title="提示内容">内容</div>
+      enter: '#submit',                                 // 当按下回车键后，系统将会点击这个按钮
+      items: [],                                        // 手动定义列表模型集合，此时collection中的url将失效，即静态分页效果
+      page: 1,                                          // 定义当前分页中的第几页
+      pageSize: 20,                                     // 定义每页显示多少条数据
+      diff: true,                                       // 最小渲染单元，此时item那里需添加bb-watch来监听数据变化
+      data: {}                                          // 传递给模型类的数据， 常放于new一个视图的参数里
+      append: false,                                    // 是否是追加内容， 默认为替换， 常用于“加载更多”场景中, 默认为false
+      empty: false,                                     // 追加单视图时， 默认会清空掉render元素内的所有dom,为false时， 不清空， 只是追加，默认为true
+      pagination: true/selector,                        // 是否显示分页 view视图中相应加入<div id="pagination-container"></div>; pagination可为元素选择符
+      max: 5,                                           // 限制显示个数
+      sortField: 'sort',                                // 上移下移字段名称， 默认为sort
+      cache: true,                                      // 数据缓存到内存中
+      session: true,                                    // 数据缓存到浏览器中，下次打开浏览器，请求的数据直接从浏览器缓存中读取
+
+      // 以下为树型列表时 需要的参数
+      subRender: '.node-tree',                          // 下级分类的容器选择符
+      collapse: '.node-collapse'                        // 展开/收缩元素选择符
+      parentId: 'belongId',                             // 分类 的父类ID
+      categoryId: 'categoryId',                         // 分类 的当前ID
+      rootId: 'isroot',                                 // 一级分类字段名称
+      rootValue: '00'                                   // 一级分类字段值  可为数组[null, 'Syscode_']   数组里的选项可为方法， 返回true与false
+      extend: true                                      // false收缩 true为展开
+    });
+  },
+  init: function(){                                     // 初始化模型类数据
+    this._setDefault('args.name', 'a');                 // 初始化数据
+    return {
+      message: '我是一条消息'
+    }
+  },
+  beforeRender: function(){                             // 视图插入到DOM前
+
+  },
+  afterRender: function(){                              // 视图插入到DOM后
+
+  },
+  beforeLoad: function(){                               // 从服务器获取数据前回调
+
+  },
+  afterLoad: function(){                                // 从服务器获取数据后回调
+
+  },
+  errorFetch: fucntion(response){                       // 从服务器获取列表失败回调
+
+  },
+  update: function(name){                               // 监听的字段改变时回调
+
+  },
+  change: fucntion(){                                   // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+
+  },
+  destory: function(){                                  // 组件销毁时
+
+  },
+  filter: function(){                                   // 过滤操作
+
+  },
+});
+```
+
+```js
+// 表单提交视图
+var ProductDetail = BbaseDetail.extend({
+  initialize: function(){
+    this._super({
+      template: `
+        <div id="product-detail-form"><input type="text" class="text" value=""/><input type="button" id="submit" value="添加表单"/></div>
+      `,
+      model: BbaseModel.extend({
+        baseId: 'productId',                            // 映射数据库主键字段
+        baseUrl: CONST.API + '/product/detail',         // 对应RESTFUL地址
+        fields: ['name']                                // 最终要获取的字段,即提交到服务器上的字段
+      }),
+      form: '#product-detail-form:#submit' ,            // 定义表单提交作用域及提交按钮，中间以冒号分隔
+      toolTip: true,                                    // 是否显示title提示框   html代码： <div class="tool-tip" data-title="提示内容">内容</div>
+      enter: '#submit',                                 // 当按下回车键后，系统将会点击这个按钮
+      data: {}                                          // 传递给模型类的数据， 常放于new一个视图的参数里
+    });
+  },
+  init: function(response){                             // 初始化模型类数据, response 为服务器返回的数据
+    this._setDefault('args.name', 'a');                 // 初始化数据
+    return {
+      message: '我是一条消息'
+    }
+  },
+  beforeRender: function(){                             // 视图插入到DOM前
+
+  },
+  afterRender: function(){                              // 视图插入到DOM后
+
+  },
+  beforeSave: function(){                               // 模型类保存前
+
+  },
+  afterSave: fucntion(model, response){                 // 模型类保存后
+
+  },
+  beforeLoad: function(){                               // 从服务器获取数据前回调
+
+  },
+  afterLoad: function(){                                // 从服务器获取数据后回调
+
+  },
+  errorSave: function(response){                        // 模型类保存失败后回调
+
+  },
+  errorFetch: fucntion(response){                       // 载入模型类失败回调
+
+  },
+  update: function(name){                               // 监听的字段改变时回调
+
+  },
+  change: fucntion(){                                   // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+
+  },
+  destory: function(){                                  // 组件销毁时
+
+  }
+});
+
+// 视图调用
+new ProductDetail({
+  id: 1,                                                // 如果传入ID参数， 则系统会自动从服务端请求详细表单内容
+  data: {},                                             // 传递给模型类的数据， 常放于new一个视图的参数里
+  onChange: fucntion(){},                               // 手动调用，内可加逻辑代码
+  onUpdate: function(){},                               // 当模型类改变时系统会实时调用这个回调
+  onReady: fucntion(){},                                // 组件渲染完毕
+});
+```
+
+### 其它说明
 ```js
 var Module = BbaseView.extend({
 
   // 组件初始化
   initialize: fucntion  (){
     this._super({
-
-      // 通用部分
-      template: template, // 字符串模板
-      modelBind: true,    // 主要用于表单改变时及时更新到模型类中，默认为change改变， 若想及时更新可以使用  data-bind-type="keyup" 表示按下键盘时触发(推荐使用bb-model="name:keyup")
-      toolTip: true, // 是否显示title提示框   html代码： <div class="tool-tip" data-title="提示内容">内容</div>
-      enter: '#submit' // 执行回车后的按钮点击的元素选择符
-      data: {} // 传递给模型类的数据
-
-      // 约定事件
-      setValue: function(val){}, // 手动为组件赋值，内可加逻辑代码
-      onChange: fucntion(){}, // 手动调用，内可加逻辑代码
-      onUpdate: function(){}, // 当模型类改变时系统会实时调用这个回调
-      onReady: fucntion(){},  // 组件渲染完毕
-
       // BbaseList 部分
-      model: ProductModel, // 模型类,
-      collection:  ProductCollection,// 集合,
-      item: ProductItem, // 单视图
-      render: '.product-list', 插入列表的容器选择符, 若为空则默认插入到$el中
-      items: [], // 数据不是以url的形式获取时 (可选), items可为function形式传递;
-      append: false, // 是否是追加内容， 默认为替换
       checkAppend: false, // 鼠标点击checkbox， checkbox是否追加  需在BbaseItem事件中添加 'click .toggle': '_check',
       checkToggle: true,// 是否选中切换
-      pagination: true/selector, // 是否显示分页 view视图中相应加入<div id="pagination-container"></div>; pagination可为元素选择符
+
       page: parseInt(BbaseEst.cookie('orderList_page')) || 1, //设置起始页 所有的分页数据都会保存到cookie中， 以viewId + '_page'格式存储， 注意cookie取的是字符串， 要转化成int
       pageSize: parseInt(BbaseEst.cookie('orderList_pageSize')) || 16, // 设置每页显示个数
-      max: 5, // 限制显示个数
-      sortField: 'sort', // 上移下移字段名称， 默认为sort
-      itemId: 'Category_00000000000123', // 当需要根据某个ID查找列表时， 启用此参数， 方便
-      cache: true, // 数据缓存到内存中
-      session: true, // 数据缓存到浏览器中，下次打开浏览器，请求的数据直接从浏览器缓存中读取
-      // 以下为树型列表时 需要的参数
-      subRender: '.node-tree', // 下级分类的容器选择符
-      collapse: '.node-collapse' 展开/收缩元素选择符
-      parentId: 'belongId', // 分类 的父类ID
-      categoryId: 'categoryId', // 分类 的当前ID
-      rootId: 'isroot', // 一级分类字段名称
-      rootValue: '00' // 一级分类字段值  可为数组[null, 'Syscode_']   数组里的选项可为方法， 返回true与false
-      extend: true // false收缩 true为展开
-
-      // BbaseItem 部分
-      filter: function(model){}, // 过滤模型类
-
-      // BbaseDetail 部分
-      id: ctx.model.get('id'), // 当不是以dialog形式打开的时候， 需要传递ID值
-      page: ctx._getPage() // 点击返回按钮且需要定位到第几页时， 传入page值，
-      hideSaveBtn: true, // 保存成功后的弹出提示框中是否隐藏保存按钮
-      hideOkBtn: true, // 保存成功后的弹出提示框中是否隐藏确定按钮
-      autoHide: true, // 保存成功后是否自动隐藏提示对话框
-      form: '#form:#submit', // 表单提交配置,#form为提交作用域，#submit为提交按钮
-
     );
   },
-  // 组件模型类初始化
-  init: function(response){               // response   BaseDetail返回回来的数据
-    this._setDefault('args.name', 'a');   // 初始化数据
-    return {                              // 也可以这样初始化
-      "args.name": 'a'
-    };
-  },
+
   // 数据监听(推荐写到html页面中，详见下面的绑定规则)
   onWatch: fucntion(){
     this._watch(['args.name'], '.result:style', function(name){
       console.log('改变的字段为：' + name);
     });
   },
-
-  // 数据载入前
-  beforeLoad: function(){},
-
-  // 数据载入后
-  afterLoad: function(){},
-
-  // 组件渲染前
-  beforeRender: fucntion(){},
-
-  // 组件渲染后
-  afterRender: function(){},
-
-  // 监听的字段改变时回调
-  update: function(name){},
-
-  // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
-  change: fucntion(){},
-
-  // 过滤操作
-  filter: function(){},
-
-  // 模型类保存前
-  beforeSave: function(){},
-
-  // 模型类保存后
-  afterSave: fucntion(model, response){},
-
-  // 保存失败回调
-  errorSave: function(response){},
-
-   // 获取数据出错
-  errorFetch: function(response){}
-
-  // 组件销毁时
-  destory: function(){}
-
 });
 ```
 
-### 组件ID
+### 视图ID
 ```js
-this.viewId // 指定ID， 可以用this._view(this.viewId)获取
-this.cid // 唯一标识符， 由系统生成
+this.viewId                                             // 指定ID， 可以用this._view(this.viewId)获取
+this.cid                                                // 唯一标识符， 由系统生成
 ```
 
-### 组件重渲染
+### 视图重渲染
 ```js
 this._region('imagePickerConfig', ImagePickerConfig, {
   el: '.image-picker-config',
@@ -193,14 +305,11 @@ this._region('imagePickerConfig', ImagePickerConfig, {
 
 ### 数据绑定
 ```html
-<div class=".bind" bb-watch="args.name" bb-render=".bind:style" bb-change="handleChange" style="display: {{#compare args.name '===' 'show'}}block;{{else}}none;{{/compare}}"></div>
+<div bb-watch="args.name:style" bb-change="handleChange" style="display: {{#compare args.name '===' 'show'}}block;{{else}}none;{{/compare}}"></div>
 ```
 
->bb-watch:  监听的字段，多个字段以逗号隔开(当只要渲染当前元素时， 可以使用bb-watch="args.name:style"简写,多个字段以逗号隔开，错误写法bb-watch="args.name,args.color:style:html",正确写法：bb-watch="args.name:style,args.color:html")<br>
-bb-render: 需要重新渲染的元素或属性，后面带:style(样式) :class(属性) :html(内容) :value(表单)若不带则整个dom替换掉
-           当同一个元素带多个属性时，可简写为.bind:style:html:class<br>
+>bb-watch:  监听的字段，多个字段以逗号隔开(当只要渲染当前元素时， 可以使用bb-watch="args.name:style"简写,多个字段以逗号隔开，错误写法bb-watch="args.name,args.color:style:html",正确写法：bb-watch="args.name:style,args.color:html")<br>【提示:】 使用:html时， 确保子元素没有使用指令，否则指令将失效
 bb-change: 事件函数(其中参数为改变的字段名称)<br>
-【提示:】 使用:html时， 确保子元素没有使用指令，否则指令将失效
 
 ### 表单元素双向绑定
 <input bb-model="name:keyup" type="text" class="text" />
@@ -220,14 +329,14 @@ bb-keyup="addOne:enter('arg1', name)"; // 当不加单引号时，表示从模�
 bb-keyup="addOne:13";// 当e.keyCode = 13时，调用方法addOne  常用keyCode表:http://www.cambiaresearch.com/articles/15/javascript-key-codes
 ```
 
-### 组件自带属性
+### 视图自带属性
 ```js
 bb-checked="checked": 是否选中
 bb-checked="checked_all": 是否全部选中
 bb-checked="result_none": 列表是否为空
 ```
 
-### 组件自带事件
+### 视图自带事件
 ```js
 // BbaseItem
 bb-click="_moveUp": 上移
@@ -248,14 +357,14 @@ bb-click="_reset": 初始化表单
 bb-click="_save": 保存表单(当需要实时保存且不需要提示“保存成功”时使用)
 ```
 
-### 组件自带指令
+### 视图自带指令
 ```js
 bb-checked="checked";      checkbox选中
 bb-show="models.length";   显示、隐藏   models为BbaseList中的this.collection.models
 bb-disabled="models.length"
 ```
 
-### 组件通用方法
+### 视图通用方法
 ```js
 this._super(type); // 引用父类，当参数type为view时返回上级视图 model时返回上级模型类，data上级模型类数据,options返回上级参数,"_init" 执行上级方法,为对象时调用父级的_initialize()方法 (注：BbaseItem中调用BbaseList中的方法，尽量用this._super('superFn', args))
 this._view('viewId');// 获取视图(注：默认带this.cid)

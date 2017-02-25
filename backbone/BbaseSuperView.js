@@ -1147,7 +1147,8 @@ var BbaseSuperView = BbaseBackbone.View.extend({
    * @return {[type]}       [description]
    */
   _getBoolean: function (value) {
-    var bool = BbaseEst.compile('{{' + value + '}}', this.model.attributes);
+    if (BbaseEst.isEmpty(value)){return false;};
+    var bool =  BbaseEst.compile('{{' + value + '}}', this.model.attributes);
 
     if (bool === 'true' || bool === '1') {
       bool = true;

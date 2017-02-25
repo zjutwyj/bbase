@@ -160,7 +160,9 @@ var BbaseList = BbaseSuperView.extend({
         } else {
           options.itemTemp = this.$template.find(options.render).html();
         }
-        this.$template.find(options.render).empty();
+        if (typeof this._options.empty === 'undefined' || this._options.empty){
+          this.$template.find(options.render).empty();
+        }
       } else {
         if (BbaseEst.msie()) {
           this.__template = options.template.replace(new RegExp('\\sstyle=', 'img'), ' ng-style=');
