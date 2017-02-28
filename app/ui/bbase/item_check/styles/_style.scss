@@ -1,0 +1,198 @@
+// 表单相关
+$formBorder: #BBBBBB;
+$formHeight: 22px;
+$formIconColor:#FF5241;
+
+
+//全局样式
+.ui-itemcheck {
+  .ui-item-check {
+    float: left;
+    margin-right: 2px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    line-height: normal;
+  }
+  .ui-item-check .check-icon {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 14px;
+    height: 14px;
+    z-index: 1000;
+    color: $formIconColor;
+    opacity: 0.8;
+    border-radius: 0;
+  }
+  .ui-item-check .icon-ok {
+    font-size: 12px;
+    line-height: 12px;
+  }
+  .ui-item-check.item-active .check-icon {
+    display: block;
+  }
+  .ui-item-check.item-active {}
+  .ui-item-check .cd-r-cur-in-cnt {
+    display: inline-block;
+    width: 100%;
+  }
+  .icon-ok {
+    background: none;
+  }
+  .x-icon-info,
+  .x-icon-question {
+    background: none;
+  }
+  .item-active {
+    background-color: none !important;
+  }
+}
+
+#jhw .ui-itemcheck .item-active {
+  background-color: transparent;
+}
+
+// 样式1
+.ui-item-check-btn {
+  .ui-item-check {
+    padding: 2px;
+    border: 1px solid $formBorder;
+  }
+}
+
+// 单选项
+.ui-item-check-radio {
+  .item-check-text {
+    vertical-align: middle;
+  }
+  .ui-item-check {
+    margin-right: 4px;
+  }
+  .ui-item-check .toggle {
+    padding-left: 18px;
+    text-align: left;
+  }
+  .ui-item-check .check-icon {
+    left: 2px;
+    top: 2px;
+    border: 1px solid $formBorder;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
+    display: inline-block;
+  }
+  .ui-item-check .check-icon .icon-ok {
+    font-size: 12px;
+    line-height: 12px;
+    margin-left: 0px;
+    margin-top: 0px;
+    width: 100%;
+    float: left;
+    height: 100%;
+    display: inline-block;
+    text-indent: 0px;
+  }
+  .ui-item-check.hover .check-icon {
+    border-color: $formIconColor;
+  }
+  .ui-item-check .icon-ok:before {
+    content: "";
+  }
+  .ui-item-check.item-active .icon-ok:before {
+    content: "\e60f";
+  }
+}
+
+.ie8 .ui-item-check-radio .ui-item-check .check-icon {
+  border-radius: 10px;
+  behavior: url(pie/PIE.htc);
+}
+
+// 多选项
+.ui-item-check-checkbox {
+  .item-check-text {
+    vertical-align: middle;
+  }
+  .ui-item-check {
+    margin-right: 4px;
+    .toggle {
+      padding-left: 18px;
+      text-align: left;
+    }
+    .check-icon {
+      left: 2px;
+      top: 2px;
+      border: 1px solid $formBorder;
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      display: inline-block;
+      .icon-ok {
+        font-size: 12px;
+        line-height: 12px;
+        margin-left: 0px;
+        margin-top: 0px;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        float: left;
+      }
+    }
+    .icon-ok:before {
+      content: "";
+    }
+  }
+  .item-check.hover .check-icon {
+    border-color: $formIconColor;
+  }
+  .ui-item-check.item-active .check-icon {
+    background: $formIconColor;
+    color: #fff;
+    border-color: $formIconColor;
+    .icon-ok:before {
+      content: "\e600";
+    }
+  }
+}
+
+.ui-item-check-radio,
+.ui-item-check-checkbox {
+  line-height: 18px !important;
+  padding-top: 6px !important;
+}
+
+// tab
+.ui-item-check-tab {
+  zoom: 1;
+  margin-left: 1px;
+  .ui-item-check {
+    float: left;
+    margin-left: -1px;
+        margin-right: 0;
+    .toggle {
+      display: inline-block;
+      padding: 0 12px;
+      line-height: 32px;
+      color:#666;
+      border: 1px solid #e5e5e5;
+      background: #f8f8f8;
+      min-width: 80px;
+      text-align: center;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+  }
+  .item-active {
+    .toggle {
+      border-bottom-color: #fff;
+      background: #fff;
+    }
+  }
+  .ui-item-check.item-active .check-icon{
+    display:none;
+  }
+}

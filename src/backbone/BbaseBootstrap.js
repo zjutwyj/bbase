@@ -1,0 +1,9 @@
+window.BbaseModel = BbaseModel;
+window.BbaseCollection = BbaseCollection;
+window.BbaseItem = BbaseItem;
+window.BbaseDetail = BbaseDetail;
+window.BbaseList = BbaseList;
+window.BbaseService = BbaseService;
+window.BbaseView = BbaseView;
+window.BbaseUtils = BbaseUtils;
+window.BbaseHandlebars = BbaseHandlebars;

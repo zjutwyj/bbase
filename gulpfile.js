@@ -25,7 +25,7 @@ var paths = {};
 var SRCDIR = './app',
   TMPDIR = './.tmp',
   dist = {
-    bbase: './vendor/bbase',
+    bbase: './app/vendor/bbase',
     UserMangement: ''
   },
   DEBUG = true;
@@ -220,26 +220,26 @@ gulp.task('bbase_jquery', function () {
   baseTask({
     scripts: {
       source: [
-        'backbone/BbaseJqueryPre.js',
-        'Est/Est.source.js',
-        'vendor/backbone/backbone-debug-est.js',
-        'vendor/handlebars/handlebars-debug.js',
+        'src/backbone/BbaseJqueryPre.js',
+        'src/Est/Est.source.js',
+        'src/vendor/backbone/backbone-debug-est.js',
+        'src/vendor/handlebars/handlebars-debug.js',
 
-        'handlebars/HandlebarsHelper.js',
-        'backbone/BbaseApp.js',
-        'backbone/BbaseUtils.js',
-        'backbone/BbaseService.js',
-        'backbone/BbaseSuperView.js',
-        'backbone/BbaseView.js',
-        'backbone/BbaseList.js',
-        'backbone/BbaseItem.js',
-        'backbone/BbaseCollection.js',
-        'backbone/BbaseModel.js',
-        'backbone/BbaseDetail.js',
-        'backbone/BbaseBootstrap.js',
-        'backbone/BbaseDirective.js',
-        'backbone/BbaseStatus.js',
-        'backbone/BbaseEnd.js',
+        'src/handlebars/HandlebarsHelper.js',
+        'src/backbone/BbaseApp.js',
+        'src/backbone/BbaseUtils.js',
+        'src/backbone/BbaseService.js',
+        'src/backbone/BbaseSuperView.js',
+        'src/backbone/BbaseView.js',
+        'src/backbone/BbaseList.js',
+        'src/backbone/BbaseItem.js',
+        'src/backbone/BbaseCollection.js',
+        'src/backbone/BbaseModel.js',
+        'src/backbone/BbaseDetail.js',
+        'src/backbone/BbaseBootstrap.js',
+        'src/backbone/BbaseDirective.js',
+        'src/backbone/BbaseStatus.js',
+        'src/backbone/BbaseEnd.js',
 
       ],
       name: 'bbase_jquery.min.js',
@@ -252,30 +252,30 @@ gulp.task('bbase_zepto', function () {
   baseTask({
     scripts: {
       source: [
-        'vendor/zepto/deferred.js',
-        'vendor/zepto/callbacks.js',
-        'vendor/zepto/selector.js',
-        'vendor/zepto/hover.js',
-        'backbone/BbaseZeptoPre.js',
-        'Est/Est.source.js',
-        'vendor/backbone/backbone-debug-est.js',
-        'vendor/handlebars/handlebars-debug.js',
+        'src/vendor/zepto/deferred.js',
+        'src/vendor/zepto/callbacks.js',
+        'src/vendor/zepto/selector.js',
+        'src/vendor/zepto/hover.js',
+        'src/backbone/BbaseZeptoPre.js',
+        'src/Est/Est.source.js',
+        'src/vendor/backbone/backbone-debug-est.js',
+        'src/vendor/handlebars/handlebars-debug.js',
 
-        'handlebars/HandlebarsHelper.js',
-        'backbone/BbaseApp.js',
-        'backbone/BbaseUtils.js',
-        'backbone/BbaseService.js',
-        'backbone/BbaseSuperView.js',
-        'backbone/BbaseView.js',
-        'backbone/BbaseList.js',
-        'backbone/BbaseItem.js',
-        'backbone/BbaseCollection.js',
-        'backbone/BbaseModel.js',
-        'backbone/BbaseDetail.js',
-        'backbone/BbaseBootstrap.js',
-        'backbone/BbaseDirective.js',
-        'backbone/BbaseStatus.js',
-        'backbone/BbaseEnd.js'
+        'src/handlebars/HandlebarsHelper.js',
+        'src/backbone/BbaseApp.js',
+        'src/backbone/BbaseUtils.js',
+        'src/backbone/BbaseService.js',
+        'src/backbone/BbaseSuperView.js',
+        'src/backbone/BbaseView.js',
+        'src/backbone/BbaseList.js',
+        'src/backbone/BbaseItem.js',
+        'src/backbone/BbaseCollection.js',
+        'src/backbone/BbaseModel.js',
+        'src/backbone/BbaseDetail.js',
+        'src/backbone/BbaseBootstrap.js',
+        'src/backbone/BbaseDirective.js',
+        'src/backbone/BbaseStatus.js',
+        'src/backbone/BbaseEnd.js'
       ],
       name: 'bbase_zepto.min.js',
       dist: dist.bbase
@@ -283,15 +283,29 @@ gulp.task('bbase_zepto', function () {
   }, DEBUG);
 });
 
-gulp.task('publish', function(){
+gulp.task('bbase_lib', function () {
   gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WorkProjects/UserManagement/app/vendor/bbase'));
   gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WorkProjects/Mobile/app/vendor/bbase'));
   gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WebstormProjects/Leaflet/app/vendor/bbase'));
   gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WorkProjects/lmc_wcd/app/vendor/bbase'));
 });
 
+gulp.task('bbase_ui', function () {
+  gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/UserManagement/app/ui/bbase'));
+  gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/Mobile/app/ui/bbase'));
+  gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WebstormProjects/Leaflet/app/ui/bbase'));
+  gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/lmc_wcd/app/ui/bbase'));
+});
+
+gulp.task('bbase_components', function () {
+  gulp.src('./app/components/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/UserManagement/app/components/bbase'));
+  gulp.src('./app/components/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/Mobile/app/components/bbase'));
+  gulp.src('./app/components/bbase/**').pipe(gulp.dest('C:/software/WebstormProjects/Leaflet/app/components/bbase'));
+  gulp.src('./app/components/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/lmc_wcd/app/components/bbase'));
+});
+
 gulp.task('dist', function (callback) {
-  runSequence(['bbase_jquery'], ['bbase_zepto'], ['publish'], callback);
+  runSequence(['bbase_jquery'], ['bbase_zepto'], ['bbase_lib', 'bbase_ui', 'bbase_components'], callback);
 });
 
 // dist

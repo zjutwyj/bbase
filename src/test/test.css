@@ -1,0 +1,40 @@
+#laymod_189 #item0491458548762663 .cubeLink bg {
+  background-size: cover !important;
+}
+
+#laymod_189 #item0491458548762663 .cubeLink ico {
+  color: #ffffff !important;
+  background-image: none !important;
+}
+
+#laymod_189 #item0491458548762663 .cubeLink ico:before {
+  content: "\e60c" !important;
+}
+
+#laymod_189 #item04F1458548762674 .cubeLink bg {
+  background-size: cover !important;
+}
+
+#laymod_189 #item04F1458548762674 .cubeLink ico {
+  color: #ffffff !important;
+  background-image: none !important;
+}
+
+#laymod_189 #item04F1458548762674 .cubeLink ico:before {
+  content: "\e600" !important;
+}
+
+#laymod_189 #item04I1458548762681 .cubeLink bg {
+  background-size: cover !important;
+  background-color: rgba(190, 55, 55, 1) !important;
+  background-image: url(http://dfwjjingtai.b0.upaiyun.com/upload/g/g2/ggggfj/picture/2016/03/02/01878d8d-d4c2-46a7-864b-4543730f0ae6.jpg) !important;
+}
+
+#laymod_189 #item04I1458548762681 .cubeLink ico:before {
+  content: "\e60d" !important;
+}
+
+#laymod_189 #item04I1458548762681 .cubeLink ico {
+  color: #ffffff !important;
+  background-image: none !important;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="themes/default/css/ueditor.css" type="text/css">
+    <script src="third-party/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+
+<p class="note">
+    <span class="remind">注：线上演示版上传功能只作为功能演示，1.4.3以上版本将不再承诺支持ie6/ie7。</span>
+    <span id="uploadbtn" class="uploadbtn">导入word文档</span>
+    <span class="uploadcount"></span>
+    <span class="clearfix"></span>
+</p>
+
+<div class="details">
+    <div>
+        <script type="text/plain" id="editor"></script>
+        <div class="con-split"></div>
+    </div>
+</div>
+
+
+<script src="third-party/webuploader/webuploader.flashonly.js" type="text/javascript"></script>
+<link rel="stylesheet" href="third-party/webuploader/webuploader.css"/>
+<script>
+    var ue = UE.getEditor('editor');
+    (function(){
+
+        function renderUploader(id, ue) {
+
+            var uploader = WebUploader.create({
+                pick: {
+                    id: "#" + id,
+                    multiple: false
+                },
+                accept: {
+                    title: "word文档",
+                    extensions: "doc,docx",
+                    mimeTypes: "application/msword"
+                },
+                fileSingleSizeLimit: 5120000,
+                swf: 'third-party/webuploader/Uploader.swf',
+                server: 'http://convert.wenku.baidu.com/rtcs/convert?pn=1&rn=-1',
+                fileVal: 'file',
+                duplicate: true
+            });
+
+            uploader.on('filesQueued', function(files){
+                uploader.upload();
+                uploader.disable();
+            });
+
+            uploader.on('uploadFinished', function(files){
+                setTimeout(function () {
+                    uploader.enable();
+                },2000);
+            });
+
+            uploader.on('all', function(){
+                var args = UE.utils.clone([], arguments);
+                args[0] = 'uploader_' + args[0];
+                console.log(args[0]);
+                return ue.fireEvent.apply(ue, args);
+            });
+
+
+        }
+        renderUploader('uploadbtn', ue);
+
+    })();
+</script>
+
+
+</body>
+</html>
