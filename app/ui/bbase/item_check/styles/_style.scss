@@ -57,8 +57,14 @@ $formIconColor:#FF5241;
 // 样式1
 .ui-item-check-btn {
   .ui-item-check {
-    padding: 2px;
+    padding: 2px 4px;
     border: 1px solid $formBorder;
+  }
+  .item-active{
+        visibility: visible;
+    border-color: #5289db;
+    background-color: #5289db;
+    color: #fff;
   }
 }
 

@@ -767,6 +767,7 @@
     border-collapse: collapse;
     text-align: center;
     font-size: 16px;
+        background-color: #fbfbfb;
 }
 .formPanel .main .title td {
     padding: 0 10px;

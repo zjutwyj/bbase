@@ -119,6 +119,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
     try {
       var views = [];
       if (!panel) panel = this.panels[name];
+      if (!panel) return;
       if (panel.el !== 'body') {
         $('.region', $(panel.el)).each(function () {
           views.push($(this).attr('data-view'));

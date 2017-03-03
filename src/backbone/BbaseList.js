@@ -335,9 +335,9 @@ var BbaseList = BbaseSuperView.extend({
     if (this._options.viewId && ctx.collection.paginationModel &&
       ctx._getPageSize() < 999) {
       BbaseApp.addCookie(this._options.viewId + '_page');
-      BbaseEst.cookie(this._options.viewId + '_page', ctx._getPage());
+      //BbaseEst.cookie(this._options.viewId + '_page', ctx._getPage());
       BbaseApp.addCookie(this._options.viewId + '_pageSize');
-      BbaseEst.cookie(this._options.viewId + '_pageSize', ctx._getPageSize());
+      //BbaseEst.cookie(this._options.viewId + '_pageSize', ctx._getPageSize());
     }
     // 判断是否存在url
     if (ctx.collection.url && !this._options.items) {

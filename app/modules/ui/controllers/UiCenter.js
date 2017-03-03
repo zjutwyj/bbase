@@ -87,6 +87,12 @@ define('UiCenter', [], function (require, exports, module) {
         .UiCenter-tag .tab-ul-line .tab-li.item-active .dataTabUiDirective,.UiCenter-tag .tab-ul-line .tab-li.hover .dataTabUiDirective {
             background-position: -30px -179px;
         }
+         .UiCenter-tag .tab-ul-line .tab-li .dataTabUiItemCheck {
+            background-position: 0 -329px;
+        }
+        .UiCenter-tag .tab-ul-line .tab-li.item-active .dataTabUiItemCheck,.UiCenter-tag .tab-ul-line .tab-li.hover .dataTabUiItemCheck {
+            background-position: -30px -329px;
+        }
 
 
 
@@ -105,10 +111,11 @@ define('UiCenter', [], function (require, exports, module) {
       return {
         cur: 'UiList',
         items: [
-          { text: '列表', moduleId: 'UiList' },
-          { text: '表单', moduleId: 'UiForm' },
-          { text: '下拉', moduleId: 'UiDropDown' },
-          { text: '指令', moduleId: 'UiDirective' }
+          { text: '列表', moduleId: 'UiList' ,oneRender: false},
+          { text: '表单', moduleId: 'UiForm' ,oneRender: false},
+          { text: '下拉', moduleId: 'UiDropDown' ,oneRender: false},
+          { text: '选项卡', moduleId: 'UiItemCheck' ,oneRender: false},
+          { text: '指令', moduleId: 'UiDirective',oneRender: false }
         ],
         tpl:  `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTab{{moduleId}} tabImgComm"></div><span>{{text}}</span></a>

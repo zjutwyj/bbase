@@ -32,7 +32,7 @@
     line-height: 20px;
     text-indent:2px;
     padding: 4px;
-    border: 1px solid #b9ddff;
+    border: 1px solid #d6d6d6;
     vertical-align: middle;
     -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
@@ -45,7 +45,7 @@
     text-shadow: none;
     color: #333;
     background-color: #fff;
-    border-color: #b9ddff;
+    border-color: #d6d6d6;
   }
   .x-icon {
     vertical-align: top;
@@ -73,11 +73,11 @@
     color: #333;
     vertical-align: middle;
     background-color: #fff;
-    border-color: #b9ddff;
+    border-color: #d6d6d6;
     border-left-color: #fff;
     .icon {
       font-size: 20px;
-      color: #5c90ca;
+      color: #d6d6d6;
       background-image: none;
     }
   }
@@ -122,7 +122,7 @@
     color: #fff;
     text-decoration: none;
     outline: 0;
-    background-color: #5c90ca;
+    background-color: #bdbdbd;
   }
   .bui-list-item-select-inner {
     padding: 3px 4px;
@@ -133,7 +133,7 @@
   .bui-list-item-select:hover {
     text-decoration: none;
     color: #fff;
-    background-color: #5c90ca;
+    background-color: #bdbdbd;
   }
   .bui-list-item-select:hover .bui-list-item-select-inner {
     color: #fff;

@@ -144,19 +144,9 @@ define('BbaseTab', [], function(require, exports, module) {
         BbaseApp.addRegion(moduleName + '-' + index, instance, {
           el: this.$tabList.eq(index),
           viewId: viewId,
-          data: BbaseEst.typeOf(this.options.items[index]['data']) === 'undefined' ?
+          passData:  BbaseEst.typeOf(this.options.items[index]['data']) === 'undefined' ?
             BbaseApp.getView(this.$el.parents('.region:first').attr('data-view')).model.toJSON() : this.options.items[index]['data'] || {}
         });
-        /*BbaseApp.addPanel(moduleName + '-' + index, {
-          el: this.$tabList.eq(index),
-          template: '<div class="tab-cont-inner' + moduleName + index + '">正在加载中...</div>'
-        }).addView(viewId, new instance(BbaseEst.extend(this.options.items[index].args || {}, {
-          el: this.require ? $('.tab-cont-inner' + moduleName + index, this.$tabList.eq(index)) : this.$tabList.eq(index),
-          append: false,
-          viewId: viewId,
-          data: BbaseEst.typeOf(this.options.items[index]['data']) === 'undefined' ?
-            BbaseApp.getView(this.$el.parents('.region:first').attr('data-view')).model.toJSON() : this.options.items[index]['data'] || {}
-        })));*/
       });
       if (BbaseApp.getView(viewId) && BbaseApp.getView(viewId).refresh)
         BbaseApp.getView(viewId).refresh();

@@ -30,282 +30,110 @@ var SRCDIR = './app',
   },
   DEBUG = true;
 
-function doTask(item, debug) {
-  for (var key in paths[item]) {
-    switch (key) {
-      case 'scripts':
-        try {
-          gulp.task(item + key, function () {
-            if (debug) {
-              return gulp.src(paths[item].scripts.source)
-                /*.pipe(jshint())
-                 .pipe(jshint.reporter(stylish))*/
-                .pipe(concat(paths[item].scripts.name))
-                .pipe(gulp.dest(paths[item].scripts.dist));
-            }
-            return gulp.src(paths[item].scripts.source)
-              .pipe(concat(paths[item].scripts.name))
-              .pipe(uglify())
-              .pipe(gulp.dest(paths[item].scripts.dist));
-          });
-          gulp.start(item + key);
-        } catch (e) {
-          console.error(item + key + e);
-        }
-        break;
 
-      case 'styles':
-        try {
-          gulp.task(item + key, function () {
-            return gulp.src(paths[item].styles.source)
-              .pipe(minifyCSS({ keepBreaks: true }))
-              .pipe(gulp.dest(paths[item].styles.dist));
-          });
-          gulp.start(item + key);
-        } catch (e) {
-          console.error(item + key + e);
-        }
-        break;
-
-      case 'doc':
-        try {
-          gulp.task(item + key, function () {
-            return gulp.src(paths[item].doc.source)
-              .pipe(yuidoc())
-              .pipe(gulp.dest(paths[item].doc.dist))
-          });
-          gulp.start(item + key);
-        } catch (e) {
-          console.error(item + key + e);
-        }
-        break;
-
-      case 'images':
-        try {
-          gulp.task(item + key, function () {
-            return gulp.src(paths[item].images.source)
-              .pipe(imagemin({ optimizationLevel: 5 }))
-              .pipe(gulp.dest(paths[item].images.dist));
-          });
-          gulp.start(item + key);
-        } catch (e) {
-          console.error(item + key + e);
-        }
-        break;
-      default:
-    }
-  }
-}
-
-/**
- * 处理脚本
- * @param  {object} options 配置
- * @param  {boolean} debug  是否调试
- * @return {[type]}         [description]
- */
-function handleScripts(options, debug) {
-  try {
-    var config = options.scripts;
-    var name = config.name;
-
-    gulp.task(name, function () {
-      if (debug) {
-        return gulp.src(config.source)
-          .pipe(concat(config.name))
-          .pipe(gulp.dest(config.dist));
-      }
-      return gulp.src(config.source)
-        .pipe(concat(config.name))
-        .pipe(uglify())
-        .pipe(gulp.dest(config.dist));
-    });
-    gulp.start(name);
-  } catch (e) {
-    console.error(e);
-  }
-}
-/**
- * 处理样式
- * @param  {[type]} options [description]
- * @param  {[type]} debug   [description]
- * @return {[type]}         [description]
- */
-function handleStyles(options, debug) {
-  try {
-    var config = options.styles;
-    var name = config.name;
-    gulp.task(name, function () {
-      return gulp.src(config.source)
-        .pipe(minifyCSS({
-          keepBreaks: true
-        }))
-        .pipe(gulp.dest(config.dist));
-    });
-    gulp.start(name);
-  } catch (e) {
-    console.error(e);
-  }
-}
-/**
- * 处理文档
- * @param  {[type]} options [description]
- * @param  {[type]} debug   [description]
- * @return {[type]}         [description]
- */
-function handleDoc(options, debug) {
-  try {
-    var config = options.doc;
-    var name = config.name;
-    gulp.task(name, function () {
-      return gulp.src(config.source)
-        .pipe(yuidoc())
-        .pipe(gulp.dest(config.dist));
-    });
-    gulp.start(name);
-  } catch (e) {
-    console.error(e);
-  }
-}
-/**
- * 处理图片
- * @param  {[type]} options [description]
- * @param  {[type]} debug   [description]
- * @return {[type]}         [description]
- */
-function handleImages(options, debug) {
-  try {
-    var config = options.images;
-    var name = config.name;
-    gulp.task(name, function () {
-      return gulp.src(config.source)
-        .pipe(imagemin({
-          optimizationLevel: 5
-        }))
-        .pipe(gulp.dest(config.dist));
-    });
-    gulp.start(name);
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-/**
- * 基础任务
- * @param  {[type]} options  [description]
- * @param  {[type]} debug [description]
- * @return {[type]}       [description]
- */
-function baseTask(options, debug) {
-  for (var key in options) {
-    switch (key) {
-      case 'scripts':
-        handleScripts(options, debug);
-        break;
-      case 'styles':
-        handleStyles(options, debug);
-        break;
-      case 'doc':
-        handleDoc(options, debug);
-        break;
-      case 'images':
-        handleImages(options, debug);
-        break;
-      default:
-    }
-  }
-}
-
-// 手机端bbass
 gulp.task('bbase_jquery', function () {
-  baseTask({
-    scripts: {
-      source: [
-        'src/backbone/BbaseJqueryPre.js',
-        'src/Est/Est.source.js',
-        'src/vendor/backbone/backbone-debug-est.js',
-        'src/vendor/handlebars/handlebars-debug.js',
+  var source = [
+    'src/backbone/BbaseJqueryPre.js',
+    'src/Est/Est.source.js',
+    'src/vendor/backbone/backbone-debug-est.js',
+    'src/vendor/handlebars/handlebars-debug.js',
 
-        'src/handlebars/HandlebarsHelper.js',
-        'src/backbone/BbaseApp.js',
-        'src/backbone/BbaseUtils.js',
-        'src/backbone/BbaseService.js',
-        'src/backbone/BbaseSuperView.js',
-        'src/backbone/BbaseView.js',
-        'src/backbone/BbaseList.js',
-        'src/backbone/BbaseItem.js',
-        'src/backbone/BbaseCollection.js',
-        'src/backbone/BbaseModel.js',
-        'src/backbone/BbaseDetail.js',
-        'src/backbone/BbaseBootstrap.js',
-        'src/backbone/BbaseDirective.js',
-        'src/backbone/BbaseStatus.js',
-        'src/backbone/BbaseEnd.js',
-
-      ],
-      name: 'bbase_jquery.min.js',
-      dist: dist.bbase
-    }
-  }, DEBUG);
+    'src/handlebars/HandlebarsHelper.js',
+    'src/backbone/BbaseApp.js',
+    'src/backbone/BbaseUtils.js',
+    'src/backbone/BbaseService.js',
+    'src/backbone/BbaseSuperView.js',
+    'src/backbone/BbaseView.js',
+    'src/backbone/BbaseList.js',
+    'src/backbone/BbaseItem.js',
+    'src/backbone/BbaseCollection.js',
+    'src/backbone/BbaseModel.js',
+    'src/backbone/BbaseDetail.js',
+    'src/backbone/BbaseBootstrap.js',
+    'src/backbone/BbaseDirective.js',
+    'src/backbone/BbaseStatus.js',
+    'src/backbone/BbaseEnd.js'
+  ];
+  if (DEBUG) {
+    return gulp.src(source)
+      .pipe(concat('bbase_jquery.min.js'))
+      .pipe(gulp.dest(dist.bbase));
+  }
+  return gulp.src(source)
+    .pipe(concat('bbase_jquery.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest(dist.bbase));
 });
-// 手机端精简bbass
 gulp.task('bbase_zepto', function () {
-  baseTask({
-    scripts: {
-      source: [
-        'src/vendor/zepto/deferred.js',
-        'src/vendor/zepto/callbacks.js',
-        'src/vendor/zepto/selector.js',
-        'src/vendor/zepto/hover.js',
-        'src/backbone/BbaseZeptoPre.js',
-        'src/Est/Est.source.js',
-        'src/vendor/backbone/backbone-debug-est.js',
-        'src/vendor/handlebars/handlebars-debug.js',
+  var source = [
+    'src/vendor/zepto/deferred.js',
+    'src/vendor/zepto/callbacks.js',
+    'src/vendor/zepto/selector.js',
+    'src/vendor/zepto/hover.js',
+    'src/backbone/BbaseZeptoPre.js',
+    'src/Est/Est.source.js',
+    'src/vendor/backbone/backbone-debug-est.js',
+    'src/vendor/handlebars/handlebars-debug.js',
 
-        'src/handlebars/HandlebarsHelper.js',
-        'src/backbone/BbaseApp.js',
-        'src/backbone/BbaseUtils.js',
-        'src/backbone/BbaseService.js',
-        'src/backbone/BbaseSuperView.js',
-        'src/backbone/BbaseView.js',
-        'src/backbone/BbaseList.js',
-        'src/backbone/BbaseItem.js',
-        'src/backbone/BbaseCollection.js',
-        'src/backbone/BbaseModel.js',
-        'src/backbone/BbaseDetail.js',
-        'src/backbone/BbaseBootstrap.js',
-        'src/backbone/BbaseDirective.js',
-        'src/backbone/BbaseStatus.js',
-        'src/backbone/BbaseEnd.js'
-      ],
-      name: 'bbase_zepto.min.js',
-      dist: dist.bbase
-    }
-  }, DEBUG);
+    'src/handlebars/HandlebarsHelper.js',
+    'src/backbone/BbaseApp.js',
+    'src/backbone/BbaseUtils.js',
+    'src/backbone/BbaseService.js',
+    'src/backbone/BbaseSuperView.js',
+    'src/backbone/BbaseView.js',
+    'src/backbone/BbaseList.js',
+    'src/backbone/BbaseItem.js',
+    'src/backbone/BbaseCollection.js',
+    'src/backbone/BbaseModel.js',
+    'src/backbone/BbaseDetail.js',
+    'src/backbone/BbaseBootstrap.js',
+    'src/backbone/BbaseDirective.js',
+    'src/backbone/BbaseStatus.js',
+    'src/backbone/BbaseEnd.js'
+  ];
+  if (DEBUG) {
+    return gulp.src(source)
+      .pipe(concat('bbase_zepto.min.js'))
+      .pipe(gulp.dest(dist.bbase));
+  }
+  return gulp.src(source)
+    .pipe(concat('bbase_zepto.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest(dist.bbase));
 });
 
-gulp.task('bbase_lib', function () {
+gulp.task('UserManagement', function () {
   gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WorkProjects/UserManagement/app/vendor/bbase'));
-  gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WorkProjects/Mobile/app/vendor/bbase'));
-  gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WebstormProjects/Leaflet/app/vendor/bbase'));
-  gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WorkProjects/lmc_wcd/app/vendor/bbase'));
-});
-
-gulp.task('bbase_ui', function () {
   gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/UserManagement/app/ui/bbase'));
-  gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/Mobile/app/ui/bbase'));
-  gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WebstormProjects/Leaflet/app/ui/bbase'));
-  gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/lmc_wcd/app/ui/bbase'));
+  gulp.src('./app/components/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/UserManagement/app/components/bbase'));
 });
 
-gulp.task('bbase_components', function () {
-  gulp.src('./app/components/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/UserManagement/app/components/bbase'));
+gulp.task('Mobile', function () {
+  gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WorkProjects/Mobile/app/vendor/bbase'));
+  gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/Mobile/app/ui/bbase'));
   gulp.src('./app/components/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/Mobile/app/components/bbase'));
+});
+
+gulp.task('Leaflet', function () {
+  gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WebstormProjects/Leaflet/app/vendor/bbase'));
+  gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WebstormProjects/Leaflet/app/ui/bbase'));
   gulp.src('./app/components/bbase/**').pipe(gulp.dest('C:/software/WebstormProjects/Leaflet/app/components/bbase'));
+});
+
+gulp.task('lmc_wcd', function () {
+  gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WorkProjects/lmc_wcd/app/vendor/bbase'));
+  gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/lmc_wcd/app/ui/bbase'));
   gulp.src('./app/components/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/lmc_wcd/app/components/bbase'));
 });
 
+gulp.task('build', function (callback) {
+  DEBUG = true;
+  runSequence(['bbase_jquery'], ['bbase_zepto'], ['UserManagement', 'Mobile', 'Leaflet', 'lmc_wcd'], callback);
+});
+
 gulp.task('dist', function (callback) {
-  runSequence(['bbase_jquery'], ['bbase_zepto'], ['bbase_lib', 'bbase_ui', 'bbase_components'], callback);
+  DEBUG = false;
+  runSequence(['bbase_jquery', 'bbase_zepto'], ['UserManagement', 'Mobile', 'Leaflet', 'lmc_wcd'], callback);
 });
 
 // dist

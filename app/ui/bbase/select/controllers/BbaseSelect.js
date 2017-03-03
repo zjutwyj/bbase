@@ -28,36 +28,36 @@ define('BbaseSelect', [], function(require, exports, module) {
       this.model.attributes.text = this.model.get(this._options.data.text);
       this.model.attributes.value = this.model.get(this._options.data.value);
       this.model.on('autoSelectNode', this.autoSelectNode, this);
-      if (Est.typeOf(this._options.data.inputValue) === 'number' && this._options.data.inputValue === this.model.get('value')) {
-        setTimeout(Est.proxy(function() {
+      if (BbaseEst.typeOf(this._options.data.inputValue) === 'number' && this._options.data.inputValue === this.model.get('value')) {
+        setTimeout(BbaseEst.proxy(function() {
           this.selectItem(false);
         }, this), 0);
       }
-      if (Est.typeOf(this._options.data.inputValue) === 'string' && this._options.data.inputValue &&
+      if (BbaseEst.typeOf(this._options.data.inputValue) === 'string' && this._options.data.inputValue &&
         this._options.data.inputValue.indexOf(this.model.get('value')) !== -1) {
-        setTimeout(Est.proxy(function() {
+        setTimeout(BbaseEst.proxy(function() {
           this.selectItem(false);
         }, this), 0);
       }
-      if (Est.isEmpty(this._options.data.inputValue) && Est.isEmpty(this.model.get('value'))) {
-        setTimeout(Est.proxy(function() {
+      if (BbaseEst.isEmpty(this._options.data.inputValue) && BbaseEst.isEmpty(this.model.get('value'))) {
+        setTimeout(BbaseEst.proxy(function() {
           this.selectItem(false);
         }, this), 0);
       }
     },
     autoSelectNode: function() {
-      setTimeout(Est.proxy(function() {
+      setTimeout(BbaseEst.proxy(function() {
         var $selectNode = this.$el.find('.select-div');
         $selectNode.click();
       }, this), 100);
     },
     selectItem: function(hasCallback) {
-      if (Est.typeOf(hasCallback) === 'undefined') hasCallback = true;
+      if (BbaseEst.typeOf(hasCallback) === 'undefined') hasCallback = true;
       this._options.data.inputValue = this.model.get('value');
-      app.getView(this._options.viewId).setInputValue(this.model.get('text'), this.model.toJSON(), false, hasCallback, this._options.data.postData);
-      app.getView(this._options.viewId).setCurrentSelect(this.$el);
-      app.getView(this._options.viewId).setSubSelect(this.model);
-      app.getView(this._options.viewId).setVal();
+      BbaseApp.getView(this._options.viewId).setInputValue(this.model.get('text'), this.model.toJSON(), false, hasCallback, this._options.data.postData);
+      BbaseApp.getView(this._options.viewId).setCurrentSelect(this.$el);
+      BbaseApp.getView(this._options.viewId).setSubSelect(this.model);
+      BbaseApp.getView(this._options.viewId).setVal();
     }
   });
 
@@ -80,14 +80,14 @@ define('BbaseSelect', [], function(require, exports, module) {
     // 搜索
     search: function(e) {
       e.stopImmediatePropagation();
-      this.searchKey = Est.trim(this.$('.select-search').val());
+      this.searchKey = BbaseEst.trim(this.$('.select-search').val());
       if (this.preSearchKey === this.searchKey) return;
       this.preSearchKey = this.searchKey;
       this.isSearch = false;
       if (!this.isSearch) {
         this.isSearch = true;
-        setTimeout(Est.proxy(function() {
-          if (Est.isEmpty(this.searchKey)) {
+        setTimeout(BbaseEst.proxy(function() {
+          if (BbaseEst.isEmpty(this.searchKey)) {
             this._load({
               page: 1,
               pageSize: 1000
@@ -105,7 +105,7 @@ define('BbaseSelect', [], function(require, exports, module) {
       }
     },
     selectClick: function(id) {
-      Est.each(this.collection.models, Est.proxy(function(item) {
+      BbaseEst.each(this.collection.models, BbaseEst.proxy(function(item) {
         if (item.get('value') === id) {
           item.trigger('autoSelectNode');
           return false;
@@ -116,7 +116,7 @@ define('BbaseSelect', [], function(require, exports, module) {
       e.stopImmediatePropagation();
     },
     setInputValue: function(val, model, _init, hasCallback, postData) {
-      this.$input.val(Est.trim(val).replace('|-', ''));
+      this.$input.val(BbaseEst.trim(val).replace('|-', ''));
       this._select = model.value;
       if (!_init) {
         if (this._options.onChange && hasCallback)
@@ -145,7 +145,7 @@ define('BbaseSelect', [], function(require, exports, module) {
     },
     setVal: function() {
       if (this._options.input) {
-        this._options.input.val(app.getView(this._options.originId).getValue());
+        this._options.input.val(BbaseApp.getView(this._options.originId).getValue());
         if (!this.dic) {
           this._options.input.change();
         }
@@ -160,7 +160,7 @@ define('BbaseSelect', [], function(require, exports, module) {
     getValue: function() {
       if (this.sub) {
         var select = this.sub.getValue();
-        if (Est.isEmpty(select)) {
+        if (BbaseEst.isEmpty(select)) {
           return this._select;
         }
         return select;
@@ -200,11 +200,11 @@ define('BbaseSelect', [], function(require, exports, module) {
       'click .down': 'showSelect'
     },
     initialize: function() {
-      if (Est.typeOf(this.options.render) !== 'string') {
+      if (BbaseEst.typeOf(this.options.render) !== 'string') {
         this.$el = $(this.options.el, this.options.render);
       }
       this.options.data = this.options.data || {};
-      this.options.data = Est.extend({
+      this.options.data = BbaseEst.extend({
         width: 150
       }, this.options.data);
 
@@ -212,7 +212,7 @@ define('BbaseSelect', [], function(require, exports, module) {
         this.options.data.width = this.options.width < 65 ? 65 : this.options.width;
       this.options.text = this.options.text || 'text';
       this.options.value = this.options.value || 'value';
-      this.options.disabled = Est.typeOf(this.options.disabled) === 'boolean' ? this.options.disabled : false;
+      this.options.disabled = BbaseEst.typeOf(this.options.disabled) === 'boolean' ? this.options.disabled : false;
 
       this._initialize({
         template: viewTemp
@@ -235,7 +235,7 @@ define('BbaseSelect', [], function(require, exports, module) {
      */
     initSelect: function(items) {
       var viewId = this._options.viewId;
-      app.addPanel('select-' + viewId, {
+      BbaseApp.addPanel('select-' + viewId, {
         el: 'body',
         append: true,
         template: '<div class="select-container-' + viewId + '"></div>'
@@ -263,7 +263,7 @@ define('BbaseSelect', [], function(require, exports, module) {
         },
         render: '.select-ul'
       });
-      app.addView('select-list-' + viewId, this.selectNode);
+      BbaseApp.addView('select-list-' + viewId, this.selectNode);
       this.selectNode.setInputNode(this.$('.bui-select-input'));
       this.$select = this.selectNode.getSelect();
     },
@@ -283,9 +283,9 @@ define('BbaseSelect', [], function(require, exports, module) {
     initInputValue: function(items) {
       if (!items) return;
       var id = this._options.cur === 0 ? 0 : (this._options.cur || $(this._options.target).val());
-      Est.each(items, function(item) {
-        if (((item[this._options.value] + '') === (id + '')) || (Est.isEmpty(item[this._options.value]) && Est.isEmpty(id))) {
-          this.$('.bui-select-input').val(Est.trim(item[this._options.text]).replace('|-', ''));
+      BbaseEst.each(items, function(item) {
+        if (((item[this._options.value] + '') === (id + '')) || (BbaseEst.isEmpty(item[this._options.value]) && BbaseEst.isEmpty(id))) {
+          this.$('.bui-select-input').val(BbaseEst.trim(item[this._options.text]).replace('|-', ''));
           //if (!this.initRender)
           if (this._options.onChange)
             this._options.onChange.call(this, item, this.initRender, this._options.data.postData);
@@ -349,7 +349,7 @@ define('BbaseSelect', [], function(require, exports, module) {
     setValue: function(value) {
       var list = null;
       if (!this.selectNode) this.initSelect(this._options.items);
-      list = Est.filter(this.selectNode.collection.models, function(item) {
+      list = BbaseEst.filter(this.selectNode.collection.models, function(item) {
         return value.indexOf(item.attributes.value) > -1;
       });
       if (list.length > 0) {
@@ -357,7 +357,7 @@ define('BbaseSelect', [], function(require, exports, module) {
         this.selectNode.setInputValue(list[0].get('text'), list[0].toJSON(), false, true, this._options.data.postData);
         this.selectNode.disableInputChange();
         if (this.selectNode) list[0].trigger('autoSelectNode');
-        setTimeout(Est.proxy(function() {
+        setTimeout(BbaseEst.proxy(function() {
           this.selectNode.enableInputChange();
         }, this), 300);
       }
@@ -368,7 +368,7 @@ define('BbaseSelect', [], function(require, exports, module) {
         this._options.input = $(this._options.target);
         this._options.inputValue = this._options.input.val();
       }
-      if (!Est.isEmpty(this._options.cur)) this._options.inputValue = this._options.cur;
+      if (!BbaseEst.isEmpty(this._options.cur)) this._options.inputValue = this._options.cur;
       if (this._options.items) this.initInputValue(this._options.items);
     }
   });

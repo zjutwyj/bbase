@@ -27,7 +27,7 @@ function itemCheck(value, selector, type) {
       items: object.items || [],
       onChange: this._bind(function (item, init, event, values) {
         if (typeof this.model.attributes[object.cur] !== 'undefined' && !BbaseEst.isEmpty(object.cur) && !init) {
-          this._set(object.cur, item.value);
+          this._set(object.cur, type === 'checkbox' ? values : item.value);
         }
         if (object.onChange) {
           return object.onChange.apply(this, [item, init, event, values]);
@@ -56,16 +56,21 @@ Bbase.DIRECTIVE['bbaseuicheckbox'] = {
   }
 }
 
+//bb-bbaseuiitemtab="{viewId:'ui-item-tab',cur:getCurValue(formId),items:items, onChange: handleChange}"
+Bbase.DIRECTIVE['bbaseuiitemtab'] = {
+  bind: function (value, selector) {
+    itemCheck.apply(this, [value, selector, 'tab']);
+  }
+}
 //bb-bbaseuiitemcheck="{viewId:'radio-form',cur:getCurValue(formId),items:items, onChange: handleChange}"
 Bbase.DIRECTIVE['bbaseuiitemcheck'] = {
   bind: function (value, selector) {
     itemCheck.apply(this, [value, selector, 'normal']);
   }
 }
-
-//bb-bbaseuiitemtab="{viewId:'ui-item-tab',cur:getCurValue(formId),items:items, onChange: handleChange}"
-Bbase.DIRECTIVE['bbaseuiitemtab'] = {
+//bb-bbaseuiitembtn="{viewId:'ui-item-tab',cur:getCurValue(formId),items:items, onChange: handleChange}"
+Bbase.DIRECTIVE['bbaseuiitembtn'] = {
   bind: function (value, selector) {
-    itemCheck.apply(this, [value, selector, 'tab']);
+    itemCheck.apply(this, [value, selector, 'btn']);
   }
 }

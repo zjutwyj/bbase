@@ -9,7 +9,7 @@ define('BbaseItemCheck', [], function(require, exports, module) {
 
   model = BbaseModel.extend({
     baseId: 'id',
-    defaults: Est.extend({}, BaseModel.prototype.defaults)
+    defaults: BbaseEst.extend({}, BbaseModel.prototype.defaults)
   });
 
   collection = BbaseCollection.extend({
@@ -42,7 +42,7 @@ define('BbaseItemCheck', [], function(require, exports, module) {
           this._super('view').getAppendValue() : this._get('value'));
       }
       this.result = this.options.data.onChange.call(this, this.model.attributes, init, e, (init ? this._super('options').cur : this._super('view').getValue()));
-      if (Est.typeOf(this.result) === 'boolean' && !this.result) return false;
+      if (BbaseEst.typeOf(this.result) === 'boolean' && !this.result) return false;
     }
   });
   /**
@@ -82,10 +82,10 @@ define('BbaseItemCheck', [], function(require, exports, module) {
   BbaseItemCheck = BbaseList.extend({
     initialize: function() {
       this.targetVal = $(this.options.target).val();
-      this.options.data = Est.extend(this.options.data || {}, {
+      this.options.data = BbaseEst.extend(this.options.data || {}, {
         template: this.options.tpl || '<span class="item-check-text">{{text}}</span>',
         onChange: this.options.onChange || function() {},
-        cur: this.options.cur || (Est.isEmpty(this.targetVal) ? '-' : this.targetVal),
+        cur: this.options.cur || (BbaseEst.isEmpty(this.targetVal) ? '-' : this.targetVal),
         compare: this.options.compare,
         path: this.options.path || 'value',
         target: this.options.target,
@@ -100,14 +100,14 @@ define('BbaseItemCheck', [], function(require, exports, module) {
         collection: collection,
         item: item,
         render: '.item-check-wrap',
-        checkAppend: Est.typeOf(this.options.checkAppend) === 'boolean' ?
+        checkAppend: BbaseEst.typeOf(this.options.checkAppend) === 'boolean' ?
           this.options.checkAppend : false
       });
     },
     setValue: function(value) {
       if (!value || value === this.options.data.cur) return;
       this.options.data.cur = value;
-      Est.each(this.views, this._bind(function(view) {
+      BbaseEst.each(this.views, this._bind(function(view) {
         if (value !== '-' && value.indexOf(view._get(this.options.data.path)) > -1 && !view._get('checked')) {
           view.toggleChecked(true, true);
         } else if ((value === '-' || value.indexOf(view._get(this.options.data.path)) === -1) && view._get('checked')) {
@@ -119,12 +119,12 @@ define('BbaseItemCheck', [], function(require, exports, module) {
       return this.options.data.cur;
     },
     getValue: function() {
-      return Est.map(this._getCheckedItems(true), this._bind(function(item) {
+      return BbaseEst.map(this._getCheckedItems(true), this._bind(function(item) {
         return item[this.options.data.path];
       })).join(',')
     },
     getAppendValue: function() {
-      return Est.chain(Est.cloneDeep(this._getCheckedItems(true)))
+      return BbaseEst.chain(BbaseEst.cloneDeep(this._getCheckedItems(true)))
         .pluck(this.options.path || 'value').value().join(',');
     }
   });

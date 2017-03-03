@@ -22,3 +22,4 @@ Bbase.MODULE['UiDropDown'] = 'modules/ui/controllers/UiDropDown.js';
 
 
 Bbase.MODULE['UiList01'] = 'modules/ui/controllers/UiList01.js';
+Bbase.MODULE['UiItemCheck'] = 'modules/ui/controllers/UiItemCheck.js';
