@@ -1,0 +1,38 @@
+.bbase-component-photocrop {
+  .jcrop-content .jcrop-holder {
+    background-color: rgba(204, 204, 204, 0.15)!important;
+    margin: 0 auto;
+  }
+  .ui-dialog-content {
+    vertical-align: middle;
+    display: table-cell;
+    text-align: center;
+  }
+  .jcrop-keymgr {
+    opacity: 0;
+  }
+  #photo-btns {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+  }
+  #photo-btns .cancel,
+  #photo-btns .submit {
+    width: 70px;
+    height: 36px;
+  }
+  #photo-btns .cancel {
+    border: none;
+    background: transparent;
+    cursor:pointer;
+  }
+  #photo-btns .submit {
+    border: none;
+    background: $mainColor;
+    color: #fff;
+    cursor:pointer;
+  }
+  #photo-btns .submit:hover {
+    background-color: lighten($mainColor, 10%);
+  }
+}

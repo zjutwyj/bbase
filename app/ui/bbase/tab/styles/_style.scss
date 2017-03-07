@@ -1,207 +1,207 @@
 /*tab基础样式*/
 
-.tab-cont-div {
+.bbase-ui-tab {
+  .tab-cont-div {
+    position: relative;
+  }
+  .tab-ul {
+    border-bottom: inherit;
+    height: 32px;
+    position: relative;
+    .tab-li {
+      display: table-cell;
+      text-align: center;
+      cursor: pointer;
+    }
+    .tab-li a {
+      cursor: pointer;
+      color: #666;
+      outline: none;
+    }
+    .tab-li .toggle:hover,
+    .tab-li a:hover {
+      color: #000;
+    }
+    .tab-li a:hover,
+    .tab-li a:visited,
+    .tab-li a:active {
+      background: transparent;
+      border: none;
+    }
+  }
+  .tab-ul-dbtn .tab-li .toggle:hover,
+  .tab-ul-dbtn .tab-li a:hover {
+    color: #fff !important;
+  }
+  .slideBar {
+    width: 100%;
+    height: 1px;
+    border-top: 1px solid #e1e1e1;
+    position: relative;
+  }
+  .transitionPanel {
+    position: relative;
+    -moz-transition: left .5s cubic-bezier(0.175, 0.885, 0.320, 1.325);
+    -webkit-transition: left .5s cubic-bezier(0.175, 0.885, 0.320, 1.325);
+    -o-transition: left .5s cubic-bezier(0.175, 0.885, 0.320, 1.325);
+    transition: left .5s cubic-bezier(0.175, 0.885, 0.320, 1.325);
+  }
+  .slideBar .slideBarTip {
+    width: 82px;
+    height: 2px;
+    position: absolute;
+    top: -2px;
+    background: $mainColor;
+  }
+  /*tab样式1*/
+  .tab-ul-normal {
+    border-bottom: 1px solid #dfdfdf;
+    .tab-li {
+      height: 31px;
+      line-height: 31px;
+      padding: 0 4px;
+    }
+    .tab-li.item-active {
+      height: 32px;
+    }
+    .tab-li {
+      padding-left: 0px;
+      padding-right: 0px;
+      border-left: 1px solid #fff;
+    }
+    .tab-li a {
+      padding: 6px 0px 6px 0px;
+      font-size: 14px;
+    }
+    .tab-li .toggle {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+    .tab-li.item-active {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-bottom-color: transparent;
+    }
+  }
+  /* tab样式2*/
+  .tab-ul-btn {
+    background-color: transparent;
+    .tab-li {
+      height: 31px;
+      line-height: 31px;
+      padding: 0 4px;
+    }
+    .tab-li {
+      float: left !important;
+      margin-right: 2px;
+      height: 24px;
+      margin-bottom: 5px;
+      line-height: 24px;
+      background-color: #efefef;
+      border: 1px solid #dfdfdf;
+      color: #666;
+      width: auto;
+      text-align: center;
+      cursor: pointer;
+    }
+    .tab-li a {
+      padding: 6px 0px 6px 0px;
+      font-size: 14px;
+      color: #fff;
+    }
+    .tab-li.item-active {
+      background-color: #FF5241;
+      color: #fff;
+      border: 1px solid #FF5241;
+    }
+    .tab-li.item-active a {
+      color: #fff;
+    }
+  }
+  /* tab样式3*/
+  .tab-ul-line {
+    height: 25px;
+    background-color: transparent !important;
+    overflow: hidden;
+    .tab-li {
+      height: 31px;
+      line-height: 31px;
+      padding: 0 4px;
+    }
+    .tab-li {
+      font-size: 14px;
+      color: #000;
+      cursor: pointer;
+      height: 25px;
+      line-height: 20px;
+    }
+    .tab-li a {
+      padding: 6px 0px 6px 0px;
+      font-size: 14px;
+      text-decoration: none;
+    }
+    .tab-li.item-active,
+    .tab-li:hover {
+      color: $mainColor;
+      text-decoration: none;
+      background-color: transparent;
+      border: none;
+    }
+    .tab-li.item-active a {
+      color: $mainColor;
+      font-size: 14px;
+    }
+  }
+  /* tab样式4*/
+  .tab-ul-text .tab-li.item-active a {
+    color: #ff4942;
+  }
+  .tab-ul-text .tab-li {
+    padding: 0 4px;
+    height: 31px;
+    line-height: 31px;
+    float: left;
+  }
+  .tab-ul-text .tab-li a {
+    vertical-align: middle;
+  }
+}
+
+.bbase-ui-tab.v {
   position: relative;
-}
-
-.tab-ul {
-  border-bottom: inherit;
-  height: 32px;
-  position: relative;
-}
-
-.tab-ul .tab-li {
-  display: table-cell;
-  text-align: center;
-  cursor: pointer;
-}
-
-.tab-ul .tab-li a {
-  cursor: pointer;
-  color: #666;
-  outline: none;
-}
-
-.tab-ul .tab-li .toggle:hover,
-.tab-ul .tab-li a:hover {
-  color: #000;
-}
-
-.tab-ul-dbtn .tab-li .toggle:hover,
-.tab-ul-dbtn .tab-li a:hover {
-  color: #fff !important;
-}
-
-.tab-ul .tab-li a:hover,
-.tab-ul .tab-li a:visited,
-.tab-ul .tab-li a:active {
-  background: transparent;
-  border: none;
-}
-
-
-/*tab样式1*/
-
-.tab-ul-normal {
-  border-bottom: 1px solid #dfdfdf;
-}
-
-.tab-ul-normal .tab-li {
-  height: 31px;
-  line-height: 31px;
-  padding: 0 4px;
-}
-
-.tab-ul-normal .tab-li.item-active {
-  height: 32px;
-}
-
-.tab-ul-normal .tab-li {
-  padding-left: 0px;
-  padding-right: 0px;
-  border-left: 1px solid #fff;
-}
-
-.tab-ul-normal .tab-li a {
-  padding: 6px 0px 6px 0px;
-  font-size: 14px;
-}
-
-.tab-ul-normal .tab-li .toggle {
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-.tab-ul-normal .tab-li.item-active {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-bottom-color: transparent;
-}
-
-
-/* tab样式2*/
-
-.tab-ul-btn {
-  background-color: transparent;
-}
-
-.tab-ul-btn .tab-li {
-  height: 31px;
-  line-height: 31px;
-  padding: 0 4px;
-}
-
-.tab-ul-btn .tab-li {
-  float: left !important;
-  margin-right: 2px;
-  height: 24px;
-  margin-bottom: 5px;
-  line-height: 24px;
-  background-color: #efefef;
-  border: 1px solid #dfdfdf;
-  color: #666;
-  width: auto;
-  text-align: center;
-  cursor: pointer;
-}
-
-.tab-ul-btn .tab-li a {
-  padding: 6px 0px 6px 0px;
-  font-size: 14px;
-  color: #fff;
-}
-
-.tab-ul-btn .tab-li.item-active {
-  background-color: #FF5241;
-  color: #fff;
-  border: 1px solid #FF5241;
-}
-
-.tab-ul-btn .tab-li.item-active a {
-  color: #fff;
-}
-
-
-/* tab样式3*/
-
-.tab-ul-line {
-  height: 25px;
-  background-color: transparent !important;
-  overflow:hidden;
-}
-
-.tab-ul-line .tab-li {
-  height: 31px;
-  line-height: 31px;
-  padding: 0 4px;
-}
-
-.tab-ul-line .tab-li {
-  font-size: 14px;
-  float: left;
-  color: #000;
-  cursor: pointer;
-  height: 25px;
-  line-height: 20px;
-}
-
-.tab-ul-line .tab-li a {
-  padding: 6px 0px 6px 0px;
-  font-size: 14px;
-}
-
-.tab-ul-line .tab-li.item-active,
-.tab-ul-line .tab-li:hover {
-  color: #FF5241;
-  text-decoration: none;
-  background-color: transparent;
-  border: none;
-}
-
-.tab-ul-line .tab-li.item-active {}
-
-.tab-ul-line .tab-li.item-active a {
-  color: #FF5241;
-  font-size: 14px;
-}
-
-.slideBar {
-  width: 100%;
-  height: 1px;
-  border-top: 1px solid #e1e1e1;
-  position: relative;
-}
-
-.transitionPanel {
-  position: relative;
-  -moz-transition: left .5s cubic-bezier(0.175, 0.885, 0.320, 1.325);
-  -webkit-transition: left .5s cubic-bezier(0.175, 0.885, 0.320, 1.325);
-  -o-transition: left .5s cubic-bezier(0.175, 0.885, 0.320, 1.325);
-  transition: left .5s cubic-bezier(0.175, 0.885, 0.320, 1.325);
-}
-
-.slideBar .slideBarTip {
-  width: 82px;
-  height: 2px;
-  position: absolute;
-  top: -2px;
-  background: #4e67ee;
-}
-
-
-/* tab样式4*/
-
-.tab-ul-text .tab-li.item-active a {
-  color: #ff4942;
-}
-
-.tab-ul-text .tab-li {
-  padding: 0 4px;
-  height: 31px;
-  line-height: 31px;
-  float: left;
-}
-
-.tab-ul-text .tab-li a {
-  vertical-align: middle;
+  overflow: hidden;
+  .tab-ul-line {
+    float: left;
+  }
+  .tab-cont {
+    float: left;
+  }
+  .tab-ul-line .tab-li {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding-left: 45px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .tab-ul-line .tab-li.item-active {
+    background-color: #f4f5f9;
+  }
+  .slideBar {
+    width: 4px;
+    height: 100%;
+    border-top: none;
+    border-left: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+  }
+  .slideBar .slideBarTip {
+    width: 4px;
+    height: 20px;
+    position: absolute;
+    left: -2px;
+  }
 }

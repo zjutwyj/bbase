@@ -23,10 +23,11 @@ Bbase.DIRECTIVE['bbaseuitab'] = {
         viewId: viewId, // 视图ID
         tpl: object.tpl || '<a href="javascript:;">{{text}}</a>', // 模版
         toolTip: object.toolTip, // 是否初始化提示，详见SuperView的_initilize参数说明
-        cur: this._getDefault(object.cur, object.default || ''), // 显示当前项内容
+        cur: this._get(object.cur) || object.default || object.cur, // 显示当前项内容
         require: object.require, // 是否模块化请求， 默认为true（若去除此配置，items里的nodeId都得改成moduleId）
         theme: object.theme || 'tab-ul-text', // 样式：目前有tab-ul-normal,tab-ul-text,tab-ul-btn,tab-ul-line
         path: object.path || 'value', // 作用域字段
+        direction: object.direction || 'h',
         contSelector: object.contSelector, // 【可选】容器选择符
         args: {},
         items: object.items, // 传递给视图的参数, 具体数据见上面

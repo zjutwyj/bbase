@@ -9,28 +9,9 @@ define('UiForm', [], function (require, exports, module) {
 
   template = `
     <div class="UiForm-wrap">
-      <style>
-        .demo-item{padding:5px;}
-      </style>
-      <div class="demo-item result clearfix" >您的选择：<br>text: <span bb-watch="curText:html">{{curText}}</span>, <br>value:<span bb-watch="curValue:html">{{curValue}}</span></div>
-      <br>
-      <br>
-      <div class="demo-item item-type-title clearfix">样式一：</div>
-      <div class="demo-item clearfix" bb-bbaseuiradio="{viewId:'bbaseuiradio',cur:curRidao,items:items, onChange: handleChange }"></div>
-      <div class="demo-item item-directive">指令：bb- bbaseuiradio="{viewId:'bbaseuiradio',cur:cur,items:items, onChange: handleChange }"</div>
-      <br>
-      <br>
-      <div class="demo-item item-type-title clearfix">样式二：</div>
-      <div class="demo-item clearfix" bb-bbaseuicheckbox="{viewId:'bbaseuicheckbox',cur:curCheckbox,items:items, onChange: handleCheckboxChange }"></div>
-      <div class="demo-item item-directive">指令：bb- bbaseuicheckbox="{viewId:'bbaseuicheckbox',cur:cur,items:items, onChange: handleCheckboxChange }"</div>
+      <div id="ui-nav" bb-bbaseuitab="{viewId: 'uiFormNavTab', cur: curNav,theme:'tab-ul-line',path: 'moduleId', tpl: tpl, items: navitems, direction: 'v'}"></div>
     </div>
   `;
-  var items = [
-    { text: '全部', value: 'all' },
-    { text: '已完成', value: 'complete' },
-    { text: '未完成', value: 'undo' },
-    { text: '部分完成', value: 'part' }
-  ];
 
   UiForm = BbaseView.extend({
     initialize: function () {
@@ -40,27 +21,16 @@ define('UiForm', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        curRidao: 'all',
-        curCheckbox: 'all',
-        curText: '',
-        curValue: '',
-        items: items
-      }
-    },
-    handleChange: function (item, init) {
-      if (!init) {
-        this._set({
-          curText: item.text,
-          curValue: item.value
-        });
-      }
-    },
-    handleCheckboxChange: function (item, init, events, val) {
-      if (!init) {
-        this._set({
-          curText: item.text,
-          curValue: val
-        });
+        curNav: 'UiFormRadio',
+        navitems: [
+          { text: '单选', moduleId: 'UiFormRadio' },
+          { text: '多选', moduleId: 'UiFormCheckbox' },
+          { text: '下拉菜单', moduleId: 'UiFormSelect' },
+          { text: '滑动条', moduleId: 'UiFormSlider' }
+        ],
+        tpl: `
+          <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>
+        `
       }
     }
   });

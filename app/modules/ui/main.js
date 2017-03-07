@@ -7,7 +7,7 @@ Bbase.ROUTE['ui_tab'] = function () {
   });
 };
 Bbase.MODULE['UiCenter'] = 'modules/ui/controllers/UiCenter.js';
-Bbase.ROUTE['demo'] = function () {
+Bbase.ROUTE['ui'] = function () {
   seajs.use(['BbaseJquery', 'UiCenter'], function (BbaseJquery, UiCenter) {
     BbaseApp.addRegion('UiCenter', UiCenter, {
       el: '#app-main'
@@ -15,11 +15,15 @@ Bbase.ROUTE['demo'] = function () {
   });
 };
 
-Bbase.MODULE['UiList'] = 'modules/ui/controllers/UiList.js';
 Bbase.MODULE['UiForm'] = 'modules/ui/controllers/UiForm.js';
-Bbase.MODULE['UiDirective'] = 'modules/ui/controllers/UiDirective.js';
+Bbase.MODULE['UiFormRadio'] = 'modules/ui/controllers/UiFormRadio.js';
+Bbase.MODULE['UiFormCheckbox'] = 'modules/ui/controllers/UiFormCheckbox.js';
+Bbase.MODULE['UiFormSelect'] = 'modules/ui/controllers/UiFormSelect.js';
+Bbase.MODULE['UiFormSlider'] = 'modules/ui/controllers/UiFormSlider.js';
+
+Bbase.MODULE['UiItemCheck'] = 'modules/ui/controllers/UiItemCheck.js';
+Bbase.MODULE['UiItemCheckTab'] = 'modules/ui/controllers/UiItemCheckTab.js';
+Bbase.MODULE['UiItemCheckBtn'] = 'modules/ui/controllers/UiItemCheckBtn.js';
+
 Bbase.MODULE['UiDropDown'] = 'modules/ui/controllers/UiDropDown.js';
 
-
-Bbase.MODULE['UiList01'] = 'modules/ui/controllers/UiList01.js';
-Bbase.MODULE['UiItemCheck'] = 'modules/ui/controllers/UiItemCheck.js';

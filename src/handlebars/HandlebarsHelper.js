@@ -420,7 +420,66 @@ BbaseHandlebars.registerHelper('keyMap', function (val1, val2, options) {
   if (!val1 || !val2) return '';
   return val2[val1];
 });
+/**
+ * radio标签
+ *
+ * @method [表单] - radio
+ * @author wyj 15.1.7
+ * @example
+ *        {{{radio name='isBest' value=isBest option='{"是": "01", "否": "00"}' }}}
+ */
+BbaseHandlebars.registerHelper('radio', function (options) {
+  var result = [], list = $.parseJSON ? $.parseJSON(options.hash.option) : JSON.parse(options.hash.options);
+  Est.each(list, function (val, key, list, index) {
+    var checked = options.hash.value === val ? 'checked' : '';
+    result.push('<label><input id="model' + index + '-' + options.hash.name + '" type="radio" name="' + options.hash.name +
+      '" value="' + val + '" ' + checked + '>&nbsp;' + key + '</label>&nbsp;&nbsp;');
+  });
+  return result.join('');
+});
 
+/**
+ * checkbox标签
+ *
+ * @method [表单] - checkbox
+ * @author wyj 15.6.19
+ * @example
+ *      {{{checkbox label='' name='isDefault' value=isDefault trueVal='1' falseVal='0' }}}
+ */
+BbaseHandlebars.registerHelper('checkbox', function (options) {
+  var id = options.hash.id ? options.hash.id : ('model-' + options.hash.name);
+  var random = Est.nextUid('checkbox'); // 随机数
+  var icon_style = "font-size: 32px;"; // 图标大小
+  var value = Est.isEmpty(options.hash.value) ? options.hash.falseVal : options.hash.value; // 取值
+  var isChecked = value === options.hash.trueVal ? true : false; // 是否选中状态
+  var defaultClass = isChecked ? 'icon-checkbox' : 'icon-checkboxno';
+  var args = ("'" + random + "'"); // 参数
+
+  var result = '<div> <label for="' + id + '" style="overflow:hidden;display:inline-block;"> ' +
+    '<input onclick="window.ckToggleClass(' + args + ');" type="checkbox" name="' + options.hash.name + '" id="' + id + '" value="' + value + '" ' + (isChecked ? 'checked' : '') + ' true-value="' + options.hash.trueVal + '" false-value="' + options.hash.falseVal + '"  class="rc-hidden" style="display: none;">' +
+    '<i id="' + random + '" class="iconfont ' + defaultClass + '" style="' + icon_style + '"></i>' + options.hash.label +
+    '</label></div>';
+  return result;
+});
+
+/**
+ * select标签
+ *
+ * @method [表单] - select
+ * @author wyj 15.6.22
+ * @example
+ *      {{{select name='paymentConfit' value=curConfitPanment key='paymentId' text='name' list=paymentConfigList  style="height: 40px;"}}}
+ *
+ */
+BbaseHandlebars.registerHelper('select', function (options) {
+  var id = options.hash.id ? options.hash.id : ('model-' + options.hash.name);
+  var str = '<select name="' + options.hash.name + '" id="' + id + '"  class="' + (options.hash.className || '') + '" style="' + (options.hash.style || '') + '"> ';
+  Est.each(options.hash.list, function (item) {
+    var selected = options.hash.value === item[options.hash.key] ? 'selected' : '';
+    str += '<option value="' + item[options.hash.key] + '" ' + selected + '>' + item[options.hash.text] + '</option>';
+  });
+  return str + '</select>';
+});
 /**
  * 管道过滤
  *

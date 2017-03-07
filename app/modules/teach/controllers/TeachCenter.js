@@ -8,7 +8,7 @@ define('TeachCenter', [], function(require, exports, module){
   var TeachCenter, template;
 
   template = `
-    <div class="TeachCenter-wrap">
+    <div class="TeachCenter-wrap bbase-center">
       TeachCenter
     </div>
   `;

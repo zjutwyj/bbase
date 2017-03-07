@@ -7,7 +7,7 @@
 define('BbaseSelect', [], function(require, exports, module) {
   var BbaseSelect, model, item, collection, list;
   var listTemp = '';
-  var viewTemp = '<div class="bui-select ui-select" aria-disabled="false" tabindex="0" hidefocus="true" style="width: {{width}}px;" aria-pressed="false"> <input type="text" readonly="readonly" class="bui-select-input bui-form-field" style="width: {{minus width 56}}px;border-right:none;" aria-disabled="false" aria-pressed="false"> <span class="x-icon x-icon-normal down" style="margin-left: -4px;"><i class="icon icon-caret iconfont icon-xialasanjiao icon-caret-down" style="width: 8px; height: 8px"></i> </span> </div>';
+  var viewTemp = '<div class="bbase-ui-select bui-select ui-select" aria-disabled="false" tabindex="0" hidefocus="true" style="width: {{width}}px;" aria-pressed="false"> <input type="text" readonly="readonly" class="bui-select-input bui-form-field" style="width: {{minus width 56}}px;border-right:none;" aria-disabled="false" aria-pressed="false"> <span class="x-icon x-icon-normal down" style="margin-left: -4px;"><i class="bbasefont bbase-caretdown" style="width: 8px; height: 8px"></i> </span> </div>';
 
   model = BbaseModel.extend({});
 
@@ -218,7 +218,7 @@ define('BbaseSelect', [], function(require, exports, module) {
         template: viewTemp
       });
       this.initRender = true;
-      listTemp = '<div class="bui-list-picker bui-picker bui-overlay bui-ext-position x-align-bl-tl bui-select-custom" ' +
+      listTemp = '<div class="bbase-ui-select bbase-ui-select-down bui-list-picker bui-picker bui-overlay bui-ext-position x-align-bl-tl bui-select-custom" ' +
         'aria-disabled="false" aria-pressed="false" style="visibility: visible;width:{{minus width 2}}px; display: none;"> ' +
         '{{#if search}} <div class="select-search-container"> <input class="select-search-btn" type="hidden"/> ' +
         '<input type="text" class="select-search"  style="width:{{minus width 32}}px;"/> </div> {{/if}}' +
@@ -310,9 +310,9 @@ define('BbaseSelect', [], function(require, exports, module) {
       if (!this.selectNode) this.initSelect(this._options.items);
       this.$select.css({
         zIndex: 100000,
-        width: (this._options.data.width || 150) - 23 + 'px',
+        width: (this._options.data.width || 150) - 19 + 'px',
         left: this.$('.bui-select').offset().left,
-        top: this.$('.bui-select').offset().top + 30
+        top: this.$('.bui-select').offset().top + 31
       }).show();
       $(document).one('click', $.proxy(function() {
         this.hideSelect();
@@ -350,7 +350,7 @@ define('BbaseSelect', [], function(require, exports, module) {
       var list = null;
       if (!this.selectNode) this.initSelect(this._options.items);
       list = BbaseEst.filter(this.selectNode.collection.models, function(item) {
-        return value.indexOf(item.attributes.value) > -1;
+        return value === item.attributes.value;
       });
       if (list.length > 0) {
         this._options.inputValue = value;

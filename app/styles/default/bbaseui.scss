@@ -1,4 +1,19 @@
 @charset "utf-8";
+@mixin ie7icon($inner) {
+  *zoom: expression(this.runtimeStyle['zoom']='1', this.innerHTML='#{$inner}');
+}
+@mixin gradient($start, $end) {
+  background: -webkit-gradient(linear, left top, left bottom, from($start), to($end));
+  background: -moz-linear-gradient(top, $start, $end);
+  //filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='$start', endColorstr='$end');
+}
+
+
+
+
+$mainColor:#5289db;  // 主题颜色
 @import '../../ui/bbase/tab/styles/style';
 @import '../../ui/bbase/select/styles/style';
 @import '../../ui/bbase/item_check/styles/style';
+@import '../../ui/bbase/pagination/styles/style';
+@import '../../ui/bbase/slider/styles/style';

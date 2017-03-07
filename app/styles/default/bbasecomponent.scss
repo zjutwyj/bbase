@@ -1,0 +1,21 @@
+@charset "utf-8";
+@mixin ie7icon($inner) {
+  *zoom: expression(this.runtimeStyle['zoom']='1', this.innerHTML='#{$inner}');
+}
+@mixin gradient($start, $end) {
+  background: -webkit-gradient(linear, left top, left bottom, from($start), to($end));
+  background: -moz-linear-gradient(top, $start, $end);
+  //filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='$start', endColorstr='$end');
+}
+
+
+
+
+
+$mainColor:#5289db;  // 主题颜色.[;;;;]
+
+@import '../../components/bbase/photopick/styles/style';
+@import '../../components/bbase/photocrop/styles/style';
+@import '../../components/bbase/musicpick/styles/style';
+@import '../../components/bbase/photobeautify/styles/style';
+@import '../../components/bbase/colorpick/styles/style';

@@ -8,7 +8,8 @@ define('BbasePagination', [],
     var BbasePagination, template;
 
     template = `
-      <ul class="pagination" id="pagination-ul"  style="float:right;margin-top:0px;" currentPage="{{page}}">
+      <div class="bbase-ui-pagination">
+        <ul class="pagination" id="pagination-ul"  style="float:right;margin-top:0px;" currentPage="{{page}}">
     <li class="page-start bui-bar-item bui-inline-block {{#compare page '===' 1}}disabled{{else}}danaiPageNum{{/compare}}" aria-disabled="true"
         id="pageFirst" data-page="1"><a href="javascript:;">首页</a></li>
     <li class="page-pre bui-bar-item bui-inline-block {{#compare page '===' 1}}disabled{{else}}danaiPageNum{{/compare}}" aria-disabled="true"
@@ -48,6 +49,7 @@ define('BbasePagination', [],
     <li class="page-info bui-bar-item-text bui-bar-item bui-inline-block bui-bar-item-text-hover bui-bar-item-hover" style="line-height: 30px; padding-left: 10px;"
         id="totalCount">{{page}} / {{totalPage}}页, 共{{count}}个</li>
 </ul>
+      </div>
     `;
 
     //分页模板

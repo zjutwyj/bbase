@@ -14,8 +14,8 @@ var CONST = {
   DOMAIN: 'http://www.bbase.com', // 域名
   STATIC_URL: 'http://www.bbase.com/html/', // 静态页面存放地址
   DOMAIN_TAIL: 'bbase.com', // 去http://
-  PIC_URL: 'http://img.bbase.com/wcd', // 图片服务器地址
-  CDN: 'http://img.bbase.com/wcd/cnd/manage', // 修改后记得改gulpfile里的cdn_root
+  PIC_URL: 'http://img.jihui88.com/wcd', // 图片服务器地址
+  CDN: 'http://img.jihui88.com/wcd/cnd/manage', // 修改后记得改gulpfile里的cdn_root
   MUSIC_URL: 'http://f.bbase.com', // 音乐服务器地址
   SEP: '/', // 地址分隔符
   PIC_NONE: '/manage/images/nopic.jpg?v=001', // 无图片时的替换图片

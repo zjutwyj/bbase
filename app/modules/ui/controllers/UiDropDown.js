@@ -9,7 +9,7 @@ define('UiDropDown', [], function(require, exports, module){
 
   template = `
     <div class="UiDropDown-wrap">
-      UiDropDown
+      <div bb-bbaseuidropdown="{viewId: 'dropdown'}">下拉框1</div>
     </div>
   `;
 

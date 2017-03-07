@@ -1,0 +1,301 @@
+.bbase-component-musicpick {
+        body, button, input, select, textarea {
+    font-size: 12px;
+}
+  .materialLeftPanel {
+    width: 138px;
+    height: 542px;
+    display: table-cell;
+    background: #f4f5f9;
+    vertical-align: top;
+    padding: 0;
+    float: left;
+  }
+  .materialLeftPanel li {
+    height: 54px;
+    line-height: 54px;
+    list-style: none;
+    text-align: center;
+    outline: 0;
+  }
+  .materialLeftPanel li.ui-state-active {
+    background: #fff;
+  }
+  .uploadPhoto {
+    width: 138px;
+    position: absolute;
+    color: #fff;
+    background: $mainColor;
+    bottom: 0;
+    font-size: 16px;
+  }
+  .uploadPhoto:hover {
+    background: lighten($mainColor, 10%);
+  }
+  .materialLeftPanel li {
+    height: 54px;
+    line-height: 54px;
+    list-style: none;
+    text-align: center;
+    outline: 0;
+  }
+  .uploadify-button {
+    position: absolute;
+    bottom: 0;
+  }
+  .materialLeftPanel a {
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    outline: 0;
+    display: block;
+  }
+  .materialLeftPanel a:link,
+  .materialLeftPanel a:visited,
+  .materialLeftPanel a:hover,
+  .materialLeftPanel a:active {
+    text-decoration: none;
+  }
+  .closeBtn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 20px;
+    height: 18px;
+    color: #BEBEBE;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 2px;
+    font-weight: normal;
+    z-index: 1;
+    cursor: pointer;
+    -moz-transition: all .15s;
+    -webkit-transition: all .15s;
+    -o-transition: all .15s;
+    transition: all .15s;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    line-height:1;
+  }
+  .closeBtn:hover {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  #photo-main {
+    float: left;
+    padding-left: 24px;
+    width: 695px;
+  }
+  .photo-tool {
+        width: 100%;
+    height: 43px;
+    line-height: 34px;
+    padding-top: 11px;
+    padding-left: 0px;
+  }
+  .pictureFrame {
+    float: left;
+    display: block;
+    width: 120px;
+    height: 146px;
+    margin: 0 9px 0 9px;
+    _margin: 0 11px 0 10px;
+    position: relative;
+  }
+  .imgkk {
+    margin: 1px;
+    padding: 0;
+    cursor: pointer;
+    display: block;
+    background: #e5e5e5;
+    border: 1px solid rgba(0, 0, 0, 0);
+    position: relative;
+  }
+  .pictureMainFrame {
+    width: 116px;
+    height: 116px;
+    line-height: 0;
+  }
+  .hoverBg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: rgba(0, 0, 0, .4);
+    font-size: 12px;
+    color: #fff;
+    display: none;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .operationBar {
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 6px;
+    _top: 6px;
+    right: 2px;
+    _right: 2px;
+    margin: 0;
+    padding: 0;
+    display: none;
+  }
+  .operationBar {
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 6px;
+    right: 12px;
+    margin: 0;
+    padding: 0;
+    display: none;
+  }
+  .delBtn {
+    cursor: pointer;
+    position: relative;
+    display: block;
+    width: 12px;
+    height: 12px;
+    z-index: 2;
+    color: #fff !important;
+  }
+  .delBtn:link,
+  .delBtn:visited,
+  .delBtn:hover,
+  .delBtn:active {
+    text-decoration: none;
+  }
+
+  .picture-img {
+    width: 116px;
+    height: 116px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #e5e5e5;
+    overflow: hidden;
+  }
+
+  .clickToUse {
+    margin-top: 26px;
+    height: 68px;
+    line-height: 68px;
+  }
+  .file-upload,
+  .file-upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 20px;
+    direction: ltr;
+    cursor: pointer;
+  }
+  .uploading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 70px;
+    height: 70px;
+    background-color: #fff;
+    z-index: 99999999;
+    opacity: 0.8;
+    margin-left: -35px;
+    border-radius: 11px;
+    font-size: 23px;
+    margin-top: -35px;
+    text-align: center;
+    border: 1px solid #929191;
+    line-height: 70px;
+    padding: 0 10px;
+  }
+  .selectBtn {
+    position: absolute;
+    left: 5px;
+    z-index: 999;
+    top: 5px;
+    display: none;
+  }
+  .hover .selectBtn,
+  .item-active .selectBtn {
+    display: block;
+  }
+  .selectBtn .ui-item-check-checkbox .item-check .check-icon {
+    border-color: #fff;
+  }
+  #photo-main .ui-item-check-radio,
+  #photo-main .ui-item-check-checkbox {
+    line-height: 18px !important;
+    padding-top: 0px !important;
+  }
+  #photo-pagination {
+    position: absolute;
+    bottom: 12px;
+    left: 170px;
+  }
+  #photo-pagination .page-per-page {
+    display: none;
+  }
+  #photo-btns {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+  }
+  #photo-btns .cancel,
+  #photo-btns .submit {
+    width: 70px;
+    height: 36px;
+  }
+  #photo-btns .cancel {
+    border: none;
+    background: transparent;
+    cursor:pointer;
+  }
+  #photo-btns .submit {
+    border: none;
+    background: $mainColor;
+    color: #fff;
+    cursor:pointer;
+  }
+  #photo-btns .submit:hover {
+    background-color: lighten($mainColor, 10%);
+  }
+  .music-play {
+    width: auto;
+    text-align: center;
+    float: right;
+    color: #999;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 8px;
+    span{
+      margin-left:2px;
+          font-size: 12px;
+    vertical-align: bottom;
+    }
+}
+
+.images-content{height:310px;clear:both;}
+  .images-content .bui-grid-row-even{background:#f7f7f7}
+  .images-content .music-name{overflow:hidden;cursor:pointer;white-space:nowrap;text-overflow:ellipsis;color:#666;padding-right:10px;width: 535px;float:left}
+  .images-content .music-size{float:right;color:#ccc;display:block}
+  .images-content .music-li{clear:both;padding:0 10px;font-size:12px;color:#666;height:30px;line-height:30px;list-style:none;}
+  .images-content .item-active{background-color: $mainColor;color: #fff;}
+  .images-content .item-active .music-name,.images-content .item-active .music-play, .images-content .item-active .music-size{;color: #fff;}
+.bbase-ui-tab .tab-ul-line{
+  margin-top:6px;
+}
+
+
+}

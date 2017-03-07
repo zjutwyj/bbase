@@ -8,30 +8,10 @@ define('UiItemCheck', [], function (require, exports, module) {
   var UiItemCheck, template;
 
   template = `
-    <div class="UiItemCheck-wrap" style="padding: 5px; overflow:hidden;">
-      <style>
-        .demo-item{padding:5px;}
-      </style>
-      <div class="demo-item result clearfix" bb-watch="curText:html">您的选择：text: {{curText}}, value:{{curValue}}</div>
-      <br>
-      <br>
-      <div class="demo-item item-type-title clearfix">样式一：</div>
-      <div class="demo-item clearfix" bb-bbaseuiitemtab="{viewId:'itemcheck',cur:cur,items:items, onChange: handleChange }"></div>
-      <div class="demo-item item-directive">指令：bb-bbaseuiitemtab="{viewId:'itemcheck',cur:cur,items:items, onChange: handleChange }"</div>
-      <br>
-      <br>
-      <div class="demo-item item-type-title clearfix">样式二：</div>
-      <div class="demo-item clearfix" bb-bbaseuiitembtn="{viewId:'itemchecknormal',cur:curNormal,items:itemsNormal, onChange: handleNormalChange }"></div>
-      <div class="demo-item item-directive">指令：bb-bbaseuiitembtn="{viewId:'itemchecknormal',cur:curNormal,items:itemsNormal, onChange: handleNormalChange }"</div>
+    <div class="UiItemCheck-wrap">
+     <div id="ui-nav" bb-bbaseuitab="{viewId: 'uiFormNavTab', cur: curNav,theme:'tab-ul-line',path: 'moduleId', tpl: tpl, items: navitems, direction: 'v'}"></div>
     </div>
   `;
-
-  var items = [
-    { text: '全部', value: 'all' },
-    { text: '已完成', value: 'complete' },
-    { text: '未完成', value: 'uncomplete' },
-    { text: '部分完成', value: 'partcomplete' }
-  ];
 
   UiItemCheck = BbaseView.extend({
     initialize: function () {
@@ -41,24 +21,15 @@ define('UiItemCheck', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        curText: '',
-        curValue: '',
-        cur: 'all',
-        items: items,
-        curNormal: 'all',
-        itemsNormal: items
+        curNav: 'UiItemCheckTab',
+        navitems: [
+          { text: '样式一', moduleId: 'UiItemCheckTab' },
+          { text: '样式二', moduleId: 'UiItemCheckBtn' }
+        ],
+        tpl: `
+          <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>
+        `
       }
-    },
-    handleChange: function (item, init) {
-      if (!init) {
-        this._set({
-          curText: item.text,
-          curValue: item.value
-        });
-      }
-    },
-    handleNormalChange: function (item, init) {
-      this.handleChange.call(this, item, init);
     }
   });
 

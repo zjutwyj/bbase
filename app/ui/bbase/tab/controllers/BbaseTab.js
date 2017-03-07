@@ -4,7 +4,7 @@
  * @class UI - ui库
  * @author yongjin<zjut_wyj@163.com> 2015/9/6
  */
-define('BbaseTab', [], function(require, exports, module) {
+define('BbaseTab', [], function (require, exports, module) {
   var BbaseTab, model, collection, item;
 
   model = BbaseModel.extend({
@@ -17,47 +17,52 @@ define('BbaseTab', [], function(require, exports, module) {
   });
 
   item = BbaseItem.extend({
-    tagName: function() {
+    tagName: function () {
       return this.options.data.tagName || 'li';
     },
     className: 'tab-li',
     events: {
       'click .toggle': 'toggleChecked'
     },
-    initialize: function() {
+    initialize: function () {
       this.tabName = this.options.data.tagName || 'li';
       this._super({
         template: '<div class="toggle">' + this.options.data.template + '</div>',
         toolTip: this.options.data.toolTip
       });
     },
-    afterRender: function() {
+    afterRender: function () {
       if (this.options.data.cur !== '-' && (this.options.data.cur === this._getValue(this.options.data.path))) {
         this._check();
         this.options.data.onChange.call(this, this.model.attributes, true);
-        setTimeout(BbaseEst.proxy(function() {
+        setTimeout(BbaseEst.proxy(function () {
           this.showCurModule(this.options.data.cur, true);
         }, this), 0);
       }
       this.$('.toggle:first').addClass('tab-' + this._getValue(this.options.data.path));
       if (BbaseEst.typeOf(this._getValue('delay')) === 'boolean' && !this._getValue('delay')) {
-        this._delay(function() {
+        this._delay(function () {
           BbaseApp.getView(this._options.viewId).renderModule(this._getValue('dx'), this._getValue('moduleId'), this._getValue('viewId'));
         }, 100);
       }
     },
-    showCurModule: function(modId, lazy) {
+    showCurModule: function (modId, lazy) {
       if (BbaseApp.getView(this._options.viewId)) {
         BbaseApp.getView(this._options.viewId).showModule(modId, this.model.get('dx'), this.model.get('moduleId'), this.model.get('viewId'));
         if (BbaseApp.getView(this._options.viewId).getType() === 'tab-ul-line') this.setSliderBar(lazy);
       }
     },
-    setSliderBar: function(lazy) {
-      setTimeout(BbaseEst.proxy(function() {
-        BbaseApp.getView(this._options.viewId).setSliderBar(this.$el.outerWidth(), this.$el.position().left);
+    setSliderBar: function (lazy) {
+      setTimeout(BbaseEst.proxy(function () {
+        if (this._super().options.direction === 'v'){
+          BbaseApp.getView(this._options.viewId).setSliderBar(null, this.$el.outerHeight(), null, this.$el.position().top);
+        }else{
+          BbaseApp.getView(this._options.viewId).setSliderBar(this.$el.outerWidth(),null, this.$el.position().left, null);
+        }
+
       }, this), lazy ? 200 : 0);
     },
-    toggleChecked: function(e) {
+    toggleChecked: function (e) {
       this._check(e);
       this.showCurModule(this._getValue(this.options.data.path));
       $(this._options.data.target).val(this._getValue(this.options.data.path));
@@ -95,7 +100,7 @@ define('BbaseTab', [], function(require, exports, module) {
    *        }));
    */
   BbaseTab = BbaseList.extend({
-    initialize: function() {
+    initialize: function () {
       this.targetVal = $(this.options.target).val();
       this.$tabCont = $('<div class="tab-cont"></div>'); // 导航容器
       this.$tabList = null; // 导航列表
@@ -108,25 +113,25 @@ define('BbaseTab', [], function(require, exports, module) {
         path: this.options.path || 'value',
         tagName: this.options.tagName || 'li',
         target: this.options.target,
-        onChange: this.options.onChange || function() {}
+        onChange: this.options.onChange || function () {}
       });
       if (typeof this.options.require === 'undefined' ||
         (typeof this.options.require !== 'undefined' && this.options.require)) {
         this.require = true;
-        BbaseEst.each(this.options.items, BbaseEst.proxy(function(item, index) {
+        BbaseEst.each(this.options.items, BbaseEst.proxy(function (item, index) {
           this.$listCont.append($('<div class="tab-cont-div tab-cont-' + this.options.viewId + index + '" style="display: none;"></div>'));
         }, this));
         this.$tabList = this.$listCont.find('.tab-cont-div');
       } else if ('nodeId' in this.options.items[this.options.items.length - 1]) {
-        BbaseEst.each(this.options.items, function(item) {
+        BbaseEst.each(this.options.items, function (item) {
           this.$selectorList.push(item[this.options.path]);
         }, this);
-        setTimeout(BbaseEst.proxy(function() {
+        setTimeout(BbaseEst.proxy(function () {
           this.$tabList = $(this.$selectorList.join(', '));
         }, this), 0);
       }
       this._super({
-        template: '<ul class="tab-ul tab-ul' + this.options.viewId + ' ' + (this.options.theme || 'tab-ul-normal') + ' nav-justified clearfix"></ul>' + (this.options.theme === 'tab-ul-line' ? '<div class="slideBar"><div class="slideBarTip transitionPanel" style="left: 3.5px; width: auto;"></div></div>' : ''),
+        template: '<div class="bbase-ui-tab ' + (this.options.direction || 'h') + '"><ul class="tab-ul tab-ul' + this.options.viewId + ' ' + (this.options.theme || 'tab-ul-normal') + ' nav-justified clearfix"></ul>' + (this.options.theme === 'tab-ul-line' ? '<div class="slideBar"><div class="slideBarTip transitionPanel" style=""></div></div></div>' : ''),
         model: model,
         render: '.tab-ul' + this.options.viewId,
         collection: collection,
@@ -134,27 +139,27 @@ define('BbaseTab', [], function(require, exports, module) {
         checkAppend: false
       });
     },
-    renderModule: function(index, moduleName, viewId) {
-      try{
+    renderModule: function (index, moduleName, viewId) {
+      try {
         var viewId = viewId || (moduleName + '-' + index);
-      this.renderType = BbaseEst.typeOf(this.options.items[index]['oneRender']) === 'undefined' ? '_one' :
-        this.options.items[index]['oneRender'] ? '_one' : '_require';
+        this.renderType = BbaseEst.typeOf(this.options.items[index]['oneRender']) === 'undefined' ? '_one' :
+          this.options.items[index]['oneRender'] ? '_one' : '_require';
 
-      this[this.renderType]([moduleName + (this.renderType === '_one' ? '-' + index : '')], function(instance) {
-        BbaseApp.addRegion(moduleName + '-' + index, instance, {
-          el: this.$tabList.eq(index),
-          viewId: viewId,
-          passData:  BbaseEst.typeOf(this.options.items[index]['data']) === 'undefined' ?
-            BbaseApp.getView(this.$el.parents('.region:first').attr('data-view')).model.toJSON() : this.options.items[index]['data'] || {}
+        this[this.renderType]([moduleName + (this.renderType === '_one' ? '-' + index : '')], function (instance) {
+          BbaseApp.addRegion(moduleName + '-' + index, instance, {
+            el: this.$tabList.eq(index),
+            viewId: viewId,
+            passData: BbaseEst.typeOf(this.options.items[index]['data']) === 'undefined' ?
+              BbaseApp.getView(this.$el.parents('.region:first').attr('data-view')).model.toJSON() : this.options.items[index]['data'] || {}
+          });
         });
-      });
-      if (BbaseApp.getView(viewId) && BbaseApp.getView(viewId).refresh)
-        BbaseApp.getView(viewId).refresh();
-      }catch(e){
+        if (BbaseApp.getView(viewId) && BbaseApp.getView(viewId).refresh)
+          BbaseApp.getView(viewId).refresh();
+      } catch (e) {
         console.dir(e);
       }
     },
-    showModule: function(modId, index, moduleId, viewId) {
+    showModule: function (modId, index, moduleId, viewId) {
       try {
         var moduleName = modId;
         if (!this.$tabList) return;
@@ -172,17 +177,26 @@ define('BbaseTab', [], function(require, exports, module) {
         console.log(e);
       }
     },
-    setSliderBar: function(width, left) {
-      this.$('.slideBarTip:first').css({
-        left: left,
-        width: width
-      });
+    setSliderBar: function (width, height, left, top) {
+      if (width) {
+        this.$('.slideBarTip:first').css({
+          left: left,
+          width: width
+        });
+      } else {
+        this.$('.slideBarTip:first').css({
+          top: top,
+          height: height,
+          left:0,
+          width: this.$('.slideBarTip:first').width()
+        });
+      }
     },
-    getType: function() {
+    getType: function () {
       return this._options.theme;
     },
-    afterRender: function() {
-      this.$el.append(this.$tabCont);
+    afterRender: function () {
+      this.$el.find('.bbase-ui-tab').append(this.$tabCont);
     }
   });
 

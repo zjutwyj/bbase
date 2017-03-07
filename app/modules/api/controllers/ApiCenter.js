@@ -8,7 +8,7 @@ define('ApiCenter', [], function(require, exports, module){
   var ApiCenter, template;
 
   template = `
-    <div class="ApiCenter-wrap">
+    <div class="ApiCenter-wrap bbase-center">
       ApiCenter
     </div>
   `;

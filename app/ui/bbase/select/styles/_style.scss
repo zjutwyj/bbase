@@ -1,7 +1,7 @@
-@mixin ie7icon($inner) {
-  *zoom: expression(this.runtimeStyle['zoom']='1', this.innerHTML='#{$inner}');
+.bbase-ui-select-down{
+  position:absolute;
 }
-.ui-select {
+.bbase-ui-select.ui-select {
   display: inline-block;
   margin-right: 5px;
   button,
@@ -30,7 +30,7 @@
     display: inline-block;
     height: 20px;
     line-height: 20px;
-    text-indent:2px;
+    text-indent: 2px;
     padding: 4px;
     border: 1px solid #d6d6d6;
     vertical-align: middle;
@@ -70,37 +70,38 @@
   }
   .x-icon-normal {
     text-shadow: none;
-    color: #333;
+    color: #868686;
     vertical-align: middle;
     background-color: #fff;
     border-color: #d6d6d6;
     border-left-color: #fff;
     .icon {
-      font-size: 20px;
-      color: #d6d6d6;
+      color: #ababab;
       background-image: none;
+      font-size: 14px;
     }
   }
-  .icon-xialasanjiao {
+  .bbase-caretdown {
     @include ie7icon(\e618);
+    font-size:12px;
   }
 }
 
-.bui-picker {
+.bbase-ui-select .bui-picker {
   z-index: 2050;
 }
 
-.bui-overlay {
+.bbase-ui-select .bui-overlay {
   position: absolute;
   left: -9999px;
   top: -9999px;
 }
 
-.bui-select-list {
+.bbase-ui-select .bui-select-list {
   background-color: #fff;
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, .15);
-  border-radius: 4px;
+  border-radius: 0px;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
   background-clip: padding-box;
@@ -122,7 +123,7 @@
     color: #fff;
     text-decoration: none;
     outline: 0;
-    background-color: #bdbdbd;
+    background-color: $mainColor;
   }
   .bui-list-item-select-inner {
     padding: 3px 4px;
@@ -133,7 +134,7 @@
   .bui-list-item-select:hover {
     text-decoration: none;
     color: #fff;
-    background-color: #bdbdbd;
+    background-color: $mainColor;
   }
   .bui-list-item-select:hover .bui-list-item-select-inner {
     color: #fff;

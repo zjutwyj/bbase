@@ -19,6 +19,9 @@ BbaseEst.extend(BbaseApplication.prototype, {
     this.dialog = []; // 对话框
     this.dialogs = {}; // 带身份标识的dialog
     this.status = {}; // 状态
+    if (typeof app !== 'undefined' && app.getStatus){
+      this.status = BbaseEst.extend(this.status, app.getAllStatus());
+    }
     this.cookies = []; // 会话
     this.models = []; // 实体对象
     this.compileTemps = {}; // 编译模版

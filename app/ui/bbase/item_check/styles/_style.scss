@@ -1,11 +1,5 @@
-// 表单相关
-$formBorder: #BBBBBB;
-$formHeight: 22px;
-$formIconColor:#FF5241;
-
-
 //全局样式
-.ui-itemcheck {
+.bbase-ui-itemcheck.ui-itemcheck {
   .ui-item-check {
     float: left;
     margin-right: 2px;
@@ -22,13 +16,16 @@ $formIconColor:#FF5241;
     width: 14px;
     height: 14px;
     z-index: 1000;
-    color: $formIconColor;
+    color: $mainColor;
     opacity: 0.8;
     border-radius: 0;
   }
-  .ui-item-check .icon-ok {
+  .ui-item-check .bbase-yuandian {
     font-size: 12px;
     line-height: 12px;
+  }
+  .ui-item-check .bbase-yuandian:before {
+    content: "\e6ac";
   }
   .ui-item-check.item-active .check-icon {
     display: block;
@@ -38,7 +35,7 @@ $formIconColor:#FF5241;
     display: inline-block;
     width: 100%;
   }
-  .icon-ok {
+  .bbase-yuandian {
     background: none;
   }
   .x-icon-info,
@@ -50,15 +47,15 @@ $formIconColor:#FF5241;
   }
 }
 
-#jhw .ui-itemcheck .item-active {
+.bbase-ui-itemcheck.ui-itemcheck .item-active {
   background-color: transparent;
 }
 
 // 样式1
-.ui-item-check-btn {
+.bbase-ui-itemcheck.ui-item-check-btn {
   .ui-item-check {
     padding: 2px 4px;
-    border: 1px solid $formBorder;
+    border: 1px solid #BBBBBB;
   }
   .item-active{
         visibility: visible;
@@ -66,10 +63,13 @@ $formIconColor:#FF5241;
     background-color: #5289db;
     color: #fff;
   }
+  .ui-item-check .bbase-yuandian:before {
+    content: "";
+  }
 }
 
 // 单选项
-.ui-item-check-radio {
+.bbase-ui-itemcheck.ui-item-check-radio {
   .item-check-text {
     vertical-align: middle;
   }
@@ -83,16 +83,16 @@ $formIconColor:#FF5241;
   .ui-item-check .check-icon {
     left: 2px;
     top: 2px;
-    border: 1px solid $formBorder;
+    border: 1px solid #BBBBBB;
     border-radius: 50%;
     width: 12px;
     height: 12px;
     line-height: 12px;
     display: inline-block;
   }
-  .ui-item-check .check-icon .icon-ok {
+  .ui-item-check .check-icon .bbase-yuandian {
     font-size: 12px;
-    line-height: 12px;
+    line-height: 13px;
     margin-left: 0px;
     margin-top: 0px;
     width: 100%;
@@ -102,23 +102,23 @@ $formIconColor:#FF5241;
     text-indent: 0px;
   }
   .ui-item-check.hover .check-icon {
-    border-color: $formIconColor;
+    border-color: $mainColor;
   }
-  .ui-item-check .icon-ok:before {
+  .ui-item-check .bbase-yuandian:before {
     content: "";
   }
-  .ui-item-check.item-active .icon-ok:before {
-    content: "\e60f";
+  .ui-item-check.item-active .bbase-yuandian:before {
+    content: "\e601";
   }
 }
 
-.ie8 .ui-item-check-radio .ui-item-check .check-icon {
+.ie8 .bbase-ui-itemcheck.ui-item-check-radio .ui-item-check .check-icon {
   border-radius: 10px;
   behavior: url(pie/PIE.htc);
 }
 
 // 多选项
-.ui-item-check-checkbox {
+.bbase-ui-itemcheck.ui-item-check-checkbox {
   .item-check-text {
     vertical-align: middle;
   }
@@ -131,12 +131,12 @@ $formIconColor:#FF5241;
     .check-icon {
       left: 2px;
       top: 2px;
-      border: 1px solid $formBorder;
+      border: 1px solid #BBBBBB;
       width: 12px;
       height: 12px;
       border-radius: 2px;
       display: inline-block;
-      .icon-ok {
+      .bbase-yuandian {
         font-size: 12px;
         line-height: 12px;
         margin-left: 0px;
@@ -147,31 +147,35 @@ $formIconColor:#FF5241;
         float: left;
       }
     }
-    .icon-ok:before {
+    .bbase-yuandian:before {
       content: "";
     }
   }
-  .item-check.hover .check-icon {
-    border-color: $formIconColor;
+
+  .ui-item-check.hover .check-icon {
+    border-color: $mainColor;
+  }
+  .ui-item-check .bbase-yuandian:before {
+    content: "";
   }
   .ui-item-check.item-active .check-icon {
-    background: $formIconColor;
+    background: $mainColor;
     color: #fff;
-    border-color: $formIconColor;
-    .icon-ok:before {
-      content: "\e600";
+    border-color: $mainColor;
+    .bbase-yuandian:before {
+      content: "\e6ac";
     }
   }
 }
 
-.ui-item-check-radio,
-.ui-item-check-checkbox {
+.bbase-ui-itemcheck.ui-item-check-radio,
+.bbase-ui-itemcheck.ui-item-check-checkbox {
   line-height: 18px !important;
   padding-top: 6px !important;
 }
 
 // tab
-.ui-item-check-tab {
+.bbase-ui-itemcheck.ui-item-check-tab {
   zoom: 1;
   margin-left: 1px;
   .ui-item-check {

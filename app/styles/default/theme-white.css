@@ -1,861 +1,1151 @@
 .flyerBody {
-    width: 100%;
-    height: 100%;
-    -webkit-user-select: none;
-}
-.flyerHeader {
-    position: relative;
-    width: 100%;
-    min-width: 1200px;
-    height: 70px;
-    background-color: #fff;
-    z-index: 1005;
-}
-.flyerShadow {
-    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.2);
-    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
-}
-.flyerHeader .area {
-    position: relative;
-    height: 70px;
-    margin: 0 auto;
-}
-.flyerHeader .area .logo {
-    cursor: pointer;
-    float: left;
-    width: 181px;
-    height: 70px;
-}
-.versionTab {
-    padding: 0 4px;
-    position: absolute;
-    top: 26px;
-    left: 166px;
-    width: 38px;
-    height: 19px;
-    line-height: 19px;
-    border: 1px solid;
-    border-radius: 3px;
-    text-align: center;
-    font-size: 12px;
-    z-index: 9;
-}
-.versionTab.freeTab {
-    color: #333;
-    border-color: #333;
-    cursor: pointer;
-}
-.flyerHeader .area .navBar {
-    float: left;
-    width: 890px;
-    list-style: none;
-    height: 68px;
-    line-height: 68px;
-    position: relative;
-    padding-left: 0;
-    box-sizing: border-box;
-}
-.flyerHeader .area .logo a {
-    display: -webkit-flex;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    -webkit-align-items: center;
-    align-items: center;
-}
-.flyerHeader .area .logo img {
-    max-width: 100%;
-    max-height: 100%;
-}
-.flyerHeader .navBar li {
-    float: left;
-    position: relative;
-    padding: 0 20px;
-    margin-left: 0;
-    font-size: 16px;
-    text-align: center;
-    vertical-align: top;
-    cursor: pointer;
-}
-.flyerHeader .navBar .checked {
-    border-top: 2px solid #4e67ee;
-    color: #4e67ee;
-}
-.flyerHeader .navBar li:first-child {
-    margin-left: 0px;
-}
-.flyerHeader .userIcon {
-    float: right;
-    position: relative;
-    width: 60px;
-    height: 70px;
-    cursor: pointer;
-}
-.flyerHeader .userIcon .bg {
-    z-index: 2;
-    position: absolute;
-    width: 60px;
-    height: 71px;
-    background: transparent;
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
-}
-.flyerHeader .userIcon .icon {
-    z-index: 2;
-    position: absolute;
-    top: 50%;
-    margin-top: -9.5px;
-    left: 50%;
-    margin-left: -9.5px;
-    width: 19px;
-    height: 19px;
-    background: url(img/manage/manage_2.png?v=201611071734) no-repeat -81px -31px;
-}
-.event_banner {
-    cursor: pointer;
-    height: 100px;
-    background: url(img/manage/hotFestival.jpg?v=201612121818) no-repeat center;
+  width: 100%;
+  height: 100%;
+  -webkit-user-select: none;
 }
 
-.flyerHeader  .userPanel {
-    cursor: default;
-    display: none;
-    position: absolute;
-    z-index: 1;
-    left: -139px;
-    top: 1px;
-    margin-top: 69px;
-    width: 199px;
-    background: #fff;
-    font-size: 14px;
-    color: #333;
-    text-align: left;
-    border: 1px solid #e5e5e5;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    -o-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    -ms-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+.flyerHeader {
+  position: relative;
+  width: 100%;
+  min-width: 1200px;
+  height: 70px;
+  background-color: #fff;
+  z-index: 1005;
 }
+
+.flyerShadow {
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.flyerHeader .area {
+  position: relative;
+  height: 70px;
+  margin: 0 auto;
+  width:1200px;
+}
+#app-main{
+  width:1200px;
+  margin:0 auto;
+}
+
+.flyerHeader .area .logo {
+  cursor: pointer;
+  float: left;
+  width: 181px;
+  height: 70px;
+}
+
+.versionTab {
+  padding: 0 4px;
+  position: absolute;
+  top: 26px;
+  left: 166px;
+  width: 38px;
+  height: 19px;
+  line-height: 19px;
+  border: 1px solid;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 12px;
+  z-index: 9;
+}
+
+.versionTab.freeTab {
+  color: #333;
+  border-color: #333;
+  cursor: pointer;
+}
+
+.flyerHeader .area .navBar {
+  float: left;
+  width: 890px;
+  list-style: none;
+  height: 68px;
+  line-height: 68px;
+  position: relative;
+  padding-left: 0;
+  box-sizing: border-box;
+}
+
+.flyerHeader .area .logo a {
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.flyerHeader .area .logo img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.flyerHeader .navBar li {
+  float: left;
+  position: relative;
+  padding: 0 20px!important;
+  margin-left: 0;
+  font-size: 16px;
+  text-align: center;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+.flyerHeader .navBar .checked {
+  border-top: 2px solid #4e67ee;
+  color: #4e67ee;
+}
+
+.flyerHeader .navBar li:first-child {
+  margin-left: 0px;
+}
+
+.flyerHeader .userIcon {
+  float: right;
+  position: relative;
+  width: 60px;
+  height: 70px;
+  cursor: pointer;
+}
+
+.flyerHeader .userIcon .bg {
+  z-index: 2;
+  position: absolute;
+  width: 60px;
+  height: 71px;
+  background: transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+}
+
+.flyerHeader .userIcon .icon {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  margin-top: -9.5px;
+  left: 50%;
+  margin-left: -9.5px;
+  width: 19px;
+  height: 19px;
+  background: url(img/manage/manage_2.png?v=201611071734) no-repeat -81px -31px;
+}
+
+.event_banner {
+  cursor: pointer;
+  height: 100px;
+  background: url(img/manage/hotFestival.jpg?v=201612121818) no-repeat center;
+}
+
+.flyerHeader .userPanel {
+  cursor: default;
+  display: none;
+  position: absolute;
+  z-index: 1;
+  left: -139px;
+  top: 1px;
+  margin-top: 69px;
+  width: 199px;
+  background: #fff;
+  font-size: 14px;
+  color: #333;
+  text-align: left;
+  border: 1px solid #e5e5e5;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
 .flyerHeader .userPanel .userExit {
-    height: 32px;
-    line-height: 32px;
-    font-size: 0;
+  height: 32px;
+  line-height: 32px;
+  font-size: 0;
 }
+
 .flyerHeader .userPanel .userExit .userGreetingBox {
-    width: 116px;
-    height: 32px;
-    line-height: 32px;
-    display: inline-block;
-    font-size: 0;
-    padding-left: 17px;
-    float: left;
+  width: 116px;
+  height: 32px;
+  line-height: 32px;
+  display: inline-block;
+  font-size: 0;
+  padding-left: 17px;
+  float: left;
 }
+
 .flyerHeader .userPanel .userGreetingBox .userName {
-    width: auto;
-    max-width: 70px;
-    display: inline-block;
-    font-size: 12px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-    white-space: nowrap;
-    vertical-align: top;
+  width: auto;
+  max-width: 70px;
+  display: inline-block;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: nowrap;
+  vertical-align: top;
 }
+
 .flyerHeader .userPanel .userGreetingBox .greetings {
-    display: inline-block;
-    font-size: 12px;
-    vertical-align: top;
-    margin-left: 2px;
+  display: inline-block;
+  font-size: 12px;
+  vertical-align: top;
+  margin-left: 2px;
 }
+
 .flyerHeader .userPanel .userExit .userExitBox {
-    width: 66px;
-    display: inline-block;
-    font-size: 12px;
-    vertical-align: top;
-    position: relative;
+  width: 66px;
+  display: inline-block;
+  font-size: 12px;
+  vertical-align: top;
+  position: relative;
 }
+
 .flyerHeader .userPanel .userExitHover {
-    width: 45px;
-    height: 20px;
-    line-height: 20px;
-    margin-top: 6px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    cursor: pointer;
+  width: 45px;
+  height: 20px;
+  line-height: 20px;
+  margin-top: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  cursor: pointer;
 }
+
 .flyerHeader .userPanel .userExit .userExitImg {
-    width: 12px;
-    height: 12px;
-    background: url(img/manage/manage.png?v=201610211717) -200px -450px;
-    position: absolute;
-    top: 5px;
-    left: 0;
+  width: 12px;
+  height: 12px;
+  background: url(img/manage/manage.png?v=201610211717) -200px -450px;
+  position: absolute;
+  top: 5px;
+  left: 0;
 }
 
 .flyerHeader .userPanel .userExit .userExitText {
-    position: absolute;
-    top: 0;
-    left: 15px;
+  position: absolute;
+  top: 0;
+  left: 15px;
 }
+
 .flyerHeader .userIcon:hover .bg {
-    background: #fff;
-    border-color: #e5e5e5;
+  background: #fff;
+  border-color: #e5e5e5;
 }
-.flyerHeader .navBar a{
-    color:rgb(48, 57, 66);
-    text-decoration: none;
+
+.flyerHeader .navBar a {
+  color: rgb(48, 57, 66);
+  text-decoration: none;
 }
-.flyerHeader .navBar a:hover{
-    color: #4e67ee;
+
+.flyerHeader .navBar a:hover {
+  color: #4e67ee;
 }
-.flyerHeader .navBar .tab-ul-line .tab-li.item-active a{
-    color: #4e67ee;
-    text-decoration: none;
+
+.flyerHeader .navBar .tab-ul-line .tab-li.item-active a {
+  color: #4e67ee;
+  text-decoration: none;
 }
-.userIcon .userPanel{
-    display:none;
+
+.userIcon .userPanel {
+  display: none;
 }
-.userIcon:hover .userPanel{
-    display:block;
+
+.userIcon:hover .userPanel {
+  display: block;
 }
 
 .middle {
-    height: auto;
+  height: auto;
 }
+
 .middle .content {
-    width: 1058px;
-    margin: auto;
+  width: 1058px;
+  margin: auto;
 }
+
 .middle .left {
-    width: 550px;
-    height: 534px;
-    float: left;
-    margin: 31px 100px 0 0;
-    background: url(img/regVersion2016.png?v=201701061749) -344px 0 no-repeat;
-    position: relative;
-    position: relative;
+  width: 550px;
+  height: 534px;
+  float: left;
+  margin: 31px 100px 0 0;
+  background: url(img/regVersion2016.png?v=201701061749) -344px 0 no-repeat;
+  position: relative;
+  position: relative;
 }
+
 .worn {
-    font-size: 12px;
-    color: #343434;
-    width: 239px;
-    height: 25px;
-    line-height: 25px;
-    text-align: left;
-    padding-left: 28px;
-    margin-bottom: 5px;
-    border: 1px solid #ffe792;
-    background: url(img/regVersion2016.png?v=201701061749) -670px -557px no-repeat #fffedf;
+  font-size: 12px;
+  color: #343434;
+  width: 239px;
+  height: 25px;
+  line-height: 25px;
+  text-align: left;
+  padding-left: 28px;
+  margin-bottom: 5px;
+  border: 1px solid #ffe792;
+  background: url(img/regVersion2016.png?v=201701061749) -670px -557px no-repeat #fffedf;
 }
+
 .middle .right {
-    font-family: "微软雅黑";
-    width: 273px;
-    height: auto;
-    padding: 30px 32px;
-    float: left;
-    background: #fff;
-    margin-top: 80px;
-    box-shadow: 0 0 6px rgba(0,0,0,.08);
-    -moz-box-shadow: 0 0 6px rgba(0,0,0,.08);
-    -webkit-box-shadow: 0 0 6px rgba(0,0,0,.08);
+  font-family: "微软雅黑";
+  width: 273px;
+  height: auto;
+  padding: 30px 32px;
+  float: left;
+  background: #fff;
+  margin-top: 80px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, .08);
+  -moz-box-shadow: 0 0 6px rgba(0, 0, 0, .08);
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, .08);
 }
+
 .middle .foot {
-    float: right;
-    margin: 30px 45px 0 0;
-    line-height: 23px;
+  float: right;
+  margin: 30px 45px 0 0;
+  line-height: 23px;
 }
+
 .righttop {
-    height: 44px;
-    line-height: 44px;
-    font-size: 18px;
-    color: #2f82ff;
+  height: 44px;
+  line-height: 44px;
+  font-size: 18px;
+  color: #2f82ff;
 }
+
 .middle #reg-link {
-    color: #acacac;
-    font-size: 16px;
-    cursor: pointer;
-    text-decoration: none;
+  color: #acacac;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
 }
+
 .log-line {
-    text-align: center;
-    margin-bottom: 15px;
-    position: relative;
-    height: 44px;
-    width: 269px;
-    border: 1px solid #fff;
+  text-align: center;
+  margin-bottom: 15px;
+  position: relative;
+  height: 44px;
+  width: 269px;
+  border: 1px solid #fff;
 }
+
 .log-line .log-txt {
-    color: #c2c2c2;
-    position: absolute;
-    top: 0;
-    left: 50px;
-    z-index: 1;
-    text-align: left;
-    line-height: 44px;
-    font-size: 16px;
+  color: #c2c2c2;
+  position: absolute;
+  top: 0;
+  left: 50px;
+  z-index: 1;
+  text-align: left;
+  line-height: 44px;
+  font-size: 16px;
 }
+
 .log-line .log-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 209px;
-    height: 38px;
-    line-height: 38px;
-    background: transparent;
-    font-size: 14px;
-    padding: 2px 10px 2px 50px;
-    outline: 0;
-    z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 209px;
+  height: 38px;
+  line-height: 38px;
+  background: transparent;
+  font-size: 14px;
+  padding: 2px 10px 2px 50px;
+  outline: 0;
+  z-index: 10;
 }
+
 .log-line .input2 {
-    border: 1px solid #d7d9e1;
-    color: #888;
+  border: 1px solid #d7d9e1;
+  color: #888;
 }
 
 .log-line .logIco {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 24px;
-    height: 24px;
-    background: url(img/regVersion2016.png?v=201701061749) -101px 0 no-repeat;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 24px;
+  height: 24px;
+  background: url(img/regVersion2016.png?v=201701061749) -101px 0 no-repeat;
 }
+
 .log-line .logIcoCacct {
-    background-position: -101px 0;
+  background-position: -101px 0;
 }
+
 .goin1 {
-    float: right;
-    margin-top: 4px;
+  float: right;
+  margin-top: 4px;
 }
+
 .goin1 a {
-    text-decoration: none;
-    font-size: 12px;
-    color: #2f82ff;
+  text-decoration: none;
+  font-size: 12px;
+  color: #2f82ff;
 }
+
 .loginBtn {
-    float: left;
-    width: 271px;
-    height: 44px;
-    line-height: 44px;
-    color: #fff;
-    text-align: center;
-    font-size: 18px;
-    cursor: pointer;
-    background: url(img/regVersion2016.png?v=201701061749) 0 -315px no-repeat;
+  float: left;
+  width: 271px;
+  height: 44px;
+  line-height: 44px;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  cursor: pointer;
+  background: url(img/regVersion2016.png?v=201701061749) 0 -315px no-repeat;
 }
+
 .loginBtn:hover {
-    background-position: 0 -376px
+  background-position: 0 -376px
 }
+
 .option {
-    font-size: 14px;
-    color: #373737;
-    height: 30px;
-    line-height: 24px;
+  font-size: 14px;
+  color: #373737;
+  height: 30px;
+  line-height: 24px;
 }
+
 .login_otherAcct {
-    width: 100%;
-    height: 30px;
-    line-height: 30px;
-    margin-top: 10px;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 10px;
 }
+
 .login_other {
-    display: inline-block;
-    height: 30px;
-    line-height: 30px;
-    ertical-align: top;
-    margin-right: 5px;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  ertical-align: top;
+  margin-right: 5px;
 }
+
 .login_WeChatI {
-    width: 25px;
-    height: 30px;
-    display: inline-block;
-    background: url(img/regVersion2016.png?v=201701061749) no-repeat -37px -1090px;
-    vertical-align: top;
-    margin-right: 5px;
+  width: 25px;
+  height: 30px;
+  display: inline-block;
+  background: url(img/regVersion2016.png?v=201701061749) no-repeat -37px -1090px;
+  vertical-align: top;
+  margin-right: 5px;
 }
+
 .login_QQI {
-    width: 25px;
-    height: 30px;
-    display: inline-block;
-    background: url(img/regVersion2016.png?v=201701061749) no-repeat -68px -1090px;
-    vertical-align: top;
-    margin-right: 5px;
+  width: 25px;
+  height: 30px;
+  display: inline-block;
+  background: url(img/regVersion2016.png?v=201701061749) no-repeat -68px -1090px;
+  vertical-align: top;
+  margin-right: 5px;
 }
-.member-mask{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding-top: 70px;
-    background-color: #f0f6fe;
-    z-index: 999;
-    height: 100%;
+
+.member-mask {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding-top: 70px;
+  background-color: #f0f6fe;
+  z-index: 999;
+  height: 100%;
 }
-.log-line .input2:focus,.regLine .item2 input:focus{
-    border: 1px solid #5c91ff;
+
+.log-line .input2:focus,
+.regLine .item2 input:focus {
+  border: 1px solid #5c91ff;
 }
+
 .log-line .logIcoPwd {
-    background-position: -101px -120px;
+  background-position: -101px -120px;
 }
+
 #log-valid-img {
-       position: absolute;
-    right: 20px;
-    top: 0px;
-    cursor: pointer;
-    width: 100px;
-    height: 43px;
+  position: absolute;
+  right: 20px;
+  top: 0px;
+  cursor: pointer;
+  width: 100px;
+  height: 43px;
 }
+
 #log-refresh-btn {
-    float: right;
-    margin-top: 10px;
-    height: 25px;
-    width: 16px;
-    cursor: pointer;
-    background: url(img/regVersion2016.png?v=201701061749) no-repeat -675px -650px;
+  float: right;
+  margin-top: 10px;
+  height: 25px;
+  width: 16px;
+  cursor: pointer;
+  background: url(img/regVersion2016.png?v=201701061749) no-repeat -675px -650px;
 }
+
 .flyerHeader .userIcon:hover .icon {
-    background-position: -111px -31px;
+  background-position: -111px -31px;
 }
+
 .middle #reg-link:hover {
-    color: #6b6b6b;
+  color: #6b6b6b;
 }
-.goin1:hover{
-    text-decoration: underline;
+
+.goin1:hover {
+  text-decoration: underline;
 }
+
 #sign:hover {
-    background: #17c627;
+  background: #17c627;
 }
-.flyerHeader  .messageIcon {
-    float: right;
-    position: relative;
-    width: 60px;
-    height: 70px;
-    cursor: pointer;
+
+.flyerHeader .messageIcon {
+  float: right;
+  position: relative;
+  width: 60px;
+  height: 70px;
+  cursor: pointer;
 }
-.flyerHeader .messagePanel{
-    display:none;
+
+.flyerHeader .messagePanel {
+  display: none;
 }
-.flyerHeader  .messageIcon .bg {
-    z-index: 2;
-    position: absolute;
-    width: 60px;
-    height: 71px;
-    background: transparent;
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
+
+.flyerHeader .messageIcon .bg {
+  z-index: 2;
+  position: absolute;
+  width: 60px;
+  height: 71px;
+  background: transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
 }
-.flyerHeader  .messageIcon .icon {
-    z-index: 2;
-    position: absolute;
-    top: 50%;
-    margin-top: -10px;
-    left: 50%;
-    margin-left: -10px;
-    width: 20px;
-    height: 20px;
-    background: url(img/manage/manage_2.png?v=201611071734) no-repeat -80px 0;
+
+.flyerHeader .messageIcon .icon {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  left: 50%;
+  margin-left: -10px;
+  width: 20px;
+  height: 20px;
+  background: url(img/manage/manage_2.png?v=201611071734) no-repeat -80px 0;
 }
-.flyerHeader  .messagePanel {
-    cursor: default;
-    display: none;
-    position: absolute;
-    z-index: 1;
-    top: 1px;
-    left: -288px;
-    margin-top: 69px;
-    width: 348px;
-    height: 170px;
-    background: #fff;
-    font-size: 0;
-    color: #333;
-    text-align: left;
-    border: 1px solid #e5e5e5;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    -o-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    -ms-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+
+.flyerHeader .messagePanel {
+  cursor: default;
+  display: none;
+  position: absolute;
+  z-index: 1;
+  top: 1px;
+  left: -288px;
+  margin-top: 69px;
+  width: 348px;
+  height: 170px;
+  background: #fff;
+  font-size: 0;
+  color: #333;
+  text-align: left;
+  border: 1px solid #e5e5e5;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
+
 .flyerHeader .messagePanel .messLeft {
-    width: 84px;
-    height: 100%;
-    display: inline-block;
-    vertical-align: top;
-    font-size: 12px;
-    color: #333;
-    background-color: #f4f5f9;
-    float: left;
+  width: 84px;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+  color: #333;
+  background-color: #f4f5f9;
+  float: left;
 }
-.flyerHeader  .messagePanel .leftBox {
-    width: 84px;
-    height: 42px;
-    line-height: 42px;
-    text-align: center;
-    cursor: pointer;
-    position: relative;
+
+.flyerHeader .messagePanel .leftBox {
+  width: 84px;
+  height: 42px;
+  line-height: 42px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
 }
-.flyerHeader  .messagePanel .leftBox.leftClick {
-    background-color: #fff;
-    color: #548cd4;
-    cursor: default;
+
+.flyerHeader .messagePanel .leftBox.leftClick {
+  background-color: #fff;
+  color: #548cd4;
+  cursor: default;
 }
+
 .hasNewUpdate .messageHasNew {
-    display: none;
-    position: absolute;
-    top: 13px;
-    right: 17px;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background-color: #fd5b01;
-    z-index: 3;
+  display: none;
+  position: absolute;
+  top: 13px;
+  right: 17px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #fd5b01;
+  z-index: 3;
 }
+
 .messRight {
-    width: 264px;
-    height: 100%;
-    display: inline-block;
-    vertical-align: top;
-    font-size: 12px;
-    color: #333;
+  width: 264px;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+  color: #333;
 }
+
 .flyerHeader .messageIcon:hover .bg {
-    background: #fff;
-    border-color: #e5e5e5;
+  background: #fff;
+  border-color: #e5e5e5;
 }
-.flyerHeader .messageIcon:hover .messagePanel{
-    display:block;
+
+.flyerHeader .messageIcon:hover .messagePanel {
+  display: block;
 }
+
 .newsImgPanel {
-    width: 243px;
-    height: 126px;
-    line-height: 126px;
-    overflow: hidden;
-    margin: 0 auto;
+  width: 243px;
+  height: 126px;
+  line-height: 126px;
+  overflow: hidden;
+  margin: 0 auto;
 }
+
 .menuUpdatePanel {
-    width: 100%;
-    height: 100%;
-    padding-top: 12px;
-    box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding-top: 12px;
+  box-sizing: border-box;
 }
+
 .newsImgBox {
-    height: 100%;
-    width: 486px;
+  height: 100%;
+  width: 486px;
 }
+
 .newsImgPanel .dotLine {
-    position: absolute;
-    top: 117px;
-    right: 20px;
+  position: absolute;
+  top: 117px;
+  right: 20px;
 }
+
 .newsImgPanel .dotLine .switchDot {
-    width: 10px;
-    height: 10px;
-    cursor: pointer;
-    float: left;
-    margin-left: 3px;
-    background: url(img/manage/dot-off.png?v=201610241559) center center no-repeat;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  float: left;
+  margin-left: 3px;
+  background: url(img/manage/dot-off.png?v=201610241559) center center no-repeat;
 }
+
 .newsImgPanel .dotLine .dot-on {
-    background: url(img/manage/dot-on.png?v=201610241559) center center no-repeat;
+  background: url(img/manage/dot-on.png?v=201610241559) center center no-repeat;
 }
+
 .newsList {
-    width: 100%;
-    height: 25px;
-    line-height: 25px;
+  width: 100%;
+  height: 25px;
+  line-height: 25px;
 }
+
 .newsList a {
-    width: 256px;
-    height: 20px;
-    line-height: 20px;
-    display: block;
-    text-decoration: none;
-    color: #333;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-    white-space: nowrap;
-    cursor: pointer;
+  width: 256px;
+  height: 20px;
+  line-height: 20px;
+  display: block;
+  text-decoration: none;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: nowrap;
+  cursor: pointer;
 }
+
 .myMessagePanel {
-    width: 100%;
-    height: 100%;
-    padding-top: 12px;
-    box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding-top: 12px;
+  box-sizing: border-box;
 }
+
 .newsList a .icon0 {
-    display: inline-block;
-    width: 19px;
-    height: 100%;
-    position: relative;
+  display: inline-block;
+  width: 19px;
+  height: 100%;
+  position: relative;
 }
+
 .newsList a .iconPoint:after {
-    width: 2px;
-    height: 2px;
-    position: absolute;
-    background-color: #7d7b7b;
-    content: "";
-    border-radius: 50%;
-    left: 9px;
-    top: 10px;
+  width: 2px;
+  height: 2px;
+  position: absolute;
+  background-color: #7d7b7b;
+  content: "";
+  border-radius: 50%;
+  left: 9px;
+  top: 10px;
 }
+
 .newsList a .iconPoint {
-    display: inline-block;
-    width: 19px;
-    height: 100%;
-    position: relative;
+  display: inline-block;
+  width: 19px;
+  height: 100%;
+  position: relative;
 }
-.flyerHeader  .messageIcon:hover .icon {
-    background-position: -110px 0;
+
+.flyerHeader .messageIcon:hover .icon {
+  background-position: -110px 0;
 }
+
 .newsList a:hover {
-    color: #548cd4;
-    text-decoration: underline;
+  color: #548cd4;
+  text-decoration: underline;
 }
+
 .flyerHeader .userPanel .userExitHover:hover .userExitText {
-    color: #548cd4;
+  color: #548cd4;
 }
+
 .addWork {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255,255,255,1);
-    border: 8px solid transparent;
-    border-image: url(img/manage/imgBorder.png?v=201612261731) 8 8 round;
-    cursor: pointer;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 1);
+  border: 8px solid transparent;
+  border-image: url(img/manage/imgBorder.png?v=201612261731) 8 8 round;
+  cursor: pointer;
 }
+
 .addWork:hover {
-    border-image: none;
-    border-color: #4e67ee;
-    border-width: 1px;
-    padding-top:7px;
+  border-image: none;
+  border-color: #4e67ee;
+  border-width: 1px;
+  padding-top: 7px;
 }
-#createFlyer, #copyFlyer {
-    transition-duration: 0s;
+
+#createFlyer,
+#copyFlyer {
+  transition-duration: 0s;
 }
+
 .addWork .bgPic {
-    width: 57px;
-    height: 57px;
-    position: relative;
-    top: 80px;
-    margin: 0 auto;
-    background: url(img/manage/manage_2.png?v=201611071734) no-repeat -150px 0;
+  width: 57px;
+  height: 57px;
+  position: relative;
+  top: 80px;
+  margin: 0 auto;
+  background: url(img/manage/manage_2.png?v=201611071734) no-repeat -150px 0;
 }
+
 .addWork .text {
-    color: #4e67ee;
-    font-size: 16px;
-    text-align: center;
-    position: relative;
-    top: 110px;
+  color: #4e67ee;
+  font-size: 16px;
+  text-align: center;
+  position: relative;
+  top: 110px;
 }
-.flyerHeader .area .navBar .region{
-    height:100%;
-}.flyerHeader .area .navBar .tab-ul-line{
-    height:100%;
+
+.flyerHeader .area .navBar .region {
+  height: 100%;
 }
-.flyerHeader .area .navBar .tab-ul-line li{
-    height:100%;
-    line-height:70px;
+
+.flyerHeader .area .navBar .tab-ul-line {
+  height: 100%;
 }
+
+.flyerHeader .area .navBar .tab-ul-line li {
+  height: 100%;
+  line-height: 70px;
+}
+
 .flyerHeader .area .navBar .slideBar .slideBarTip {
-    width: 82px;
-    height: 2px;
-    position: absolute;
-    top: -68px;
-    background: #4e67ee;
+  width: 82px;
+  height: 2px;
+  position: absolute;
+  top: -68px;
+  background: #4e67ee;
 }
+
 .flyerHeader .area .navBar .slideBar {
-    width: 100%;
-    height: 1px;
-    border-top: 1px solid transparent;
-    position: relative;
+  width: 100%;
+  height: 1px;
+  border-top: 1px solid transparent;
+  position: relative;
 }
-.flyerHeader .area .navBar .tab-ul-line .tab-li.item-active a{
-    font-size:16px;
+
+.flyerHeader .area .navBar .tab-ul-line .tab-li.item-active a {
+  font-size: 16px;
 }
-.flyerHeader .area .navBar .tab-ul-line .tab-li a{
-    font-size:16px;
+
+.flyerHeader .area .navBar .tab-ul-line .tab-li a {
+  font-size: 16px;
 }
 
 .formPanel .header {
-    position: relative;
-    height: 50px;
-    line-height: 50px;
-    padding-left: 14px;
-    background-color: #f4f5f9;
-    border-bottom: 1px solid #dadada;
-    font-size: 0;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 14px;
+  background-color: #f4f5f9;
+  border-bottom: 1px solid #dadada;
+  font-size: 0;
 }
+
 .formPanel .header .formIdArea {
-    float: left;
-    position: relative;
-    font-size: 14px;
+  float: left;
+  position: relative;
+  font-size: 14px;
 }
+
 .formPanel .header .dataType {
-    display: inline-block;
-    font-size: 14px;
+  display: inline-block;
+  font-size: 14px;
 }
+
 .formPanel .header .dataType::before {
-    content: "";
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background: url(img/manage/tongyong2.png?v=201612191754) no-repeat -60px -2px;
-    vertical-align: middle;
-    padding-right: 7px;
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url(img/manage/tongyong2.png?v=201612191754) no-repeat -60px -2px;
+  vertical-align: middle;
+  padding-right: 7px;
 }
+
 .anything .header .dataType::after {
-    content: "";
+  content: "";
 }
+
 .formPanel .header .name {
-    display: inline-block;
-    max-width: 185px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    vertical-align: top;
-    padding-left: 6px;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: top;
+  padding-left: 6px;
 }
+
 .formPanel .header .formIdArea .formIdComboBox {
-    display: none;
-    position: absolute;
-    left: 70px;
-    top: 50px;
-    z-index: 1;
-    background-color: #f4f5f9;
-    border: 1px solid #e7e7eb;
-    border-top: 0;
-    max-width: 200px;
-    max-height: 150px;
+  display: none;
+  position: absolute;
+  left: 70px;
+  top: 50px;
+  z-index: 1;
+  background-color: #f4f5f9;
+  border: 1px solid #e7e7eb;
+  border-top: 0;
+  max-width: 200px;
+  max-height: 150px;
 }
+
 .formPanel .header .formIdArea .formIdComboBox li {
-    cursor: pointer;
-    padding-left: 6px;
-    padding-right: 22px;
-    max-width: 172px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    height: 40px;
-    line-height: 32px;
+  cursor: pointer;
+  padding-left: 6px;
+  padding-right: 22px;
+  max-width: 172px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  height: 40px;
+  line-height: 32px;
 }
+
 .formPanel .header .excelBtn {
-    cursor: pointer;
-    float: right;
-    position: relative;
-    color: #4e67ee;
-    text-align: center;
-    font-size: 15px;
-    padding-right: 20px;
+  cursor: pointer;
+  float: right;
+  position: relative;
+  color: #4e67ee;
+  text-align: center;
+  font-size: 15px;
+  padding-right: 20px;
 }
+
 .formPanel .header .excelBtn {
-    cursor: pointer;
-    float: right;
-    position: relative;
-    color: #4e67ee;
-    text-align: center;
-    font-size: 15px;
-    padding-right: 20px;
+  cursor: pointer;
+  float: right;
+  position: relative;
+  color: #4e67ee;
+  text-align: center;
+  font-size: 15px;
+  padding-right: 20px;
 }
-.formPanel .main{
-    padding-bottom:50px;
+
+.formPanel .main {
+  padding-bottom: 50px;
 }
+
 .formPanel .main .title {
-    table-layout: fixed;
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    border-collapse: collapse;
-    text-align: center;
-    font-size: 16px;
-        background-color: #fbfbfb;
+  table-layout: fixed;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 16px;
+  background-color: #fbfbfb;
 }
+.formPanel .argName{
+  background-color: #fbfbfb;
+}
+
 .formPanel .main .title td {
-    padding: 0 10px;
-    position: relative;
-    border-right: 1px solid #e7e7eb;
-    text-align: center;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+  padding: 0 10px;
+  position: relative;
+  border-right: 1px solid #e7e7eb;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
+
 .formPanel .main .title td:last-child {
-    border-right: 0;
+  border-right: 0;
 }
+
 .formPanel .main .content {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-    table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  table-layout: fixed;
 }
+
 .formPanel .footer {
-    position: absolute;
-    bottom: 1px;
-    left: 1px;
-    right: 1px;
-    height: 50px;
-    line-height: 50px;
-    border-top: 1px solid #dadada;
-    background-color: #f4f5f9;
-    color: #666;
-    box-sizing: border-box;
+  position: absolute;
+  bottom: 1px;
+  left: 1px;
+  right: 1px;
+  height: 50px;
+  line-height: 50px;
+  border-top: 1px solid #dadada;
+  background-color: #f4f5f9;
+  color: #666;
+  box-sizing: border-box;
 }
+
 .formPanel .pageInfo {
-    display: inline-block;
-    position: relative;
-    vertical-align: top;
-    padding-left: 14px;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  padding-left: 14px;
 }
+
 .formPanel .pageOperate {
-    display: inline-block;
-    position: relative;
-    float: right;
-    padding-right: 20px;
-    top: -2px;
+  display: inline-block;
+  position: relative;
+  float: right;
+  padding-right: 20px;
+  top: -2px;
 }
+
 .formPanel .pageOperate .prevPage {
-    cursor: pointer;
-    display: inline-block;
-    vertical-align: middle;
-    width: 21px;
-    height: 21px;
-    background: url(img/manage/qt.png?v=201612191754) -333px -174px;
-    border: 1px solid #7b7c7e;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  width: 21px;
+  height: 21px;
+  background: url(img/manage/qt.png?v=201612191754) -333px -174px;
+  border: 1px solid #7b7c7e;
 }
+
 .formPanel .pageOperate .currentPage {
-    margin: 0 5px;
-    display: inline-block;
-    vertical-align: middle;
-    height: 21px;
-    line-height: 21px;
-}.formPanel .pageOperate .nextPage {
-    cursor: pointer;
-    display: inline-block;
-    vertical-align: middle;
-    width: 21px;
-    height: 21px;
-    background: url(img/manage/qt.png?v=201612191754) -351px -174px;
-    border: 1px solid #7b7c7e;
+  margin: 0 5px;
+  display: inline-block;
+  vertical-align: middle;
+  height: 21px;
+  line-height: 21px;
 }
+
+.formPanel .pageOperate .nextPage {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  width: 21px;
+  height: 21px;
+  background: url(img/manage/qt.png?v=201612191754) -351px -174px;
+  border: 1px solid #7b7c7e;
+}
+
 .formPanel {
-    font-size: 13px;
-    box-sizing: border-box;
-    overflow: hidden;
-    border: 1px solid #dadada;
-    position: relative;
+  font-size: 13px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid #dadada;
+  position: relative;
 }
+
 .formPanel .main .content td {
-    line-height: 40px;
-    height: 40px;
-    padding: 0 10px;
-    border: 1px solid #e7e7eb;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+  line-height: 40px;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid #e7e7eb;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
+
 .formPanel .main .content tr td:first-child {
-    border-left: none;
+  border-left: none;
 }
+
 .formPanel .pageOperate .disablePage {
-    cursor: default;
-    border-color: #e1e1e1;
+  cursor: default;
+  border-color: #e1e1e1;
+}
+
+.bbase-center {
+  border-left: 1px solid #dfdfdf;
+  border-top: 1px solid #dfdfdf;
+  box-shadow: 1px 1px 1px #e9e8e8;
+  overflow: hidden;
+}
+
+.bbase-center .tab-ul-line {
+  height: auto;
+  padding-left: 10px;
+}
+
+.bbase-center .bbase-ui-tab.v .tab-ul-line {
+  padding-left: 0;
+}
+
+.bbase-center .bbase-ui-tab .slideBar .slideBarTip {
+  background: #4e67ee;
+}
+
+#ui-nav .tab-ul {
+  width: 162px;
+  border-right: 1px solid #dadadc;
+}
+.bbase-center .tab-ul-line .tab-li {
+  float: left;
+  position: relative;
+  width: 110px;
+  height: 58px;
+  line-height: 58px;
+  text-align: center;
+  font-size: 16px;
+  list-style-type: none;
+}
+
+.bbase-center .tab-ul-line .tab-li span {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 4px;
+}
+
+.bbase-center .tab-ul-line .tab-li.item-active {
+  cursor: default;
+}
+
+.bbase-center .tab-ul-line .tab-li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #000;
+  padding: 0;
+}
+
+.bbase-center .tab-ul-line .tab-li.item-active a {
+  color: #4a68ec;
+  cursor: pointer;
+}
+
+.bbase-center .tab-ul-line .tab-li.item-active a {
+  cursor: default;
+}
+
+.bbase-center .tab-ul-line .tab-li .tabImgComm {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background: url(/manage/styles/default/img/manage/tongyong2.png?v=201612191754) no-repeat;
+  vertical-align: middle;
+}
+
+.bbase-center .tab-ul-line .tab-li.hover .ui-tabs-anchor span {
+  color: #4a68ec;
+}
+
+.bbase-center .tab-ul-line .tab-li .dataTabUiList {
+  background-position: 0 0;
+}
+
+.bbase-center .tab-ul-line .tab-li.item-active .dataTabUiList,
+.bbase-center .tab-ul-line .tab-li.hover .dataTabUiList {
+  background-position: -30px 0px;
+}
+
+.bbase-center .tab-ul-line .tab-li .dataTabUiForm {
+  background-position: 0 -28.5px;
+}
+
+.bbase-center .tab-ul-line .tab-li.item-active .dataTabUiForm,
+.bbase-center .tab-ul-line .tab-li.hover .dataTabUiForm {
+  background-position: -30px -28.5px;
+}
+
+.bbase-center .tab-ul-line .tab-li .dataTabUiDropDown {
+  background-position: 0 -58px;
+}
+
+.bbase-center .tab-ul-line .tab-li.item-active .dataTabUiDropDown,
+.bbase-center .tab-ul-line .tab-li.hover .dataTabUiDropDown {
+  background-position: -30px -58px;
+}
+
+.bbase-center .tab-ul-line .tab-li .dataTabUiDirective {
+  background-position: 0 -179px;
+}
+
+.bbase-center .tab-ul-line .tab-li.item-active .dataTabUiDirective,
+.bbase-center .tab-ul-line .tab-li.hover .dataTabUiDirective {
+  background-position: -30px -179px;
+}
+
+.bbase-center .tab-ul-line .tab-li .dataTabUiItemCheck {
+  background-position: 0 -329px;
+}
+
+.bbase-center .tab-ul-line .tab-li.item-active .dataTabUiItemCheck,
+.bbase-center .tab-ul-line .tab-li.hover .dataTabUiItemCheck {
+  background-position: -30px -329px;
+}
+
+.bbase-center .tab-ul-line .tab-li .dataTabNav {
+  background-position: -318px -89px;
+}
+
+.bbase-center .tab-ul-line .tab-li.item-active .dataTabNav,
+.bbase-center .tab-ul-line .tab-li.hover .dataTabNav {
+  background-position: -348px -89px;
+}
+
+.demo-item{
+    padding:10px;
+}
+.red{
+  color:red;
+}
+.form-api{
+width: 996px;margin-top:10px;
+}
+.form-api .anything{
+  display:block;
+}
+.form-demo .header{
+  padding-left:8px;
+}
+.form-demo  .footer{
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px solid #e7e7e7;
+    background-color: #f4f5f9;
+    padding-left:10px;
+}
+button, input, select, textarea {
+    font-size: 12px;
+    height: 27px;
+    border: 1px solid #d6d6d6;
+    text-indent: 8px;
 }

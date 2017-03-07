@@ -21,10 +21,11 @@ function itemCheck(value, selector, type) {
       theme: 'ui-item-check-' + (object.theme || type),
       target: object.target || '',
       path: object.path || 'value',
-      cur: this._getDefault(object.cur, object.default || ''),
+      cur: this._get(object.cur) || object.default || object.cur,
       checkAppend: BbaseEst.typeOf(object.append) === 'boolean' ? object.append : checkAppend,
       checkToggle: BbaseEst.typeOf(object.toggle) === 'boolean' ? object.toggle : checkToggle,
       items: object.items || [],
+      compare: object.compare, // 自定义比较器
       onChange: this._bind(function (item, init, event, values) {
         if (typeof this.model.attributes[object.cur] !== 'undefined' && !BbaseEst.isEmpty(object.cur) && !init) {
           this._set(object.cur, type === 'checkbox' ? values : item.value);

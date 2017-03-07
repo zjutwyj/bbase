@@ -1222,7 +1222,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
           }
         } else if (BbaseEst.typeOf('ignore') === 'string'){
           if (ignore === list[0]){
-            object[list[0]] = list[1];
+            object[list[0]] = list[1].replace(/'/img, '');
             return true;
           }
         }
@@ -1727,8 +1727,16 @@ var BbaseSuperView = BbaseBackbone.View.extend({
       var offset = $(this).attr('data-offset') || 0;
       if (BbaseEst.isEmpty(title)) return;
 
+      var hash = BbaseEst.hash(title || 'error:446');
+
+      if (!BbaseApp.getData('toolTipList')) BbaseApp.addData('toolTipList', []);
+      if (BbaseEst.findIndex(BbaseApp.getData('toolTipList'), '' + hash) > -1){
+        BbaseApp.getDialog(hash).show();
+        return;
+      }
+
       BbaseUtils.dialog({
-        dialogId: BbaseEst.hash(title || 'error:446'),
+        dialogId: hash,
         title: null,
         width: 'auto',
         offset: parseInt(offset, 10),
@@ -1739,7 +1747,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
         autofocus: false,
         target: $(this).get(0)
       });
-      if (!BbaseApp.getData('toolTipList')) BbaseApp.addData('toolTipList', []);
+
       BbaseApp.getData('toolTipList').push(BbaseEst.hash(title));
 
       $(window).one('click', BbaseEst.proxy(function () {
@@ -1749,6 +1757,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
         BbaseApp.addData('toolTipList', []);
 
       }, this));
+
     }, function () {
       try {
         BbaseApp.getDialog(BbaseEst.hash($(this).attr('data-title') || $(this).attr('title'))).close();
