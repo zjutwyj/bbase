@@ -8,11 +8,11 @@ define('UiFormSlider', [], function (require, exports, module) {
   var UiFormSlider, template;
 
   template = `
-    <div class="UiFormSlider-wrap" style="padding:10px;">
+    <div class="UiFormSlider-wrap module-wrap">
       <div class="formPanel form-demo">
-        <div class="anything" style="display: block;">
+        <div class="anything">
           <div class="header">
-            <div id="formIdArea" class="formIdArea">
+            <div class="formIdArea">
               <span class="name">指令用法：bbaseuislider="{viewId: 'viewId', cur: cur, width: width, onChange: handleChange}"</span>
             </div>
           </div>
@@ -56,6 +56,12 @@ define('UiFormSlider', [], function (require, exports, module) {
                   <td class="argDesc"><span>步长，取值必须大于 0，并且可被 (max - min) 整除</span></td>
                   <td class="argType"><span>number</span></td>
                   <td class="argDefault"><span>1</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>range</span></td>
+                  <td class="argDesc"><span>范围</span></td>
+                  <td class="argType"><span>object</span></td>
+                  <td class="argDefault"><span>{ 'min': 0, 'max': 100 }</span></td>
                 </tr>
                 <tr>
                   <td class="argName"><span>width</span></td>
@@ -124,7 +130,7 @@ for(var i = 0; i < 100; i++){
     },
     init: function () {
       return {
-        cur: '5.00',
+        cur: '50.00',
         width: 100,
         items: items
       }

@@ -2,9 +2,12 @@ Bbase.MODULE['BbaseMusicPick'] = 'components/bbase/musicpick/controllers/BbaseMu
 Bbase.DIRECTIVE['bbasecomponentmusicpick'] = {
   bind: function (value, selector) {
     var object = this._getObject(value, 'cur');
+    var viewId = object.viewId || BbaseEst.nextUid('bbasecomponentmusicpick');
+
     $(selector).click(this._bind(function (e) {
       this._dialog({
         moduleId: 'BbaseMusicPick',
+        viewId: viewId,
         width: object.width || 876,
         cover: true,
         height: object.height || 542,

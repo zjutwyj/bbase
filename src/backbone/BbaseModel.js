@@ -90,7 +90,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
       BbaseUtils.tip(CONST.LANG.AUTH_LIMIT, { time: 2000 });
     }
     if (response.msgType === 'notLogin' && !this.stopCheckLogin) {
-      BbaseEst.trigger('checkLogin');
+      BbaseEst.trigger('checkLogin', null, true);
     }
     else if (response.msgType === "nopriv" && CONST.NO_PRIV){
         if (CONST.NO_PRIV.indexOf('#/') > -1){
@@ -144,7 +144,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
     // 当success为false时， 直接返回服务器错误的response信息
     if (BbaseEst.typeOf(response.success) === 'boolean' && !response.success) {
       ctx.attributes._response = response;
-      BbaseEst.trigger('errorSave' + ctx.cid, response);
+      BbaseEst.trigger('errorSave' + ctx.cid, response, true);
       return ctx.attributes;
     }
     // 处理data数据， 并把data数据赋值到response对象上
@@ -200,7 +200,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
       newModel.save(null, {
         success: function(model, result) {
           if (result.msgType === 'notLogin' && !this.stopCheckLogin) {
-            BbaseEst.trigger('checkLogin');
+            BbaseEst.trigger('checkLogin', null, true);
           }
           if (typeof options.success != 'undefined') {
             options.success && options.success.call(ctx, keyValue, result);

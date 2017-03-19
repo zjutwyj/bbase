@@ -7,7 +7,7 @@
 define('BbaseDropDown', [], function(require, exports, module) {
   var BbaseDropDown, template;
 
-  template = '<div class="bui-list-picker bui-picker bui-overlay bui-ext-position x-align-bl-tl bui-select-custom" aria-disabled="false" aria-pressed="false"style="visibility: visible;width:{{width}}; display: none;"> <div class="bui-simple-list bui-select-list" aria-disabled="false" aria-pressed="false" style="height: {{height}};overflow-x: {{overflowX}};width: {{width}};max-height: none;"> 正在加载... </div> </div>';
+  template = '<div class="ui-bbase-ui-dropdown bui-list-picker bui-picker bui-overlay bui-ext-position x-align-bl-tl bui-select-custom" aria-disabled="false" aria-pressed="false"style="visibility: visible;width:{{width}}; display: none;"> <div class="bui-simple-list bui-select-list" aria-disabled="false" aria-pressed="false" style="height: {{height}};overflow-x: {{overflowX}};width: {{width}};max-height: none;"> 正在加载... </div> </div>';
 
   /**
    * 下拉框

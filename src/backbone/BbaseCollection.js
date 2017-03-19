@@ -106,7 +106,7 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
     }
     if (!resp.success && resp.msg) {
       if (resp.msgType === "notLogin" && !BbaseEst.isEmpty(this.url)) {
-        BbaseEst.trigger('checkLogin');
+        BbaseEst.trigger('checkLogin', null, true);
       }
       else if (resp.msgType === "nopriv" && CONST.NO_PRIV){
         if (CONST.NO_PRIV.indexOf('#/') > -1){
@@ -291,7 +291,7 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
         this.collection.remove(this.collection[len]);
         len--;
       }
-      BbaseEst.trigger(this._super('view').cid + 'models')
+      BbaseEst.trigger(this._super('view').cid + 'models', null, true)
     }
   }
 });

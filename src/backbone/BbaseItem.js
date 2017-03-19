@@ -396,7 +396,7 @@ var BbaseItem = BbaseSuperView.extend({
     //TODO 如果
     if (BbaseEst.typeOf(e) !== 'boolean' && e)
     //e.stopImmediatePropagation();
-      BbaseEst.trigger(this.cid + 'checked', 'checked');
+      BbaseEst.trigger(this.cid + 'checked', 'checked', true);
     if (!this._get('checked')) {
       checked_all = false;
     } else {
@@ -607,7 +607,7 @@ var BbaseItem = BbaseSuperView.extend({
    *      this._removeFromItems(context.model.get('dx'));
    */
   _removeFromItems: function(dx) {
-    BbaseEst.trigger(this._super('view').cid + 'models');
+    BbaseEst.trigger(this._super('view').cid + 'models', null, true);
     if (BbaseEst.typeOf(dx) === 'undefined') return;
     if (BbaseApp.getView(this.viewId)) {
       if (BbaseApp.getView(this.viewId)._options.items){

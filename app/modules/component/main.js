@@ -16,3 +16,4 @@ Bbase.MODULE['ComponentMusicPick'] = 'modules/component/controllers/ComponentMus
 
 Bbase.MODULE['ComponentColor'] = 'modules/component/controllers/ComponentColor.js';
 Bbase.MODULE['ComponentColorPick'] = 'modules/component/controllers/ComponentColorPick.js';
+Bbase.MODULE['ComponentColorPanel'] = 'modules/component/controllers/ComponentColorPanel.js';

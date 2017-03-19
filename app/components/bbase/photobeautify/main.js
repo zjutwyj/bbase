@@ -4,9 +4,11 @@ Bbase.MODULE['Xiuxiu'] = 'components/bbase/photobeautify/vendor/xiuxiu.js';
 Bbase.DIRECTIVE['bbasecomponentphotobeautify'] = {
   bind: function (value, selector) {
     var object = this._getObject(value, 'cur');
+     var viewId = object.viewId || BbaseEst.nextUid('bbasecomponentmusicpick');
     $(selector).click(this._bind(function (e) {
       this._dialog({
         moduleId: 'BbasePhotoBeautify',
+        viewId: viewId,
         width: object.width || 876,
         cover: true,
         height: object.height || 542,

@@ -141,6 +141,7 @@ var BbaseUtils = {
       window.comfirmDialog = BbaseApp.addDialog(dialog({
         id: 'dialog' + BbaseEst.nextUid(),
         title: options.title,
+        cover:options.cover,
         content: '<div style="padding: 20px;">' + options.content + '</div>',
         width: options.width || 200,
         button: [{

@@ -3,8 +3,11 @@ Bbase.MODULE['BbasePhotoCrop'] = 'components/bbase/photocrop/controllers/BbasePh
 Bbase.DIRECTIVE['bbasecomponentphotocrop'] = {
   bind: function (value, selector) {
     var object = this._getObject(value, 'cur');
+     var viewId = object.viewId || BbaseEst.nextUid('bbasecomponentmusicpick');
+
     $(selector).click(this._bind(function (e) {
       this._dialog({
+        viewId: viewId,
         moduleId: 'BbasePhotoCrop',
         cover: true,
         quickClose: true,

@@ -93,7 +93,7 @@ define('BbaseItemCheck', [], function(require, exports, module) {
       });
       this._super({
         template: '<div class="bbase-ui-itemcheck item-check-wrap ui-itemcheck ' + (this.options.theme || 'ui-item-check-normal') +
-          '"><div class="toggle clearfix">' + this.options.data.template +
+          ' clearfix"><div class="toggle clearfix">' + this.options.data.template +
           '<span class="check-icon x-icon x-icon-small x-icon-info clearfix">' +
           '<i class="bbasefont bbase-yuandian icon-white"></i></span></div></div>',
         model: model,

@@ -22,7 +22,7 @@ define('BbasePagination', [],
         id="next" data-page="{{plus page 1}}"><a href="javascript:;">&gt</a></li>
     <li class="page-end bui-bar-item bui-inline-block {{#compare page '===' totalPage}}disabled{{else}}danaiPageNum{{/compare}}" aria-disabled="true"
         id="pageLast" data-page="{{totalPage}}"><a href="javascript:;">尾页</a></li>
-    <li class="page-go bui-bar-item-text bui-bar-item bui-inline-block bui-bar-item-text-hover bui-bar-item-hover" style="line-height: 30px; padding-left: 5px;"
+    <li class="page-go bui-bar-item-text bui-bar-item bui-inline-block bui-bar-item-text-hover bui-bar-item-hover" style="line-height: 28px; padding-left: 5px;"
         id=""><input type="text" class="input-pageTo control-text" style="padding:4px 0;" value="{{page}}"> <button type="button" class="button button-info pageTo">GO
     </button></li>
     <li class="page-refresh bui-bar-item-text bui-bar-item bui-inline-block bui-bar-item-text-hover bui-bar-item-hover" style="line-height: 30px; padding-left: 10px;">

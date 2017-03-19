@@ -7,6 +7,7 @@ Bbase.MODULE['BbaseSelect'] = 'ui/bbase/select/controllers/BbaseSelect.js';
 Bbase.DIRECTIVE['bbaseuiselect'] = {
   bind: function (value, selector) {
     var object = this._getObject(value, 'cur');
+
     this._require(['BbaseSelect'], function (Select) {
       var viewId = object.viewId;
       this._region(viewId, Select, {

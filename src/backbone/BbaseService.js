@@ -195,7 +195,7 @@ BbaseService.prototype = {
           var list = null;
 
           if (result && result.msgType === 'notLogin') {
-            BbaseEst.trigger('checkLogin');
+            BbaseEst.trigger('checkLogin', null, true);
           }
           if (BbaseEst.typeOf(result) === 'string') {
             if (options.session && result.attributes) {
@@ -279,7 +279,7 @@ BbaseService.prototype = {
       } else {
         ajaxTimeout = ctx.ajax(options).done(function(result) {
           if (result.msgType === 'notLogin') {
-            BbaseEst.trigger('checkLogin');
+            BbaseEst.trigger('checkLogin', null, true);
           }
           if (options.session && result) {
             BbaseApp.addSession(cacheId, result);

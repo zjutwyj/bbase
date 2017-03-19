@@ -73,7 +73,7 @@ define('ComponentPhotoCrop', [], function(require, exports, module){
     },
     init: function () {
       return {
-        cur: 'http://img.jihui88.com/wcd/upload//j//j2//jihui88//picture//2016//08//31/05c50890-35d4-4867-8d7d-1bb6710362aa.png?v=115305748'
+        cur: CONST.PIC_URL + '/upload//j//j2//jihui88//picture//2016//08//31/05c50890-35d4-4867-8d7d-1bb6710362aa.png?v=115305748'
       }
     },
     handleChange: function (result) {

@@ -59,7 +59,7 @@
 
 .flyerHeader .area .navBar {
   float: left;
-  width: 890px;
+  width: 700px;
   list-style: none;
   height: 68px;
   line-height: 68px;
@@ -102,6 +102,43 @@
   margin-left: 0px;
 }
 
+.flyerHeader .homeIcon {
+    float: right;
+    position: relative;
+    width: 60px;
+    height: 70px;
+    cursor: pointer;
+}
+.flyerHeader .homeIcon .bg {
+  z-index: 2;
+  position: absolute;
+  width: 60px;
+  height: 71px;
+  background: transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+}
+.flyerHeader .homeIcon:hover .bg {
+  background: #fff;
+  border-color: #e5e5e5;
+}
+.flyerHeader .homeIcon .icon {
+  z-index: 2;
+    position: absolute;
+    top: 50%;
+    margin-top: -9.5px;
+    left: 50%;
+    margin-left: -9.5px;
+    width: 24px;
+    height: 24px;
+    background: url(img/manage/manage_2.png?v=201611071734) no-repeat -142px -58px;
+}
+.flyerHeader .homeIcon:hover .icon {
+  background-position: -172px -58px;
+}
+
+
+
 .flyerHeader .userIcon {
   float: right;
   position: relative;
@@ -119,6 +156,11 @@
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
 }
+.flyerHeader .userIcon:hover .bg {
+  background: #fff;
+  border-color: #e5e5e5;
+}
+
 
 .flyerHeader .userIcon .icon {
   z-index: 2;
@@ -131,6 +173,13 @@
   height: 19px;
   background: url(img/manage/manage_2.png?v=201611071734) no-repeat -81px -31px;
 }
+.flyerHeader .userIcon:hover .icon {
+  background-position: -111px -31px;
+}
+
+
+
+
 
 .event_banner {
   cursor: pointer;
@@ -226,11 +275,6 @@
   position: absolute;
   top: 0;
   left: 15px;
-}
-
-.flyerHeader .userIcon:hover .bg {
-  background: #fff;
-  border-color: #e5e5e5;
 }
 
 .flyerHeader .navBar a {
@@ -445,7 +489,7 @@
   width: 100%;
   padding-top: 70px;
   background-color: #f0f6fe;
-  z-index: 999;
+  z-index: 1000;
   height: 100%;
 }
 
@@ -476,9 +520,7 @@
   background: url(img/regVersion2016.png?v=201701061749) no-repeat -675px -650px;
 }
 
-.flyerHeader .userIcon:hover .icon {
-  background-position: -111px -31px;
-}
+
 
 .middle #reg-link:hover {
   color: #6b6b6b;
@@ -1011,11 +1053,22 @@
 
 .bbase-center .bbase-ui-tab .slideBar .slideBarTip {
   background: #4e67ee;
+  left: -164px;
 }
 
-#ui-nav .tab-ul {
+#ui-nav .tab-head-tab-ul-line{
   width: 162px;
-  border-right: 1px solid #dadadc;
+  float:left;
+}
+#ui-nav .bbase-ui-tab.v .slideBar {
+    width: 4px;
+    height: 100%;
+    border-top: none;
+    border-left: none;
+    position: absolute;
+    left: 163px;
+    border-left: 1px solid #dfdfdf;
+    top: 0;
 }
 .bbase-center .tab-ul-line .tab-li {
   float: left;
@@ -1143,9 +1196,28 @@ width: 996px;margin-top:10px;
     background-color: #f4f5f9;
     padding-left:10px;
 }
-button, input, select, textarea {
+input[type=text], select, textarea {
     font-size: 12px;
     height: 27px;
     border: 1px solid #d6d6d6;
     text-indent: 8px;
+}
+button{
+    font-size: 12px;
+    height: 27px;
+    border: 1px solid #d6d6d6;
+}
+
+.checkboxAll{
+  display: inline-block;
+    height: 42px;
+    padding-top: 8px;
+    line-height: 50px;
+    vertical-align: middle;
+}
+.td-checkbox{
+
+}
+.module-wrap{
+  padding: 10px;
 }

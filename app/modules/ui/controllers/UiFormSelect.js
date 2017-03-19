@@ -8,11 +8,11 @@ define('UiFormSelect', [], function(require, exports, module){
   var UiFormSelect, template;
 
   template = `
-    <div class="UiFormSelect-wrap"  style="padding:10px;">
+    <div class="UiFormSelect-wrap module-wrap">
     <div class="formPanel form-demo">
-        <div class="anything" style="display: block;">
+        <div class="anything">
           <div class="header">
-            <div id="formIdArea" class="formIdArea">
+            <div class="formIdArea">
               <span class="name">bbaseuiselect="{viewId: 'viewId', cur: cur, items: items, onChange: handleChange}"</span>
             </div>
           </div>

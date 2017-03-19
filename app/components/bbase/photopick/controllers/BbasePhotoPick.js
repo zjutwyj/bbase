@@ -29,19 +29,6 @@ define('BbasePhotoPick', ['BbaseItemCheck', 'FileUpload'], function (require, ex
         <div class="photo-tool">
         </div>
         <ul class="photo-list">
-          <div class="pictureFrame {{#if checked}}selected{{/if}}">
-            <div class="picture-img" bb-watch="serverPath:style" style=" background-image: url({{PIC serverPath 120}});">
-              <div class="hoverBg">
-                <div class="clickToUse">点击使用</div>
-              </div>
-              <div class="operationBar">
-                <a href="javascript:;" id="" class="delBtn bbasefont bbase-delete" title="删除"></a>
-              </div>
-              <div class="selectBtn">
-              </div>
-            </div>
-            <div class="picTitle" style=""><span bb-watch="filename:html">{{filename}}</span></div>
-          </div>
         </ul>
       </div>
       <div id="photo-pagination">
@@ -55,6 +42,7 @@ define('BbasePhotoPick', ['BbaseItemCheck', 'FileUpload'], function (require, ex
 
   BbasePhotoPick = BbaseList.extend({
     initialize: function () {
+      var size = typeof this.options.size === 'undefined' ?  120 : this.options.size;
       this._super({
         model: BbaseModel.extend({
           defaults: BbaseEst.extend({}, BbaseModel.prototype.defaults),
@@ -71,6 +59,21 @@ define('BbasePhotoPick', ['BbaseItemCheck', 'FileUpload'], function (require, ex
           },
           tagName: 'li',
           className: 'photo-item',
+          template: `
+            <div class="pictureFrame {{#if checked}}selected{{/if}}">
+            <div class="picture-img" bb-watch="serverPath:style" style=" background-image: url({{PIC serverPath ${size}}});">
+              <div class="hoverBg">
+                <div class="clickToUse">点击使用</div>
+              </div>
+              <div class="operationBar">
+                <a href="javascript:;" id="" class="delBtn bbasefont bbase-delete" title="删除"></a>
+              </div>
+              <div class="selectBtn">
+              </div>
+            </div>
+            <div class="picTitle" style=""><span bb-watch="filename:html">{{filename}}</span></div>
+          </div>
+          `,
           clickToUse: function (e) {
             e.stopImmediatePropagation();
             BbaseApp.getView(this._options.viewId).onChange(this.model.toJSON());

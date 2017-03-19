@@ -8,7 +8,7 @@ define('DemoList', [], function(require, exports, module){
   var DemoList, template;
 
   template = `
-    <div class="DemoList-wrap" bb-bbaseuitab="{viewId: 'uilisttab2', cur: curListType,theme:'tab-ul-btn', path: 'moduleId', items: ListTypeitems, onChange: handleTabChange}">
+    <div id="ui-nav" class="DemoList-wrap" bb-bbaseuitab="{viewId: 'uilisttab2', cur: curListType,theme:'tab-ul-line', path: 'moduleId',  direction: 'v',items: ListTypeitems,tpl: tpl, onChange: handleTabChange}">
 
     </div>
   `;
@@ -21,10 +21,13 @@ define('DemoList', [], function(require, exports, module){
     },
     init: function(){
       return {
-        curListType: 'DemoList01',
+        curListType: 'DemoListTable',
         ListTypeitems: [
-          {text: '类型一', moduleId: 'DemoList01', oneRender: false}
-        ]
+          {text: '表格列表', moduleId: 'DemoListTable', oneRender: false}
+        ],
+        tpl: `
+          <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>
+        `
       }
     },
     handleTabChange: function(){

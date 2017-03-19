@@ -1231,7 +1231,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
         var key = list.shift();
         object[key] = this._getObject(list.join(':'));
       } else if (list[1].indexOf('\'') > -1) {
-        object[list[0]] = BbaseEst.trim(list[1].replace(/'/img, ''));
+        object[list[0]] = list[1] === "''" ? '' : BbaseEst.trim(list[1].replace(/'/img, ''));
       } else if (list[1] in this.model.attributes) {
         object[list[0]] = this._get(list[1]);
         object.fields[list[0]] = list[1];
@@ -1307,7 +1307,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
     // just for trigger
     if (!BbaseEst.equal(BbaseEst.getValue(this.model.attributes, path), val)) {
       BbaseEst.setValue(this.model.attributes, path, val);
-      BbaseEst.trigger(this.cid + path, path);
+      BbaseEst.trigger(this.cid + path, path, true);
       this._m_change_ = true;
     }
   },
@@ -1677,11 +1677,11 @@ var BbaseSuperView = BbaseBackbone.View.extend({
             return;
           if (BbaseEst.typeOf(options.moduleId) === 'function') {
             options.dialogId = options.dialogId || options.viewId;
-            BbaseApp.addPanel(options.dialogId, {
+            BbaseApp.addPanel(viewId, {
               el: '#' + options.dialogId,
               template: '<div id="base_item_dialog' + options.dialogId + '" class="region ' +
-                options.dialogId + '"></div>'
-            }).addView(options.dialogId, new options.moduleId(options));
+                viewId + '"></div>'
+            }).addView(viewId, new options.moduleId(options));
           } else if (BbaseEst.typeOf(options.moduleId) === 'string') {
             seajs.use([options.moduleId], function (instance) {
               try {
@@ -1730,8 +1730,8 @@ var BbaseSuperView = BbaseBackbone.View.extend({
       var hash = BbaseEst.hash(title || 'error:446');
 
       if (!BbaseApp.getData('toolTipList')) BbaseApp.addData('toolTipList', []);
-      if (BbaseEst.findIndex(BbaseApp.getData('toolTipList'), '' + hash) > -1){
-        BbaseApp.getDialog(hash).show();
+      if (BbaseEst.indexOf(BbaseApp.getData('toolTipList'), hash) > -1){
+        BbaseApp.getDialog(hash) && BbaseApp.getDialog(hash).show();
         return;
       }
 

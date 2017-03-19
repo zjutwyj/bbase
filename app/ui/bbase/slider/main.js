@@ -2,12 +2,14 @@ Bbase.MODULE['BbaseSlider'] = 'ui/bbase/slider/controllers/BbaseSlider.js';
 Bbase.DIRECTIVE['bbaseuislider'] = {
   bind: function (value, selector) {
     var object = this._getObject(value, 'cur');
+
     this._require(['BbaseSlider'], function (Select) {
       var viewId = object.viewId;
       this._region(viewId, Select, {
         el: this.$(selector),
         start: this._get(object.cur) || object.default || object.cur || [10],
         step: object.step || 1,
+        range: object.range || { 'min': 0, 'max': 100 },
         width: object.width,
         onSlide: object.onSlide,
         onSet: object.onSet,
