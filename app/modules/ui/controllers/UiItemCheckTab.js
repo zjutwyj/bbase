@@ -69,6 +69,12 @@ define('UiItemCheckTab', [], function(require, exports, module){
                   <td class="argType"><span>string</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
+                <tr>
+                  <td class="argName"><span>delay</span></td>
+                  <td class="argDesc"><span>延时加载</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>true</span></td>
+                </tr>
               </tbody>
             </table>
           </div>

@@ -10,7 +10,7 @@ define('BbasePhotoCrop', ['Jcrop'], function (require, exports, module) {
   Jcrop = require('Jcrop');
 
   template = `
-    <div class="BbasePhotoCrop-wrap bbase-component-photocrop">
+    <div class="BbasePhotoCrop-wrap bbase-component-photocrop" style="overflow:hidden;">
      <link rel="stylesheet" href="components/bbase/photocrop/vendor/Jcrop/css/jquery.Jcrop.css" type="text/css" />
 <div class="jcrop-content">
   <img src="{{PIC image}}"  id="jcrop-target" alt=""/>

@@ -30,12 +30,7 @@ define('BbaseMusicPick', ['BbaseItemCheck', 'FileUpload'], function (require, ex
       <div id="photo-main">
         <div class="photo-tool" bb-bbaseuitab="{viewId:'itemcheckmusiccate',theme: 'tab-ul-line',cur:curCate,items:cateitems,path:'className', require: false,onChange: handleCateChange }">
         </div>
-        <ul class="photo-list images-content">
-          <div class="music-container ">
-      <div class="music-name toggle" bb-watch="filename:html">{{filename}}</div>
-      <div class="music-play bbasefont bbase-play" style="display:block;"><span>播放</span></div>
-      <div class="music-size" bb-watch="fsize:html">{{fsize}}KB</div>
-    </div>
+        <ul class="music-list images-content">
         </ul>
       </div>
       <div id="photo-pagination">
@@ -68,6 +63,13 @@ define('BbaseMusicPick', ['BbaseItemCheck', 'FileUpload'], function (require, ex
           },
           tagName: 'li',
           className: 'music-li',
+          template: `
+            <div class="music-container ">
+              <div class="music-name toggle" bb-watch="filename:html">{{filename}}</div>
+              <div class="music-play bbasefont bbase-play" style="display:block;"><span>播放</span></div>
+              <div class="music-size" bb-watch="fsize:html">{{fsize}}KB</div>
+            </div>
+          `,
           clickToUse: function (e) {
             e.stopImmediatePropagation();
             BbaseApp.getView(this._options.viewId).onChange(this.model.toJSON());
@@ -93,7 +95,7 @@ define('BbaseMusicPick', ['BbaseItemCheck', 'FileUpload'], function (require, ex
 
           }
         }),
-        render: '.photo-list',
+        render: '.music-list',
         template: template,
         pagination: '#photo-pagination',
         pageSize: 14,

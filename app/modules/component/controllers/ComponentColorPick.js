@@ -17,7 +17,7 @@ define('ComponentColorPick', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main">
-            <div class="demo-item clearfix" bb-bbasecomponentcolorpick="{viewId:'bbasecomponentcolorpick',cur:cur}"></div>
+            <div class="demo-item pointer clearfix" bb-bbasecomponentcolorpick="{viewId:'bbasecomponentcolorpick',cur:cur}">点我打开颜色选择框</div>
           </div>
           <div class="footer">
             <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; </div>
@@ -56,6 +56,18 @@ define('ComponentColorPick', [], function (require, exports, module) {
                   <td class="argDesc"><span>回调函数</span></td>
                   <td class="argType"><span>function(item, init)</span></td>
                   <td class="argDefault"><span>-</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>width</span></td>
+                  <td class="argDesc"><span>对话框宽度</span></td>
+                  <td class="argType"><span>number</span></td>
+                  <td class="argDefault"><span>400</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>height</span></td>
+                  <td class="argDesc"><span>对话框高度</span></td>
+                  <td class="argType"><span>number</span></td>
+                  <td class="argDefault"><span>256</span></td>
                 </tr>
               </tbody>
             </table>

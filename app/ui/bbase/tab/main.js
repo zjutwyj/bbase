@@ -8,6 +8,7 @@ Bbase.MODULE['BbaseTab'] = 'ui/bbase/tab/controllers/BbaseTab.js';
 Bbase.DIRECTIVE['bbaseuitab'] = {
   bind: function (value, selector) {
     var object = this._getObject(value, 'cur');
+
     this._require(['BbaseTab'], function (BbaseTab) {
       var viewId = object.viewId;
 
@@ -20,7 +21,6 @@ Bbase.DIRECTIVE['bbaseuitab'] = {
 
       this._region(viewId, BbaseTab, {
         el: this.$(selector), // 插入点
-        viewId: viewId, // 视图ID
         tpl: object.tpl || '<a href="javascript:;">{{text}}</a>', // 模版
         toolTip: object.toolTip, // 是否初始化提示，详见SuperView的_initilize参数说明
         cur: this._get(object.cur) || object.default || object.cur, // 显示当前项内容

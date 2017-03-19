@@ -17,7 +17,7 @@ define('ComponentMusicPick', [], function(require, exports, module){
             </div>
           </div>
           <div class="main">
-          <div class="demo-item clearfix"><a href="javascript:;" class="demo-item clearfix" bb-bbasecomponentmusicpick="{viewId: 'componentPhoto1', items: items, cur:cur}">选择音乐</a></div>
+          <div class="demo-item clearfix"><a href="javascript:;" class="demo-item clearfix" bb-bbasecomponentmusicpick="{viewId: 'componentMusicPick', items: items, cur:cur}">选择音乐</a></div>
           </div>
           <div class="footer">
           <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}};</div>

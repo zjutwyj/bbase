@@ -1,26 +1,26 @@
 /**
- * @description BbaseColorPicker
+ * @description BbaseColorPick
  * @class UI - ui库
  * @author yongjin<zjut_wyj@163.com> 2015/8/15
  */
-define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, module) {
-  var BbaseColorPicker, template, noUiSlider, BbaseItemCheck;
+define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module) {
+  var BbaseColorPick, template, noUiSlider, BbaseItemCheck;
 
   BbaseItemCheck = require('BbaseItemCheck');
 
 
-(function(factory) {
+  (function (factory) {
     // Browser globals
     window.noUiSlider = factory();
 
-  }(function() {
+  }(function () {
 
     'use strict';
 
 
     // Removes duplicates from an array.
     function unique(array) {
-      return array.filter(function(a) {
+      return array.filter(function (a) {
         return !this[a] ? this[a] = true : false;
       }, {});
     }
@@ -65,7 +65,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
     // Sets a class and removes it after [duration] ms.
     function addClassFor(element, className, duration) {
       addClass(element, className);
-      setTimeout(function() {
+      setTimeout(function () {
         removeClass(element, className);
       }, duration);
     }
@@ -130,7 +130,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
 
     // todo
     function addCssPrefix(cssPrefix) {
-      return function(className) {
+      return function (className) {
         return cssPrefix + className;
       };
     }
@@ -354,11 +354,11 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
 
       // Sort all entries by value (numeric sort).
       if (ordered.length && typeof ordered[0][0] === "object") {
-        ordered.sort(function(a, b) {
+        ordered.sort(function (a, b) {
           return a[0][0] - b[0][0];
         });
       } else {
-        ordered.sort(function(a, b) {
+        ordered.sort(function (a, b) {
           return a[0] - b[0];
         });
       }
@@ -379,11 +379,11 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
       }
     }
 
-    Spectrum.prototype.getMargin = function(value) {
+    Spectrum.prototype.getMargin = function (value) {
       return this.xPct.length === 2 ? fromPercentage(this.xVal, value) : false;
     };
 
-    Spectrum.prototype.toStepping = function(value) {
+    Spectrum.prototype.toStepping = function (value) {
 
       value = toStepping(this.xVal, this.xPct, value);
 
@@ -395,7 +395,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
       return value;
     };
 
-    Spectrum.prototype.fromStepping = function(value) {
+    Spectrum.prototype.fromStepping = function (value) {
 
       // Invert the value if this is a right-to-left slider.
       if (this.direction) {
@@ -405,7 +405,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
       return accurateNumber(fromStepping(this.xVal, this.xPct, value));
     };
 
-    Spectrum.prototype.getStep = function(value) {
+    Spectrum.prototype.getStep = function (value) {
 
       // Find the proper step for rtl sliders by search in inverse direction.
       // Fixes issue #262.
@@ -422,7 +422,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
       return value;
     };
 
-    Spectrum.prototype.getApplicableStep = function(value) {
+    Spectrum.prototype.getApplicableStep = function (value) {
 
       // If the value is 100%, return the negative step twice.
       var j = getJ(value, this.xPct),
@@ -431,7 +431,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
     };
 
     // Outside testing
-    Spectrum.prototype.convert = function(value) {
+    Spectrum.prototype.convert = function (value) {
       return this.getStep(this.toStepping(value));
     };
 
@@ -449,7 +449,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
       object, to make sure all values can be correctly looped elsewhere. */
 
     var defaultFormatter = {
-      'to': function(value) {
+      'to': function (value) {
         return value !== undefined && value.toFixed(2);
       },
       'from': Number
@@ -655,7 +655,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
           throw new Error("noUiSlider: must pass a formatter for all handles.");
         }
 
-        parsed.tooltips.forEach(function(formatter) {
+        parsed.tooltips.forEach(function (formatter) {
           if (typeof formatter !== 'boolean' && (typeof formatter !== 'object' || typeof formatter.to !== 'function')) {
             throw new Error("noUiSlider: 'tooltips' must be passed a formatter or 'false'.");
           }
@@ -727,7 +727,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
       // Run all options through a testing mechanism to ensure correct
       // input. It should be noted that options might get modified to
       // be handled properly. E.g. wrapping integers in arrays.
-      Object.keys(tests).forEach(function(name) {
+      Object.keys(tests).forEach(function (name) {
 
         // If the option isn't set, but it is required, throw an error.
         if (options[name] === undefined && defaults[name] === undefined) {
@@ -979,7 +979,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
           options.tooltips.reverse();
         }
 
-        bindEvent('update', function(f, o, r) {
+        bindEvent('update', function (f, o, r) {
           if (tips[o]) {
             tips[o].innerHTML = options.tooltips[o] === true ? f[o] : options.tooltips[o].to(r[o]);
           }
@@ -1012,7 +1012,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
         if (mode === 'positions') {
 
           // Map all percentages to on-range values.
-          return values.map(function(value) {
+          return values.map(function (value) {
             return scope_Spectrum.fromStepping(stepped ? scope_Spectrum.getStep(value) : value);
           });
         }
@@ -1022,7 +1022,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
           // If the value must be stepped, it needs to be converted to a percentage first.
           if (stepped) {
 
-            return values.map(function(value) {
+            return values.map(function (value) {
 
               // Convert to percentage, apply step, return to value.
               return scope_Spectrum.fromStepping(scope_Spectrum.getStep(scope_Spectrum.toStepping(value)));
@@ -1056,7 +1056,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
         scope_Spectrum.direction = 0;
 
         // Create a copy of the group, sort it and filter away all duplicates.
-        group = unique(group.slice().sort(function(a, b) {
+        group = unique(group.slice().sort(function (a, b) {
           return a - b;
         }));
 
@@ -1072,7 +1072,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
           ignoreLast = true;
         }
 
-        group.forEach(function(current, index) {
+        group.forEach(function (current, index) {
 
           // Get the current step and the lower + upper positions.
           var step, i, q,
@@ -1190,7 +1190,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
         }
 
         // Append all points.
-        Object.keys(spread).forEach(function(a) {
+        Object.keys(spread).forEach(function (a) {
           addSpread(a, spread[a]);
         });
         element.innerHTML = out;
@@ -1233,12 +1233,12 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
           handleNumber = Math.abs(handleNumber - options.dir);
         }
 
-        Object.keys(scope_Events).forEach(function(targetEvent) {
+        Object.keys(scope_Events).forEach(function (targetEvent) {
 
           var eventType = targetEvent.split('.')[0];
 
           if (event === eventType) {
-            scope_Events[targetEvent].forEach(function(callback) {
+            scope_Events[targetEvent].forEach(function (callback) {
 
               callback.call(
                 // Use the slider public API as the scope ('this')
@@ -1281,7 +1281,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
         // This function can be used to 'filter' events to the slider.
         // element is a node, not a nodeList
 
-        var method = function(e) {
+        var method = function (e) {
 
             if (scope_Target.hasAttribute('disabled')) {
               return false;
@@ -1313,7 +1313,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
           methods = [];
 
         // Bind a closure on the target for every event type.
-        events.split(' ').forEach(function(eventName) {
+        events.split(' ').forEach(function (eventName) {
           element.addEventListener(eventName, method, false);
           methods.push([eventName, method]);
         });
@@ -1380,7 +1380,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
         var d = document.documentElement;
 
         // Unbind the move and end events, which are added on 'start'.
-        d.noUiListeners.forEach(function(c) {
+        d.noUiListeners.forEach(function (c) {
           d.removeEventListener(c[0], c[1]);
         });
 
@@ -1462,7 +1462,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
             addClass(scope_Target, cssClasses[12]);
           }
 
-          var f = function() {
+          var f = function () {
             return false;
           };
 
@@ -1488,7 +1488,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
         event.stopPropagation();
 
         // Add up the handle offsets.
-        scope_Handles.forEach(function(a) {
+        scope_Handles.forEach(function (a) {
           total += offset(a)[options.style];
         });
 
@@ -1536,9 +1536,9 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
           to = scope_Spectrum.getStep((location * 100) / baseSize()),
           value = scope_Spectrum.fromStepping(to);
 
-        Object.keys(scope_Events).forEach(function(targetEvent) {
+        Object.keys(scope_Events).forEach(function (targetEvent) {
           if ('hover' === targetEvent.split('.')[0]) {
-            scope_Events[targetEvent].forEach(function(callback) {
+            scope_Events[targetEvent].forEach(function (callback) {
               callback.call(scope_Self, value);
             });
           }
@@ -1576,7 +1576,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
         if (behaviour.hover) {
           attach(actions.move, scope_Base, hover, { hover: true });
           for (i = 0; i < scope_Handles.length; i += 1) {
-            ['mousemove MSPointerMove pointermove'].forEach(function(eventName) {
+            ['mousemove MSPointerMove pointermove'].forEach(function (eventName) {
               scope_Handles[i].children[0].addEventListener(eventName, stopPropagation, false);
             });
           }
@@ -1596,7 +1596,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
             drag.push(scope_Handles[(drag[0] === scope_Handles[0] ? 1 : 0)].children[0]);
           }
 
-          drag.forEach(function(element) {
+          drag.forEach(function (element) {
             attach(actions.start, element, start, {
               handles: scope_Handles
             });
@@ -1646,7 +1646,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
         // No significant effect in Chrome, Edge sees dramatic
         // performace improvements.
         if (window.requestAnimationFrame) {
-          window.requestAnimationFrame(function() {
+          window.requestAnimationFrame(function () {
             handle.style[options.style] = to + '%';
           });
         } else {
@@ -1765,7 +1765,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
       // Removes classes from the root and empties it.
       function destroy() {
 
-        cssClasses.forEach(function(cls) {
+        cssClasses.forEach(function (cls) {
           if (!cls) {
             return;
           } // Ignore empty classes
@@ -1784,7 +1784,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
 
         // Check all locations, map them to their stepping point.
         // Get the step point, then find it in the input list.
-        var retour = scope_Locations.map(function(location, index) {
+        var retour = scope_Locations.map(function (location, index) {
 
           var step = scope_Spectrum.getApplicableStep(location),
 
@@ -1821,7 +1821,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
 
         // If the event bound is 'update,' fire it immediately for all handles.
         if (namespacedEvent.split('.')[0] === 'update') {
-          scope_Handles.forEach(function(a, index) {
+          scope_Handles.forEach(function (a, index) {
             fireEvent('update', index);
           });
         }
@@ -1833,7 +1833,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
         var event = namespacedEvent.split('.')[0],
           namespace = namespacedEvent.substring(event.length);
 
-        Object.keys(scope_Events).forEach(function(bind) {
+        Object.keys(scope_Events).forEach(function (bind) {
 
           var tEvent = bind.split('.')[0],
             tNamespace = bind.substring(tEvent.length);
@@ -1858,7 +1858,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
             snap: optionsToUpdate.snap === undefined ? options.snap : optionsToUpdate.snap
           });
 
-        ['margin', 'limit', 'step', 'range', 'animate'].forEach(function(name) {
+        ['margin', 'limit', 'step', 'range', 'animate'].forEach(function (name) {
           if (optionsToUpdate[name] !== undefined) {
             options[name] = optionsToUpdate[name];
           }
@@ -2354,10 +2354,10 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
 
   /**
    * 颜色选取
-   * @method [颜色选取] - BbaseColorPicker
+   * @method [颜色选取] - BbaseColorPick
    * @example
    *      this._dialog({
-   *        moduleId: 'BbaseColorPicker',
+   *        moduleId: 'BbaseColorPick',
    *        title: null,
    *        quickClose: true,
    *        cover: false,
@@ -2372,37 +2372,74 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
    *        }, this)
    *      });
    */
-  BbaseColorPicker = BbaseView.extend({
+  BbaseColorPick = BbaseView.extend({
     events: {
       'keyup .ui-color-input': 'handleInput',
       'click .ui-color-ok': 'colorOk'
     },
     initialize: function () {
-      this._initialize({
+      this._super({
         template: `
-          <div class="ui-color-picker">
-  <div class="left" style="width: 190px;">
-    <div id="{{viewId}}"></div>
-    <div id="{{viewId}}-slider" style="height: 18px;"></div>
-    <div class="ui-color-cont">
-      <div class="ui-color-warp">
-        <div class="ui-bg-color-wrap"><div class="ui-bg-color-show" style="background-color: #fff;"></div></div>
-        <input class="ui-color-input" type="text">
-        <input type="button" class="ui-color-ok" style="" value="确定"/>
-      </div>
-    </div>
-  </div>
-  <div class="left system-history-view" style="width: 190px;padding-left: 5px;">
-    <div id="{{viewId}}-system" class="clearfix"></div>
-    <div class="clearfix">历史操作</div>
-    <div class="color-picker-history clearfix">
+          <div class="bbase-component-colorpick ui-color-picker">
+            <div class="left" style="width: 190px;">
+              <div id="{{viewId}}"></div>
+              <div id="{{viewId}}-slider" bb-bbaseuislider="{viewId: 'slider', cur: curSlider, onChange: onSlideChange,width:180}" style="height: 18px;"></div>
+              <div class="ui-color-cont">
+                <div class="ui-color-warp">
+                  <div class="ui-bg-color-wrap"><div class="ui-bg-color-show" style="background-color: #fff;"></div></div>
+                  <input class="ui-color-input" type="text">
+                  <input type="button" class="ui-color-ok" style="" value="确定"/>
+                </div>
+              </div>
+            </div>
+            <div class="left system-history-view" style="width: 190px;padding-left: 10px;">
+              <div id="{{viewId}}-system" class="clearfix"></div>
+              <div class="clearfix" style="text-indent:4px;padding:6px 0;">历史操作</div>
+              <div class="color-picker-history clearfix">
 
-    </div>
-  </div>
-</div>
+              </div>
+            </div>
+          </div>
         `
       });
     },
+    init: function () {
+      this.parseColor(this._options.color);
+      return {
+        curSlider: parseInt(this.color.a * 100)
+      }
+    },
+    afterRender: function () {
+      this.initFarbtastic();
+      if (!this._options.min) {
+        this.initSystemColor();
+        this.initHistoryColor();
+      } else {
+        this.$el.addClass('color-picker-min');
+      }
+      this.init = false;
+    },
+    onSlideChange: function (values, handle, init) {
+      if (!init) {
+        if (handle == 0) { // 第一个滑动按钮
+          this.color.a = values[handle] / 100;
+          this.handleChange();
+        }
+      } else {
+        this.initSlider();
+      }
+    },
+
+    /**
+     * 初始化拖动
+     * @method initSlider
+     * @private
+     */
+    initSlider: function () {
+      this.$slider = this.$('#' + this.model.get('viewId') + '-slider');
+      this.setGradient(this.color.hex || '#ffffff');
+    },
+
     beforeRender: function () {
       this.model.set('viewId', BbaseEst.nextUid('farbtatic'));
       this.init = true;
@@ -2436,40 +2473,56 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
       debug('updateFarbtasticColor');
       this.farbtastic.setColor(rgbToHex(this.color.r, this.color.g, this.color.b));
     },
-    /**
-     * 初始化拖动
-     * @method initSlider
-     * @private
-     */
-    initSlider: function () {
-      this.$slider = this.$('#' + this.model.get('viewId') + '-slider');
-      noUiSlider.create(this.$slider.get(0), {
-        start: parseInt(this.color.a * 100),
-        range: { 'min': 0, 'max': 100 }
-      });
-      try {
-        this.$slider.get(0).noUiSlider.on('update', BbaseEst.proxy(function (values, handle) {
-          if (handle == 0) { // 第一个滑动按钮
-            this.color.a = values[handle] / 100;
-            this.handleChange();
-          }
-        }, this));
-      } catch (e) {}
-      this.setGradient(this.color.hex || '#ffffff');
-    },
+
     /**
      * 初始化系统颜色
      * @method initSystemColor
      * @private
      */
     initSystemColor: function () {
-      BbaseApp.addView('initBbaseColorPickerSystemColor', new BbaseItemCheck({
+      BbaseApp.addView('initBbaseColorPickSystemColor', new BbaseItemCheck({
         el: this.$('#' + this.model.get('viewId') + '-system'),
-        viewId: 'initBbaseColorPickerSystemColor',
-        tpl: '<span class="cd-r-cur-in-cnt fl" style="width: 100%;height: 100%;display: inline-block;background-color:{{value}}">&nbsp;</span>',
+        viewId: 'initBbaseColorPickSystemColor',
+        tpl: '<span class="cd-r-cur-in-cnt fl" style="width: 100%;height: 100%;display: inline-block;background-color:{{value}};border:1px solid {{borderColor}};">&nbsp;</span>',
         cur: this._options.color || '#ffffff',
         path: 'value',
-        items: BbaseApp.getStatus('backgroundColor'),
+        items:  [
+  { text: '透明', value: 'transparent'  ,borderColor: 'transparent'},
+  { text: '白色', value: '#ffffff', rgb: 'rgb(255, 255, 255)' ,borderColor: '#dfdfdf'},
+  { text: '米色', value: '#fedac2', rgb: 'rgb(254, 218, 194)' ,borderColor: '#fedac2'},
+  { text: '天蓝', value: '#abedfa', rgb: 'rgb(171, 237, 250)' ,borderColor: '#abedfa'},
+  { text: '楷体', value: '#eaeac6', rgb: 'rgb(234, 234, 198)' ,borderColor: '#eaeac6'},
+  { text: '黑体', value: '#bbe4e6', rgb: 'rgb(187, 228, 230)' ,borderColor: '#bbe4e6'},
+  { text: '黑体', value: '#fac8f5', rgb: 'rgb(250, 200, 245)' ,borderColor: '#fac8f5'},
+  { text: '黑体', value: '#b7e775', rgb: 'rgb(183, 231, 117)' ,borderColor: '#b7e775'},
+  { text: '黑体', value: '#e3f094', rgb: 'rgb(227, 240, 148)' ,borderColor: '#e3f094'},
+  { text: '黑体', value: '#fdeb7a', rgb: 'rgb(253, 235, 122)' ,borderColor: '#fdeb7a'},
+  { text: '黑体', value: '#cccccc', rgb: 'rgb(204, 204, 204)' ,borderColor: '#cccccc'},
+  { text: '黑体', value: '#ccff33', rgb: 'rgb(204, 255, 51)' ,borderColor: '#ccff33'},
+  { text: '黑体', value: '#ff6666', rgb: 'rgb(255, 102, 102)' ,borderColor: '#ff6666'},
+  { text: '黑体', value: '#66ccff', rgb: 'rgb(102, 204, 255)' ,borderColor: '#66ccff'},
+  { text: '黑体', value: '#ff0000', rgb: 'rgb(255, 0, 0)' ,borderColor: '#ff0000'},
+  { text: '黑体', value: '#3399ff', rgb: 'rgb(51, 153, 255)' ,borderColor: '#3399ff'},
+  { text: '黑体', value: '#ff9900', rgb: 'rgb(255, 153, 0)' ,borderColor: '#ff9900'},
+  { text: '黑体', value: '#339966', rgb: 'rgb(51, 153, 102)' ,borderColor: '#339966'},
+  { text: '黑体', value: '#ffff99', rgb: 'rgb(255, 255, 153)' ,borderColor: '#ffff99'},
+  { text: '黑体', value: '#cc99ff', rgb: 'rgb(204, 153, 255)' ,borderColor: '#cc99ff'},
+  { text: '黑体', value: '#00ffff', rgb: 'rgb(0, 255, 255)' ,borderColor: '#00ffff'},
+  { text: '黑体', value: '#66ffcc', rgb: 'rgb(102, 255, 204)' ,borderColor: '#66ffcc'},
+  { text: '黑体', value: '#999999', rgb: 'rgb(153, 153, 153)' ,borderColor: '#999999'},
+  { text: '黑体', value: '#666666', rgb: 'rgb(102, 102, 102)' ,borderColor: '#666666'},
+  { text: '黑体', value: '#21292b', rgb: 'rgb(33, 41, 43)' ,borderColor: '#21292b'},
+  { text: '黑体', value: '#cccc00', rgb: 'rgb(204, 204, 0)' ,borderColor: '#cccc00'},
+  { text: '黑体', value: '#996633', rgb: 'rgb(153, 102, 51)' ,borderColor: '#996633'},
+  { text: '黑体', value: '#66cccc', rgb: 'rgb(102, 204, 204)' ,borderColor: '#66cccc'},
+  { text: '黑体', value: '#99cccc', rgb: 'rgb(153, 204, 204)',borderColor: '#99cccc' },
+  { text: '黑体', value: '#ccffff', rgb: 'rgb(204, 255, 255)' ,borderColor: '#ccffff'},
+  { text: '黑体', value: '#ccffcc', rgb: 'rgb(204, 255, 204)' ,borderColor: '#dfdfdf'},
+  { text: '黑体', value: '#9999ff', rgb: 'rgb(153, 153, 255)' ,borderColor: '#9999ff'},
+  { text: '黑体', value: '#66cc99', rgb: 'rgb(102, 204, 153)',borderColor: '#66cc99' },
+  { text: '黑体', value: '#6666cc', rgb: 'rgb(102, 102, 204)' ,borderColor: '#6666cc'},
+  { text: '黑体', value: 'rgba', rgb: 'rgba' ,borderColor: '#dfdfdf'}
+],
         onChange: BbaseEst.proxy(function (item, init) {
           if (init) return;
           this.isTransparent = item['value'] === 'transparent' ? true : false;
@@ -2488,7 +2541,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
      */
     parseHistory: function () {
       try {
-        this.history = JSON.parse(BbaseApp.getSession('BbaseColorPickerHistory'));
+        this.history = JSON.parse(BbaseApp.getSession('BbaseColorPickHistory'));
       } catch (e) {
         this.history = [
           { text: '#ffffff', value: '#ffffff' }
@@ -2506,11 +2559,11 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
           text: 'aaa',
           value: this.color.rgba || '#ffffff'
         });
-        if (this.history.length > 16) {
+        if (this.history.length > 21) {
           this.history.pop();
         }
       }
-      BbaseApp.addSession('BbaseColorPickerHistory', JSON.stringify(this.history));
+      BbaseApp.addSession('BbaseColorPickHistory', JSON.stringify(this.history));
     },
     /**
      * 初始化历史记录
@@ -2519,15 +2572,15 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
      */
     initHistoryColor: function () {
       this.parseHistory();
-      BbaseApp.addView('initBbaseColorPickerHistoryColor', new BbaseItemCheck({
+      BbaseApp.addView('initBbaseColorPickHistoryColor', new BbaseItemCheck({
         el: this.$('.color-picker-history'),
-        viewId: 'initBbaseColorPickerHistoryColor',
+        viewId: 'initBbaseColorPickHistoryColor',
         tpl: '<span class="cd-r-cur-in-cnt fl" style="width: 100%;height: 100%;display: inline-block;background-color:{{value}}">&nbsp;</span>',
         cur: this._options.color || '#ffffff',
         path: 'value',
         items: this.history,
         onChange: BbaseEst.proxy(function (item, init) {
-          if (init)return;
+          if (init) return;
           this.parseColor(item['value']);
           this.updateFarbtasticColor();
           this.updateSlider();
@@ -2548,8 +2601,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
       }
     },
     updateSlider: function () {
-      debug('updateSlider');
-      this.$slider.get(0).noUiSlider.set(parseInt(this.color.a * 100, 10));
+      this._set('curSlider', parseInt(this.color.a * 100, 10));
     },
     /**
      * 文本框绑定
@@ -2617,7 +2669,7 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
       this.$show.css('background-color', this.color.rgba);
       this.$input.val(this.color.hex);
       this.setGradient(this.color.hex);
-      this._options.change && this._options.change.call(this, this.color.rgba, this.init);
+      this._options.onChange && this._options.onChange.call(this, this.color.rgba, this.init);
     },
     /**
      * 确定按钮绑定
@@ -2628,21 +2680,9 @@ define('BbaseColorPicker', ['BbaseItemCheck'], function (require, exports, modul
     colorOk: function () {
       this.saveHistory();
       this._options.ok && this._options.ok.call(this, this.color.rgba);
-      BbaseApp.getDialog('BbaseColorPicker') && BbaseApp.getDialog('BbaseColorPicker').close().remove();
-    },
-    afterRender: function () {
-      this.parseColor(this._options.color);
-      this.initFarbtastic();
-      this.initSlider();
-      if (!this._options.min) {
-        this.initSystemColor();
-        this.initHistoryColor();
-      } else {
-        this.$el.addClass('color-picker-min');
-      }
-      this.init = false;
+      BbaseApp.getCurrentDialog() && BbaseApp.getCurrentDialog().close().remove();
     }
   });
 
-  module.exports = BbaseColorPicker;
+  module.exports = BbaseColorPick;
 });

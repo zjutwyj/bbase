@@ -147,7 +147,7 @@ var BbaseDetail = BbaseSuperView.extend({
       if (ctx.beforeLoad) ctx.beforeLoad.call(this);
       ctx.model.fetch().done(function (response) {
         if (response.msgType === 'notLogin') {
-          BbaseEst.trigger('checkLogin');
+          BbaseEst.trigger('checkLogin', null, true);
         }
         if (!response.success) {
           if (ctx.errorFetch) {
@@ -320,7 +320,7 @@ var BbaseDetail = BbaseSuperView.extend({
           $button.html(preText);
         }, function (response) {
           if (response.msgType === 'notLogin') {
-            BbaseEst.trigger('checkLogin');
+            BbaseEst.trigger('checkLogin', null, true);
           }
           if (ctx.errorSave) ctx.errorSave.call(ctx, response);
           if (options.onErrorSave) options.onErrorSave.call(ctx, response);

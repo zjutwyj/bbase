@@ -373,11 +373,11 @@ var BbaseList = BbaseSuperView.extend({
           if (BbaseEst.isEmpty(result) || BbaseEst.isEmpty(result.attributes) || result.attributes.data.length === 0) {
             ctx._handleListNode();
             if (result.msgType === 'notLogin') {
-              BbaseEst.trigger('checkLogin');
+              BbaseEst.trigger('checkLogin', null, true);
             }
           }
         } catch (e) {
-          BbaseEst.trigger('checkLogin');
+          BbaseEst.trigger('checkLogin', null, true);
           debug('Error4 -> _load -> ' + result.msg); //debug__
         }
         ctx._afterLoad(result);
@@ -391,6 +391,9 @@ var BbaseList = BbaseSuperView.extend({
         ctx._resetModels();
         if (!ctx._ready_component_) {
           ctx._finally();
+        }
+        if (options && options.afterRender){
+          options.afterRender.call(ctx);
         }
       });
     } else {
@@ -781,7 +784,7 @@ var BbaseList = BbaseSuperView.extend({
     this._resetDx();
     this._setValue('checked_all', false);
 
-    BbaseEst.trigger(this.cid + 'models');
+    BbaseEst.trigger(this.cid + 'models', null, true);
 
     if (this._get('result_none')) {
       this.list.find('.no-result').remove();
@@ -907,7 +910,7 @@ var BbaseList = BbaseSuperView.extend({
     //垃圾回收器会回收它们
     this.views = [];
 
-    BbaseEst.trigger(this.cid + 'models');
+    BbaseEst.trigger(this.cid + 'models', null, true);
     //this.list.empty();
     return this.collection;
   },
@@ -1446,7 +1449,7 @@ var BbaseList = BbaseSuperView.extend({
           } else
             BbaseUtils.tip(options.tip);
           ctx._load();
-          BbaseEst.trigger(ctx.cid + 'models');
+          BbaseEst.trigger(ctx.cid + 'models', null, true);
           if (options.callback)
             options.callback.call(ctx, result);
         }
@@ -1455,7 +1458,7 @@ var BbaseList = BbaseSuperView.extend({
       BbaseEst.each(this._getCheckedItems(), function (item) {
         item.destroy();
       });
-      BbaseEst.trigger(ctx.cid + 'models');
+      BbaseEst.trigger(ctx.cid + 'models', null, true);
       if (options.callback)
         options.callback.call(ctx);
     }
@@ -1515,7 +1518,7 @@ var BbaseList = BbaseSuperView.extend({
     BbaseEst.each(this.collection.models, function (model) {
       if ((!BbaseEst.equal(model._previousAttributes.checked, model.attributes.checked) || focus) && model.view) {
         model.attributes.checked = false;
-        BbaseEst.trigger(model.view.cid + 'checked', 'checked');
+        BbaseEst.trigger(model.view.cid + 'checked', 'checked', true);
       }
     });
   },

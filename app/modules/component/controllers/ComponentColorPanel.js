@@ -1,26 +1,26 @@
 'use strict';
 /**
  * @description 模块功能说明
- * @class UiFormRadio
+ * @class ComponentColorPanel
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('UiFormRadio', [], function (require, exports, module) {
-  var UiFormRadio, template;
+define('ComponentColorPanel', [], function (require, exports, module) {
+  var ComponentColorPanel, template;
 
   template = `
-    <div class="UiFormRadio-wrap module-wrap">
+    <div class="ComponentColorPanel-wrap" style="padding:10px;">
       <div class="formPanel form-demo">
-        <div class="anything">
+        <div class="anything" style="display: block;">
           <div class="header">
-            <div class="formIdArea">
+            <div id="formIdArea" class="formIdArea">
               <span class="name">指令用法：bbaseuiradio="{viewId: 'viewId', cur: cur, items: items, onChange: handleChange}"</span>
             </div>
           </div>
           <div class="main">
-            <div class="demo-item clearfix" bb-bbaseuiradio="{viewId:'bbaseuiradio',cur:cur,items:items }"></div>
+            <div class="demo-item clearfix" bb-bbasecomponentcolorpick="{viewId:'bbasecomponentcolorpick',cur:cur}"></div>
           </div>
           <div class="footer">
-            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'ddd', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; </div>
           </div>
         </div>
       </div>
@@ -52,21 +52,9 @@ define('UiFormRadio', [], function (require, exports, module) {
                   <td class="argDefault"><span>-</span></td>
                 </tr>
                 <tr>
-                  <td class="argName"><span>items</span><span class="red">&nbsp;(必填)</span></td>
-                  <td class="argDesc"><span>显示项数组列表</span></td>
-                  <td class="argType"><span>array</span></td>
-                  <td class="argDefault"><span>-</span></td>
-                </tr>
-                <tr>
                   <td class="argName"><span>onChange</span></td>
                   <td class="argDesc"><span>回调函数</span></td>
                   <td class="argType"><span>function(item, init)</span></td>
-                  <td class="argDefault"><span>-</span></td>
-                </tr>
-                <tr>
-                  <td class="argName"><span>tpl</span></td>
-                  <td class="argDesc"><span>自定义模板</span></td>
-                  <td class="argType"><span>string</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
               </tbody>
@@ -79,7 +67,7 @@ define('UiFormRadio', [], function (require, exports, module) {
   `;
 
 
-  UiFormRadio = BbaseView.extend({
+  ComponentColorPanel = BbaseView.extend({
     initialize: function () {
       this._super({
         template: template
@@ -87,16 +75,16 @@ define('UiFormRadio', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        cur: 'all',
+        cur: '#ffffff',
         items: [
-          { text: '全部', value: 'all' },
-          { text: '已完成', value: 'complete' },
-          { text: '未完成', value: 'undo' },
-          { text: '部分完成', value: 'part' }
+          { text: '白色', value: '#ffffff' },
+          { text: '黑色', value: '#000000' },
+          { text: '绿色', value: 'green' },
+          { text: '红色', value: 'red' }
         ]
       }
     }
   });
 
-  module.exports = UiFormRadio;
+  module.exports = ComponentColorPanel;
 });

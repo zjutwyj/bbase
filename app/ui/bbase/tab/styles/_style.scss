@@ -170,8 +170,7 @@
 .bbase-ui-tab.v {
   position: relative;
   overflow: hidden;
-  .tab-ul-line {
-    float: left;
+  .tab-head-tab-ul-line{
   }
   .tab-cont {
     float: left;
@@ -196,7 +195,6 @@
     position: absolute;
     left: 0;
     top: 0;
-    overflow: hidden;
   }
   .slideBar .slideBarTip {
     width: 4px;

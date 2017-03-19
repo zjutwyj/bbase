@@ -27,3 +27,5 @@ Bbase.ROUTE['member_password_forget'] = function () {
     });
   });
 }
+
+Bbase.MODULE['MemberHeader'] = 'modules/account/controllers/MemberHeader.js';

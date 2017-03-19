@@ -348,6 +348,11 @@ define('BbaseSelect', [], function(require, exports, module) {
     },
     setValue: function(value) {
       var list = null;
+
+      if (this.getValue() === value){
+        return;
+      }
+
       if (!this.selectNode) this.initSelect(this._options.items);
       list = BbaseEst.filter(this.selectNode.collection.models, function(item) {
         return value === item.attributes.value;

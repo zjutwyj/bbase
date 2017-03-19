@@ -130,8 +130,9 @@ define('BbaseTab', [], function (require, exports, module) {
           this.$tabList = $(this.$selectorList.join(', '));
         }, this), 0);
       }
+      var theme = (this.options.theme || 'tab-ul-normal') ;
       this._super({
-        template: '<div class="bbase-ui-tab ' + (this.options.direction || 'h') + '"><ul class="tab-ul tab-ul' + this.options.viewId + ' ' + (this.options.theme || 'tab-ul-normal') + ' nav-justified clearfix"></ul>' + (this.options.theme === 'tab-ul-line' ? '<div class="slideBar"><div class="slideBarTip transitionPanel" style=""></div></div></div>' : ''),
+        template: '<div class="bbase-ui-tab ' + (this.options.direction || 'h') + '"><div class="tab-head tab-head-'+ theme+ '"><ul class="tab-ul tab-ul' + this.options.viewId + ' ' + theme+ ' nav-justified clearfix"></ul></div>' + (this.options.theme === 'tab-ul-line' ? '<div class="slideBar"><div class="slideBarTip transitionPanel" style=""></div></div></div>' : ''),
         model: model,
         render: '.tab-ul' + this.options.viewId,
         collection: collection,
@@ -187,10 +188,18 @@ define('BbaseTab', [], function (require, exports, module) {
         this.$('.slideBarTip:first').css({
           top: top,
           height: height,
-          left:0,
           width: this.$('.slideBarTip:first').width()
         });
       }
+    },
+    setValue: function(value){
+      var checkModel = this._getCheckedItems();
+      if (checkModel.length > 0 && checkModel[0]._get(this._options.path || 'value')===value ){return;}
+      this.collection.each(this._bind(function(model){
+        if (model._get(this._options.path || 'value') === value){
+          model.view.toggleChecked();
+        }
+      }));
     },
     getType: function () {
       return this._options.theme;

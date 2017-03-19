@@ -8,4 +8,4 @@ Bbase.ROUTE['demo'] = function () {
 };
 
 Bbase.MODULE['DemoList'] = 'modules/demo/controllers/DemoList.js';
-Bbase.MODULE['DemoList01'] = 'modules/demo/controllers/DemoList01.js';
+Bbase.MODULE['DemoListTable'] = 'modules/demo/controllers/DemoListTable.js';

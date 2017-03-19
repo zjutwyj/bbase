@@ -8,11 +8,11 @@ define('UiFormCheckbox', [], function(require, exports, module){
   var UiFormCheckbox, template;
 
   template = `
-    <div class="UiFormCheckbox-wrap" style="padding:10px;">
+    <div class="UiFormCheckbox-wrap module-wrap">
         <div class="formPanel form-demo">
-        <div class="anything" style="display: block;">
+        <div class="anything">
           <div class="header">
-            <div id="formIdArea" class="formIdArea">
+            <div class="formIdArea">
               <span class="name">bbaseuicheckbox="{viewId: 'viewId', cur: cur, items: items, onChange: handleChange}"</span>
             </div>
           </div>

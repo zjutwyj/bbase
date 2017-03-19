@@ -26,7 +26,8 @@ define('UiForm', [], function (require, exports, module) {
           { text: '单选', moduleId: 'UiFormRadio' },
           { text: '多选', moduleId: 'UiFormCheckbox' },
           { text: '下拉菜单', moduleId: 'UiFormSelect' },
-          { text: '滑动条', moduleId: 'UiFormSlider' }
+          { text: '滑动条', moduleId: 'UiFormSlider' },
+          { text: '下拉框', moduleId: 'UiFormDropDown' }
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

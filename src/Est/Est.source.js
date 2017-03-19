@@ -2951,10 +2951,10 @@
    *        BbaseEst.trigger('event1', 'aaa'); // 触发事件
    *        BbaseEst.off('event1', token); // 取消订阅(若未存token，则全部取消监听)
    */
-  function trigger(topic, args) {
+  function trigger(topic, args, debounce) {
     var sub = topics[topic];
     if (!sub) return false;
-    if (sub.timer) {
+    if (debounce && sub.timer) {
       clearTimeout(sub.timer);
     }
     sub.timer = setTimeout(function () {
@@ -2964,7 +2964,7 @@
         subscribers[len].func(topic, args);
       }
       subscribers.timer = null;
-    }, 8);
+    }, debounce ? 8 : 0);
 
     return true;
   }

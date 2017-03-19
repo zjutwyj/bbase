@@ -58,6 +58,24 @@ define('ComponentPhotoPick', [], function(require, exports, module){
                   <td class="argType"><span>function(item, init)</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
+                 <tr>
+                  <td class="argName"><span>listApi</span></td>
+                  <td class="argDesc"><span>列表API</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>/att/list</span></td>
+                </tr>
+                 <tr>
+                  <td class="argName"><span>detailApi</span></td>
+                  <td class="argDesc"><span>详细API</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>/att/detail</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>size</span></td>
+                  <td class="argDesc"><span>图片大小</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>120</span></td>
+                </tr>
               </tbody>
             </table>
           </div>
