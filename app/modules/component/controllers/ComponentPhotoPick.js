@@ -86,7 +86,7 @@ define('ComponentPhotoPick', [], function(require, exports, module){
 
   var items = [];
   for(var i = 0; i< 100; i++){
-    items.push({filename:'图片名称' + i, serverPath: CONST.PIC_NONE});
+    items.push({filename:'图片名称' + i, serverPath: CONST.PIC_NONE + '?' + i});
   }
 
   ComponentPhotoPick = BbaseView.extend({

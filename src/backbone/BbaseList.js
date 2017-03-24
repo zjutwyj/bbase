@@ -1091,6 +1091,7 @@ var BbaseList = BbaseSuperView.extend({
    */
   _checkAll: function (e) {
     var checked,
+      _self = this,
       $check = null;
 
     if (BbaseEst.typeOf(e) === 'boolean') {
@@ -1110,8 +1111,8 @@ var BbaseList = BbaseSuperView.extend({
     }
     checked = this._getValue('checked_all');
     this.collection.each(function (model) {
-      model.view._check(checked);
-      model.view.render();
+      model._set('checked', checked);
+      //if (!_self._options.diff) model.view.render();
     });
     this._checkedAll(this._getValue('checked_all'));
   },

@@ -1,4 +1,3 @@
-Bbase.MODULE['FileUpload'] = 'components/bbase/photopick/vendor/jquery.fileupload.js';
 Bbase.MODULE['BbasePhotoPick'] = 'components/bbase/photopick/controllers/BbasePhotoPick.js';
 Bbase.DIRECTIVE['bbasecomponentphotopick'] = {
   bind: function (value, selector) {

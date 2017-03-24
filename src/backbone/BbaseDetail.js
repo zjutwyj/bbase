@@ -86,7 +86,6 @@ var BbaseDetail = BbaseSuperView.extend({
    *        this._render();
    */
   _render: function () {
-    if (this._initDefault) this._initDefault.call(this);
     if (this.beforeRender) this.beforeRender.call(this, this._options);
     if (!this._options.append) this.list.empty();
 
@@ -144,6 +143,7 @@ var BbaseDetail = BbaseSuperView.extend({
       ctx.model.set('id', ctx.passId);
       ctx.model.set('_data', ctx._options.data);
       ctx.model.set('CONST', CONST);
+      if (ctx._initDefault) ctx._initDefault.call(this);
       if (ctx.beforeLoad) ctx.beforeLoad.call(this);
       ctx.model.fetch().done(function (response) {
         if (response.msgType === 'notLogin') {
@@ -164,6 +164,7 @@ var BbaseDetail = BbaseSuperView.extend({
       ctx.model = new model(this._options.data || {});
       ctx.model.set('_data', ctx._options.data);
       ctx.model.set('_isAdd', ctx._isAdd = true);
+      if (ctx._initDefault) ctx._initDefault.call(this);
       ctx.render();
     }
 
@@ -368,9 +369,11 @@ var BbaseDetail = BbaseSuperView.extend({
       wait: true,
       success: function (response) {
         BbaseApp.addModel(BbaseEst.cloneDeep(response.attributes));
-        if (top) {
-          top.model = response.attributes;
-        }
+        try {
+          if (top && top.model) {
+            top.model = response.attributes;
+          }
+        } catch (e) {}
         if (callback && typeof callback === 'function')
           callback.call(this, response);
       },

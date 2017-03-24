@@ -59,7 +59,12 @@
     height: 20px;
     vertical-align: bottom;
 }
-
+.pagination .input-pageTo{
+    padding:4px 0;float:left;margin-right:4px;text-indent:0px;
+}
+.pagination .pageTo{
+    float:left;
+}
 .pagination .button {
     display: inline-block;
     margin-bottom: 0;
@@ -69,8 +74,9 @@
     background-image: none;
     border: 1px solid #E0EEFF;
     white-space: nowrap;
-    line-height: 20px;
-    padding: 4px 12px;
+    height:30px;
+    line-height: 30px;
+    padding: 0px 12px;
     font-size: 14px;
     -webkit-user-select: none;
     -moz-user-select: none;
