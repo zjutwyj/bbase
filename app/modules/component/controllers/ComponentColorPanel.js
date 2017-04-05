@@ -17,7 +17,7 @@ define('ComponentColorPanel', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main">
-            <div class="demo-item clearfix" bb-bbasecomponentcolorpanel="{viewId:'bbasecomponentcolorpanel',cur:cur}"></div>
+            <div class="demo-item clearfix" bb-bbasecomponentcolorpanel="{viewId:'bbasecomponentcolorpanel',cur:cur}" style="width: 200px;"></div>
           </div>
           <div class="footer">
             <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; </div>
