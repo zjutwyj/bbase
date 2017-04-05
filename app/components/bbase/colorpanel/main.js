@@ -7,7 +7,9 @@ Bbase.DIRECTIVE['bbasecomponentcolorpanel'] = {
       var cur = this._get(object.cur) || object.default || object.cur || '#ffffff';
       this._region(viewId, BbaseItemCheck, {
         el: this.$(selector),
-        onChange: BbaseEst.proxy(function (item) {
+        onChange: BbaseEst.proxy(function (item, init) {
+          this._set(object.cur, result);
+          if (object.onChange) object.onChange.call(this, item, init);
         }, this)
       });
     });

@@ -6,3 +6,6 @@ Bbase.ROUTE['teach'] = function () {
     });
   });
 }
+Bbase.TEMPLATE['template/readme'] = function(require, exports, module) {
+  module.exports = require('README.html');
+}

@@ -1040,6 +1040,7 @@
   border-top: 1px solid #dfdfdf;
   box-shadow: 1px 1px 1px #e9e8e8;
   overflow: hidden;
+  margin-top:10px;
 }
 
 .bbase-center .tab-ul-line {

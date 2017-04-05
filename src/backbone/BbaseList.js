@@ -360,7 +360,7 @@ var BbaseList = BbaseSuperView.extend({
         }
         if (!result) {
           result = { success: false, msg: '请求未知错误' };
-          ctx.errorFetch.call(ctx, result);
+          ctx.errorFetch && ctx.errorFetch.call(ctx, result);
         }
         if (result && !result.success && ctx.errorFetch) {
           ctx.errorFetch.call(ctx, result);
@@ -1349,13 +1349,13 @@ var BbaseList = BbaseSuperView.extend({
   /**
    *  获取checkbox选中项所有ID值列表
    *
-   * @method [选取] - _getCheckboxIds ( 获取checkbox选中项所有ID值列表 )
+   * @method [选取] - _getCheckedIds ( 获取checkbox选中项所有ID值列表 )
    * @return {*}
    * @author wyj 14.12.8
    * @example
-   *      this._getCheckboxIds(); => ['id1', 'id2', 'id3', ...]
+   *      this._getCheckedIds(); => ['id1', 'id2', 'id3', ...]
    */
-  _getCheckboxIds: function (field) {
+  _getCheckedIds: function (field) {
     return BbaseEst.pluck(this._getCheckedItems(), BbaseEst.isEmpty(field) ? 'id' : ('attributes.' + field));
   },
   __filter: function (item) {
@@ -1431,7 +1431,7 @@ var BbaseList = BbaseSuperView.extend({
     options = BbaseEst.extend({
       tip: CONST.LANG.SUCCESS + '！'
     }, options);
-    this.checkboxIds = this._getCheckboxIds(options.field || 'id');
+    this.checkboxIds = this._getCheckedIds(options.field || 'id');
     if (this.checkboxIds.length === 0) {
       BbaseUtils.tip(CONST.LANG.SELECT_ONE + '！');
       return;
@@ -1491,7 +1491,7 @@ var BbaseList = BbaseSuperView.extend({
       id = options.id || 'id';
     }
 
-    this.checkboxIds = this._getCheckboxIds(field);
+    this.checkboxIds = this._getCheckedIds(field);
     if (this.checkboxIds && this.checkboxIds.length === 0) {
       BbaseUtils.tip(CONST.LANG.SELECT_ONE);
       return;

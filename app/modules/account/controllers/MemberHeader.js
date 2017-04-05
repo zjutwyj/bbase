@@ -104,7 +104,6 @@ define('MemberHeader', [], function (require, exports, module) {
         curNav: location.hash.length > 0 ? location.hash : '#/teach',
         navItems: [
           { text: '简易教程', value: '#/teach' },
-          { text: 'API', value: '#/api' },
           { text: '示例展示', value: '#/demo' },
           { text: 'Ui展示', value: '#/ui' },
           { text: '组件展示', value: '#/component' }

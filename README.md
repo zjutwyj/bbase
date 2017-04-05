@@ -87,7 +87,7 @@ var FlyHeader = BbaseView.extend({
       data: {}                                          // 传递给模型类的数据， 常放于new一个视图的参数里
     });
   },
-  init: function(){                                     // 初始化模型类数据
+  initData: function(){                                 // 初始化模型类数据
     this._setDefault('args.name', 'a');                 // 初始化数据
     return {
       message: '我是一条消息'
@@ -156,7 +156,7 @@ var ProductList = BbaseList.extend({
       extend: true                                      // false收缩 true为展开
     });
   },
-  init: function(){                                     // 初始化模型类数据
+  initData: function(){                                 // 初始化模型类数据
     this._setDefault('args.name', 'a');                 // 初始化数据
     return {
       message: '我是一条消息'
@@ -211,7 +211,7 @@ var ProductDetail = BbaseDetail.extend({
       data: {}                                          // 传递给模型类的数据， 常放于new一个视图的参数里
     });
   },
-  init: function(response){                             // 初始化模型类数据, response 为服务器返回的数据
+  initData: function(response){                         // 初始化模型类数据, response 为服务器返回的数据
     this._setDefault('args.name', 'a');                 // 初始化数据
     return {
       message: '我是一条消息'
@@ -312,7 +312,9 @@ this._region('imagePickerConfig', ImagePickerConfig, {
 bb-change: 事件函数(其中参数为改变的字段名称)<br>
 
 ### 表单元素双向绑定
+```html
 <input bb-model="name:keyup" type="text" class="text" />
+```
 ```js
 bb-model: 模型类字段  后面的:keyup表示按下某个键弹起时触发，默认为:change (注：建议添加value="{{name}}",懒执行，提高性能)
 ```
@@ -321,7 +323,9 @@ bb-model: 模型类字段  后面的:keyup表示按下某个键弹起时触发�
 详见：example/DomainComponent.js
 
 ### 事件绑定
+```html
 <input bb-click="handleAdd" type="button" value="添加表单" class="abutton faiButton faiButton-hover" />
+```
 ```js
 bb-click="addOne": 事件类型，支持jquery所有的事件
 bb-keyup="addOne:enter$arg1";   当按下回车时触发  $arg1 表示传递给方法的参数，后面可以加多个参数(注：event永远在最后)
@@ -362,6 +366,7 @@ bb-click="_save": 保存表单(当需要实时保存且不需要提示“保存�
 bb-checked="checked";      checkbox选中
 bb-show="models.length";   显示、隐藏   models为BbaseList中的this.collection.models
 bb-disabled="models.length"
+bb-src=""
 ```
 
 ### 视图通用方法
@@ -448,7 +453,7 @@ this._insertOrder(evt.oldIndex, evt.newIndex, function(list) {}); //插序排序
 this._getItems(); // 获取全部列表
 this._getItem(index); // 获取第index项
 this._getCheckedItems(isPluck); // 获取选中的列表项 isPluck为true时自动转化为model.toJSON()对象
-this._getCheckboxIds(); // 获取选中项的ids数组
+this._getCheckedIds(); // 获取选中项的ids数组
 
 this._getPage(); // 获取当前第几页
 this._setPage(5);// 设置当前第几页

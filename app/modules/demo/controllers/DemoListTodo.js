@@ -81,15 +81,15 @@ input[type="checkbox"] {
   position: relative;
   margin: 0;
   width: 100%;
-  font-size: 24px;
+  font-size: 24px !important;
   font-family: inherit;
   font-weight: inherit;
-  line-height: 1.4em;
+  line-height: 1.4em !important;
   border: 0;
   outline: none;
   color: inherit;
   padding: 6px;
-  height:54px;
+  height:54px !important;
   border: 1px solid #999;
   box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
@@ -405,7 +405,7 @@ html .clear-completed:active {
   window.createItems = function () {
     window.timestart = new Date().getTime();
     var items = [];
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < 6; i++) {
       items.push({ title: i, completed: false });
     }
     return items;

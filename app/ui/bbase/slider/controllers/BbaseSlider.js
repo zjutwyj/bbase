@@ -1947,7 +1947,7 @@ define('BbaseSlider', [], function(require, exports, module){
   BbaseSlider = BbaseView.extend({
     initialize: function(){
       this._super({
-        template: '<div class="bbase-ui-slider" style="width:' + (this.options.width || '100') + 'px;"></div>'
+        template: '<div class="bbase-ui-slider" style="width:' + (this.options.width || '200') + 'px;"></div>'
       });
     },
     init: function() {
@@ -1982,6 +1982,7 @@ define('BbaseSlider', [], function(require, exports, module){
         this._eventStart = true;
         if (!this.stopEvent && this._options.onChange) this._options.onChange.apply(this, [values, handle, this._init]);
       }, this));
+      if (!this.stopEvent && this._options.onChange) this._options.onChange.apply(this, [null, null, this._init]);
       setTimeout(BbaseEst.proxy(function() {
         this._init = false;
       }, this), 100);

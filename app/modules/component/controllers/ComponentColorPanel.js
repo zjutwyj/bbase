@@ -17,7 +17,7 @@ define('ComponentColorPanel', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main">
-            <div class="demo-item clearfix" bb-bbasecomponentcolorpick="{viewId:'bbasecomponentcolorpick',cur:cur}"></div>
+            <div class="demo-item clearfix" bb-bbasecomponentcolorpanel="{viewId:'bbasecomponentcolorpanel',cur:cur}"></div>
           </div>
           <div class="footer">
             <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; </div>
@@ -75,13 +75,7 @@ define('ComponentColorPanel', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        cur: '#ffffff',
-        items: [
-          { text: '白色', value: '#ffffff' },
-          { text: '黑色', value: '#000000' },
-          { text: '绿色', value: 'green' },
-          { text: '红色', value: 'red' }
-        ]
+        cur: '#ffffff'
       }
     }
   });

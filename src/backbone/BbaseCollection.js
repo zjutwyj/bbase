@@ -293,5 +293,26 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
       }
       BbaseEst.trigger(this._super('view').cid + 'models', null, true)
     }
+  },
+  _getPage: function () {
+    return this.paginationModel.get('page');
+  },
+  _setPage: function (page) {
+    this.paginationModel.set('page', page);
+  },
+  _getTotalPage: function () {
+    return this._getCount() % this._getPageSize() == 0 ? this._getCount() / this._getPageSize() : Math.floor(this._getCount() / this._getPageSize()) + 1;
+  },
+  _getCount: function () {
+    return this.paginationModel.get('count');
+  },
+  _setCount: function (count) {
+    this.paginationModel.set('count', count);
+  },
+  _getPageSize: function () {
+    return this.paginationModel.get('pageSize');
+  },
+  _setPageSize: function (pageSize) {
+    this.paginationModel.set('pageSize', pageSize);
   }
 });

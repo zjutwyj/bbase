@@ -8,7 +8,7 @@ define('DemoCenter', [], function (require, exports, module) {
   var DemoCenter, template;
 
   template = `
-    <div class="DemoCenter-wrap bbase-center" style="padding:10px;">
+    <div class="DemoCenter-wrap bbase-center">
       </style>
       <div class="DemoCenter-tag" bb-bbaseuitab="{viewId: 'uicentertab', cur: cur,tpl:tpl, theme:'tab-ul-line', path:'moduleId', items: items, onChange: handleTabChange}" ></div>
     </div>
