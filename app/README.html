@@ -79,6 +79,9 @@ var FlyHeader = BbaseView.extend({
       message: &#39;我是一条消息&#39;
     }
   },
+  onReady: function(){                                  // 组件初始化后回调
+
+  },
   beforeRender: function(){                             // 视图插入到DOM前
 
   },
@@ -146,6 +149,9 @@ var ProductList = BbaseList.extend({
       message: &#39;我是一条消息&#39;
     }
   },
+  onReady: function(){                                  // 组件初始化后回调
+
+  },
   beforeRender: function(){                             // 视图插入到DOM前
 
   },
@@ -198,6 +204,9 @@ var ProductDetail = BbaseDetail.extend({
     return {
       message: &#39;我是一条消息&#39;
     }
+  },
+  onReady: function(){                                  // 组件初始化后回调
+
   },
   beforeRender: function(){                             // 视图插入到DOM前
 
@@ -417,6 +426,8 @@ this._getCount();// 获取总个数
 this._setCount(5);// 设置总个数
 this._getTotalPage();// 获取总页数
 this._getLength(); // 获取列表长度
+
+this._reload();         // 刷新列表
 
 this._batch({  // 批量操作
     url: CONST.API + &#39;/message/batch/del&#39;,

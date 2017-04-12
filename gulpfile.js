@@ -128,6 +128,12 @@ gulp.task('lmc_wcd', function () {
   gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/lmc_wcd/app/ui/bbase'));
   gulp.src('./app/components/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/lmc_wcd/app/components/bbase'));
 });
+gulp.task('Pc', function () {
+  gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WorkProjects/Pc/app/vendor/bbase'));
+  gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/Pc/app/ui/bbase'));
+  gulp.src('./app/components/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/Pc/app/components/bbase'));
+});
+
 
 gulp.task('readme', function () {
   return gulp.src('README.md')
@@ -137,12 +143,12 @@ gulp.task('readme', function () {
 
 gulp.task('build', function (callback) {
   DEBUG = true;
-  runSequence(['bbase_jquery'], ['bbase_zepto'], ['UserManagement', 'Mobile', 'Leaflet', 'lmc_wcd', 'readme'], callback);
+  runSequence(['bbase_jquery'], ['bbase_zepto'], ['UserManagement', 'Mobile', 'Leaflet', 'lmc_wcd', 'Pc','readme'], callback);
 });
 
 gulp.task('dist', function (callback) {
   DEBUG = false;
-  runSequence(['bbase_jquery', 'bbase_zepto'], ['UserManagement', 'Mobile', 'Leaflet', 'lmc_wcd', 'readme'], callback);
+  runSequence(['bbase_jquery', 'bbase_zepto'], ['UserManagement', 'Mobile', 'Leaflet', 'lmc_wcd', 'Pc','readme'], callback);
 });
 
 // dist

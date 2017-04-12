@@ -21,9 +21,16 @@ Bbase.MODULE['UiFormCheckbox'] = 'modules/ui/controllers/UiFormCheckbox.js';
 Bbase.MODULE['UiFormSelect'] = 'modules/ui/controllers/UiFormSelect.js';
 Bbase.MODULE['UiFormSlider'] = 'modules/ui/controllers/UiFormSlider.js';
 Bbase.MODULE['UiFormDropDown'] = 'modules/ui/controllers/UiFormDropDown.js';
+Bbase.MODULE['UiFormTextEditor'] = 'modules/ui/controllers/UiFormTextEditor.js';
 
 Bbase.MODULE['UiItemCheck'] = 'modules/ui/controllers/UiItemCheck.js';
 Bbase.MODULE['UiItemCheckTab'] = 'modules/ui/controllers/UiItemCheckTab.js';
 Bbase.MODULE['UiItemCheckBtn'] = 'modules/ui/controllers/UiItemCheckBtn.js';
+
+
+
+Bbase.MODULE['UiScroll'] = 'modules/ui/controllers/UiScroll.js';
+Bbase.MODULE['UiScrollbar'] = 'modules/ui/controllers/UiScrollbar.js';
+Bbase.MODULE['UiSortable'] = 'modules/ui/controllers/UiSortable.js';
 
 

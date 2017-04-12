@@ -89,7 +89,7 @@ define('BbaseColorPanel', [], function (require, exports, module) {
           width: 400,
           color: color,
           hideSaveBtn: true,
-          target: this.$el.get(0),
+          target: this.$('.background-color-custom').get(0),
           onChange: BbaseEst.proxy(function (value) {
             color = value;
             if (this._options.onChange){

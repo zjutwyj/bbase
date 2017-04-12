@@ -1702,6 +1702,9 @@
    */
   function trim(str) {
     if (isEmpty(str)) return null;
+    if (typeOf(str) !== 'string'){
+      return str;
+    }
     for (var i = 0; i < str.length; i++) {
       if (indexOf(whitespace, str.charAt(i)) === -1) {
         str = str.substring(i);

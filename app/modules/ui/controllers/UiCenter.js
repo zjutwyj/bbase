@@ -24,7 +24,8 @@ define('UiCenter', [], function (require, exports, module) {
         cur: 'UiForm',
         items: [
           { text: '表单', moduleId: 'UiForm', oneRender: false },
-          { text: '选项卡', moduleId: 'UiItemCheck', oneRender: false }
+          { text: '选项卡', moduleId: 'UiItemCheck', oneRender: false },
+          { text: '拖动滚动', moduleId: 'UiScroll', oneRender: false }
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTab{{moduleId}} tabImgComm"></div><span>{{text}}</span></a>

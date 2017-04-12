@@ -85,7 +85,7 @@ define('ComponentPhotoPick', [], function(require, exports, module){
   `;
 
   var items = [];
-  for(var i = 0; i< 100; i++){
+  for(var i = 0; i< 200; i++){
     items.push({filename:'图片名称' + i, serverPath: CONST.PIC_NONE + '?' + i});
   }
 

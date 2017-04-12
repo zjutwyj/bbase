@@ -14,7 +14,7 @@ seajs.use(['BbaseJquery', 'MemberHeader'], function (BbaseJquery, MemberHeader) 
     var router = BbaseBackbone.Router.extend(b_routes);
     new router();
     BbaseBackbone.history.start();
-    if (!result.attributes){
+    if (!result.attributes || !result.attributes.data){
       result.attirbutes = {
         data: {}
       }

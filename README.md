@@ -93,6 +93,9 @@ var FlyHeader = BbaseView.extend({
       message: '我是一条消息'
     }
   },
+  onReady: function(){                                  // 组件初始化后回调,整个生命周期中只调用一次
+
+  },
   beforeRender: function(){                             // 视图插入到DOM前
 
   },
@@ -162,6 +165,9 @@ var ProductList = BbaseList.extend({
       message: '我是一条消息'
     }
   },
+  onReady: function(){                                  // 组件初始化后回调,整个生命周期中只调用一次
+
+  },
   beforeRender: function(){                             // 视图插入到DOM前
 
   },
@@ -216,6 +222,9 @@ var ProductDetail = BbaseDetail.extend({
     return {
       message: '我是一条消息'
     }
+  },
+  onReady: function(){                                  // 组件初始化后回调,整个生命周期中只调用一次
+
   },
   beforeRender: function(){                             // 视图插入到DOM前
 
@@ -464,6 +473,8 @@ this._setCount(5);// 设置总个数
 this._getTotalPage();// 获取总页数
 this._getLength(); // 获取列表长度
 
+this._reload();         // 刷新列表
+
 this._batch({  // 批量操作
     url: CONST.API + '/message/batch/del',
     tip: '删除成功'
@@ -590,6 +601,9 @@ new BbaseService().factory({
 兼容所有浏览器(包括IE6789)
 
 ### 更新记录
+>2017.04.12
+新增组件生命周期onReady
+
 >2016.11.06<br>
 添加_getParam与_setParam 请求参数获取与设置方法
 

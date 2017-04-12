@@ -417,6 +417,9 @@ var BbaseList = BbaseSuperView.extend({
     if (this._options.onReady) setTimeout(this._bind(function () {
       this._options.onReady.call(this, this._options)
     }), 0);
+    if (this.onReady){
+      this.onReady.call(this, this._options);
+    }
     if (this._options.toolTip) setTimeout(this._bind(function () {
       this._initToolTip();
     }), 0);
@@ -461,9 +464,11 @@ var BbaseList = BbaseSuperView.extend({
    *        this._reload();
    */
   _reload: function (options) {
-    this._empty.call(this); // 清空视图
-    this.collection.reset(); // 清空collection
-    this.list.empty(); // 清空DOM
+    if (!this._options.diff){
+      this._empty.call(this); // 清空视图
+      this.collection.reset(); // 清空collection
+      this.list.empty(); // 清空DOM
+    }
     this._load(options); // 重新加载数据
   },
 
@@ -664,7 +669,7 @@ var BbaseList = BbaseSuperView.extend({
   },
   _setModels: function (list) {
     var len_c = this.collection.models.length;
-    var len_l = list.length;
+    var len_l = this._options.max < 99999 ? this._options.max > list.length ? list.length : this._options.max :  list.length;
     var dx = (this._getPageSize() || 16) *
         ((this._getPage() - 1) || 0);
     if (len_l > 0 && list[0].view) {
@@ -677,7 +682,7 @@ var BbaseList = BbaseSuperView.extend({
         if (list[i]) {
           list[i]['dx'] = dx;
           dx++;
-          model.view._set(this._getPath(list[i]));
+          model.view && model.view._set(this._getPath(list[i]));
         }
       }
     }));
@@ -688,7 +693,7 @@ var BbaseList = BbaseSuperView.extend({
         this._push(new this._options.model(this._getPath(list[j - 1])));
       }
     } else if (len_l < len_c) {
-      this._remove(len_l, len_c);
+        this._remove(len_l, len_c);
     }
   },
   /**
@@ -810,7 +815,7 @@ var BbaseList = BbaseSuperView.extend({
     var _dx = (this._getPageSize() || 16) *
         ((this._getPage() - 1) || 0);;
     BbaseEst.each(this.collection.models, function (item) {
-      item.view._set('dx', _dx);
+      item.view && item.view._set('dx', _dx);
       _dx++;
     });
     this.dx = this.collection.models.length;
