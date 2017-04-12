@@ -79,7 +79,7 @@ var FlyHeader = BbaseView.extend({
       message: &#39;我是一条消息&#39;
     }
   },
-  onReady: function(){                                  // 组件初始化后回调
+  onReady: function(){                                  // 组件初始化后回调,整个生命周期中只调用一次
 
   },
   beforeRender: function(){                             // 视图插入到DOM前
@@ -149,7 +149,7 @@ var ProductList = BbaseList.extend({
       message: &#39;我是一条消息&#39;
     }
   },
-  onReady: function(){                                  // 组件初始化后回调
+  onReady: function(){                                  // 组件初始化后回调,整个生命周期中只调用一次
 
   },
   beforeRender: function(){                             // 视图插入到DOM前
@@ -205,7 +205,7 @@ var ProductDetail = BbaseDetail.extend({
       message: &#39;我是一条消息&#39;
     }
   },
-  onReady: function(){                                  // 组件初始化后回调
+  onReady: function(){                                  // 组件初始化后回调,整个生命周期中只调用一次
 
   },
   beforeRender: function(){                             // 视图插入到DOM前
@@ -545,6 +545,8 @@ BbaseApp.addFilter(&#39;myFilter&#39;,function(arg1,arg2,arg3){
 <p>兼容所有浏览器(包括IE6789)</p>
 <h3 id="-">更新记录</h3>
 <blockquote>
+<p>2017.04.12
+新增组件生命周期onReady</p>
 <p>2016.11.06<br>
 添加_getParam与_setParam 请求参数获取与设置方法</p>
 <p>2016.08.28<br>
