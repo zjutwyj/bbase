@@ -119,10 +119,6 @@ var BbaseView = BbaseSuperView.extend({
     if (this._options.onReady) setTimeout(this._bind(function() {
       this._options.onReady.call(this, this._options);
     }), 0);
-      if (this.onReady) setTimeout(this._bind(function() {
-      this.onReady.call(this, this._options);
-    }), 0);
-
     if (this._watchBind) setTimeout(this._bind(function() {
       this._watchBind.call(this, this._options.template);
     }), 0);
