@@ -417,9 +417,6 @@ var BbaseList = BbaseSuperView.extend({
     if (this._options.onReady) setTimeout(this._bind(function () {
       this._options.onReady.call(this, this._options)
     }), 0);
-    if (this.onReady){
-      this.onReady.call(this, this._options);
-    }
     if (this._options.toolTip) setTimeout(this._bind(function () {
       this._initToolTip();
     }), 0);
@@ -695,6 +692,9 @@ var BbaseList = BbaseSuperView.extend({
     } else if (len_l < len_c) {
         this._remove(len_l, len_c);
     }
+    if (this.viewUpdate) setTimeout(this._bind(function () {
+      this.viewUpdate.call(this, this._options)
+    }), 0);
   },
   /**
    * 向视图添加元素

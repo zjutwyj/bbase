@@ -93,13 +93,13 @@ var FlyHeader = BbaseView.extend({
       message: '我是一条消息'
     }
   },
-  onReady: function(){                                  // 组件初始化后回调,整个生命周期中只调用一次
-
-  },
   beforeRender: function(){                             // 视图插入到DOM前
 
   },
   afterRender: function(){                              // 视图插入到DOM后
+
+  },
+  viewUpdate: function(){                               // 视图更新
 
   },
   update: function(name){                               // 监听的字段改变时回调
@@ -165,13 +165,13 @@ var ProductList = BbaseList.extend({
       message: '我是一条消息'
     }
   },
-  onReady: function(){                                  // 组件初始化后回调,整个生命周期中只调用一次
-
-  },
   beforeRender: function(){                             // 视图插入到DOM前
 
   },
   afterRender: function(){                              // 视图插入到DOM后
+
+  },
+  viewUpdate: function(){                               // 视图更新
 
   },
   beforeLoad: function(){                               // 从服务器获取数据前回调
@@ -223,13 +223,13 @@ var ProductDetail = BbaseDetail.extend({
       message: '我是一条消息'
     }
   },
-  onReady: function(){                                  // 组件初始化后回调,整个生命周期中只调用一次
-
-  },
   beforeRender: function(){                             // 视图插入到DOM前
 
   },
   afterRender: function(){                              // 视图插入到DOM后
+
+  },
+  viewUpdate: function(){                               // 视图更新
 
   },
   beforeSave: function(){                               // 模型类保存前
@@ -602,7 +602,7 @@ new BbaseService().factory({
 
 ### 更新记录
 >2017.04.12
-新增组件生命周期onReady
+新增组件生命周期viewUpdate
 
 >2016.11.06<br>
 添加_getParam与_setParam 请求参数获取与设置方法

@@ -302,9 +302,6 @@ var BbaseItem = BbaseSuperView.extend({
     if (this.afterRender) setTimeout(this._bind(function() {
       this.afterRender.call(this, this.model);
     }), 0);
-    if (this.onReady) setTimeout(this._bind(function() {
-      this.onReady.call(this, this.model);
-    }), 0);
     if (this._watchBind) setTimeout(this._bind(function() {
       this._watchBind.call(this, this._options.template);
     }), 0);
