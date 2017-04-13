@@ -50,12 +50,53 @@
 .bbase-ui-itemcheck.ui-itemcheck .item-active {
   background-color: transparent;
 }
+// 选择样式
+.bbase-ui-itemcheck.ui-item-check-normal{
+  .ui-item-check{
+       margin-right: 10px;
+    border: 1px solid #b9babb;
+    padding: 2px 4px;
+  }
+  .ui-item-check.item-active{
+    border: 1px solid $mainColor;
+    color: $mainColor;
+  }
+  .ui-item-check.item-active .check-icon{
+    display:block;
+  }
+  .item-active .toggle{
 
-// 样式1
+  }
+  .ui-item-check.item-active .bbase-yuandian{
+    display:none;
+  }
+  .ui-item-check .check-icon{
+         height: 0;
+    width: 0;
+    top: 0;
+    border-width: 8px 0px 0px 8px;
+    border-style: solid;
+    border-color: #5289db transparent transparent transparent;
+    opacity: 0.8;
+  }
+}
+// 文字样式
+.bbase-ui-itemcheck.ui-item-check-text{
+  .ui-item-check{
+    margin-right:10px;
+  }
+  .ui-item-check.item-active .check-icon{
+    display:none;
+  }
+  .item-active .toggle{
+    color: $mainColor;
+  }
+}
+// 按钮样式
 .bbase-ui-itemcheck.ui-item-check-btn {
   .ui-item-check {
     padding: 2px 4px;
-    border: 1px solid #BBBBBB;
+    border: 1px solid transparent;
   }
   .item-active{
         visibility: visible;

@@ -28,6 +28,8 @@ define('UiForm', [], function (require, exports, module) {
           { text: '下拉菜单', moduleId: 'UiFormSelect' },
           { text: '滑动条', moduleId: 'UiFormSlider' },
           { text: '下拉框', moduleId: 'UiFormDropDown' },
+          { text: '组合切换', moduleId: 'UiFormGroup' },
+          { text: '选项卡', moduleId: 'UiFormTab' ,oneRender: false},
           { text: '编辑器', moduleId: 'UiFormTextEditor' }
         ],
         tpl: `

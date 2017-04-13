@@ -69,6 +69,11 @@ Bbase.DIRECTIVE['bbaseuiitemcheck'] = {
     itemCheck.apply(this, [value, selector, 'normal']);
   }
 }
+Bbase.DIRECTIVE['bbaseuiitemtext'] = {
+  bind: function (value, selector) {
+    itemCheck.apply(this, [value, selector, 'text']);
+  }
+}
 //bb-bbaseuiitembtn="{viewId:'ui-item-tab',cur:getCurValue(formId),items:items, onChange: handleChange}"
 Bbase.DIRECTIVE['bbaseuiitembtn'] = {
   bind: function (value, selector) {

@@ -1014,6 +1014,7 @@
   overflow: hidden;
   border: 1px solid #dadada;
   position: relative;
+  margin-bottom:10px;
 }
 
 .formPanel .main .content td {
@@ -1057,7 +1058,7 @@
   left: -164px;
 }
 
-#ui-nav .tab-head-tab-ul-line{
+#ui-nav .tab-ul-line{
   width: 162px;
   float:left;
 }

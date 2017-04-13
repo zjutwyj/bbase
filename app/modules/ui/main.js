@@ -22,15 +22,14 @@ Bbase.MODULE['UiFormSelect'] = 'modules/ui/controllers/UiFormSelect.js';
 Bbase.MODULE['UiFormSlider'] = 'modules/ui/controllers/UiFormSlider.js';
 Bbase.MODULE['UiFormDropDown'] = 'modules/ui/controllers/UiFormDropDown.js';
 Bbase.MODULE['UiFormTextEditor'] = 'modules/ui/controllers/UiFormTextEditor.js';
-
-Bbase.MODULE['UiItemCheck'] = 'modules/ui/controllers/UiItemCheck.js';
-Bbase.MODULE['UiItemCheckTab'] = 'modules/ui/controllers/UiItemCheckTab.js';
-Bbase.MODULE['UiItemCheckBtn'] = 'modules/ui/controllers/UiItemCheckBtn.js';
-
-
+Bbase.MODULE['UiFormGroup'] = 'modules/ui/controllers/UiFormGroup.js';
+Bbase.MODULE['UiFormTab'] = 'modules/ui/controllers/UiFormTab.js';
 
 Bbase.MODULE['UiScroll'] = 'modules/ui/controllers/UiScroll.js';
 Bbase.MODULE['UiScrollbar'] = 'modules/ui/controllers/UiScrollbar.js';
 Bbase.MODULE['UiSortable'] = 'modules/ui/controllers/UiSortable.js';
+
+Bbase.MODULE['UiList'] = 'modules/ui/controllers/UiList.js';
+Bbase.MODULE['UiListExpand'] = 'modules/ui/controllers/UiListExpand.js';
 
 

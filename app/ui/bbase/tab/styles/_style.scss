@@ -72,6 +72,7 @@
     .tab-li a {
       padding: 6px 0px 6px 0px;
       font-size: 14px;
+      text-decoration: none;
     }
     .tab-li .toggle {
       padding-left: 8px;
@@ -97,29 +98,32 @@
       height: 24px;
       margin-bottom: 5px;
       line-height: 24px;
-      background-color: #efefef;
-      border: 1px solid #dfdfdf;
+      background-color: transparent;
+      border: 1px solid transparent;
       color: #666;
       width: auto;
       text-align: center;
       cursor: pointer;
+      padding: 0 6px;
     }
     .tab-li a {
       padding: 6px 0px 6px 0px;
       font-size: 14px;
-      color: #fff;
+      color: #333;
+      text-decoration: none;
     }
     .tab-li.item-active {
-      background-color: #FF5241;
+      background-color: $mainColor;
       color: #fff;
-      border: 1px solid #FF5241;
+      border: 1px solid $mainColor;
     }
     .tab-li.item-active a {
       color: #fff;
     }
   }
   /* tab样式3*/
-  .tab-ul-line {
+  .tab-ul-line,
+  .tab-ul-line.h {
     height: 25px;
     background-color: transparent !important;
     overflow: hidden;
@@ -154,7 +158,7 @@
   }
   /* tab样式4*/
   .tab-ul-text .tab-li.item-active a {
-    color: #ff4942;
+    color: $mainColor;
   }
   .tab-ul-text .tab-li {
     padding: 0 4px;
@@ -164,18 +168,48 @@
   }
   .tab-ul-text .tab-li a {
     vertical-align: middle;
+    text-decoration: none;
+  }
+  /* 方块类型 */
+  .tab-ul-block {
+    .tab-li {
+      float: left;
+      margin-right: -1px;
+      cursor: pointer;
+      text-align: center;
+      position: relative;
+      line-height: normal;
+      .toggle {
+        display: inline-block;
+        padding: 0 12px;
+        line-height: 32px;
+        color: #666;
+        border: 1px solid #e5e5e5;
+        background: #f8f8f8;
+        min-width: 80px;
+        text-align: center;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        a{
+          text-decoration: none;
+        }
+      }
+    }
+    .tab-li.item-active .toggle{
+      border-bottom-color: #fff;
+      background: #fff;
+    }
   }
 }
 
 .bbase-ui-tab.v {
   position: relative;
   overflow: hidden;
-  .tab-head-tab-ul-line{
-  }
-  .tab-cont {
+  > .tab-cont {
     float: left;
   }
-  .tab-ul-line .tab-li {
+  > .tab-head .tab-ul-line .tab-li {
     float: none;
     display: block;
     width: 100%;
@@ -184,10 +218,10 @@
     height: 50px;
     line-height: 50px;
   }
-  .tab-ul-line .tab-li.item-active {
+  > .tab-head .tab-ul-line .tab-li.item-active {
     background-color: #f4f5f9;
   }
-  .slideBar {
+  >.slideBar {
     width: 4px;
     height: 100%;
     border-top: none;
@@ -196,7 +230,7 @@
     left: 0;
     top: 0;
   }
-  .slideBar .slideBarTip {
+  >.slideBar .slideBarTip {
     width: 4px;
     height: 20px;
     position: absolute;

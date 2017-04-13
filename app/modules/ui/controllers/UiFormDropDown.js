@@ -13,7 +13,7 @@ define('UiFormDropDown', [], function (require, exports, module) {
         <div class="anything">
           <div class="header">
             <div class="formIdArea">
-              <span class="name">指令用法：bbaseuislider="{viewId: 'viewId', cur: cur, width: width, onChange: handleChange}"</span>
+              <span class="name">指令用法：bbaseuidropdown="{viewId:'bbaseuidropdownmodule',moduleId: 'DemoListTable'}"</span>
             </div>
           </div>
           <div class="main clearfix">

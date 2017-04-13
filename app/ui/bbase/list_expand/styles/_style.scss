@@ -1,0 +1,82 @@
+.bbase-ui-listexpand {
+  .more-sections,
+  .section-button-container {
+    font-size: 14px;
+    font-family: HelveticaNeueW01-55Roma, HelveticaNeueW02-55Roma, HelveticaNeueW10-55Roma, sans-serif;
+  }
+  .section-button-container {
+    height: 30px;
+    margin: 6px 14px;
+  }
+  .section-button {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 118px;
+    text-overflow: ellipsis;
+    color: #20303c;
+  }
+  .section-button-container .section-button {
+    cursor: pointer;
+    padding: 0 13px;
+    line-height: 30px;
+    box-sizing: border-box;
+    border-radius: 999px;
+    border: 0;
+    position: relative;
+    top: -4px;
+    margin-bottom: -2px;
+    left: -13px;
+    outline: 0;
+    -webkit-font-smoothing: antialiased;
+    max-width: none;
+  }
+  .section-button-container .section-button span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 112px;
+    vertical-align: top;
+    display: inline-block;
+  }
+  .section-button-container .section-button.already-used span {
+    max-width: 102px;
+  }
+  .section-button-container .section-button .already-used-check,
+  .section-button-container .section-button .already-used-check:hover {
+    color: lighten($mainColor, 10%);
+    margin-left: 2px;
+  }
+  .section-button-container .section-button.already-used .already-used-check {
+    display: inline-block;
+  }
+  .more-sections {
+    cursor: pointer;
+    color: $mainColor;
+    display: inline-block;
+    margin: 0 14px 24px;
+  }
+  .more-sections:hover {
+    color: $mainColor;
+  }
+  .more-sections div {
+    color: $mainColor;
+    margin-left: 6px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .section-button-container .section-button:not(.selected):hover {
+    background-color: lighten($mainColor, 35%);
+    color: $mainColor;
+  }
+  .section-button-container .section-button.selected {
+    background-color: $mainColor;
+    color: #ffffff;
+  }
+  .section-button-container .section-button.selected .already-used-check {
+    color: #fff;
+  }
+  .more-sections .dropup {
+    transform: rotate(180deg)
+  }
+}

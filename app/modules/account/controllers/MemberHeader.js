@@ -28,7 +28,7 @@ define('MemberHeader', [], function (require, exports, module) {
                     <img bb-src="{{CONST 'HOST'}}/styles/default/img/manage/LOGO_2.png?v=201603020957">
                   </a>
                 </div>
-                <div class="navBar" bb-bbaseuitab="{viewId: 'navigator', cur: curNav, items: navItems, require:false,theme:'tab-ul-line', onChange: handleNavigatorChange}"></div>
+                <div class="navBar" bb-bbaseuitab="{viewId: 'navigator', cur: curNav, items: navItems, require:false, theme:'tab-ul-line', onChange: handleNavigatorChange}"></div>
                 <div class="userIcon">
                     <div class="bg"></div>
                     <div class="icon"></div>

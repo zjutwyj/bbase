@@ -1758,7 +1758,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
       BbaseUtils.dialog({
         dialogId: hash,
         title: null,
-        width: 'auto',
+        width: $(this).attr('data-width') || 'auto',
         offset: parseInt(offset, 10),
         skin: 'tool-tip-dialog',
         align: $(this).attr('data-align') || 'top',
