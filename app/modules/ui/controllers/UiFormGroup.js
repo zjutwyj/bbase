@@ -1,23 +1,68 @@
 'use strict';
 /**
  * @description 模块功能说明
- * @class UiItemCheckTab
+ * @class UiFormGroup
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('UiItemCheckTab', [], function(require, exports, module){
-  var UiItemCheckTab, template;
+define('UiFormGroup', [], function(require, exports, module){
+  var UiFormGroup, template;
 
   template = `
-    <div class="UiItemCheckTab-wrap" style="padding:10px;">
-        <div class="formPanel form-demo">
-        <div class="anything" style="display: block;">
+    <div class="UiFormGroup-wrap module-wrap">
+      <div class="formPanel form-demo">
+        <div class="anything">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbaseuiitemtab="{viewId: 'viewId', cur: cur, items: items, onChange: handleChange}"</span>
+              <span class="name">bbaseuiitemtab="{viewId: 'bbaseitemtab', cur: cur, items: items, onChange: handleChange}"</span>
             </div>
           </div>
           <div class="main">
-             <div class="demo-item clearfix" bb-bbaseuiitemtab="{viewId:'itemcheck',cur:cur,items:items}"></div>
+             <div class="demo-item clearfix" bb-bbaseuiitemtab="{viewId:'bbaseitemtab',cur:cur,items:items}"></div>
+          </div>
+          <div class="footer">
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'ddd', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="formPanel form-demo">
+        <div class="anything">
+          <div class="header">
+            <div id="formIdArea" class="formIdArea">
+              <span class="name">bbaseuiitembtn="{viewId: 'bbaseitembtn', cur: cur, items: items, onChange: handleChange}"</span>
+            </div>
+          </div>
+          <div class="main">
+             <div class="demo-item clearfix" bb-bbaseuiitembtn="{viewId:'bbaseitembtn',cur:cur,items:items}"></div>
+          </div>
+          <div class="footer">
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'ddd', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="formPanel form-demo">
+        <div class="anything">
+          <div class="header">
+            <div id="formIdArea" class="formIdArea">
+              <span class="name">bbaseuiitemtext="{viewId: 'bbaseitemtext', cur: cur, items: items, onChange: handleChange}"</span>
+            </div>
+          </div>
+          <div class="main">
+             <div class="demo-item clearfix" bb-bbaseuiitemtext="{viewId:'bbaseitemtext',cur:cur,items:items}"></div>
+          </div>
+          <div class="footer">
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'ddd', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="formPanel form-demo">
+        <div class="anything">
+          <div class="header">
+            <div id="formIdArea" class="formIdArea">
+              <span class="name">bbaseuiitemcheck="{viewId: 'bbaseitemcheck', cur: cur, items: items, onChange: handleChange}"</span>
+            </div>
+          </div>
+          <div class="main">
+             <div class="demo-item clearfix" bb-bbaseuiitemcheck="{viewId:'bbaseitemcheck',cur:cur,items:items}"></div>
           </div>
           <div class="footer">
             <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'ddd', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
@@ -69,30 +114,22 @@ define('UiItemCheckTab', [], function(require, exports, module){
                   <td class="argType"><span>string</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
-                <tr>
-                  <td class="argName"><span>delay</span></td>
-                  <td class="argDesc"><span>延时加载</span></td>
-                  <td class="argType"><span>boolean</span></td>
-                  <td class="argDefault"><span>true</span></td>
-                </tr>
               </tbody>
             </table>
           </div>
         </div>
-      </div>
-
     </div>
   `;
 
-  UiItemCheckTab = BbaseView.extend({
+  UiFormGroup = BbaseView.extend({
     initialize: function(){
       this._super({
         template: template
       });
     },
-    init: function () {
+    initData: function(){
       return {
-         cur: 'all',
+        cur: 'all',
         items: [
           { text: '全部', value: 'all' },
           { text: '已完成', value: 'complete' },
@@ -103,5 +140,5 @@ define('UiItemCheckTab', [], function(require, exports, module){
     }
   });
 
-  module.exports = UiItemCheckTab;
+  module.exports = UiFormGroup;
 });

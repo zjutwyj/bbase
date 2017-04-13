@@ -2382,7 +2382,8 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
         template: `
           <div class="bbase-component-colorpick ui-color-picker">
             <div class="left" style="width: 190px;">
-              <div id="{{viewId}}"></div>
+              <div id="{{viewId}}" style="height:195px;"></div>
+
               <div id="{{viewId}}-slider" bb-bbaseuislider="{viewId: 'slider', cur: curSlider, onChange: onSlideChange,width:180}" style="height: 18px;"></div>
               <div class="ui-color-cont">
                 <div class="ui-color-warp">
@@ -2487,42 +2488,42 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
         cur: this._options.color || '#ffffff',
         path: 'value',
         items:  [
-  { text: '透明', value: 'transparent'  ,borderColor: 'transparent'},
-  { text: '白色', value: '#ffffff', rgb: 'rgb(255, 255, 255)' ,borderColor: '#dfdfdf'},
-  { text: '米色', value: '#fedac2', rgb: 'rgb(254, 218, 194)' ,borderColor: '#fedac2'},
-  { text: '天蓝', value: '#abedfa', rgb: 'rgb(171, 237, 250)' ,borderColor: '#abedfa'},
-  { text: '楷体', value: '#eaeac6', rgb: 'rgb(234, 234, 198)' ,borderColor: '#eaeac6'},
-  { text: '黑体', value: '#bbe4e6', rgb: 'rgb(187, 228, 230)' ,borderColor: '#bbe4e6'},
-  { text: '黑体', value: '#fac8f5', rgb: 'rgb(250, 200, 245)' ,borderColor: '#fac8f5'},
-  { text: '黑体', value: '#b7e775', rgb: 'rgb(183, 231, 117)' ,borderColor: '#b7e775'},
-  { text: '黑体', value: '#e3f094', rgb: 'rgb(227, 240, 148)' ,borderColor: '#e3f094'},
-  { text: '黑体', value: '#fdeb7a', rgb: 'rgb(253, 235, 122)' ,borderColor: '#fdeb7a'},
-  { text: '黑体', value: '#cccccc', rgb: 'rgb(204, 204, 204)' ,borderColor: '#cccccc'},
-  { text: '黑体', value: '#ccff33', rgb: 'rgb(204, 255, 51)' ,borderColor: '#ccff33'},
-  { text: '黑体', value: '#ff6666', rgb: 'rgb(255, 102, 102)' ,borderColor: '#ff6666'},
-  { text: '黑体', value: '#66ccff', rgb: 'rgb(102, 204, 255)' ,borderColor: '#66ccff'},
-  { text: '黑体', value: '#ff0000', rgb: 'rgb(255, 0, 0)' ,borderColor: '#ff0000'},
-  { text: '黑体', value: '#3399ff', rgb: 'rgb(51, 153, 255)' ,borderColor: '#3399ff'},
-  { text: '黑体', value: '#ff9900', rgb: 'rgb(255, 153, 0)' ,borderColor: '#ff9900'},
-  { text: '黑体', value: '#339966', rgb: 'rgb(51, 153, 102)' ,borderColor: '#339966'},
-  { text: '黑体', value: '#ffff99', rgb: 'rgb(255, 255, 153)' ,borderColor: '#ffff99'},
-  { text: '黑体', value: '#cc99ff', rgb: 'rgb(204, 153, 255)' ,borderColor: '#cc99ff'},
-  { text: '黑体', value: '#00ffff', rgb: 'rgb(0, 255, 255)' ,borderColor: '#00ffff'},
-  { text: '黑体', value: '#66ffcc', rgb: 'rgb(102, 255, 204)' ,borderColor: '#66ffcc'},
-  { text: '黑体', value: '#999999', rgb: 'rgb(153, 153, 153)' ,borderColor: '#999999'},
-  { text: '黑体', value: '#666666', rgb: 'rgb(102, 102, 102)' ,borderColor: '#666666'},
-  { text: '黑体', value: '#21292b', rgb: 'rgb(33, 41, 43)' ,borderColor: '#21292b'},
-  { text: '黑体', value: '#cccc00', rgb: 'rgb(204, 204, 0)' ,borderColor: '#cccc00'},
-  { text: '黑体', value: '#996633', rgb: 'rgb(153, 102, 51)' ,borderColor: '#996633'},
-  { text: '黑体', value: '#66cccc', rgb: 'rgb(102, 204, 204)' ,borderColor: '#66cccc'},
-  { text: '黑体', value: '#99cccc', rgb: 'rgb(153, 204, 204)',borderColor: '#99cccc' },
-  { text: '黑体', value: '#ccffff', rgb: 'rgb(204, 255, 255)' ,borderColor: '#ccffff'},
-  { text: '黑体', value: '#ccffcc', rgb: 'rgb(204, 255, 204)' ,borderColor: '#dfdfdf'},
-  { text: '黑体', value: '#9999ff', rgb: 'rgb(153, 153, 255)' ,borderColor: '#9999ff'},
-  { text: '黑体', value: '#66cc99', rgb: 'rgb(102, 204, 153)',borderColor: '#66cc99' },
-  { text: '黑体', value: '#6666cc', rgb: 'rgb(102, 102, 204)' ,borderColor: '#6666cc'},
-  { text: '黑体', value: 'rgba', rgb: 'rgba' ,borderColor: '#dfdfdf'}
-],
+          { text: '透明', value: 'transparent'  ,borderColor: 'transparent'},
+          { text: '白色', value: '#ffffff', rgb: 'rgb(255, 255, 255)' ,borderColor: '#fff'},
+          { text: '米色', value: '#fedac2', rgb: 'rgb(254, 218, 194)' ,borderColor: '#fedac2'},
+          { text: '天蓝', value: '#abedfa', rgb: 'rgb(171, 237, 250)' ,borderColor: '#abedfa'},
+          { text: '楷体', value: '#eaeac6', rgb: 'rgb(234, 234, 198)' ,borderColor: '#eaeac6'},
+          { text: '黑体', value: '#bbe4e6', rgb: 'rgb(187, 228, 230)' ,borderColor: '#bbe4e6'},
+          { text: '黑体', value: '#fac8f5', rgb: 'rgb(250, 200, 245)' ,borderColor: '#fac8f5'},
+          { text: '黑体', value: '#b7e775', rgb: 'rgb(183, 231, 117)' ,borderColor: '#b7e775'},
+          { text: '黑体', value: '#e3f094', rgb: 'rgb(227, 240, 148)' ,borderColor: '#e3f094'},
+          { text: '黑体', value: '#fdeb7a', rgb: 'rgb(253, 235, 122)' ,borderColor: '#fdeb7a'},
+          { text: '黑体', value: '#cccccc', rgb: 'rgb(204, 204, 204)' ,borderColor: '#cccccc'},
+          { text: '黑体', value: '#ccff33', rgb: 'rgb(204, 255, 51)' ,borderColor: '#ccff33'},
+          { text: '黑体', value: '#ff6666', rgb: 'rgb(255, 102, 102)' ,borderColor: '#ff6666'},
+          { text: '黑体', value: '#66ccff', rgb: 'rgb(102, 204, 255)' ,borderColor: '#66ccff'},
+          { text: '黑体', value: '#ff0000', rgb: 'rgb(255, 0, 0)' ,borderColor: '#ff0000'},
+          { text: '黑体', value: '#3399ff', rgb: 'rgb(51, 153, 255)' ,borderColor: '#3399ff'},
+          { text: '黑体', value: '#ff9900', rgb: 'rgb(255, 153, 0)' ,borderColor: '#ff9900'},
+          { text: '黑体', value: '#339966', rgb: 'rgb(51, 153, 102)' ,borderColor: '#339966'},
+          { text: '黑体', value: '#ffff99', rgb: 'rgb(255, 255, 153)' ,borderColor: '#ffff99'},
+          { text: '黑体', value: '#cc99ff', rgb: 'rgb(204, 153, 255)' ,borderColor: '#cc99ff'},
+          { text: '黑体', value: '#00ffff', rgb: 'rgb(0, 255, 255)' ,borderColor: '#00ffff'},
+          { text: '黑体', value: '#66ffcc', rgb: 'rgb(102, 255, 204)' ,borderColor: '#66ffcc'},
+          { text: '黑体', value: '#999999', rgb: 'rgb(153, 153, 153)' ,borderColor: '#999999'},
+          { text: '黑体', value: '#666666', rgb: 'rgb(102, 102, 102)' ,borderColor: '#666666'},
+          { text: '黑体', value: '#21292b', rgb: 'rgb(33, 41, 43)' ,borderColor: '#21292b'},
+          { text: '黑体', value: '#cccc00', rgb: 'rgb(204, 204, 0)' ,borderColor: '#cccc00'},
+          { text: '黑体', value: '#996633', rgb: 'rgb(153, 102, 51)' ,borderColor: '#996633'},
+          { text: '黑体', value: '#66cccc', rgb: 'rgb(102, 204, 204)' ,borderColor: '#66cccc'},
+          { text: '黑体', value: '#99cccc', rgb: 'rgb(153, 204, 204)',borderColor: '#99cccc' },
+          { text: '黑体', value: '#ccffff', rgb: 'rgb(204, 255, 255)' ,borderColor: '#ccffff'},
+          { text: '黑体', value: '#ccffcc', rgb: 'rgb(204, 255, 204)' ,borderColor: '#ccffcc'},
+          { text: '黑体', value: '#9999ff', rgb: 'rgb(153, 153, 255)' ,borderColor: '#9999ff'},
+          { text: '黑体', value: '#66cc99', rgb: 'rgb(102, 204, 153)',borderColor: '#66cc99' },
+          { text: '黑体', value: '#6666cc', rgb: 'rgb(102, 102, 204)' ,borderColor: '#6666cc'},
+          { text: '黑体', value: '#dfdfdf', rgb: 'rgb(223, 223, 223)' ,borderColor: '#dfdfdf'}
+        ],
         onChange: BbaseEst.proxy(function (item, init) {
           if (init) return;
           this.isTransparent = item['value'] === 'transparent' ? true : false;
@@ -2594,7 +2595,6 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
      * @private
      */
     setGradient: function (color) {
-      debug('setGradient');
       if (this.$slider) {
         this.$noUiBase = this.$noUiBase || this.$slider.find('.noUi-base');
         this.$noUiBase.css('background', 'linear-gradient(to right, rgba(77, 118, 129, 0), ' + color + ')');
@@ -2613,7 +2613,6 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
      * 3. 调用change函数
      */
     handleInput: function () {
-      debug('handleInput');
       var val = this.$input.val();
       if (val.length === 7) {
         this.parseColor(val);
@@ -2628,7 +2627,6 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
      * @private
      */
     parseColor: function (color) {
-      debug('parseColor');
       this.color = changeToRGBA(color);
       this.color.hex = rgbToHex(this.color.r, this.color.g, this.color.b);
       if (this.color.a === 0) {
@@ -2642,7 +2640,6 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
      * @param color
      */
     parseRgb: function (color, opacity) {
-      debug('parseRgb' + opacity);
       var _color = changeToRGBA(color);
       this.color.r = _color.r;
       this.color.g = _color.g;
@@ -2664,7 +2661,6 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
      * @param color
      */
     handleChange: function () {
-      debug('handleChange');
       this.color.rgba = 'rgba(' + this.color.r + ',' + this.color.g + ',' + this.color.b + ',' + this.color.a + ')';
       this.$show.css('background-color', this.color.rgba);
       this.$input.val(this.color.hex);

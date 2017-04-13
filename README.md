@@ -87,7 +87,7 @@ var FlyHeader = BbaseView.extend({
       data: {}                                          // 传递给模型类的数据， 常放于new一个视图的参数里
     });
   },
-  init: function(){                                     // 初始化模型类数据
+  initData: function(){                                 // 初始化模型类数据
     this._setDefault('args.name', 'a');                 // 初始化数据
     return {
       message: '我是一条消息'
@@ -97,6 +97,9 @@ var FlyHeader = BbaseView.extend({
 
   },
   afterRender: function(){                              // 视图插入到DOM后
+
+  },
+  viewUpdate: function(){                               // 视图更新
 
   },
   update: function(name){                               // 监听的字段改变时回调
@@ -156,7 +159,7 @@ var ProductList = BbaseList.extend({
       extend: true                                      // false收缩 true为展开
     });
   },
-  init: function(){                                     // 初始化模型类数据
+  initData: function(){                                 // 初始化模型类数据
     this._setDefault('args.name', 'a');                 // 初始化数据
     return {
       message: '我是一条消息'
@@ -166,6 +169,9 @@ var ProductList = BbaseList.extend({
 
   },
   afterRender: function(){                              // 视图插入到DOM后
+
+  },
+  viewUpdate: function(){                               // 视图更新
 
   },
   beforeLoad: function(){                               // 从服务器获取数据前回调
@@ -211,7 +217,7 @@ var ProductDetail = BbaseDetail.extend({
       data: {}                                          // 传递给模型类的数据， 常放于new一个视图的参数里
     });
   },
-  init: function(response){                             // 初始化模型类数据, response 为服务器返回的数据
+  initData: function(response){                         // 初始化模型类数据, response 为服务器返回的数据
     this._setDefault('args.name', 'a');                 // 初始化数据
     return {
       message: '我是一条消息'
@@ -221,6 +227,9 @@ var ProductDetail = BbaseDetail.extend({
 
   },
   afterRender: function(){                              // 视图插入到DOM后
+
+  },
+  viewUpdate: function(){                               // 视图更新
 
   },
   beforeSave: function(){                               // 模型类保存前
@@ -312,7 +321,9 @@ this._region('imagePickerConfig', ImagePickerConfig, {
 bb-change: 事件函数(其中参数为改变的字段名称)<br>
 
 ### 表单元素双向绑定
+```html
 <input bb-model="name:keyup" type="text" class="text" />
+```
 ```js
 bb-model: 模型类字段  后面的:keyup表示按下某个键弹起时触发，默认为:change (注：建议添加value="{{name}}",懒执行，提高性能)
 ```
@@ -321,7 +332,9 @@ bb-model: 模型类字段  后面的:keyup表示按下某个键弹起时触发�
 详见：example/DomainComponent.js
 
 ### 事件绑定
+```html
 <input bb-click="handleAdd" type="button" value="添加表单" class="abutton faiButton faiButton-hover" />
+```
 ```js
 bb-click="addOne": 事件类型，支持jquery所有的事件
 bb-keyup="addOne:enter$arg1";   当按下回车时触发  $arg1 表示传递给方法的参数，后面可以加多个参数(注：event永远在最后)
@@ -362,13 +375,16 @@ bb-click="_save": 保存表单(当需要实时保存且不需要提示“保存�
 bb-checked="checked";      checkbox选中
 bb-show="models.length";   显示、隐藏   models为BbaseList中的this.collection.models
 bb-disabled="models.length"
+bb-src=""
 ```
 
 ### 视图通用方法
 ```js
 this._super(type); // 引用父类，当参数type为view时返回上级视图 model时返回上级模型类，data上级模型类数据,options返回上级参数,"_init" 执行上级方法,为对象时调用父级的_initialize()方法 (注：BbaseItem中调用BbaseList中的方法，尽量用this._super('superFn', args))
-this._view('viewId');// 获取视图(注：默认带this.cid)
+
+this._view('viewId');// 获取视图(注：默认带this.cid)  注：如果是从路由那边注册的， 那么获取是用app.getView('viewId') 来引用
 this._region('name', ProductList, {}); // 添加视图区域,当一个参数时则为获取视图(注：默认带this.cid)
+
 this._service('productList').then(function(result){}); // 数据请求服务
 this._navigate('#/home', true); // 导航
 
@@ -446,7 +462,7 @@ this._insertOrder(evt.oldIndex, evt.newIndex, function(list) {}); //插序排序
 this._getItems(); // 获取全部列表
 this._getItem(index); // 获取第index项
 this._getCheckedItems(isPluck); // 获取选中的列表项 isPluck为true时自动转化为model.toJSON()对象
-this._getCheckboxIds(); // 获取选中项的ids数组
+this._getCheckedIds(); // 获取选中项的ids数组
 
 this._getPage(); // 获取当前第几页
 this._setPage(5);// 设置当前第几页
@@ -456,6 +472,8 @@ this._getCount();// 获取总个数
 this._setCount(5);// 设置总个数
 this._getTotalPage();// 获取总页数
 this._getLength(); // 获取列表长度
+
+this._reload();         // 刷新列表
 
 this._batch({  // 批量操作
     url: CONST.API + '/message/batch/del',
@@ -583,6 +601,9 @@ new BbaseService().factory({
 兼容所有浏览器(包括IE6789)
 
 ### 更新记录
+>2017.04.12
+新增组件生命周期viewUpdate
+
 >2016.11.06<br>
 添加_getParam与_setParam 请求参数获取与设置方法
 

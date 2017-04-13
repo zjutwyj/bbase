@@ -160,7 +160,7 @@ var BbaseList = BbaseSuperView.extend({
         } else {
           options.itemTemp = this.$template.find(options.render).html();
         }
-        if (typeof this._options.empty === 'undefined' || this._options.empty){
+        if (typeof this._options.empty === 'undefined' || this._options.empty) {
           this.$template.find(options.render).empty();
         }
       } else {
@@ -360,7 +360,7 @@ var BbaseList = BbaseSuperView.extend({
         }
         if (!result) {
           result = { success: false, msg: '请求未知错误' };
-          ctx.errorFetch.call(ctx, result);
+          ctx.errorFetch && ctx.errorFetch.call(ctx, result);
         }
         if (result && !result.success && ctx.errorFetch) {
           ctx.errorFetch.call(ctx, result);
@@ -392,7 +392,17 @@ var BbaseList = BbaseSuperView.extend({
         if (!ctx._ready_component_) {
           ctx._finally();
         }
+<<<<<<< HEAD
         if (options && options.afterRender){
+=======
+        // 视图更新
+        if (ctx._ready_component_ && !ctx._options.diff) {
+          if (ctx.viewUpdate) setTimeout(ctx._bind(function () {
+            ctx.viewUpdate.call(ctx, ctx._options)
+          }), 0);
+        }
+        if (options && options.afterRender) {
+>>>>>>> develop
           options.afterRender.call(ctx);
         }
       });
@@ -461,9 +471,11 @@ var BbaseList = BbaseSuperView.extend({
    *        this._reload();
    */
   _reload: function (options) {
-    this._empty.call(this); // 清空视图
-    this.collection.reset(); // 清空collection
-    this.list.empty(); // 清空DOM
+    if (!this._options.diff) {
+      this._empty.call(this); // 清空视图
+      this.collection.reset(); // 清空collection
+      this.list.empty(); // 清空DOM
+    }
     this._load(options); // 重新加载数据
   },
 
@@ -664,9 +676,9 @@ var BbaseList = BbaseSuperView.extend({
   },
   _setModels: function (list) {
     var len_c = this.collection.models.length;
-    var len_l = list.length;
+    var len_l = this._options.max < 99999 ? this._options.max > list.length ? list.length : this._options.max : list.length;
     var dx = (this._getPageSize() || 16) *
-        ((this._getPage() - 1) || 0);
+      ((this._getPage() - 1) || 0);
     if (len_l > 0 && list[0].view) {
       list = BbaseEst.map(list, function (model) {
         return model.attributes;
@@ -677,19 +689,22 @@ var BbaseList = BbaseSuperView.extend({
         if (list[i]) {
           list[i]['dx'] = dx;
           dx++;
-          model.view._set(this._getPath(list[i]));
+          model.view && model.view._set(this._getPath(list[i]));
         }
       }
     }));
     if (len_l > len_c) { // 添加
       for (var j = len_c + 1; j <= len_l; j++) {
-        list[j-1]['dx'] = dx;
+        list[j - 1]['dx'] = dx;
         dx++;
         this._push(new this._options.model(this._getPath(list[j - 1])));
       }
     } else if (len_l < len_c) {
       this._remove(len_l, len_c);
     }
+    if (this.viewUpdate) setTimeout(this._bind(function () {
+      this.viewUpdate.call(this, this._options)
+    }), 0);
   },
   /**
    * 向视图添加元素
@@ -808,9 +823,9 @@ var BbaseList = BbaseSuperView.extend({
    */
   _resetDx: function () {
     var _dx = (this._getPageSize() || 16) *
-        ((this._getPage() - 1) || 0);;
+      ((this._getPage() - 1) || 0);;
     BbaseEst.each(this.collection.models, function (item) {
-      item.view._set('dx', _dx);
+      item.view && item.view._set('dx', _dx);
       _dx++;
     });
     this.dx = this.collection.models.length;
@@ -855,7 +870,7 @@ var BbaseList = BbaseSuperView.extend({
     if (this._options.diff) {
       var models = [];
       for (var i = this.startIndex; i < this.endIndex; i++) {
-        if (this._options.items[i]){
+        if (this._options.items[i]) {
           var model = BbaseEst.cloneDeep(this._options.items[i]);
           model['dx'] = this.startIndex + i;
           models.push(model);
@@ -1091,6 +1106,7 @@ var BbaseList = BbaseSuperView.extend({
    */
   _checkAll: function (e) {
     var checked,
+      _self = this,
       $check = null;
 
     if (BbaseEst.typeOf(e) === 'boolean') {
@@ -1110,8 +1126,8 @@ var BbaseList = BbaseSuperView.extend({
     }
     checked = this._getValue('checked_all');
     this.collection.each(function (model) {
-      model.view._check(checked);
-      model.view.render();
+      model._set('checked', checked);
+      //if (!_self._options.diff) model.view.render();
     });
     this._checkedAll(this._getValue('checked_all'));
   },
@@ -1348,13 +1364,13 @@ var BbaseList = BbaseSuperView.extend({
   /**
    *  获取checkbox选中项所有ID值列表
    *
-   * @method [选取] - _getCheckboxIds ( 获取checkbox选中项所有ID值列表 )
+   * @method [选取] - _getCheckedIds ( 获取checkbox选中项所有ID值列表 )
    * @return {*}
    * @author wyj 14.12.8
    * @example
-   *      this._getCheckboxIds(); => ['id1', 'id2', 'id3', ...]
+   *      this._getCheckedIds(); => ['id1', 'id2', 'id3', ...]
    */
-  _getCheckboxIds: function (field) {
+  _getCheckedIds: function (field) {
     return BbaseEst.pluck(this._getCheckedItems(), BbaseEst.isEmpty(field) ? 'id' : ('attributes.' + field));
   },
   __filter: function (item) {
@@ -1430,7 +1446,7 @@ var BbaseList = BbaseSuperView.extend({
     options = BbaseEst.extend({
       tip: CONST.LANG.SUCCESS + '！'
     }, options);
-    this.checkboxIds = this._getCheckboxIds(options.field || 'id');
+    this.checkboxIds = this._getCheckedIds(options.field || 'id');
     if (this.checkboxIds.length === 0) {
       BbaseUtils.tip(CONST.LANG.SELECT_ONE + '！');
       return;
@@ -1490,7 +1506,7 @@ var BbaseList = BbaseSuperView.extend({
       id = options.id || 'id';
     }
 
-    this.checkboxIds = this._getCheckboxIds(field);
+    this.checkboxIds = this._getCheckedIds(field);
     if (this.checkboxIds && this.checkboxIds.length === 0) {
       BbaseUtils.tip(CONST.LANG.SELECT_ONE);
       return;

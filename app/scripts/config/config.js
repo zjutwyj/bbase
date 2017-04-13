@@ -38,3 +38,9 @@ seajs.config({
   // 文件编码
   charset: 'utf-8'
 });
+/**
+ * 注册模板
+ * */
+UTIL.each(Bbase.TEMPLATE, function(value, key) {
+  define(key, value);
+});

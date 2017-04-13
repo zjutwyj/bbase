@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html id="bbase" class="html-bg-blue" xmlns:wb="http://open.weibo.com/wb">
+<html id="app" class="html-bg-blue" xmlns:wb="http://open.weibo.com/wb">
 <head lang="zh-CN">
   <script>
     document.documentElement.className = document.documentElement.className.replace('no-javascript', 'javascript');
@@ -19,7 +19,7 @@
   <META HTTP-EQUIV="expires" CONTENT="0">
 
   <link rel="shortcut icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_gl35gegc2zm8ia4i.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_8irt0inkrnva38fr.css" />
 
   <!-- build:css styles/default/css.css -->
   <link rel="stylesheet" href="vendor/artDialog_v6/css/ui-dialog.css"/>
@@ -27,8 +27,11 @@
   <link rel="stylesheet" href="styles/default/base.css"/>
   <link rel="stylesheet" href="styles/default/bbaseui.css"/>
   <link rel="stylesheet" href="styles/default/bbasecomponent.css"/>
+  <link rel="stylesheet" href="styles/default/markdown.css"/>
   <link rel="stylesheet" href="styles/default/theme-white.css">
   <!-- endbuild -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
   <script>
     window.v = 'v0.0.1';
   </script>
@@ -76,9 +79,6 @@
 <script type="text/javascript" src="vendor/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" src="vendor/ueditor/ueditor.all.min.js"></script>
 <script type="text/javascript" src="vendor/ueditor/ueditor.custom.js"></script>
-<script type="text/javascript" src="vendor/upload/jquery.ui.widget.js"></script>
-<script type="text/javascript" src="vendor/upload/jquery.iframe-transport.js"></script>
-<script type="text/javascript" src="vendor/upload/jquery.fileupload.js"></script>
 <script type="text/javascript" src="vendor/main.js"></script>
 
 <script type="text/javascript" src="ui/bbase/pagination/main.js"></script>
@@ -87,12 +87,16 @@
 <script type="text/javascript" src="ui/bbase/item_check/main.js"></script>
 <script type="text/javascript" src="ui/bbase/dropdown/main.js"></script>
 <script type="text/javascript" src="ui/bbase/slider/main.js"></script>
+<script type="text/javascript" src="ui/bbase/scrollbar/main.js"></script>
+<script type="text/javascript" src="ui/bbase/sortable/main.js"></script>
+<script type="text/javascript" src="ui/bbase/list_expand/main.js"></script>
 
 <script type="text/javascript" src="components/bbase/photopick/main.js"></script>
 <script type="text/javascript" src="components/bbase/photocrop/main.js"></script>
 <script type="text/javascript" src="components/bbase/musicpick/main.js"></script>
 <script type="text/javascript" src="components/bbase/photobeautify/main.js"></script>
 <script type="text/javascript" src="components/bbase/colorpick/main.js"></script>
+<script type="text/javascript" src="components/bbase/colorpanel/main.js"></script>
 
 <script type="text/javascript" src="modules/account/main.js"></script>
 <script type="text/javascript" src="modules/ui/main.js"></script>

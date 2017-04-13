@@ -1,6 +1,8 @@
 .bbase-component-colorpick {
-  padding: 5px;
-  overflow: hidden;
+    padding: 5px;
+    overflow: hidden;
+    padding-left: 6px;
+    padding-right: 0;
   .ui-bg-color-wrap {
     width: 46px;
     height: 25px;
@@ -27,17 +29,20 @@
     float: left;
     width: 49px;
     cursor: pointer;
-    height: 28px;
+    height: 27px;
     border: 1px solid #dfdfdf;
     background-color: #efefef;
   }
   .noUi-horizontal .noUi-handle {
-    width: 8px;
-    height: 18px;
-    left: -5px;
+    width: 16px;
+    height: 16px;
+    left: -8px;
     overflow: hidden;
-    top: -3px;
+    top: -2px;
     border: 1px solid #9E9E9E;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
   }
   .noUi-target {
     margin: 5px 0px;
@@ -157,7 +162,6 @@
   }
   .bbase-ui-itemcheck.ui-itemcheck .ui-item-check.item-active .check-icon {
     display: none;
+  }
 }
-}
-
 

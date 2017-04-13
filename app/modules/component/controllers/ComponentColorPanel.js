@@ -17,7 +17,7 @@ define('ComponentColorPanel', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main">
-            <div class="demo-item clearfix" bb-bbasecomponentcolorpick="{viewId:'bbasecomponentcolorpick',cur:cur}"></div>
+            <div class="demo-item clearfix" bb-bbasecomponentcolorpanel="{viewId:'bbasecomponentcolorpanel',cur:cur}" style="width: 200px;"></div>
           </div>
           <div class="footer">
             <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; </div>
@@ -57,6 +57,18 @@ define('ComponentColorPanel', [], function (require, exports, module) {
                   <td class="argType"><span>function(item, init)</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
+                <tr>
+                  <td class="argName"><span>tpl</span></td>
+                  <td class="argDesc"><span>自定义模板</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>delay</span></td>
+                  <td class="argDesc"><span>延时加载</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>true</span></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -75,13 +87,7 @@ define('ComponentColorPanel', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        cur: '#ffffff',
-        items: [
-          { text: '白色', value: '#ffffff' },
-          { text: '黑色', value: '#000000' },
-          { text: '绿色', value: 'green' },
-          { text: '红色', value: 'red' }
-        ]
+        cur: '#ffffff'
       }
     }
   });

@@ -7,6 +7,11 @@
 define('MemberHeader', [], function (require, exports, module) {
   var MemberHeader, template;
 
+  var UserModel = BbaseModel.extend({
+    baseId: 'userId',
+    baseUrl: CONST.API + '/user/isLogin'
+  });
+
   MemberHeader = BbaseView.extend({
     initialize: function () {
       this._super({
@@ -23,7 +28,7 @@ define('MemberHeader', [], function (require, exports, module) {
                     <img bb-src="{{CONST 'HOST'}}/styles/default/img/manage/LOGO_2.png?v=201603020957">
                   </a>
                 </div>
-                <div class="navBar" bb-bbaseuitab="{viewId: 'navigator', cur: curNav, items: navItems, require:false,theme:'tab-ul-line', onChange: handleNavigatorChange}"></div>
+                <div class="navBar" bb-bbaseuitab="{viewId: 'navigator', cur: curNav, items: navItems, require:false, theme:'tab-ul-line', onChange: handleNavigatorChange}"></div>
                 <div class="userIcon">
                     <div class="bg"></div>
                     <div class="icon"></div>
@@ -82,27 +87,26 @@ define('MemberHeader', [], function (require, exports, module) {
         `
       });
     },
-    init: function(){
+    init: function () {
       var timeStr = "你";
       var hour = new Date().getHours();
-      if (hour > 6 && hour < 12){
+      if (hour > 6 && hour < 12) {
         timeStr = '上午';
-      } else if (hour > 12 && hour < 18){
+      } else if (hour > 12 && hour < 18) {
         timeStr = '下午';
-      } else if (hour > 18 && hour < 24){
+      } else if (hour > 18 && hour < 24) {
         timeStr = '晚上';
       }
       return {
-        timeStr:timeStr,
+        timeStr: timeStr,
         username: null,
         msgType: 'msg',
-        curNav: location.hash,
+        curNav: location.hash.length > 0 ? location.hash : '#/teach',
         navItems: [
-          {text: '简易教程', value: '#/teach'},
-          {text: 'API', value: '#/api'},
-          {text: '示例展示', value: '#/demo'},
-          {text: 'Ui展示', value: '#/ui'},
-          {text: '组件展示', value: '#/component'}
+          { text: '简易教程', value: '#/teach' },
+          { text: '示例展示', value: '#/demo' },
+          { text: 'Ui展示', value: '#/ui' },
+          { text: '组件展示', value: '#/component' }
         ]
       }
     },
@@ -119,17 +123,15 @@ define('MemberHeader', [], function (require, exports, module) {
         });
       });
     },
-    handleNavigatorChange: function(item, init, a, b){
-      if (!init){
-        this._navigate(item.value, true);
-      }
+    handleNavigatorChange: function (item, init, a, b) {
+      this._navigate(item.value, true);
     },
     beforeRender: function () {
       var ctx = this;
       BbaseEst.off('accountRender').on('accountRender', function (flag, user) {
         CONST.USER = user || {};
-        if (!CONST.USER.username){
-          CONST.USER.username="";
+        if (!CONST.USER.username) {
+          CONST.USER.username = "";
         }
         ctx._set(CONST.USER);
         if (BbaseEst.isEmpty(CONST.USER.username)) {
@@ -149,8 +151,7 @@ define('MemberHeader', [], function (require, exports, module) {
         });
       });
     },
-    afterRender: function () {
-    }
+    afterRender: function () {}
   });
 
   module.exports = MemberHeader;

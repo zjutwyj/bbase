@@ -21,8 +21,9 @@ define('DemoList', [], function(require, exports, module){
     },
     init: function(){
       return {
-        curListType: 'DemoListTable',
+        curListType: 'DemoListTodo',
         ListTypeitems: [
+          {text: 'TodoMVC', moduleId: 'DemoListTodo', oneRender: false},
           {text: '表格列表', moduleId: 'DemoListTable', oneRender: false}
         ],
         tpl: `

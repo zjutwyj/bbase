@@ -407,7 +407,7 @@ var BbaseItem = BbaseSuperView.extend({
       });
     }
     if (BbaseApp.getView(this.viewId))
-      BbaseApp.getView(this.viewId)._checkedAll(checked_all);
+      BbaseApp.getView(this.viewId)._set('checked_all',checked_all);
   },
   /**
    * 添加当前ITEM的CLASS为item-active

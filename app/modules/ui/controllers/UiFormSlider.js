@@ -131,7 +131,7 @@ for(var i = 0; i < 100; i++){
     init: function () {
       return {
         cur: '50.00',
-        width: 100,
+        width: 200,
         items: items
       }
     },

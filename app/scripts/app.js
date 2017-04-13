@@ -6,6 +6,7 @@
 window.Bbase = {
   MODULE: {},
   ROUTE: {},
-  DIRECTIVE: {}
+  DIRECTIVE: {},
+  TEMPLATE: {}
 };
 window.UEDITOR_HOME_URL = CONST.HOST + '/vendor/ueditor/';

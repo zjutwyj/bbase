@@ -65,7 +65,7 @@ define('BbaseItemCheck', [], function(require, exports, module) {
    *          { text: 'e', value: 'value_e' }
    *        ],
    *        onChange: function (item, init, event) {
-   *          console.dir(app.getView('BbaseItemCheck')._getCheckboxIds('value'));
+   *          console.dir(app.getView('BbaseItemCheck')._getCheckedIds('value'));
    *        },
    *        compare: function(item) {   // 自定义比较器
    *          if (item.value === cur || item.rgb === cur){

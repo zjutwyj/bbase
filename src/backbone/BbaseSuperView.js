@@ -23,6 +23,9 @@ var BbaseSuperView = BbaseBackbone.View.extend({
     if (this.init && BbaseEst.typeOf(this.init) !== 'function') {
       this._initialize(this.init);
     }
+    if (this.initData && BbaseEst.typeOf(this.initData) !== 'function') {
+      this._initialize(this.initData);
+    }
     BbaseBackbone.View.apply(this, arguments);
   },
   /**
@@ -779,8 +782,18 @@ var BbaseSuperView = BbaseBackbone.View.extend({
             break;
           case 'checked':
             var field = this._getField(item.value);
+            if (typeof this._options._checkAppend === 'undefined'){
+              this._set('_options._checkAppend', true);
+            }
             this._watch([field], '[bb-checked="' + item.value + '"]:checked');
             this.$('[bb-checked="' + item.value + '"]').prop('checked', this._getBoolean(item.value));
+            this.$('[bb-checked="' + item.value + '"]').change(this._bind(function(a){
+              if (item.value === 'checked_all'){
+                this._checkAll && this._checkAll(a);
+              }else{
+                this._check && this._check($(a.target).is(':checked'));
+              }
+            }, this));
             break;
           default:
             if (BbaseApp.getDirective(item.name)) {
@@ -1034,6 +1047,12 @@ var BbaseSuperView = BbaseBackbone.View.extend({
   _initDefault: function () {
     if (this.init && BbaseEst.typeOf(this.init) === 'function') {
       this.__def_vals_ = this.init.call(this, this._attributes) || {};
+      BbaseEst.each(this.__def_vals_, this._bind(function (value, key) {
+        this._setDefault(key, value);
+      }));
+    }
+    if (this.initData && BbaseEst.typeOf(this.initData) === 'function') {
+      this.__def_vals_ = this.initData.call(this, this._attributes) || {};
       BbaseEst.each(this.__def_vals_, this._bind(function (value, key) {
         this._setDefault(key, value);
       }));
@@ -1427,7 +1446,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
     if (this.collection) {
       this.collection._setParam(name, value);
     } else {
-      this.model.params[name] = value;
+      this.model._setParam(name, value);
     }
   },
   /**
@@ -1648,6 +1667,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
     var viewId = options.viewId ? options.viewId :
       BbaseEst.typeOf(options.dialogId) === 'string' ? options.dialogId : options.moduleId;
     if (BbaseEst.typeOf(viewId) === 'function') viewId = BbaseEst.nextUid('dialog_view');
+    options.viewId = viewId + this.cid;
     var comm = {
       width: 'auto',
       title: null,
@@ -1667,9 +1687,9 @@ var BbaseSuperView = BbaseBackbone.View.extend({
     options = BbaseEst.extend(comm, options);
 
     options = BbaseEst.extend(options, {
-      el: '#base_item_dialog' + viewId,
-      content: options.content || '<div id="' + viewId + '"></div>',
-      viewId: viewId,
+      el: '#base_item_dialog' + options.viewId,
+      content: options.content || '<div id="' + options.viewId + '"></div>',
+      viewId: options.viewId,
       onshow: function () {
         try {
           var result = options.onShow && options.onShow.call(this, options);
@@ -1677,11 +1697,19 @@ var BbaseSuperView = BbaseBackbone.View.extend({
             return;
           if (BbaseEst.typeOf(options.moduleId) === 'function') {
             options.dialogId = options.dialogId || options.viewId;
+<<<<<<< HEAD
             BbaseApp.addPanel(viewId, {
               el: '#' + options.dialogId,
               template: '<div id="base_item_dialog' + options.dialogId + '" class="region ' +
                 viewId + '"></div>'
             }).addView(viewId, new options.moduleId(options));
+=======
+            BbaseApp.addPanel(options.viewId, {
+              el: '#' + options.dialogId,
+              template: '<div id="base_item_dialog' + options.dialogId + '" class="region ' +
+                options.viewId + '"></div>'
+            }).addView(options.viewId, new options.moduleId(options));
+>>>>>>> develop
           } else if (BbaseEst.typeOf(options.moduleId) === 'string') {
             seajs.use([options.moduleId], function (instance) {
               try {
@@ -1738,7 +1766,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
       BbaseUtils.dialog({
         dialogId: hash,
         title: null,
-        width: 'auto',
+        width: $(this).attr('data-width') || 'auto',
         offset: parseInt(offset, 10),
         skin: 'tool-tip-dialog',
         align: $(this).attr('data-align') || 'top',
