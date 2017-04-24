@@ -23,8 +23,7 @@ define('DemoList', [], function(require, exports, module){
       return {
         curListType: 'DemoListTodo',
         ListTypeitems: [
-          {text: 'TodoMVC', moduleId: 'DemoListTodo', oneRender: false},
-          {text: '表格列表', moduleId: 'DemoListTable', oneRender: false}
+          {text: 'TodoMVC', moduleId: 'DemoListTodo', oneRender: false}
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

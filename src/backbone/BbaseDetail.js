@@ -354,6 +354,8 @@ var BbaseDetail = BbaseSuperView.extend({
    * @author wyj 14.11.15
    */
   _saveItem: function (callback, error) {
+    var _this = this;
+
     if (BbaseEst.isEmpty(this.model.url())) {
       return;
     }
@@ -379,9 +381,20 @@ var BbaseDetail = BbaseSuperView.extend({
       },
       error: function (model, XMLHttpRequest, errorThrown) {
         if (XMLHttpRequest.status === 200) {
-          callback.call(this, XMLHttpRequest.responseText);
-        } else if (error && typeof error === 'function')
-          error.call(this, XMLHttpRequest, model, errorThrown);
+          if (callback){
+            callback.call(this, XMLHttpRequest.responseText);
+          } else if (_this.afterSave){
+            _this.afterSave.call(_this, XMLHttpRequest.responseText, BbaseEst.typeOf(XMLHttpRequest.responseText) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(XMLHttpRequest.responseText, 'attributes._response.success')) === 'boolean' ?
+              BbaseEst.getValue(XMLHttpRequest.responseText, 'attributes._response') : { msg: null, msgType: null, success: true });
+          }
+
+        } else if (error && typeof error === 'function'){
+          if (error){
+            error.call(this, XMLHttpRequest, model, errorThrown);
+          }else if (_this.errorSave){
+            _this.errorSave.call(_this, XMLHttpRequest.responseText);
+          }
+        }
       }
     });
   },

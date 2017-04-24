@@ -26,7 +26,7 @@ define('BbaseItemCheck', [], function(require, exports, module) {
     afterRender: function() {
       if (this._super('view')) this.options.data.cur = this._super('view').getCurValue();
       if ((this.options.data.compare && this.options.data.compare.call(this, this.model.toJSON(), this.options.data.cur)) ||
-        (this.options.data.cur !== '-' && this.options.data.cur.indexOf(this._getValue(this.options.data.path)) > -1)) {
+        (this.options.data.cur !== '-' && this._super('view')._options.checkAppend ? this.options.data.cur.indexOf(this._getValue(this.options.data.path)) > -1 :this.options.data.cur === this._getValue(this.options.data.path))) {
         this.toggleChecked(undefined, true);
       }
     },
@@ -108,9 +108,9 @@ define('BbaseItemCheck', [], function(require, exports, module) {
       if (!value || value === this.options.data.cur) return;
       this.options.data.cur = value;
       BbaseEst.each(this.views, this._bind(function(view) {
-        if (value !== '-' && value.indexOf(view._get(this.options.data.path)) > -1 && !view._get('checked')) {
+        if (value !== '-' && this._super('view')._options.checkAppend ? value.indexOf(view._get(this.options.data.path)) !== -1:value === view._get(this.options.data.path) && !view._get('checked')) {
           view.toggleChecked(true, true);
-        } else if ((value === '-' || value.indexOf(view._get(this.options.data.path)) === -1) && view._get('checked')) {
+        } else if ((value === '-' || this._super('view')._options.checkAppend ? value.indexOf(view._get(this.options.data.path)) ===-1:value !== view._get(this.options.data.path)) && view._get('checked')) {
           view.toggleChecked(false, true);
         }
       }));

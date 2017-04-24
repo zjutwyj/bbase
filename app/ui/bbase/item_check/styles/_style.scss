@@ -20,13 +20,6 @@
     opacity: 0.8;
     border-radius: 0;
   }
-  .ui-item-check .bbase-yuandian {
-    font-size: 12px;
-    line-height: 12px;
-  }
-  .ui-item-check .bbase-yuandian:before {
-    content: "\e6ac";
-  }
   .ui-item-check.item-active .check-icon {
     display: block;
   }
@@ -133,11 +126,10 @@
   }
   .ui-item-check .check-icon .bbase-yuandian {
     font-size: 12px;
-    line-height: 13px;
+    line-height: 12px;
     margin-left: 0px;
     margin-top: 0px;
     width: 100%;
-    float: left;
     height: 100%;
     display: inline-block;
     text-indent: 0px;
@@ -145,12 +137,20 @@
   .ui-item-check.hover .check-icon {
     border-color: $mainColor;
   }
+  .ui-item-check .bbase-yuandian {
+    font-size: 12px;
+    line-height: 12px;
+  }
+  .ui-item-check .bbase-yuandian:before {
+    content: "\e6ac";
+  }
   .ui-item-check .bbase-yuandian:before {
     content: "";
   }
   .ui-item-check.item-active .bbase-yuandian:before {
     content: "\e601";
   }
+
 }
 
 .ie8 .bbase-ui-itemcheck.ui-item-check-radio .ui-item-check .check-icon {
@@ -179,7 +179,7 @@
       display: inline-block;
       .bbase-yuandian {
         font-size: 12px;
-        line-height: 12px;
+        line-height: 13px;
         margin-left: 0px;
         margin-top: 0px;
         display: inline-block;
@@ -204,7 +204,7 @@
     color: #fff;
     border-color: $mainColor;
     .bbase-yuandian:before {
-      content: "\e6ac";
+      content: "\e63d";
     }
   }
 }

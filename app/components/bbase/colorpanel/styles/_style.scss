@@ -53,7 +53,7 @@
   .noUi-base {
     background: linear-gradient(to right, rgba(77, 118, 129, 0), rgb(77, 118, 129));
   }
-  .ui-item-check {
+  .bbase-ui-itemcheck.ui-item-check-normal .ui-item-check {
     float: left;
     margin: 2px;
     cursor: pointer;
@@ -66,6 +66,8 @@
     box-sizing: border-box;
     padding: 0px;
     border-radius: 50%;
+    border: none;
+    margin-right:2px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
   }
   .x-icon-info,
@@ -82,7 +84,7 @@
     display: none;
   }
 
-  .ui-item-check.hover {
+  .bbase-ui-itemcheck.ui-item-check-normal .ui-item-check.hover {
     border-radius: 6px;
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);

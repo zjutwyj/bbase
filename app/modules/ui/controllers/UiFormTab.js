@@ -29,7 +29,7 @@ define('UiFormTab', [], function (require, exports, module) {
              <div id="tab4" style="display:none;">tab4</div>
           </div>
           <div class="footer">
-            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'ddd', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'select-normal', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@ define('UiFormTab', [], function (require, exports, module) {
              <div id="tab4" style="display:none;">tab4</div>
           </div>
           <div class="footer">
-            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'ddd', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'select-text', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@ define('UiFormTab', [], function (require, exports, module) {
              <div id="tab4" style="display:none;">tab4</div>
           </div>
           <div class="footer">
-            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'ddd', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'select-btn', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
           </div>
         </div>
       </div>
@@ -92,7 +92,28 @@ define('UiFormTab', [], function (require, exports, module) {
              <div id="tab4" style="display:none;">tab4</div>
           </div>
           <div class="footer">
-            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'ddd', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'select-tabblock', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formPanel form-demo">
+
+        <div class="anything">
+          <div class="header">
+            <div id="formIdArea" class="formIdArea">
+              <span class="name">bbaseuitabunderline="{viewId: 'bbaseuitabunderline', cur: cur, items: items,onChange: handleChange}"</span>
+            </div>
+          </div>
+          <div class="main">
+             <div class="demo-item clearfix" bb-bbaseuitabunderline="{viewId:'bbaseuitabunderline',cur:cur,items:items}"></div>
+             <div id="tab1" style="display:none;">tab1</div>
+             <div id="tab2" style="display:none;">tab2</div>
+             <div id="tab3" style="display:none;">tab3</div>
+             <div id="tab4" style="display:none;">tab4</div>
+          </div>
+          <div class="footer">
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'select-bbaseuitabunderline', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
           </div>
         </div>
       </div>

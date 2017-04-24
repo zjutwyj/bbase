@@ -2241,7 +2241,7 @@ define('BbaseMusicPick', ['BbaseItemCheck'], function (require, exports, module)
         </li>
       </ul>
       <div id="photo-main">
-        <div class="photo-tool" bb-bbaseuitab="{viewId:'itemcheckmusiccate',theme: 'tab-ul-line',cur:curCate,items:cateitems,path:'className', require: false,onChange: handleCateChange }">
+        <div class="photo-tool" bb-bbaseuitabunderline="{viewId:'itemcheckmusiccate',cur:curCate,items:cateitems,path:'className', require: false,onChange: handleCateChange }">
         </div>
         <ul class="music-list images-content">
         </ul>

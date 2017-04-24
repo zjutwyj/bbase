@@ -53,7 +53,7 @@ define('UiFormSlider', [], function (require, exports, module) {
                 </tr>
                 <tr>
                   <td class="argName"><span>step</span></td>
-                  <td class="argDesc"><span>步长，取值必须大于 0，并且可被 (max - min) 整除</span></td>
+                  <td class="argDesc" style="white-space: normal;"><span>步长，取值必须大于 0，并且可被 (max - min) 整除</span></td>
                   <td class="argType"><span>number</span></td>
                   <td class="argDefault"><span>1</span></td>
                 </tr>
@@ -101,7 +101,7 @@ define('UiFormSlider', [], function (require, exports, module) {
                 </tr>
                 <tr>
                   <td class="argName"><span>onChange</span></td>
-                  <td class="argDesc"><span>停止滑动且鼠标松开后回调函数</span></td>
+                  <td class="argDesc" style="white-space: normal;"><span>停止滑动且鼠标松开后回调函数</span></td>
                   <td class="argType"><span>function(values, handle, init)</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>

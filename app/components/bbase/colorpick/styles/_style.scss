@@ -131,7 +131,7 @@
     overflow: hidden;
     background: url(#{$host}/components/bbase/colorpick/styles/marker.png)
   }
-  .ui-item-check.hover {
+  .bbase-ui-itemcheck.ui-item-check-normal .ui-item-check.hover {
     border-radius: 6px;
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
@@ -139,7 +139,7 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
-  .ui-item-check {
+  .bbase-ui-itemcheck.ui-item-check-normal .ui-item-check {
     -webkit-transform: rotate(0);
     -moz-transform: rotate(0);
     -o-transform: rotate(0);
@@ -151,6 +151,9 @@
     -ms-transition: -ms-transform .1s ease-in;
     transition: transform .1s ease-in;
     box-sizing: border-box;
+    padding: 0;
+    margin-right:2px;
+    border:none;
   }
   .bbase-ui-itemcheck.ui-itemcheck .item-active {
     border-radius: 6px !important;

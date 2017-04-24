@@ -105,7 +105,7 @@ var FlyHeader = BbaseView.extend({
   update: function(name){                               // 监听的字段改变时回调
 
   },
-  change: fucntion(){                                   // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+  change: fucntion(path, type){                         // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
   },
   destory: function(){                                  // 组件销毁时
@@ -186,7 +186,7 @@ var ProductList = BbaseList.extend({
   update: function(name){                               // 监听的字段改变时回调
 
   },
-  change: fucntion(){                                   // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+  change: fucntion(path, type){                         // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
   },
   destory: function(){                                  // 组件销毁时
@@ -253,7 +253,7 @@ var ProductDetail = BbaseDetail.extend({
   update: function(name){                               // 监听的字段改变时回调
 
   },
-  change: fucntion(){                                   // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+  change: fucntion(path, type){                         // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
   },
   destory: function(){                                  // 组件销毁时
@@ -601,6 +601,10 @@ new BbaseService().factory({
 兼容所有浏览器(包括IE6789)
 
 ### 更新记录
+>2017.04.23
+修改组件生命周期change回调函数，参数统一为path(字段)，type(类型)
+修改_super方法，如果未找到父组件或方法将返回undefined
+
 >2017.04.12
 新增组件生命周期viewUpdate
 

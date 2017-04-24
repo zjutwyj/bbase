@@ -7,7 +7,7 @@
 define('BbaseSelect', [], function(require, exports, module) {
   var BbaseSelect, model, item, collection, list;
   var listTemp = '';
-  var viewTemp = '<div class="bbase-ui-select bui-select ui-select" aria-disabled="false" tabindex="0" hidefocus="true" style="width: {{width}}px;" aria-pressed="false"> <input type="text" readonly="readonly" class="bui-select-input bui-form-field" style="width: {{minus width 56}}px;border-right:none;" aria-disabled="false" aria-pressed="false"> <span class="x-icon x-icon-normal down" style="margin-left: -4px;"><i class="bbasefont bbase-caretdown" style="width: 8px; height: 8px"></i> </span> </div>';
+  var viewTemp = '<div class="bbase-ui-select bui-select ui-select" aria-disabled="false" tabindex="0" hidefocus="true" style="width: {{width}}px;" aria-pressed="false"> <input type="text" readonly="readonly" class="bui-select-input bui-form-field" style="width: {{minus width 56}}px;border-right:none;" aria-disabled="false" aria-pressed="false"> <span class="x-icon x-icon-normal down" style="margin-left: -4px;"><i class="bbasefont bbase-caretdown" ></i> </span> </div>';
 
   model = BbaseModel.extend({});
 
@@ -308,11 +308,12 @@ define('BbaseSelect', [], function(require, exports, module) {
       $(document).click();
       event.stopImmediatePropagation();
       if (!this.selectNode) this.initSelect(this._options.items);
+      this.$('.bui-select').addClass('select-down');
       this.$select.css({
         zIndex: 100000,
-        width: (this._options.data.width || 150) - 19 + 'px',
+        width: (this._options.data.width || 150) - 18 + 'px',
         left: this.$('.bui-select').offset().left,
-        top: this.$('.bui-select').offset().top + 31
+        top: this.$('.bui-select').offset().top + this.$('.bui-select input:first').outerHeight() -1
       }).show();
       $(document).one('click', $.proxy(function() {
         this.hideSelect();
@@ -320,6 +321,7 @@ define('BbaseSelect', [], function(require, exports, module) {
     },
     hideSelect: function() {
       this.$select.hide();
+      this.$('.bui-select').removeClass('select-down');
     },
     disable: function() {
       this._options.disabled = true;

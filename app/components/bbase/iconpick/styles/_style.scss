@@ -1,0 +1,143 @@
+.bbase-component-iconpick {
+  .addSystemIconDiv {
+    padding: 16px 12px;
+  }
+  .showSystemIconDiv {
+    height: 145px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: hidden;
+    background: #9b9b9b;
+    overflow-y: auto;
+    width: 436px;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 35px;
+    color: #fff;
+  }
+  .showSystemIconDiv .check-icon,
+  .showSystemIconDiv .item-check.item-active .check-icon {
+    display: none;
+  }
+  .showSystemIconDiv .iconBlockSet {
+    cursor: pointer;
+    font-size: 35px;
+    color: white;
+    text-align: center;
+    line-height: 38px;
+    margin: 4px 0 0 4px;
+    background: #696969;
+    width: 38px;
+    height: 38px;
+    position: relative;
+    border-radius: 5px;
+    float: left;
+    padding: 1px;
+  }
+  .showSystemIconDiv .item-active .iconBlockSet,
+  .iconOldChecked {
+    background: #000;
+    box-shadow: inset 0 2px 0 #e6af2b, inset 0 -2px 0 #e6af2b, inset 2px 0 0 #e6af2b, inset -2px 0 0 #e6af2b;
+  }
+  .showSystemIconDiv .iconBlockSet .iconfont {
+    font-size: 30px;
+    height: 100%;
+    line-height: inherit;
+  }
+  .showSystemIconDiv .iconDefault {
+    font-size: 14px !important;
+    line-height: 35px;
+  }
+  .colorChoiceDiv {
+    margin-top: 10px;
+    margin-left: 8px;
+  }
+  .iconThumbnail {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    border-radius: 5px;
+    color: white;
+    font-size: 35px;
+    line-height: 38px;
+    text-align: center;
+    background-color: #BBBBBB;
+  }
+  .colorChoicePanel {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: top;
+    font-size: 14px;
+  }
+  .setTitle {
+    float: left;
+    width: 100px;
+    text-align: right;
+  }
+  .colorChoicePanel .setTitle {
+    width: 45px;
+    margin-left: 10px;
+  }
+  .setCtrl {
+    float: left;
+  }
+  .marginT_7 {
+    margin-top: 7px;
+  }
+  #iconThumbnail-wrap {
+    display: inline-block;
+    width: 40px;
+  }
+  #iconThumbnail-wrap .iconThumbnail {
+    font-size: 30px;
+    line-height: 38px;
+  }
+  #iconThumbnail-wrap .iconThumbnail.iconDefault {
+    font-size: 14px;
+    line-height: 36px;
+  }
+  .colorChoiceDiv .iconColorPicker {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: top;
+    margin-top: 8px;
+    margin-left: 8px;
+    background: white;
+    border: 1px solid #dfdfdf;
+    cursor: pointer;
+  }
+  #icon-btns {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+  }
+  #icon-btns .cancel,
+  #icon-btns .submit {
+    width: 70px;
+    height: 36px;
+  }
+  #icon-btns .cancel {
+    border: none;
+    background: transparent;
+    cursor:pointer;
+  }
+  #icon-btns .submit {
+    border: none;
+    background: $mainColor;
+    color: #fff;
+    cursor:pointer;
+  }
+  #icon-btns .submit:hover {
+    background-color: lighten($mainColor, 10%);
+  }
+  .bbase-ui-itemcheck.ui-item-check-normal .ui-item-check{
+    margin-right:2px;
+    border:none;
+  }
+  #showSystemIconDiv .bbase-ui-itemcheck.ui-item-check-normal .ui-item-check .check-icon{
+    display:none;
+  }
+  #showSystemIconDiv .bbase-yuandian{display:block;}
+}
