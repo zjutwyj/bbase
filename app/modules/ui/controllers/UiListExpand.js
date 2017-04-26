@@ -75,6 +75,12 @@ define('UiListExpand', [], function(require, exports, module){
                   <td class="argType"><span>number</span></td>
                   <td class="argDefault"><span>200</span></td>
                 </tr>
+                 <tr>
+                  <td class="argName"><span>path</span></td>
+                  <td class="argDesc"><span>字段作用域</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>id</span></td>
+                </tr>
                 <tr>
                   <td class="argName"><span>onChange</span></td>
                   <td class="argDesc"><span>回调函数</span></td>

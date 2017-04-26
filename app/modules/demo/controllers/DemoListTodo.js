@@ -8,7 +8,7 @@ define('DemoListTodo', [], function (require, exports, module) {
   var DemoListTodo, template;
 
   template = `
-    <div class="DemoListTodo-wrap" style="padding-left:20px;">
+    <div class="DemoListTodo-wrap" style="padding-left:20px;width:573px;">
       <style type="text/css">
 button {
   margin: 0;
@@ -104,6 +104,7 @@ input[type="checkbox"] {
   background: rgba(0, 0, 0, 0.003);
   box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
   border: none !important;
+  border-top:1px solid #e6e6e6 !important;
 }
 
 .todoapp .main {
@@ -118,7 +119,7 @@ label[for='toggle-all'] {
 
 .toggle-all {
   position: absolute;
-  top: -55px;
+  top: -45px;
   left: -12px;
   width: 60px;
   height: 34px;
@@ -312,6 +313,7 @@ html .clear-completed:active {
   text-decoration: none;
   cursor: pointer;
   position: relative;
+  margin-top:-5px;
 }
 
 .clear-completed:hover {
@@ -385,7 +387,7 @@ html .clear-completed:active {
     <ul class="todo-list" bb-sortable="{handle: '.todo', draggable: '.todo'}">
     </ul>
   </section>
-  <footer class="footer" bb-show="models.length">
+  <footer class="footer">
     <span class="todo-count">
           <strong bb-watch="remaining:html">{{remaining}}</strong> items left
         </span>
@@ -415,7 +417,9 @@ html .clear-completed:active {
     initialize() {
       this._super({
         template: template,
-        model: BbaseModel.extend({}),
+        model: BbaseModel.extend({
+          fields: ['title', 'completed']
+        }),
         collection: BbaseCollection.extend({}),
         render: '.todo-list',
         items: window.createItems(),
@@ -434,6 +438,10 @@ html .clear-completed:active {
             this.beforeEditCache = this._get('title');
             this.$el.addClass('editing');
             this.$('.edit').focus();
+          },
+
+          change(type, field){
+            console.log(field);
           },
 
           doneEdit() {
@@ -455,40 +463,52 @@ html .clear-completed:active {
       }
     },
 
-    change(type) {
+    change(path, type) {
+      if (type === 'item' && path === 'completed'){
+        console.log('super' + path + type);
+      }
       this._set('remaining', this.active().length);
       this._set('allDone', this._get('remaining') === 0 ? true : false);
+      if (path === 'newTodo'){
+        this._setModels(this.getModels());
+      }
     },
 
     checkAll() {
       if (this._get('remaining') === 1) return;
-      this.collection.each((model) => {
-        model._set('completed', this._get('allDone'));
+      BbaseEst.each(this.filteredTodos, (item)=>{
+        item.completed = this._get('allDone');
       });
+      this._setModels(this.getModels());
     },
 
     changeRoute(type, bbb) {
       this._set('visibility', type);
+      this._setModels(this.getModels());
+    },
+
+    getModels: function(){
+      return this[this._get('visibility')]();
     },
 
     all() {
-      return this._get('models');
+      return BbaseEst.clone(this.filteredTodos);
     },
 
     active() {
-      return this.collection.filter((model) => {
-        return !model._get('completed');
+      return BbaseEst.filter(this.filteredTodos, (model) =>{
+        return !model.completed;
       });
     },
 
     completed() {
-      return this.collection.filter((model) => {
-        return model._get('completed');
+      return BbaseEst.filter(this.filteredTodos, (model)=>{
+        return model.completed;
       });
     },
 
     removeCompleted() {
-      this.collection._set(this.active());
+      this._setModels(this.active());
     },
 
     addTodo(name, value) {
@@ -496,12 +516,13 @@ html .clear-completed:active {
       if (!value) {
         return;
       }
-      this._push({ 'title': value, 'completed': false });
+      this.filteredTodos.push({ 'title': value, 'completed': false });
       this._set('newTodo', '');
     },
 
     afterRender() {
-      debug(new Date().getTime() - window.timestart);
+      this.filteredTodos = this._getItems();
+      console.log(new Date().getTime() - window.timestart);
     }
   });
 

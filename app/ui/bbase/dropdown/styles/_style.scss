@@ -1,4 +1,44 @@
-.ui-bbase-ui-dropdown {
+@-webkit-keyframes bbaseMoveInBottomRebound {
+  0% {
+    -webkit-transform: translateY(-150%);
+    transform: translateY(-150%);
+    opacity: 1
+  }
+  80% {
+    -webkit-transform: translateY(10%);
+    transform: translateY(10%)
+  }
+  100% {
+    -webkit-transform: none;
+    transform: none;
+    opacity: 1
+  }
+}
+
+@keyframes bbaseMoveInBottomRebound {
+  0% {
+    -webkit-transform: translateY(2%);
+    transform: translateY(2%);
+    opacity: 1
+  }
+
+  40%{
+    -webkit-transform: translateY(4%);
+    transform: translateY(4%);
+  }
+
+  80%{
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%);
+  }
+  100% {
+    -webkit-transform: none;
+    transform: none;
+    opacity: 1
+  }
+}
+
+.bbase-ui-dropdown {
   z-index: 2050;
   position: absolute;
   left: -9999px;
@@ -14,4 +54,44 @@
     overflow: hidden;
     max-height: 200px;
   }
+}
+
+.bbase-ui-dropdown-win {
+  position: fixed;
+  z-index: 51;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 2000;
+  transition: all 0.3s;
+  .bui-select-list {
+    border: none;
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-clip: padding-box;
+    overflow: hidden;
+    max-height: 200px;
+  }
+}
+
+.bbaseDropdownMoveDownDebounce {
+  animation-name: bbaseMoveInBottomRebound;
+  animation-duration: 0.2s;
+  animation-timing-function: linear;
+  animation-delay: 0.2s;
+  animation-direction: initial;
+  transform-origin: initial;
+  animation-fill-mode: forwards;
+  -webkit-animation-name: bbaseMoveInBottomRebound;
+  -webkit-animation-duration: 0.2s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-delay: 0s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-direction: initial;
+  -webkit-transform-origin: initial;
+  -webkit-animation-fill-mode: forwards;
 }

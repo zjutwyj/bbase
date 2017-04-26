@@ -30,6 +30,7 @@ define('UiForm', [], function (require, exports, module) {
           { text: '下拉框', moduleId: 'UiFormDropDown' },
           { text: '组合切换', moduleId: 'UiFormGroup' },
           { text: '选项卡', moduleId: 'UiFormTab' ,oneRender: false},
+          { text: '对话框', moduleId: 'UiFormDialog'},
           { text: '编辑器', moduleId: 'UiFormTextEditor' }
         ],
         tpl: `

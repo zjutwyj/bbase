@@ -78,3 +78,8 @@ Bbase.DIRECTIVE['bbaseuitabblock'] = {
     bbasetab.apply(this, [value, selector, 'tab-ul-block']);
   }
 }
+Bbase.DIRECTIVE['bbaseuitabunderline'] = {
+  bind: function (value, selector) {
+    bbasetab.apply(this, [value, selector, 'tab-ul-underline']);
+  }
+}

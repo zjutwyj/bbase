@@ -152,3 +152,10 @@ gulp.task('dist', function (callback) {
 });
 
 // dist
+// 字体图标库目前存在于
+// 1.bbase -> app/index.html
+// 2.Mobile -> app/index.html
+// 3.Mobile -> app/admin.html
+// 4.UserManagement -> app/index.html
+// 5.jhPcWebsite ->src/webapp/WEB-INF/jsp/index.jsp
+// 6.lmc_wcd -> app/index.html

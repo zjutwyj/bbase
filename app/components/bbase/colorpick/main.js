@@ -2,7 +2,7 @@ Bbase.MODULE['BbaseColorPick'] = 'components/bbase/colorpick/controllers/BbaseCo
 Bbase.DIRECTIVE['bbasecomponentcolorpick'] = {
   bind: function (value, selector) {
     var object = this._getObject(value, 'cur');
-    var viewId = object.viewId || BbaseEst.nextUid('bbasecomponentmusicpick');
+    var viewId = object.viewId || BbaseEst.nextUid('bbasecomponentcolorpick');
 
     $(selector).click(this._bind(function (e) {
       this._dialog({

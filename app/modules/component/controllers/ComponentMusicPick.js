@@ -13,7 +13,7 @@ define('ComponentMusicPick', [], function(require, exports, module){
         <div class="anything" style="display: block;">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">指令用法：bbaseuiradio="{viewId: 'viewId', cur: cur, items: items, onChange: handleChange}"</span>
+              <span class="name">指令用法：bbasecomponentmusicpick="{viewId: 'bbasecomponentmusicpick', cur: cur, items: items}"</span>
             </div>
           </div>
           <div class="main">

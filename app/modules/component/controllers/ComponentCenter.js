@@ -25,7 +25,8 @@ define('ComponentCenter', [], function(require, exports, module){
         items: [
           { text: '图片', moduleId: 'ComponentPhoto' ,oneRender: false},
           { text: '颜色', moduleId: 'ComponentColor' ,oneRender: false},
-          { text: '音乐', moduleId: 'ComponentMusic' ,oneRender: false}
+          { text: '音乐', moduleId: 'ComponentMusic' ,oneRender: false},
+          { text: '图标', moduleId: 'ComponentIcon' ,oneRender: false}
         ],
         tpl:  `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTab{{moduleId}} tabImgComm"></div><span>{{text}}</span></a>

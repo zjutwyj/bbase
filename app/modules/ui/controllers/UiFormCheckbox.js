@@ -86,7 +86,7 @@ define('UiFormCheckbox', [], function(require, exports, module){
     },
     init: function () {
       return {
-        cur: 'all',
+        cur: 'all,complete',
         items: [
           { text: '全部', value: 'all' },
           { text: '已完成', value: 'complete' },

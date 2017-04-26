@@ -4,6 +4,7 @@
 .bbase-ui-select.ui-select {
   display: inline-block;
   margin-right: 5px;
+  line-height:100%;
   button,
   input,
   optgroup,
@@ -84,6 +85,12 @@
   .bbase-caretdown {
     @include ie7icon(\e618);
     font-size:12px;
+    display: inline-block;
+    margin-top: 4px;
+    line-height: 100%;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
   }
 }
 
@@ -99,17 +106,14 @@
 
 .bbase-ui-select .bui-select-list {
   background-color: #fff;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, .15);
+  border: 1px solid #e4e4e4;
   border-radius: 0px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
   background-clip: padding-box;
   overflow: auto;
   overflow-x: hidden;
   max-height: 200px;
   ul {
-    margin: 10px 0;
+    margin: 0;
   }
   .bui-list-item {
     display: block;
@@ -123,10 +127,11 @@
     color: #fff;
     text-decoration: none;
     outline: 0;
-    background-color: $mainColor;
+    background-color: lighten($mainColor, 10%);
   }
   .bui-list-item-select-inner {
-    padding: 3px 4px;
+    padding: 6px;
+    font-size:14px;
   }
   .bui-list-item-selected .bui-list-item-select-inner {
     color: #fff;
@@ -134,9 +139,16 @@
   .bui-list-item-select:hover {
     text-decoration: none;
     color: #fff;
-    background-color: $mainColor;
+    background-color: lighten($mainColor, 20%);
   }
   .bui-list-item-select:hover .bui-list-item-select-inner {
     color: #fff;
+  }
+}
+.bbase-ui-select.select-down{
+  .bbase-caretdown{
+    transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
+    margin-top:-4px;
   }
 }

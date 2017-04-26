@@ -4,7 +4,7 @@ Bbase.MODULE['BbaseScrollbar'] = 'ui/bbase/scrollbar/controllers/BbaseScrollbar.
 
 Bbase.DIRECTIVE['bbaseuiscrollbar'] = {
   bind: function (value, selector) {
-    var object = this._getObject(value);
+    var object = this._object = this._getObject(value);
     object.id = object.id || 'iscroll';
     this.$(selector).css({
       position: 'relative',
@@ -24,9 +24,9 @@ Bbase.DIRECTIVE['bbaseuiscrollbar'] = {
     }
   },
   unbind: function (object) {
-    if (this[object.id]) {
-      this[object.id].disable();
-      this[object.id] = null;
+    if (this[this._object.id]) {
+      this[this._object.id].disable && this[this._object.id].disable();
+      this[this._object.id] = null;
     }
   }
 }

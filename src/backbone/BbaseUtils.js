@@ -35,7 +35,7 @@ var BbaseUtils = {
    */
   dialog: function(options) {
     var button = options.button || [];
-    seajs.use(['dialog-plus'], function(dialog) {
+    seajs.use(['BbaseDialog'], function(dialog) {
       if (options.success) {
         button.push({
           value: CONST.LANG.CONFIRM,
@@ -101,7 +101,7 @@ var BbaseUtils = {
       content: '<div style="padding: 10px;">' + msg + '</div>',
       title: null
     }, options);
-    seajs.use(['dialog-plus'], function(dialog) {
+    seajs.use(['BbaseDialog'], function(dialog) {
       if (window.tipsDialog) window.tipsDialog.close().remove();
       window.tipsDialog = BbaseApp.addDialog(dialog(options)).show(options.target);
       setTimeout(function() {
@@ -137,7 +137,7 @@ var BbaseUtils = {
     };
     BbaseEst.extend(options, opts);
     if (!context) context = this;
-    seajs.use(['dialog-plus'], function(dialog) {
+    seajs.use(['BbaseDialog'], function(dialog) {
       window.comfirmDialog = BbaseApp.addDialog(dialog({
         id: 'dialog' + BbaseEst.nextUid(),
         title: options.title,
