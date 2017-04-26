@@ -16,6 +16,7 @@ function baseDropdown(value, selector, theme) {
       data: object.data || {},
       width: object.width,
       showClose: object.showClose,
+      top: object.top,
       align: object.align,
       items: object.items,
       theme: theme,

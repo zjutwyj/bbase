@@ -155,6 +155,11 @@ var BbaseDetail = BbaseSuperView.extend({
           }
         }
         ctx._attributes = response.attributes;
+        BbaseEst.each(ctx.__def_vals_, function(value, key){
+          if (typeof ctx._get(key) === 'undefined'){
+            ctx._set(key, value);
+          }
+        });
         ctx.model.set('_isAdd', ctx._isAdd = false);
         if (ctx.afterLoad) ctx.afterLoad.call(ctx, response);
         ctx.render();

@@ -106,7 +106,7 @@ define('BbaseDropDown', [], function (require, exports, module) {
       this.$picker.show();
       if (this._options.theme === 'win') {
         this.$picker.css({
-          'top': this._options.top || 0,
+          'top': parseFloat(this._options.top, 10) || 0,
           'background-color': '#fff'
         });
       }
