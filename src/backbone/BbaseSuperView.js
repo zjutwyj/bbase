@@ -54,19 +54,20 @@ var BbaseSuperView = BbaseBackbone.View.extend({
             return this._options.data;
           }
           break;
+        case '_initialize':
+          this[type](args);
+          break;
         default:
           if (BbaseApp.getView(this.viewId) && BbaseApp.getView(this.viewId)[type]) {
             if (BbaseApp.getView(this.viewId)[type].timer) {
               clearTimeout(BbaseApp.getView(this.viewId)[type].timer);
             }
+            var _arguments =Array.prototype.slice.apply(arguments);
             BbaseApp.getView(this.viewId)[type].timer = setTimeout(this._bind(function () {
-              BbaseApp.getView(this.viewId)[type](args);
+              BbaseApp.getView(this.viewId)[type].apply(BbaseApp.getView(this.viewId), _arguments.splice(1, _arguments.length -1));
               BbaseApp.getView(this.viewId)[type].timer = null;
             }), 20);
-          } else if (this[type]) {
-            this[type](args);
           }
-          return this;
       }
     }
   },
@@ -135,8 +136,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
    */
   _navigate: function (name, options) {
     options = options || true;
-    typeof Backbone === 'undefined' ? BbaseBackbone.history.navigate(name, options)
-    : Backbone.history.navigate(name, options);
+    typeof Backbone === 'undefined' ? BbaseBackbone.history.navigate(name, options) : Backbone.history.navigate(name, options);
   },
   /**
    *  watch system
@@ -682,7 +682,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
         list.push({
           watch: watch.length > 1 ? watch[1] : model[1].split(':')[0],
           render: render.length > 1 ? render[1] : '',
-          change:  change.length > 1 ? BbaseEst.trim(change[1].substring(0,
+          change: change.length > 1 ? BbaseEst.trim(change[1].substring(0,
             change[1].indexOf('(') === -1 ? change[1].length : change[1].indexOf('('))) : null
         });
       }));
@@ -782,15 +782,15 @@ var BbaseSuperView = BbaseBackbone.View.extend({
             break;
           case 'checked':
             var field = this._getField(item.value);
-            if (typeof this._options._checkAppend === 'undefined'){
+            if (typeof this._options._checkAppend === 'undefined') {
               this._set('_options._checkAppend', true);
             }
             this._watch([field], '[bb-checked="' + item.value + '"]:checked');
             this.$('[bb-checked="' + item.value + '"]').prop('checked', this._getBoolean(item.value));
-            this.$('[bb-checked="' + item.value + '"]').change(this._bind(function(a){
-              if (item.value === 'checked_all'){
+            this.$('[bb-checked="' + item.value + '"]').change(this._bind(function (a) {
+              if (item.value === 'checked_all') {
                 this._checkAll && this._checkAll(a);
-              }else{
+              } else {
                 this._check && this._check($(a.target).is(':checked'));
               }
             }, this));
@@ -1166,10 +1166,11 @@ var BbaseSuperView = BbaseBackbone.View.extend({
    * @return {[type]}       [description]
    */
   _getBoolean: function (value) {
-    if (BbaseEst.isEmpty(value)){return false;};
-    var bool =  value;
+    if (BbaseEst.isEmpty(value)) {
+      return false; };
+    var bool = value;
     var field = this._getField(value);
-    if (!BbaseEst.isEmpty(field)){
+    if (!BbaseEst.isEmpty(field)) {
       bool = BbaseEst.compile('{{' + value + '}}', this.model.attributes);
     }
 
@@ -1230,17 +1231,17 @@ var BbaseSuperView = BbaseBackbone.View.extend({
       var fnInfo = {};
       list[0] = BbaseEst.trim(list[0]);
       list[1] = BbaseEst.trim(list[1]);
-      if (ignore){
-        if (BbaseEst.typeOf('ignore') === 'array'){
-          var dx = BbaseEst.findIndex(ignore, function(a){
+      if (ignore) {
+        if (BbaseEst.typeOf(ignore) === 'array') {
+          var dx = BbaseEst.findIndex(ignore, function (a) {
             return a === list[0];
           });
-          if (dx !== -1){
+          if (dx !== -1) {
             object[list[0]] = list[1];
             return true;
           }
-        } else if (BbaseEst.typeOf('ignore') === 'string'){
-          if (ignore === list[0]){
+        } else if (BbaseEst.typeOf(ignore) === 'string') {
+          if (ignore === list[0]) {
             object[list[0]] = list[1].replace(/'/img, '');
             return true;
           }
@@ -1351,12 +1352,12 @@ var BbaseSuperView = BbaseBackbone.View.extend({
       }
       if (this.change && !this.change.timer) {
         this.change.timer = setTimeout(this._bind(function () {
-          this.change.call(this, this.viewType, path);
+          this.change.call(this, path, this.viewType);
           this.change.timer = null;
         }), 20);
       };
       if (this.viewType === 'item') {
-        this._super('change', 'item');
+        this._super('change', path, this.viewType);
       }
     }
   },
@@ -1758,7 +1759,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
       var hash = BbaseEst.hash(title || 'error:446');
 
       if (!BbaseApp.getData('toolTipList')) BbaseApp.addData('toolTipList', []);
-      if (BbaseEst.indexOf(BbaseApp.getData('toolTipList'), hash) > -1){
+      if (BbaseEst.indexOf(BbaseApp.getData('toolTipList'), hash) > -1) {
         BbaseApp.getDialog(hash) && BbaseApp.getDialog(hash).show();
         return;
       }

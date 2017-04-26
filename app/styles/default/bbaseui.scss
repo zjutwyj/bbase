@@ -9,6 +9,7 @@
 }
 
 $mainColor:#5289db;  // 主题颜色
+@import '../../ui/bbase/dialog/styles/style';
 @import '../../ui/bbase/tab/styles/style';
 @import '../../ui/bbase/select/styles/style';
 @import '../../ui/bbase/item_check/styles/style';
@@ -16,4 +17,3 @@ $mainColor:#5289db;  // 主题颜色
 @import '../../ui/bbase/slider/styles/style';
 @import '../../ui/bbase/dropdown/styles/style';
 @import '../../ui/bbase/list_expand/styles/style';
-

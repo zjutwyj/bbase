@@ -389,6 +389,7 @@ var BbaseList = BbaseSuperView.extend({
         }
         ctx._filter();
         ctx._resetModels();
+
         if (!ctx._ready_component_) {
           ctx._finally();
         }
@@ -697,7 +698,7 @@ var BbaseList = BbaseSuperView.extend({
       for (var j = len_c + 1; j <= len_l; j++) {
         list[j - 1]['dx'] = dx;
         dx++;
-        this._push(new this._options.model(this._getPath(list[j - 1])));
+        this._push(new this._options.model(list[j - 1]));
       }
     } else if (len_l < len_c) {
       this._remove(len_l, len_c);
