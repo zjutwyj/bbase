@@ -1698,11 +1698,19 @@ var BbaseSuperView = BbaseBackbone.View.extend({
             return;
           if (BbaseEst.typeOf(options.moduleId) === 'function') {
             options.dialogId = options.dialogId || options.viewId;
+<<<<<<< HEAD
+            BbaseApp.addPanel(viewId, {
+              el: '#' + options.dialogId,
+              template: '<div id="base_item_dialog' + options.dialogId + '" class="region ' +
+                viewId + '"></div>'
+            }).addView(viewId, new options.moduleId(options));
+=======
             BbaseApp.addPanel(options.viewId, {
               el: '#' + options.dialogId,
               template: '<div id="base_item_dialog' + options.dialogId + '" class="region ' +
                 options.viewId + '"></div>'
             }).addView(options.viewId, new options.moduleId(options));
+>>>>>>> develop
           } else if (BbaseEst.typeOf(options.moduleId) === 'string') {
             seajs.use([options.moduleId], function (instance) {
               try {

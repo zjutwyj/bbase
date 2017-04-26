@@ -2383,6 +2383,7 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
           <div class="bbase-component-colorpick ui-color-picker">
             <div class="left" style="width: 190px;">
               <div id="{{viewId}}" style="height:195px;"></div>
+
               <div id="{{viewId}}-slider" bb-bbaseuislider="{viewId: 'slider', cur: curSlider, onChange: onSlideChange,width:180}" style="height: 18px;"></div>
               <div class="ui-color-cont">
                 <div class="ui-color-warp">

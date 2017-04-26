@@ -393,6 +393,9 @@ var BbaseList = BbaseSuperView.extend({
         if (!ctx._ready_component_) {
           ctx._finally();
         }
+<<<<<<< HEAD
+        if (options && options.afterRender){
+=======
         // 视图更新
         if (ctx._ready_component_ && !ctx._options.diff) {
           if (ctx.viewUpdate) setTimeout(ctx._bind(function () {
@@ -400,6 +403,7 @@ var BbaseList = BbaseSuperView.extend({
           }), 0);
         }
         if (options && options.afterRender) {
+>>>>>>> develop
           options.afterRender.call(ctx);
         }
       });

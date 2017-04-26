@@ -10,6 +10,7 @@ define('BbaseColorPanel', [], function (require, exports, module) {
   template = `
     <div class="bbase-component-colorpanel BbaseColorPanel-wrap">
       <div bb-bbaseuiitemcheck="{viewId:'colorpanel',cur:cur,items:items, tpl: tpl, onChange: handleChange ,compare:compare}"></div>
+
     </div>
   `;
 
@@ -98,8 +99,8 @@ define('BbaseColorPanel', [], function (require, exports, module) {
           }, this)
         });
       }
+
     }
   });
-
   module.exports = BbaseColorPanel;
 });

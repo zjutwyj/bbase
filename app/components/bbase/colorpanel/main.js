@@ -1,8 +1,10 @@
 Bbase.MODULE['BbaseColorPanel'] = 'components/bbase/colorpanel/controllers/BbaseColorPanel.js';
+
 Bbase.DIRECTIVE['bbasecomponentcolorpanel'] = {
   bind: function (value, selector) {
     var object = this._getObject(value, 'cur');
     var viewId = object.viewId || BbaseEst.nextUid('bbasecomponentcolorpanel');
+
     this._require(['BbaseColorPanel'], function (BbaseColorPanel) {
       this._region(viewId, BbaseColorPanel, {
         el: this.$(selector),
@@ -13,5 +15,6 @@ Bbase.DIRECTIVE['bbasecomponentcolorpanel'] = {
         }, this)
       });
     });
+
   }
 }
