@@ -451,7 +451,7 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 14.12.14
    */
   _moveUp: function(e) {
-    e.stopImmediatePropagation();
+    e && e.stopImmediatePropagation();
     this.collapsed = true;
     if (!this.viewId) {
       return false;
@@ -466,7 +466,7 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 14.12.14
    */
   _moveDown: function(e) {
-    e.stopImmediatePropagation();
+    e&& e.stopImmediatePropagation();
     this.collapsed = true;
     if (!this.viewId) {
       return false;

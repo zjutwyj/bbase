@@ -10,6 +10,8 @@ Bbase.MODULE['ComponentCenter'] = 'modules/component/controllers/ComponentCenter
 Bbase.MODULE['ComponentPhoto'] = 'modules/component/controllers/ComponentPhoto.js';
 Bbase.MODULE['ComponentPhotoPick'] = 'modules/component/controllers/ComponentPhotoPick.js';
 Bbase.MODULE['ComponentPhotoCrop'] = 'modules/component/controllers/ComponentPhotoCrop.js';
+Bbase.MODULE['ComponentPhotoGallery'] = 'modules/component/controllers/ComponentPhotoGallery.js';
+Bbase.MODULE['ComponentPhotoPanel'] = 'modules/component/controllers/ComponentPhotoPanel.js';
 
 Bbase.MODULE['ComponentMusic'] = 'modules/component/controllers/ComponentMusic.js';
 Bbase.MODULE['ComponentMusicPick'] = 'modules/component/controllers/ComponentMusicPick.js';

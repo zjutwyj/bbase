@@ -6,7 +6,7 @@
 
 /* 状况样式 */
 .flyerHeader {
-  position: relative;
+  position: fixed;
   width: 100%;
   min-width: 1200px;
   height: 70px;
@@ -27,7 +27,7 @@
 }
 #app-main{
   width:1200px;
-  margin:0 auto;
+  margin:86px auto 0;
 }
 
 .flyerHeader .area .logo {
@@ -1022,13 +1022,13 @@
 }
 
 .formPanel .main .content td {
-  line-height: 40px;
-  height: 40px;
-  padding: 0 10px;
-  border: 1px solid #e7e7eb;
-  white-space: normal;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  line-height: 20px;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #e7e7eb;
+    white-space: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .formPanel .main .content tr td:first-child {

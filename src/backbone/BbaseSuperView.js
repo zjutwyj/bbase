@@ -364,7 +364,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
       return;
     }
     // 缓存node
-    if (!item.node) {
+    if (!item.node || (item.node.size && item.node.size() === 0)) {
       item.node = this.$(selector).eq(item.index);
       if (item.node.size() === 0) {
         // 针对bb-src

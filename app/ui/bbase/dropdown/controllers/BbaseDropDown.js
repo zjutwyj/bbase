@@ -97,6 +97,7 @@ define('BbaseDropDown', [], function (require, exports, module) {
       this.bindCloseEvent();
     },
     bindCloseEvent: function () {
+      if (this._options.theme === 'win'){return;}
       $(document).one('click', BbaseEst.proxy(this.hide, this));
     },
     show: function (event) {

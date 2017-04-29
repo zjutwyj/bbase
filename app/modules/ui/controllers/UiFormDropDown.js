@@ -37,7 +37,7 @@ define('UiFormDropDown', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main clearfix">
-            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdownwin="{viewId:'bbaseuidropdownwin',moduleId: 'ThemeTable01'}">全屏下拉框</div>
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdownwin="{viewId:'bbaseuidropdownwin',moduleId: 'ThemeTable01',top:72}">全屏下拉框</div>
 
           </div>
           <div class="footer">
