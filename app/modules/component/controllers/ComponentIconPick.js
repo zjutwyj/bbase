@@ -105,6 +105,10 @@ define('ComponentIconPick', [], function (require, exports, module) {
         fontcontent: '',
         items: [
           { text: '默认', value: 'iconDefault', content: '' },
+          { text: '', value: 'bbase-setting', content: '"\\e756"' },
+          { text: '', value: 'bbase-crop', content: '"\\e62d"' },
+          { text: '', value: 'bbase-arrowleft', content: '"\\e721"' },
+          { text: '', value: 'bbase-arrowrigt', content: '"\\e612"' },
           { text: '', value: 'bbase-x', content: '"\\e659"' },
           { text: '', value: 'bbase-close', content: '"\\e611"' },
           { text: '', value: 'bbase-close_thin', content: '"\\e62c"' },

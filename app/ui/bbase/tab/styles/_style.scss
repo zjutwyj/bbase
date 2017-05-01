@@ -233,7 +233,7 @@
       left: 50%;
       width: 0;
       height: 2px;
-      background: #4e67ee;
+      background: $mainColor;
       -webkit-transition: width .3s, left .3s;
       transition: width .3s, left .3s;
     }
@@ -255,12 +255,12 @@
     display: block;
     width: 100%;
     text-align: left;
-    padding-left: 45px;
+    padding-left: 40px;
     height: 50px;
     line-height: 50px;
   }
   > .tab-head .tab-ul-line .tab-li.item-active {
-    background-color: #f4f5f9;
+    background-color: lighten($mainColor, 39%);
   }
   >.slideBar {
     width: 2px;

@@ -91,12 +91,12 @@ define('MemberLogin', [], function (require, exports, module) {
       BbaseApp.removePanel('MemberLogin');
       return false;
     },
-    afterSave: function (model, response) {
+    afterSave: function (response) {
       if (!response.success) {
         this._set('errorMsg', response.msg);
       } else {
         this._set('errorMsg', '');
-        CONST.USER = model.toJSON();
+        CONST.USER = this.model.toJSON();
         BbaseEst.trigger('accountRender', CONST.USER);
         this._set({ password: '', verCode: '' });
         // 判断是否是登录页面， 是跳转到首页

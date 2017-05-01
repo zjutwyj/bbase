@@ -259,6 +259,14 @@
     // Return a copy of the model's `attributes` object.
     toJSON: function(options) {
       var result = _.cloneDeep(this.attributes);
+
+      if (options && options.fields){
+        return BbaseEst.pick(result, options.fields);
+      }
+      if (this.fields){
+        return BbaseEst.pick(result, this.fields);
+      }
+
       // 新版将重构
       delete result.CONST;
       delete result._data;
@@ -272,12 +280,7 @@
         delete result.checked_all;
         delete result.children;
       }
-      if (this.fields){
-        return BbaseEst.pick(result, this.fields);
-      }
-      if (options && options.fields){
-        return BbaseEst.pick(result, options.fields);
-      }
+
       return result;
     },
     // Proxy `BbaseBackbone.sync` by default -- but override this if you need

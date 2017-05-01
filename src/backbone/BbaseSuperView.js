@@ -364,7 +364,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
       return;
     }
     // 缓存node
-    if (!item.node) {
+    if (!item.node || (item.node.size && item.node.size() === 0)) {
       item.node = this.$(selector).eq(item.index);
       if (item.node.size() === 0) {
         // 针对bb-src
@@ -1357,7 +1357,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
         }), 20);
       };
       if (this.viewType === 'item') {
-        this._super('change', path, this.viewType);
+        //this._super('change', path, this.viewType);
       }
     }
   },
@@ -1665,6 +1665,9 @@ var BbaseSuperView = BbaseBackbone.View.extend({
    */
   _dialog: function (options, context) {
     var ctx = context || this;
+    if (BbaseEst.typeOf(options) === 'string'){
+      return BbaseApp.getDialog(options + this.cid);
+    }
     var viewId = options.viewId ? options.viewId :
       BbaseEst.typeOf(options.dialogId) === 'string' ? options.dialogId : options.moduleId;
     if (BbaseEst.typeOf(viewId) === 'function') viewId = BbaseEst.nextUid('dialog_view');

@@ -1,0 +1,112 @@
+.bbase-component-photopanel {
+  .c4-overlay.preview {
+    display: none;
+  }
+  .c4-preview-wrapper {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #eff1f2;
+    background-color: #fff;
+  }
+  .c4-preview-wrapper:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: 60%;
+  }
+  .c4-preview-wrapper>.preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .c4-preview-wrapper .is-gallery,
+  .c4-preview-wrapper>.is-image {
+    max-width: 100%;
+    margin: auto;
+  }
+  .c4-overlay {
+    display: flex;
+    background: rgba(32, 48, 60, .7);
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    z-index: 10;
+  }
+  .cc-container button,
+  .cc-container html,
+  .cc-container input,
+  .cc-container select,
+  .cc-container textarea,
+  .p8-hidable,
+  .p8-label,
+  .p8-sub,
+  .p8-toggle {
+    font-family: HelveticaNeueW01-55Roma, HelveticaNeueW02-55Roma, HelveticaNeueW10-55Roma, "'Helvetica Neue', Helvetica, Arial, Meiryo, 'Hiragino Kaku Gothic Pro W3', 'Hiragino Kaku Gothic Pro', sans-serif";
+  }
+  .c4-preview-wrapper button {
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+  .cc-x-height.p9-primary,
+  .cc-x-height.p9a-secondary,
+  .cc-x-height.p9c-primary {
+    display: inline-block;
+    text-align: center;
+  }
+  .cc-x-height.-medium.p9-primary,
+  .cc-x-height.-medium.p9a-secondary,
+  .cc-x-height.p9c-primary {
+    padding-right: 20px;
+  }
+  .font-t1,
+  .font-t2,
+  .text-t1 {
+    font-family: HelveticaNeueW01-55Roma, HelveticaNeueW02-55Roma, HelveticaNeueW10-55Roma, "'Helvetica Neue', Helvetica, Arial, Meiryo, 'Hiragino Kaku Gothic Pro W3', 'Hiragino Kaku Gothic Pro', sans-serif";
+  }
+  .p9-primary,
+  .p9a-secondary,
+  .p9c-primary {
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-radius: 1500px;
+    cursor: pointer;
+  }
+  .cc-x-height>.cc-x-height {
+    display: inline-block;
+  }
+  .-medium.p9-primary,
+  .-medium.p9a-secondary,
+  .p9c-primary {
+    height: 36px;
+    font-size: 14px;
+    padding: 0 22px;
+  }
+  .bbase-crop,
+  .bbase-setting {
+    font-size: 28px;
+  }
+  .-icon-only.-medium.p9-primary,
+  .-icon-only.-medium.p9a-secondary,
+  .-icon-only.p9c-primary {
+    width: 36px;
+    padding: 5px;
+    font-size: 32px;
+  }
+  .p9c-primary:hover:not([disabled=disabled]) {
+    background: #fff;
+    color: $mainColor;
+  }
+}
+
+.bbase-component-photopanel:hover .c4-overlay.preview {
+  display: flex;
+}

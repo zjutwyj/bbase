@@ -17,11 +17,14 @@ function baseDropdown(value, selector, theme) {
       width: object.width,
       showClose: object.showClose,
       top: object.top,
+      lazy: object.lazy,
       align: object.align,
       items: object.items,
       theme: theme,
       onReady: function () {
-        this.reset && this.reset();
+        if (!object.lazy){
+          this.reset && this.reset();
+        }
       }
     });
   });

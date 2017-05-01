@@ -155,8 +155,8 @@ var BbaseDetail = BbaseSuperView.extend({
           }
         }
         ctx._attributes = response.attributes;
-        BbaseEst.each(ctx.__def_vals_, function(value, key){
-          if (typeof ctx._get(key) === 'undefined'){
+        BbaseEst.each(ctx.__def_vals_, function (value, key) {
+          if (typeof ctx._get(key) === 'undefined') {
             ctx._set(key, value);
           }
         });
@@ -308,7 +308,7 @@ var BbaseDetail = BbaseSuperView.extend({
         }
         $button.prop('disabled', true);
 
-        if (!BbaseEst.isEmpty(ctx.model.url())) ctx._save(function (response) {
+        if (!BbaseEst.isEmpty(ctx.model.url())) ctx._baseSave(function (response) {
           if (options.afterSave) {
             options.afterSave = BbaseEst.inject(options.afterSave, function (response) {
               return new BbaseEst.setArguments(arguments);
@@ -320,7 +320,7 @@ var BbaseDetail = BbaseSuperView.extend({
               }
               $button.prop('disabled', false);
             });
-            options.afterSave.call(ctx, response, BbaseEst.typeOf(response) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
+            options.afterSave.call(ctx, BbaseEst.typeOf(response) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
               BbaseEst.getValue(response, 'attributes._response') : { msg: null, msgType: null, success: true });
           }
           $button.html(preText);
@@ -339,6 +339,9 @@ var BbaseDetail = BbaseSuperView.extend({
       return false;
     });
   },
+  _baseSave: function(callback, error){
+    this._saveItem(callback, error);
+  },
   /**
    * 保存结果
    *
@@ -347,7 +350,23 @@ var BbaseDetail = BbaseSuperView.extend({
    * @author wyj 14.11.18
    */
   _save: function (callback, error) {
-    this._saveItem(callback, error);
+    var _this = this,
+    isPassed;
+    if (typeof _this.beforeSave !== 'undefined')
+      isPassed = _this.beforeSave.call(_this);
+    if (BbaseEst.typeOf(isPassed) !== 'undefined' && !isPassed) return false;
+    this._saveItem(function (response) {
+      if (_this.afterSave) {
+        _this.afterSave.call(_this, BbaseEst.typeOf(response) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
+          BbaseEst.getValue(response, 'attributes._response') : { msg: null, msgType: null, success: true });
+      }
+      if (callback) callback.call(_this, Array.prototype.splice.call(arguments, 0));
+    }, function () {
+      if (_this.errorSave) {
+        _this.errorSave.call(_this, Array.prototype.splice.call(arguments, 0));
+      }
+      if (error) error.call(_this, Array.prototype.splice.call(arguments, 0));
+    });
   },
   /**
    * 保存表单
@@ -386,17 +405,17 @@ var BbaseDetail = BbaseSuperView.extend({
       },
       error: function (model, XMLHttpRequest, errorThrown) {
         if (XMLHttpRequest.status === 200) {
-          if (callback){
+          if (callback) {
             callback.call(this, XMLHttpRequest.responseText);
-          } else if (_this.afterSave){
-            _this.afterSave.call(_this, XMLHttpRequest.responseText, BbaseEst.typeOf(XMLHttpRequest.responseText) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(XMLHttpRequest.responseText, 'attributes._response.success')) === 'boolean' ?
+          } else if (_this.afterSave) {
+            _this.afterSave.call(_this,BbaseEst.typeOf(XMLHttpRequest.responseText) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(XMLHttpRequest.responseText, 'attributes._response.success')) === 'boolean' ?
               BbaseEst.getValue(XMLHttpRequest.responseText, 'attributes._response') : { msg: null, msgType: null, success: true });
           }
 
-        } else if (error && typeof error === 'function'){
-          if (error){
+        } else if (error && typeof error === 'function') {
+          if (error) {
             error.call(this, XMLHttpRequest, model, errorThrown);
-          }else if (_this.errorSave){
+          } else if (_this.errorSave) {
             _this.errorSave.call(_this, XMLHttpRequest.responseText);
           }
         }
