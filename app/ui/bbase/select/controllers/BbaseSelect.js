@@ -312,7 +312,7 @@ define('BbaseSelect', [], function(require, exports, module) {
       this.$select.css({
         zIndex: 100000,
         width: (this._options.data.width || 150) - 18 + 'px',
-        left: this.$('.bui-select').offset().left,
+        left: this.$('.bui-select input').offset().left,
         top: this.$('.bui-select').offset().top + this.$('.bui-select input:first').outerHeight() -1
       }).show();
       $(document).one('click', $.proxy(function() {

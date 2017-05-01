@@ -70,7 +70,7 @@ define('DemoListTodo', [], function (require, exports, module) {
           <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" bb-model="newTodo" bb-keyup="addTodo:13$name$value">
         </header>
         <section class="main" bb-show="models.length">
-          <input class="toggle-all" type="checkbox" bb-model="allDone" bb-change="checkAll">
+          <input class="toggle-all" type="checkbox" bb-model="allDone" bb-change="checkAll" bb-checked="checked_all">
           <ul class="todo-list" bb-sortable="{handle: '.todo', draggable: '.todo'}">
           </ul>
         </section>
@@ -104,7 +104,7 @@ define('DemoListTodo', [], function (require, exports, module) {
       this._super({
         template: template,
         model: BbaseModel.extend({
-          fields: ['title', 'completed']
+          fields: ['title', 'completed', 'dx', 'checked']
         }),
         collection: BbaseCollection.extend({}),
         render: '.todo-list',
@@ -127,7 +127,7 @@ define('DemoListTodo', [], function (require, exports, module) {
           },
 
           change(type, field){
-            console.log(field);
+            this._super().handleItemChange(this.model.toJSON(), this._get('dx'));
           },
 
           doneEdit() {
@@ -149,15 +149,18 @@ define('DemoListTodo', [], function (require, exports, module) {
       }
     },
 
-    change(path, type) {
-      if (type === 'item' && path === 'completed'){
-        console.log('super' + path + type);
-      }
+    change(path) {
       this._set('remaining', this.active().length);
       this._set('allDone', this._get('remaining') === 0 ? true : false);
       if (path === 'newTodo'){
         this._setModels(this.getModels());
       }
+    },
+
+    handleItemChange: function(model, dx){
+      this.filteredTodos[dx] = model;
+      this._set('remaining', this.active().length);
+      this._set('allDone', this._get('remaining') === 0 ? true : false);
     },
 
     checkAll() {

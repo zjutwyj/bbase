@@ -13,6 +13,12 @@
    el: &#39;#leaflet-main&#39;,
    viewId: &#39;FlyHeader&#39; // 选填
 });
+
+// 组件中可使用
+this._region(&#39;FlyHeader&#39;, FlyHeader, {
+  el: &#39;#leaflet-main&#39;,
+  viewId: &#39;FlyHeader&#39;
+});
 </code></pre>
 <h3 id="-">最简视图类型(必填项)</h3>
 <pre><code class="lang-js">// 普通视图
@@ -90,7 +96,7 @@ var FlyHeader = BbaseView.extend({
   update: function(name){                               // 监听的字段改变时回调
 
   },
-  change: fucntion(path, type){                         // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+  change: fucntion(path){                               // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
   },
   destory: function(){                                  // 组件销毁时
@@ -158,9 +164,8 @@ var ProductList = BbaseList.extend({
 
   },
   beforeLoad: function(){                               // 从服务器获取数据前回调
-
   },
-  afterLoad: function(){                                // 从服务器获取数据后回调
+  afterLoad: function(response){                        // 从服务器获取数据后回调
 
   },
   errorFetch: fucntion(response){                       // 从服务器获取列表失败回调
@@ -169,7 +174,7 @@ var ProductList = BbaseList.extend({
   update: function(name){                               // 监听的字段改变时回调
 
   },
-  change: fucntion(path, type){                         // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+  change: fucntion(path){                               // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
   },
   destory: function(){                                  // 组件销毁时
@@ -216,13 +221,13 @@ var ProductDetail = BbaseDetail.extend({
   beforeSave: function(){                               // 模型类保存前
 
   },
-  afterSave: fucntion(model, response){                 // 模型类保存后
+  afterSave: fucntion(response){                        // 模型类保存后
 
   },
   beforeLoad: function(){                               // 从服务器获取数据前回调
 
   },
-  afterLoad: function(){                                // 从服务器获取数据后回调
+  afterLoad: function(response){                        // 从服务器获取数据后回调
 
   },
   errorSave: function(response){                        // 模型类保存失败后回调
@@ -234,7 +239,7 @@ var ProductDetail = BbaseDetail.extend({
   update: function(name){                               // 监听的字段改变时回调
 
   },
-  change: fucntion(path, type){                         // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+  change: fucntion(path){                               // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
   },
   destory: function(){                                  // 组件销毁时

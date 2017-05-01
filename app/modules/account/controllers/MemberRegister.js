@@ -97,7 +97,7 @@ define('MemberRegister', [], function (require, exports, module) {
       this._set('verCodeImgSrc', BbaseEst.setUrlParam('v', new Date().getTime(),
         this._get('verCodeImgSrc')));
     },
-    afterSave: function(model, response){
+    afterSave: function(response){
         this._set('errorMsg', response.msg);
     }
   });

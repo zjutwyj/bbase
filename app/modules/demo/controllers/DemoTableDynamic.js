@@ -119,6 +119,7 @@ define('DemoTableDynamic', [], function (require, exports, module) {
       models = this._getItems();
 
       // 构建header与 item.template
+      if (!maxModel) return;
       BbaseEst.each(maxModel._get('content'), function (item) {
         if (item.field.indexOf('/') == -1) {
           header += `<td>${item.label}</td>`;

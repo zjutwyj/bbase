@@ -2395,7 +2395,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
           }
         },
         error: function (e) {
-          BaseUtils.tip('上传失败');
+          BbaseUtils.tip('上传失败');
           window.$uploading.hide();
         }
       });

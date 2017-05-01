@@ -320,7 +320,7 @@ var BbaseDetail = BbaseSuperView.extend({
               }
               $button.prop('disabled', false);
             });
-            options.afterSave.call(ctx, response, BbaseEst.typeOf(response) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
+            options.afterSave.call(ctx, BbaseEst.typeOf(response) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
               BbaseEst.getValue(response, 'attributes._response') : { msg: null, msgType: null, success: true });
           }
           $button.html(preText);
@@ -357,7 +357,7 @@ var BbaseDetail = BbaseSuperView.extend({
     if (BbaseEst.typeOf(isPassed) !== 'undefined' && !isPassed) return false;
     this._saveItem(function (response) {
       if (_this.afterSave) {
-        _this.afterSave.call(_this, response, BbaseEst.typeOf(response) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
+        _this.afterSave.call(_this, BbaseEst.typeOf(response) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
           BbaseEst.getValue(response, 'attributes._response') : { msg: null, msgType: null, success: true });
       }
       if (callback) callback.call(_this, Array.prototype.splice.call(arguments, 0));
@@ -408,7 +408,7 @@ var BbaseDetail = BbaseSuperView.extend({
           if (callback) {
             callback.call(this, XMLHttpRequest.responseText);
           } else if (_this.afterSave) {
-            _this.afterSave.call(_this, XMLHttpRequest.responseText, BbaseEst.typeOf(XMLHttpRequest.responseText) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(XMLHttpRequest.responseText, 'attributes._response.success')) === 'boolean' ?
+            _this.afterSave.call(_this,BbaseEst.typeOf(XMLHttpRequest.responseText) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(XMLHttpRequest.responseText, 'attributes._response.success')) === 'boolean' ?
               BbaseEst.getValue(XMLHttpRequest.responseText, 'attributes._response') : { msg: null, msgType: null, success: true });
           }
 

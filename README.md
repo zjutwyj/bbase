@@ -17,6 +17,12 @@ BbaseApp.addRegion('FlyHeader', FlyHeader, {
    el: '#leaflet-main',
    viewId: 'FlyHeader' // 选填
 });
+
+// 组件中可使用
+this._region('FlyHeader', FlyHeader, {
+  el: '#leaflet-main',
+  viewId: 'FlyHeader'
+});
 ```
 
 ### 最简视图类型(必填项)
@@ -103,7 +109,7 @@ var FlyHeader = BbaseView.extend({
   update: function(name){                               // 监听的字段改变时回调
 
   },
-  change: fucntion(path, type){                         // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+  change: fucntion(path){                               // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
   },
   destory: function(){                                  // 组件销毁时
@@ -173,9 +179,8 @@ var ProductList = BbaseList.extend({
 
   },
   beforeLoad: function(){                               // 从服务器获取数据前回调
-
   },
-  afterLoad: function(){                                // 从服务器获取数据后回调
+  afterLoad: function(response){                        // 从服务器获取数据后回调
 
   },
   errorFetch: fucntion(response){                       // 从服务器获取列表失败回调
@@ -184,7 +189,7 @@ var ProductList = BbaseList.extend({
   update: function(name){                               // 监听的字段改变时回调
 
   },
-  change: fucntion(path, type){                         // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+  change: fucntion(path){                               // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
   },
   destory: function(){                                  // 组件销毁时
@@ -233,13 +238,13 @@ var ProductDetail = BbaseDetail.extend({
   beforeSave: function(){                               // 模型类保存前
 
   },
-  afterSave: fucntion(model, response){                 // 模型类保存后
+  afterSave: fucntion(response){                        // 模型类保存后
 
   },
   beforeLoad: function(){                               // 从服务器获取数据前回调
 
   },
-  afterLoad: function(){                                // 从服务器获取数据后回调
+  afterLoad: function(response){                        // 从服务器获取数据后回调
 
   },
   errorSave: function(response){                        // 模型类保存失败后回调
@@ -251,7 +256,7 @@ var ProductDetail = BbaseDetail.extend({
   update: function(name){                               // 监听的字段改变时回调
 
   },
-  change: fucntion(path, type){                         // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+  change: fucntion(path){                               // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
   },
   destory: function(){                                  // 组件销毁时
@@ -402,14 +407,15 @@ this._require(['ProductList'], function(ProductList){}); // 请求模块
 this._delay(function(){}, 5000); // 延迟执行
 this._bind(function(){}); // 绑定上下文
 
-this._dialog({}); // 模块对话框
+this._dialog({}); // 模块对话框 , this._dialog('viewId') -> 获取对话框
 this._close(); // 关闭对话框
 this._initToolTip(parentNode, className); // 添加提示
 
-this._set('name', 'aaa'); // 设置模型类，可传对象，类似jquery
+this._set('name', 'aaa'); // 设置模型类，可传对象 this._set({key: value});
 this._get('name'); // 获取值
 
-this._watch('color', '.render:style', function(fieldName){}); // 数据监听
+this._watch('color', '.render:style', function(fieldName){}); // 数据监听 , 建议使用组件生命周期中的change:function(color){...} 方法中处理
+
 this._getPath(this._get('args.color'), 'args.'); // 获取路径(第二个参数为前缀)
 this._getField('remaining!== models.length'); => 'remaining'// 获取表达式字段
 this._getBoolean('true');   // 获取boolean值，'true' '1' 'str' 均为true, 'false', '0', '' 均为false
