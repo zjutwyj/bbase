@@ -197,7 +197,7 @@ define('BbaseDropDown', [], function (require, exports, module) {
       }
     },
     doRender: function (instance) {
-      this.viewId = BbaseEst.typeOf(this._options.moduleId) === 'string' ? (this._options.viewId + 'drop_down') : BbaseEst.nextUid('BbaseDropDown');
+      this.viewId = BbaseEst.typeOf(this._options.moduleId) === 'string' ? (this._options.viewId.split('view0')[0] + 'drop_downview0' + this._options.viewId.split('view0')[1]) : BbaseEst.nextUid('BbaseDropDown');
       delete this._options.template;
       this.$content.html('');
       // jquery对象无法通过BbaseEst.each遍历， 需备份到this._target,

@@ -1126,7 +1126,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
       result = null;
 
     str = value.replace(/^[!|(]*(\w+(?:\.\w+)*)(?:[\s|\.|>|<|!|:=])?.*$/img, '$1');
-    list = str.replace(/({{|}})/img, '').split(/\s/);
+    list = str.split('}}')[0].replace(/({{|}})/img, '').split(/\s/);
 
     BbaseEst.each(list, this._bind(function (item) {
       result = this._loopField(item);
@@ -1747,11 +1747,19 @@ var BbaseSuperView = BbaseBackbone.View.extend({
     var $tip = $parent ? $(_className, $parent) : this.$(_className);
 
     $tip.hover(function (e) {
-      var title = $(this).attr('data-title') || $(this).attr('title');
-      var offset = $(this).attr('data-offset') || 0;
-      if (BbaseEst.isEmpty(title)) return;
 
-      var hash = BbaseEst.hash(title || 'error:446');
+      var hash = $(this).attr('data-hash');
+      var offset = $(this).attr('data-offset') || 1;
+      var title = $(this).attr('data-title') || $(this).attr('title');
+
+      if (!hash){
+        $(this).attr('data-title', title);
+        $(this).attr('title', '');
+        if (BbaseEst.isEmpty(title)) return;
+
+        hash = BbaseEst.hash(BbaseEst.nextUid(title) || 'error:446');
+        $(this).attr('data-hash', hash);
+      }
 
       if (!BbaseApp.getData('toolTipList')) BbaseApp.addData('toolTipList', []);
       if (BbaseEst.indexOf(BbaseApp.getData('toolTipList'), hash) > -1) {
@@ -1772,7 +1780,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
         target: $(this).get(0)
       });
 
-      BbaseApp.getData('toolTipList').push(BbaseEst.hash(title));
+      BbaseApp.getData('toolTipList').push(hash);
 
       $(window).one('click', BbaseEst.proxy(function () {
         BbaseEst.each(BbaseApp.getData('toolTipList'), function (item) {
@@ -1784,7 +1792,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
 
     }, function () {
       try {
-        BbaseApp.getDialog(BbaseEst.hash($(this).attr('data-title') || $(this).attr('title'))).close();
+        BbaseApp.getDialog($(this).attr('data-hash')).close();
       } catch (e) {}
     });
   }

@@ -536,7 +536,7 @@ var BbaseItem = BbaseSuperView.extend({
       e.stopImmediatePropagation();
     var context = this;
     if (BbaseApp.getData('delItemDialog')) BbaseApp.getData('delItemDialog').close();
-    if (context.model.get('children').length > 0) {
+    if (context.model.get('children') && context.model.get('children').length > 0) {
       BbaseUtils.confirm({
         title: CONST.LANG.TIP,
         width: 300,

@@ -7,10 +7,6 @@
 define('UiFormTab', [], function (require, exports, module) {
   var UiFormTab, template;
 
-  var itemTip = `
-    显示项数组列表(选项说明：如果存在moduleId, 则动态加载模块， 如果存在nodeId(如#tab1), 则显示nodeId的元素, 如果存在oneRender, 则只渲染一次，如果存在delay， 则延迟加载)
-  `;
-
   template = `
     <div class="UiFormTab-wrap module-wrap">
       <div class="formPanel form-demo">
@@ -147,7 +143,7 @@ define('UiFormTab', [], function (require, exports, module) {
                 </tr>
                 <tr>
                   <td class="argName"><span>items</span><span class="red">&nbsp;(必填)</span></td>
-                  <td class="argDesc" style="white-space: normal;" title="${itemTip}"><span>${itemTip}</span></td>
+                  <td class="argDesc" style="white-space: normal;"><span>显示项数组列表(选项说明：如果存在moduleId, 则动态加载模块， 如果存在nodeId(如#tab1), 则显示nodeId的元素, 如果存在oneRender, 则只渲染一次，如果存在delay， 则延迟加载, 传递给组件的参数用data对象)</span></td>
                   <td class="argType"><span>array</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>

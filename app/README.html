@@ -368,14 +368,15 @@ this._require([&#39;ProductList&#39;], function(ProductList){}); // 请求模块
 this._delay(function(){}, 5000); // 延迟执行
 this._bind(function(){}); // 绑定上下文
 
-this._dialog({}); // 模块对话框
+this._dialog({}); // 模块对话框 , this._dialog(&#39;viewId&#39;) -&gt; 获取对话框
 this._close(); // 关闭对话框
 this._initToolTip(parentNode, className); // 添加提示
 
-this._set(&#39;name&#39;, &#39;aaa&#39;); // 设置模型类，可传对象，类似jquery
+this._set(&#39;name&#39;, &#39;aaa&#39;); // 设置模型类，可传对象 this._set({key: value});
 this._get(&#39;name&#39;); // 获取值
 
-this._watch(&#39;color&#39;, &#39;.render:style&#39;, function(fieldName){}); // 数据监听
+this._watch(&#39;color&#39;, &#39;.render:style&#39;, function(fieldName){}); // 数据监听 , 建议使用组件生命周期中的change:function(color){...} 方法中处理
+
 this._getPath(this._get(&#39;args.color&#39;), &#39;args.&#39;); // 获取路径(第二个参数为前缀)
 this._getField(&#39;remaining!== models.length&#39;); =&gt; &#39;remaining&#39;// 获取表达式字段
 this._getBoolean(&#39;true&#39;);   // 获取boolean值，&#39;true&#39; &#39;1&#39; &#39;str&#39; 均为true, &#39;false&#39;, &#39;0&#39;, &#39;&#39; 均为false
@@ -411,6 +412,9 @@ this._getDefault(&#39;args.color&#39;, &#39;#999&#39;); // 获取args.color值�
 </code></pre>
 <h3 id="bbaseitem-">BbaseItem操作</h3>
 <pre><code class="lang-js">this._getPage(); //获取当前列表第几页
+</code></pre>
+<h3 id="bbasedetail-">BbaseDetail操作</h3>
+<pre><code class="lang-js">this._save(function(response){}, function(response){}); // 保存表单
 </code></pre>
 <h3 id="-">列表操作</h3>
 <pre><code class="lang-js">this._push(model, dx); // model可为object对象或new model()对象， dx为插入的索引值，不填默认插入到尾部

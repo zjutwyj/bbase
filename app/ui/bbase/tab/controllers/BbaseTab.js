@@ -119,8 +119,12 @@ define('BbaseTab', [], function (require, exports, module) {
 
       BbaseEst.each(this.options.items, this._bind(function (item, index) {
         if (item.moduleId) {
-          this.$tabList.push($('<div class="tab-cont-div tab-cont-' + this.options.viewId + index + '" style="display: none;"></div>'));
-          this.$listCont.append(this.$tabList[index]);
+           if (this.$listCont.find('.tab-cont-' + this.options.viewId + index).size() === 0){
+            this.$tabList.push($('<div class="tab-cont-div tab-cont-' + this.options.viewId + index + '" style="display: none;"></div>'));
+            this.$listCont.append(this.$tabList[index]);
+          }else{
+            this.$tabList.push(this.$listCont.find('.tab-cont-' + this.options.viewId + index));
+          }
         } else if (item.nodeId) {
           this.$tabList.push(hasCount ? this.$listCont.find(item['nodeId']) : $('body').find(item['nodeId']));
         }
@@ -145,11 +149,10 @@ define('BbaseTab', [], function (require, exports, module) {
           this.options.items[index]['oneRender'] ? '_one' : '_require';
 
         this[this.renderType]([moduleName + (this.renderType === '_one' ? '-' + index : '')], function (instance) {
-          BbaseApp.addRegion(moduleName + '-' + index, instance, {
+          this._region(moduleName + '-' + index, instance, {
             el: this.$tabList[index],
             viewId: viewId,
-            passData: BbaseEst.typeOf(this.options.items[index]['data']) === 'undefined' ?
-              BbaseApp.getView(this.$el.parents('.region:first').attr('data-view')).model.toJSON() : this.options.items[index]['data'] || {}
+            data: this.options.items[index]['data'] || {}
           });
         });
         if (BbaseApp.getView(viewId) && BbaseApp.getView(viewId).refresh)

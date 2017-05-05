@@ -457,6 +457,11 @@ this._getDefault('args.color', '#999'); // 获取args.color值，若不存在则
 this._getPage(); //获取当前列表第几页
 ```
 
+### BbaseDetail操作
+```js
+this._save(function(response){}, function(response){}); // 保存表单
+```
+
 ### 列表操作
 ```js
 this._push(model, dx); // model可为object对象或new model()对象， dx为插入的索引值，不填默认插入到尾部

@@ -432,7 +432,7 @@ BbaseHandlebars.registerHelper('radio', function (options) {
   var result = [], list = $.parseJSON ? $.parseJSON(options.hash.option) : JSON.parse(options.hash.options);
   Est.each(list, function (val, key, list, index) {
     var checked = options.hash.value === val ? 'checked' : '';
-    result.push('<label><input id="model' + index + '-' + options.hash.name + '" type="radio" name="' + options.hash.name +
+    result.push('<label><input bb-model="'+options.hash.name+'" id="model' + index + '-' + options.hash.name + '" type="radio" name="' + options.hash.name +
       '" value="' + val + '" ' + checked + '>&nbsp;' + key + '</label>&nbsp;&nbsp;');
   });
   return result.join('');
@@ -456,7 +456,7 @@ BbaseHandlebars.registerHelper('checkbox', function (options) {
   var args = ("'" + random + "'"); // 参数
 
   var result = '<div> <label for="' + id + '" style="overflow:hidden;display:inline-block;"> ' +
-    '<input onclick="window.ckToggleClass(' + args + ');" type="checkbox" name="' + options.hash.name + '" id="' + id + '" value="' + value + '" ' + (isChecked ? 'checked' : '') + ' true-value="' + options.hash.trueVal + '" false-value="' + options.hash.falseVal + '"  class="rc-hidden" style="display: none;">' +
+    '<input bb-model="'+options.hash.name+'" onclick="window.ckToggleClass(' + args + ');" type="checkbox" name="' + options.hash.name + '" id="' + id + '" value="' + value + '" ' + (isChecked ? 'checked' : '') + ' true-value="' + options.hash.trueVal + '" false-value="' + options.hash.falseVal + '"  class="rc-hidden" style="display: none;">' +
     '<i id="' + random + '" class="iconfont ' + defaultClass + '" style="' + icon_style + '"></i>' + options.hash.label +
     '</label></div>';
   return result;
@@ -473,7 +473,7 @@ BbaseHandlebars.registerHelper('checkbox', function (options) {
  */
 BbaseHandlebars.registerHelper('select', function (options) {
   var id = options.hash.id ? options.hash.id : ('model-' + options.hash.name);
-  var str = '<select name="' + options.hash.name + '" id="' + id + '"  class="' + (options.hash.className || '') + '" style="' + (options.hash.style || '') + '"> ';
+  var str = '<select bb-model="'+options.hash.name+'" name="' + options.hash.name + '" id="' + id + '"  class="' + (options.hash.className || '') + '" style="' + (options.hash.style || '') + '"> ';
   Est.each(options.hash.list, function (item) {
     var selected = options.hash.value === item[options.hash.key] ? 'selected' : '';
     str += '<option value="' + item[options.hash.key] + '" ' + selected + '>' + item[options.hash.text] + '</option>';

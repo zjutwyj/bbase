@@ -339,7 +339,7 @@ var BbaseDetail = BbaseSuperView.extend({
       return false;
     });
   },
-  _baseSave: function(callback, error){
+  _baseSave: function (callback, error) {
     this._saveItem(callback, error);
   },
   /**
@@ -351,21 +351,22 @@ var BbaseDetail = BbaseSuperView.extend({
    */
   _save: function (callback, error) {
     var _this = this,
-    isPassed;
+      isPassed;
     if (typeof _this.beforeSave !== 'undefined')
       isPassed = _this.beforeSave.call(_this);
     if (BbaseEst.typeOf(isPassed) !== 'undefined' && !isPassed) return false;
     this._saveItem(function (response) {
+      var resp = BbaseEst.typeOf(response) === 'string' ? { attributes: {data: response}, msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
+        BbaseEst.getValue(response, 'attributes._response') : { msg: null, msgType: null, success: true }
       if (_this.afterSave) {
-        _this.afterSave.call(_this, BbaseEst.typeOf(response) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
-          BbaseEst.getValue(response, 'attributes._response') : { msg: null, msgType: null, success: true });
+        _this.afterSave.call(_this, resp);
       }
-      if (callback) callback.call(_this, Array.prototype.splice.call(arguments, 0));
+      if (callback) callback.call(_this, resp);
     }, function () {
       if (_this.errorSave) {
-        _this.errorSave.call(_this, Array.prototype.splice.call(arguments, 0));
+        _this.errorSave.call(_this, resp);
       }
-      if (error) error.call(_this, Array.prototype.splice.call(arguments, 0));
+      if (error) error.call(_this, resp);
     });
   },
   /**
@@ -408,7 +409,7 @@ var BbaseDetail = BbaseSuperView.extend({
           if (callback) {
             callback.call(this, XMLHttpRequest.responseText);
           } else if (_this.afterSave) {
-            _this.afterSave.call(_this,BbaseEst.typeOf(XMLHttpRequest.responseText) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(XMLHttpRequest.responseText, 'attributes._response.success')) === 'boolean' ?
+            _this.afterSave.call(_this, BbaseEst.typeOf(XMLHttpRequest.responseText) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(XMLHttpRequest.responseText, 'attributes._response.success')) === 'boolean' ?
               BbaseEst.getValue(XMLHttpRequest.responseText, 'attributes._response') : { msg: null, msgType: null, success: true });
           }
 

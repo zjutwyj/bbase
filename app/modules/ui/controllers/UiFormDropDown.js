@@ -63,7 +63,7 @@ define('UiFormDropDown', [], function (require, exports, module) {
               <tbody class="uilist01-tbody">
                 <tr>
                   <td class="argName"><span>viewId</span><span class="red">&nbsp;(必填)</span></td>
-                  <td class="argDesc"><span>视图标识符</span></td>
+                  <td class="argDesc"><span>视图标识符(如果需要引用弹出的视图的话， 需要在viewId后面加drop_down)</span></td>
                   <td class="argType"><span>string</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
