@@ -197,6 +197,104 @@ var BbaseUtils = {
     if (window.$loading) window.$loading.remove();
     else $('.loading').remove();
   },
+  getItem: function(doc, obj) {
+    try {
+      for (var i = 0, ci; ci = this.tmpList[i++];) {
+        if (ci.doc === doc && ci.url == (obj.src || obj.href)) {
+          return ci;
+        }
+      }
+    } catch (e) {
+      return null;
+    }
+
+  },
+  /**
+   * 加载资源
+   * @param  {[type]}   doc [description]
+   * @param  {[type]}   obj [description]
+   * @param  {Function} fn  [description]
+   * @return {[type]}       [description]
+   * @example
+   *
+   *  BbaseUtils.loadFile(document, {
+          href: CONST.HOST + "/vendor/flatpickr/flatpickr.min.css",
+          rel: 'stylesheet',
+          tag: "link",
+          type: "text/css",
+          defer: "defer"
+        }, function() {
+          $(".publishTime").flatpickr({
+            minuteIncrement:1,
+            onChange: function(selectedDates, dateStr, instance) {
+              ctx.model.set('publishTime', dateStr);
+            },
+            onClose: function(selectedDates, dateStr, instance){
+              ctx.model.set('publishTime', dateStr);
+            }
+          });
+          $(".unpublishTime").flatpickr({
+            minuteIncrement:1,
+            onChange: function(selectedDates, dateStr, instance) {
+              ctx.model.set('unpublishTime', dateStr);
+            },
+            onClose: function(selectedDates, dateStr, instance){
+              ctx.model.set('unpublishTime', dateStr);
+            }
+          });
+        });
+   */
+  loadFile: function(doc, obj, fn) {
+    var ctx=this;
+    this.tmpList = this.tmpList || [];
+    var item = this.getItem(doc, obj);
+    if (item) {
+      if (item.ready) {
+        fn && fn();
+      } else {
+        item.funs.push(fn)
+      }
+      return;
+    }
+    this.tmpList.push({
+      doc: doc,
+      url: obj.src || obj.href,
+      funs: [fn]
+    });
+    if (!doc.body) {
+      var html = [];
+      for (var p in obj) {
+        if (p == 'tag') continue;
+        html.push(p + '="' + obj[p] + '"')
+      }
+      doc.write('<' + obj.tag + ' ' + html.join(' ') + ' ></' + obj.tag + '>');
+      return;
+    }
+    if (obj.id && doc.getElementById(obj.id)) {
+      return;
+    }
+    var element = doc.createElement(obj.tag);
+    delete obj.tag;
+    for (var p in obj) {
+      element.setAttribute(p, obj[p]);
+    }
+    element.onload = element.onreadystatechange = function() {
+      if (!this.readyState || /loaded|complete/.test(this.readyState)) {
+        item = ctx.getItem(doc, obj);
+        if (item.funs.length > 0) {
+          item.ready = 1;
+          for (var fi; fi = item.funs.pop();) {
+            fi();
+          }
+        }
+        element.onload = element.onreadystatechange = null;
+      }
+    };
+    element.onerror = function() {
+      throw Error('The load ' + (obj.href || obj.src) + ' fails')
+    };
+    doc.getElementsByTagName("head")[0].appendChild(element);
+  },
   /**
    * 调用方法 - 命令模式[说明， 只有在需要记录日志，撤销、恢复操作等功能时调用该方法]
    *

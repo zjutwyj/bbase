@@ -274,6 +274,75 @@ new ProductDetail({
 });
 ```
 
+
+// BbaseUtils工具类
+
+// 对话框
+```js
+BbaseUtils.dialog({
+   id: 'copyDialog',
+   title: '复制图片',
+   target: '.btn-email-bind',
+   width: 800,
+   quickClose: true, // 点击空白处关闭对话框
+   hideCloseBtn: false, // 是否隐藏关闭按钮
+   content: this.copyDetail({
+        filename: this.model.get('filename'),
+        serverPath: this.model.get('serverPath')
+   }),
+   cover: true, // 是否显示遮罩
+   onshow: function(){// 对话框显示时回调
+   },
+   load: function(){ // iframe载入完成后回调
+      ...base.js
+   },
+   success: function(){// 按确定按钮时回调
+      this.close();
+   }
+});
+```
+// 提示
+```js
+BbaseUtils.tip('提示内容', {
+   time: 1000,
+   title: '温馨提示'
+});
+```
+// 确认框
+```js
+ BbaseUtils.confirm({
+   title: '提示',
+   target: this.$('.name').get(0),
+   content: '是否删除?',
+   success: function(){
+        ...
+   },
+   cancel: function(){
+     ...
+   }
+});
+```
+// 添加加载动画
+```js
+BbaseUtils.addLoading();
+```
+// 移除加载动画
+```js
+BbaseUtils.removeLoading();
+```
+// 加载资源
+```js
+BbaseUtils.loadFile(document, {
+  href: CONST.HOST + "/vendor/flatpickr/flatpickr.min.css",
+  rel: 'stylesheet',
+  tag: "link",
+  type: "text/css",
+  defer: "defer"
+}, function() {
+  ...todo
+});
+```
+
 ### 其它说明
 ```js
 var Module = BbaseView.extend({
@@ -328,7 +397,7 @@ bb-change: 事件函数(其中参数为改变的字段名称)<br>
 <input bb-model="name:keyup" type="text" class="text" />
 ```
 ```js
-bb-model: 模型类字段  后面的:keyup表示按下某个键弹起时触发，默认为:change (注：建议添加value="{{name}}",懒执行，提高性能)
+bb-model: 模型类字段  后面的:keyup表示按下某个键弹起时触发，默认为:change (注：建议添加value="{{name}}",1:懒执行，提高性能,2:可以添加{{{name}}}模板指令，阻止过滤特殊符号)
 ```
 
 ### 表单验证
@@ -385,8 +454,8 @@ bb-src=""
 ```js
 this._super(type); // 引用父类，当参数type为view时返回上级视图 model时返回上级模型类，data上级模型类数据,options返回上级参数,"_init" 执行上级方法,为对象时调用父级的_initialize()方法 (注：BbaseItem中调用BbaseList中的方法，尽量用this._super('superFn', args))
 
-this._view('viewId');// 获取视图(注：默认带this.cid)  注：如果是从路由那边注册的， 那么获取是用app.getView('viewId') 来引用
-this._region('name', ProductList, {}); // 添加视图区域,当一个参数时则为获取视图(注：默认带this.cid)
+this._view('viewId', instance);// 注册视图(注：默认带this.cid)  注：如果路由那边注册的时候用的是app.addView， 那么获取是用app.getView('viewId') 来引用, 如果注册的时候用的是this._view('name', instance), 那么获取可以用this._view('name')获取
+this._region('name', ProductList, {}); // 添加视图区域,当一个参数时则为获取视图(注：默认带this.cid),引用可用this._region('name')
 
 this._service('productList').then(function(result){}); // 数据请求服务
 this._navigate('#/home', true); // 导航

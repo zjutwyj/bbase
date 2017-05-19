@@ -505,3 +505,118 @@
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
 }
+
+
+#loading {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-top: .3rem;
+  margin-left: -1.6rem;
+  z-index: 999999999
+}
+
+#loading .object {
+  width: .6rem;
+  height: .6rem;
+  background-color: $mainColor;
+  float: left;
+  margin-right: .6rem;
+  -moz-border-radius: 50% 50% 50% 50%;
+  -webkit-border-radius: 50% 50% 50% 50%;
+  border-radius: 50% 50% 50% 50%
+}
+
+#loading #object_one {
+  -webkit-animation: object_one 1.5s infinite;
+  animation: object_one 1.5s infinite
+}
+
+#loading #object_two {
+  -webkit-animation: object_two 1.5s infinite;
+  animation: object_two 1.5s infinite;
+  -webkit-animation-delay: .25s;
+  animation-delay: .25s
+}
+
+#loading #object_three {
+  -webkit-animation: object_three 1.5s infinite;
+  animation: object_three 1.5s infinite;
+  -webkit-animation-delay: .5s;
+  animation-delay: .5s
+}
+
+@-webkit-keyframes object_one {
+  75% {
+    -webkit-transform: scale(0)
+  }
+}
+
+@keyframes object_one {
+  75% {
+    transform: scale(0);
+    -webkit-transform: scale(0)
+  }
+}
+
+@-webkit-keyframes object_two {
+  75% {
+    -webkit-transform: scale(0)
+  }
+}
+
+@keyframes object_two {
+  75% {
+    transform: scale(0);
+    -webkit-transform: scale(0)
+  }
+}
+
+@-webkit-keyframes object_three {
+  75% {
+    -webkit-transform: scale(0)
+  }
+}
+
+@keyframes object_three {
+  75% {
+    transform: scale(0);
+    -webkit-transform: scale(0)
+  }
+}
+
+@keyframes guigeShow {
+  from {
+    bottom: -28rem
+  }
+  to {
+    bottom: 0
+  }
+}
+
+@-webkit-keyframes guigeShow {
+  from {
+    bottom: -28rem
+  }
+  to {
+    bottom: 0
+  }
+}
+
+@keyframes guigeHide {
+  from {
+    bottom: 0
+  }
+  to {
+    bottom: -28rem
+  }
+}
+
+@-webkit-keyframes guigeHide {
+  from {
+    bottom: 0
+  }
+  to {
+    bottom: -28rem
+  }
+}

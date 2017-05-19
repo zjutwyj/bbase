@@ -312,18 +312,16 @@ var BbaseDetail = BbaseSuperView.extend({
           if (options.afterSave) {
             options.afterSave = BbaseEst.inject(options.afterSave, function (response) {
               return new BbaseEst.setArguments(arguments);
-            }, function (response) {
-              if (bt) {
-                $button.val(preText);
-              } else {
-                $button.html(preText);
-              }
-              $button.prop('disabled', false);
-            });
+            }, function (response) {});
             options.afterSave.call(ctx, BbaseEst.typeOf(response) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
               BbaseEst.getValue(response, 'attributes._response') : { msg: null, msgType: null, success: true });
           }
-          $button.html(preText);
+          if (bt) {
+            $button.val(preText);
+          } else {
+            $button.html(preText);
+          }
+          $button.prop('disabled', false);
         }, function (response) {
           if (response.msgType === 'notLogin') {
             BbaseEst.trigger('checkLogin', null, true);
@@ -356,7 +354,7 @@ var BbaseDetail = BbaseSuperView.extend({
       isPassed = _this.beforeSave.call(_this);
     if (BbaseEst.typeOf(isPassed) !== 'undefined' && !isPassed) return false;
     this._saveItem(function (response) {
-      var resp = BbaseEst.typeOf(response) === 'string' ? { attributes: {data: response}, msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
+      var resp = BbaseEst.typeOf(response) === 'string' ? { attributes: { data: response }, msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
         BbaseEst.getValue(response, 'attributes._response') : { msg: null, msgType: null, success: true }
       if (_this.afterSave) {
         _this.afterSave.call(_this, resp);

@@ -21,7 +21,7 @@ define('ThemeTable01', [], function(require, exports, module){
       var theme = BbaseEst.nextUid('ThemeTable01');
       this._super({
         template: `
-          <div class="${theme}-wrap" style="padding:10px; width: 994px;margin:0 auto;">
+          <div class="${theme}-wrap" style="padding:10px; width: 994px;">
             <style>
               .${theme}-wrap .formPanel .header {position: relative; height: 50px; line-height: 50px; padding-left: 14px; background-color: #f4f5f9; border-bottom: 1px solid #dfdfdf; font-size: 0; }
               .${theme}-wrap .formPanel .header .formIdArea {float: left; position: relative; font-size: 14px; }

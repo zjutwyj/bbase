@@ -75,6 +75,32 @@ define('UiFormSelect', [], function(require, exports, module){
         </div>
       </div>
 
+<div class="formPanel form-api">
+        <div class="anything">
+          <div class="main">
+            <table class="title">
+              <tbody>
+                <tr>
+                  <td>方法</td>
+                  <td>说明</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="content">
+              <tbody class="uilist01-tbody">
+                <tr>
+                  <td class="argName"><span>setValue(str)</span></td>
+                  <td class="argDesc"><span>设置当前值</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>setList(list)</span></td>
+                  <td class="argDesc"><span>设置下拉菜单列表</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   `;
 

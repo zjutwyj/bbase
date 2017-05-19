@@ -1655,7 +1655,7 @@
    * @return {String} 返回新字符串
    * @author wyj on 14/5/6
    * @example
-   *     BbaseEst.ltrim('  dd    ');
+   *     BbaseEst.trimLeft('  dd    ');
    *     ==> 'dd    '
    */
   function trimLeft(str) {
@@ -2083,7 +2083,7 @@
    * @author wyj on 14/6/23
    * @example
    *      var list = ['a', 'b'];
-   *      var has = BbaseEst.indexOf('b');
+   *      var has = BbaseEst.indexOf(list, 'b');
    *      ==> 1
    */
   function arrayIndex(array, value) {
@@ -2520,7 +2520,7 @@
     return fmt;
   }
 
-  BbaseEst.dateFormat = dateFormat;
+  BbaseEst.dateFormat = BbaseEst.formatDate = dateFormat;
 
 
   // DomUtils

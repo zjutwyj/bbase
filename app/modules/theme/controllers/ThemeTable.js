@@ -9,7 +9,7 @@ define('ThemeTable', [], function (require, exports, module) {
 
   template = `
     <div class="ThemeTable-wrap">
-      <div id="ui-nav" bb-bbaseuitab="{viewId: 'uiFormNavTab', cur: curNav,theme:'tab-ul-line',path: 'moduleId', tpl: tpl, items: navitems, direction: 'v'}"></div>
+      <div id="ui-nav" bb-bbaseuitab="{viewId: 'themeTableTab', cur: curNav,theme:'tab-ul-line',path: 'moduleId', tpl: tpl, items: navitems, direction: 'v'}"></div>
     </div>
   `;
 

@@ -17,7 +17,7 @@ define('UiListExpand', [], function(require, exports, module){
             </div>
           </div>
           <div class="main">
-            <div class="demo-item clearfix" bb-bbaseuilistexpand="{viewId:'bbaseuilistexpand',cur:cur,height:250,items:listitems, max: 4,onChange: handleListChange}"></div>
+            <div class="demo-item clearfix" bb-bbaseuilistexpand="{viewId:'bbaseuilistexpand',cur:cur,height:180,items:listitems, max: 4,onChange: handleListChange}"></div>
           </div>
           <div class="footer">
             <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'ddd', cur:cur,items: selectitems}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>

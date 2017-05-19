@@ -1,6 +1,6 @@
 Bbase.MODULE['BbaseDropDown'] = 'ui/bbase/dropdown/controllers/BbaseDropDown.js';
 
-function baseDropdown(value, selector, theme) {
+function baseBbaseDropdown(value, selector, theme) {
   this._require(['BbaseDropDown'], function (BbaseDropDown) {
     var object = this._getObject(value, 'cur');
     var viewId = object.viewId;
@@ -33,11 +33,11 @@ function baseDropdown(value, selector, theme) {
 
 Bbase.DIRECTIVE['bbaseuidropdown'] = {
   bind: function (value, selector) {
-    baseDropdown.apply(this, [value, selector, null]);
+    baseBbaseDropdown.apply(this, [value, selector, null]);
   }
 }
 Bbase.DIRECTIVE['bbaseuidropdownwin'] = {
   bind: function (value, selector) {
-    baseDropdown.apply(this, [value, selector, 'win']);
+    baseBbaseDropdown.apply(this, [value, selector, 'win']);
   }
 }

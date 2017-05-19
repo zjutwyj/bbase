@@ -1,19 +1,19 @@
 'use strict';
 /**
  * @description 模块功能说明
- * @class ThemeList
+ * @class ThemeTree
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('ThemeList', [], function (require, exports, module) {
-  var ThemeList, template;
+define('ThemeTree', [], function (require, exports, module) {
+  var ThemeTree, template;
 
   template = `
-    <div class="ThemeList-wrap">
-      <div id="ui-nav" bb-bbaseuitab="{viewId: 'themeListTab', cur: curNav,theme:'tab-ul-line',path: 'moduleId', tpl: tpl, items: navitems, direction: 'v'}"></div>
+    <div class="ThemeTree-wrap">
+      <div id="ui-nav" bb-bbaseuitab="{viewId: 'themeTreeTab', cur: curNav,theme:'tab-ul-line',path: 'moduleId', tpl: tpl, items: navitems, direction: 'v'}"></div>
     </div>
   `;
 
-  ThemeList = BbaseView.extend({
+  ThemeTree = BbaseView.extend({
     initialize: function () {
       this._super({
         template: template
@@ -21,9 +21,10 @@ define('ThemeList', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        curNav: 'ThemeListRadio',
+        curNav: 'ThemeTree01',
         navitems: [
-          { text: '样式1', moduleId: 'ThemeList1' }
+          { text: '主题样式1', moduleId: 'ThemeTree01' ,oneRender:false}
+
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>
@@ -32,5 +33,5 @@ define('ThemeList', [], function (require, exports, module) {
     }
   });
 
-  module.exports = ThemeList;
+  module.exports = ThemeTree;
 });

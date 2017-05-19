@@ -14,7 +14,7 @@ define('ComponentPhotoPick', [], function(require, exports, module){
         <div class="anything" style="display: block;">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbasecomponentphotopick="{viewId: 'bbasecomponentphotopick', cur: cur, items: items}"</span>
+              <span class="name">bbasecomponentphotopick="{viewId: 'picphotopick', cur: pic, listApi: '/att/list'"</span>
             </div>
           </div>
           <div class="main">

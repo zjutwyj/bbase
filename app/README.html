@@ -256,6 +256,66 @@ new ProductDetail({
   onReady: fucntion(){},                                // 组件渲染完毕
 });
 </code></pre>
+<p>// BbaseUtils工具类</p>
+<p>// 对话框</p>
+<pre><code class="lang-js">BbaseUtils.dialog({
+   id: &#39;copyDialog&#39;,
+   title: &#39;复制图片&#39;,
+   target: &#39;.btn-email-bind&#39;,
+   width: 800,
+   quickClose: true, // 点击空白处关闭对话框
+   hideCloseBtn: false, // 是否隐藏关闭按钮
+   content: this.copyDetail({
+        filename: this.model.get(&#39;filename&#39;),
+        serverPath: this.model.get(&#39;serverPath&#39;)
+   }),
+   cover: true, // 是否显示遮罩
+   onshow: function(){// 对话框显示时回调
+   },
+   load: function(){ // iframe载入完成后回调
+      ...base.js
+   },
+   success: function(){// 按确定按钮时回调
+      this.close();
+   }
+});
+</code></pre>
+<p>// 提示</p>
+<pre><code class="lang-js">BbaseUtils.tip(&#39;提示内容&#39;, {
+   time: 1000,
+   title: &#39;温馨提示&#39;
+});
+</code></pre>
+<p>// 确认框</p>
+<pre><code class="lang-js"> BbaseUtils.confirm({
+   title: &#39;提示&#39;,
+   target: this.$(&#39;.name&#39;).get(0),
+   content: &#39;是否删除?&#39;,
+   success: function(){
+        ...
+   },
+   cancel: function(){
+     ...
+   }
+});
+</code></pre>
+<p>// 添加加载动画</p>
+<pre><code class="lang-js">BbaseUtils.addLoading();
+</code></pre>
+<p>// 移除加载动画</p>
+<pre><code class="lang-js">BbaseUtils.removeLoading();
+</code></pre>
+<p>// 加载资源</p>
+<pre><code class="lang-js">BbaseUtils.loadFile(document, {
+  href: CONST.HOST + &quot;/vendor/flatpickr/flatpickr.min.css&quot;,
+  rel: &#39;stylesheet&#39;,
+  tag: &quot;link&quot;,
+  type: &quot;text/css&quot;,
+  defer: &quot;defer&quot;
+}, function() {
+  ...todo
+});
+</code></pre>
 <h3 id="-">其它说明</h3>
 <pre><code class="lang-js">var Module = BbaseView.extend({
 
@@ -301,7 +361,7 @@ bb-change: 事件函数(其中参数为改变的字段名称)<br></p>
 <h3 id="-">表单元素双向绑定</h3>
 <pre><code class="lang-html">&lt;input bb-model=&quot;name:keyup&quot; type=&quot;text&quot; class=&quot;text&quot; /&gt;
 </code></pre>
-<pre><code class="lang-js">bb-model: 模型类字段  后面的:keyup表示按下某个键弹起时触发，默认为:change (注：建议添加value=&quot;{{name}}&quot;,懒执行，提高性能)
+<pre><code class="lang-js">bb-model: 模型类字段  后面的:keyup表示按下某个键弹起时触发，默认为:change (注：建议添加value=&quot;{{name}}&quot;,1:懒执行，提高性能,2:可以添加{{{name}}}模板指令，阻止过滤特殊符号)
 </code></pre>
 <h3 id="-">表单验证</h3>
 <p>详见：example/DomainComponent.js</p>
@@ -346,8 +406,8 @@ bb-src=&quot;&quot;
 <h3 id="-">视图通用方法</h3>
 <pre><code class="lang-js">this._super(type); // 引用父类，当参数type为view时返回上级视图 model时返回上级模型类，data上级模型类数据,options返回上级参数,&quot;_init&quot; 执行上级方法,为对象时调用父级的_initialize()方法 (注：BbaseItem中调用BbaseList中的方法，尽量用this._super(&#39;superFn&#39;, args))
 
-this._view(&#39;viewId&#39;);// 获取视图(注：默认带this.cid)  注：如果是从路由那边注册的， 那么获取是用app.getView(&#39;viewId&#39;) 来引用
-this._region(&#39;name&#39;, ProductList, {}); // 添加视图区域,当一个参数时则为获取视图(注：默认带this.cid)
+this._view(&#39;viewId&#39;, instance);// 注册视图(注：默认带this.cid)  注：如果路由那边注册的时候用的是app.addView， 那么获取是用app.getView(&#39;viewId&#39;) 来引用, 如果注册的时候用的是this._view(&#39;name&#39;, instance), 那么获取可以用this._view(&#39;name&#39;)获取
+this._region(&#39;name&#39;, ProductList, {}); // 添加视图区域,当一个参数时则为获取视图(注：默认带this.cid),引用可用this._region(&#39;name&#39;)
 
 this._service(&#39;productList&#39;).then(function(result){}); // 数据请求服务
 this._navigate(&#39;#/home&#39;, true); // 导航

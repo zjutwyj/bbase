@@ -116,6 +116,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
     if (arguments.length === 1) {
       return this._view(name);
     }
+    options.__viewId = name;
     BbaseApp.addRegion(name + this.cid, instance, options);
   },
   /**
@@ -288,6 +289,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
           return { compile: BbaseApp.getDirective(dirName).compile ? BbaseApp.getDirective(dirName).compile : compileStr.indexOf('{{') > -1 ? BbaseHandlebars.compile(compileStr) : BbaseEst.compile('{{' + compileStr + '}}'), compileStr: selector };
         } else {
           hbsStr = this._parseHbs(node.attr(ngDirName));
+          // 默认其它表单元素都经过特殊符号过滤， 当node为textarea元素时，取html代码，若html代码中存在{{{}}}符号，则不过滤符号
           if (!hbsStr && node.is('textarea')) hbsStr = this._parseHbs(node.html());
           compileStr = (BbaseEst.isEmpty(hbsStr) || hbsStr.indexOf('{{') === -1) ? '{{' + fieldName + '}}' : hbsStr;
           return {

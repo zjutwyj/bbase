@@ -17,6 +17,7 @@ var CONST = {
   PIC_URL: 'http://img.jihui88.com/wcd', // 图片服务器地址
   CDN: 'http://img.jihui88.com/wcd/cnd/manage', // 修改后记得改gulpfile里的cdn_root
   MUSIC_URL: 'http://f.bbase.com', // 音乐服务器地址
+  MAIN_COLOR: '#FF5241', // 主题颜色
   SEP: '/', // 地址分隔符
   PIC_NONE: '/manage/images/nopic.jpg?v=001', // 无图片时的替换图片
   BG_NONE: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==', // 空白背景图片

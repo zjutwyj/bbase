@@ -3,7 +3,8 @@ Bbase.DIRECTIVE['bbaseuidialog'] = {
   bind: function (value, selector) {
     var object = this._getObject(value);
     var viewId = object.viewId || BbaseEst.nextUid('bbaseuidialog');
-    $(selector).click(this._bind(function (e) {
+    this.$(selector).eq(0).click(this._bind(function (e) {
+      e.stopImmediatePropagation();
       this._dialog({
         viewId: viewId,
         moduleId: object.moduleId,
@@ -12,15 +13,18 @@ Bbase.DIRECTIVE['bbaseuidialog'] = {
         width: object.width || 'auto',
         height: object.height || 'auto',
         cover: object.cover,
+        data: {
+          id: object.id
+        },
         content: object.content,
         quickClose: object.quickClose,
         align: object.align,
         onReady: this._bind(function(){
           BbaseApp.getCurrentDialog().reset();
-          if (object.onReady) object.onReady.call(this, arguments.slice(0));
+          if (object.onReady) object.onReady.call(this, arguments.length > 0 ? arguments.slice(0) : null);
         }),
         onChange: this._bind(function () {
-          if (object.onChange) object.onChange.call(this, arguments.slice(0));
+          if (object.onChange) object.onChange.call(this, arguments.length > 0 ? arguments.slice(0) : null);
         })
       });
       return false;

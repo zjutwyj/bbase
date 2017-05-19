@@ -547,7 +547,6 @@ var BbaseItem = BbaseSuperView.extend({
     BbaseApp.addData('delItemDialog', BbaseUtils.confirm({
       title: null,
       content: '<div class="item-delete-confirm">' + CONST.LANG.DEL_CONFIRM + '</div>',
-      target: e && this._getTarget(e).get(0),
       success: function(resp) {
         if (BbaseEst.isEmpty(context.model.url())) {
           context.model.attributes.id = null;

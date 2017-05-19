@@ -103,7 +103,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
       this.removePanel(name, panel);
       panel.$template = $(panel.template);
       if (options) options.el = panel.$template;
-      panel.$template.addClass('__panel_' + name);
+      panel.$template.addClass('__panel_' + name + ' ' + (options.viewId || options.__viewId));
       panel.$template.attr('data-view', options.viewId || name);
       if (!panel.append) $(panel.el).empty();
       $(panel.el).append(panel.$template);

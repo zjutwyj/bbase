@@ -314,8 +314,8 @@ BbaseHandlebars.registerHelper('PIC', function (name, number, options) {
   if (name.indexOf('upaiyun.com') === -1 && BbaseEst.startsWidth(name, 'http') && name.indexOf('upload') > -1) {
     name = name.substring(name.indexOf('upload'), name.length);
   }
-  if (name.indexOf('upaiyun.com') === -1 && BbaseEst.startsWidth(name, 'upload')) {
-    return arguments.length < 3 ? domain + '/' + name + version :
+  if (name.indexOf('upaiyun.com') === -1 && BbaseEst.startsWidth(name, 'upload') || options.hash.upload) {
+    return arguments.length < 3 ? domain + (BbaseEst.startsWidth(name, '/') ? '' : '/') + name + version :
       BbaseHandlebars.helpers['_picUrl'].apply(this, [name, number, options]) + version;
   }
 

@@ -5,7 +5,7 @@
  */
 Bbase.MODULE['BbaseItemCheck'] = 'ui/bbase/item_check/controllers/BbaseItemCheck.js';
 
-function itemCheck(value, selector, type) {
+function bbaseItemCheck(value, selector, type) {
   var object = this._getObject(value, 'cur');
   this._require(['BbaseItemCheck'], function (ItemCheck) {
     var viewId = object.viewId;
@@ -46,37 +46,37 @@ function itemCheck(value, selector, type) {
 //bb-bbaseuiradio="{viewId:'radio-form',cur:getCurValue(formId),items:items, onChange: handleChange}"
 Bbase.DIRECTIVE['bbaseuiradio'] = {
   bind: function (value, selector) {
-    itemCheck.apply(this, [value, selector, 'radio']);
+    bbaseItemCheck.apply(this, [value, selector, 'radio']);
   }
 }
 
 //bb-bbaseuicheckbox="{viewId:'radio-form',cur:getCurValue(formId),items:items, onChange: handleChange}"
 Bbase.DIRECTIVE['bbaseuicheckbox'] = {
   bind: function (value, selector) {
-    itemCheck.apply(this, [value, selector, 'checkbox']);
+    bbaseItemCheck.apply(this, [value, selector, 'checkbox']);
   }
 }
 
 //bb-bbaseuiitemtab="{viewId:'ui-item-tab',cur:getCurValue(formId),items:items, onChange: handleChange}"
 Bbase.DIRECTIVE['bbaseuiitemtab'] = {
   bind: function (value, selector) {
-    itemCheck.apply(this, [value, selector, 'tab']);
+    bbaseItemCheck.apply(this, [value, selector, 'tab']);
   }
 }
 //bb-bbaseuiitemcheck="{viewId:'radio-form',cur:getCurValue(formId),items:items, onChange: handleChange}"
 Bbase.DIRECTIVE['bbaseuiitemcheck'] = {
   bind: function (value, selector) {
-    itemCheck.apply(this, [value, selector, 'normal']);
+    bbaseItemCheck.apply(this, [value, selector, 'normal']);
   }
 }
 Bbase.DIRECTIVE['bbaseuiitemtext'] = {
   bind: function (value, selector) {
-    itemCheck.apply(this, [value, selector, 'text']);
+    bbaseItemCheck.apply(this, [value, selector, 'text']);
   }
 }
 //bb-bbaseuiitembtn="{viewId:'ui-item-tab',cur:getCurValue(formId),items:items, onChange: handleChange}"
 Bbase.DIRECTIVE['bbaseuiitembtn'] = {
   bind: function (value, selector) {
-    itemCheck.apply(this, [value, selector, 'btn']);
+    bbaseItemCheck.apply(this, [value, selector, 'btn']);
   }
 }

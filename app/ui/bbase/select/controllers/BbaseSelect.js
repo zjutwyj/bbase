@@ -284,7 +284,9 @@ define('BbaseSelect', [], function(require, exports, module) {
       if (!items) return;
       var id = this._options.cur === 0 ? 0 : (this._options.cur || $(this._options.target).val());
       BbaseEst.each(items, function(item) {
-        if (((item[this._options.value] + '') === (id + '')) || (BbaseEst.isEmpty(item[this._options.value]) && BbaseEst.isEmpty(id))) {
+        var b1 = (item[this._options.value] + '') === (id + '');
+        var b2 = BbaseEst.isEmpty(item[this._options.value]) && BbaseEst.isEmpty(id);
+        if ( b1 || b2) {
           this.$('.bui-select-input').val(BbaseEst.trim(item[this._options.text]).replace('|-', ''));
           //if (!this.initRender)
           if (this._options.onChange)
@@ -369,6 +371,14 @@ define('BbaseSelect', [], function(require, exports, module) {
         }, this), 300);
       }
 
+    },
+    setList: function(items){
+      if (!this.selectNode){
+        this._options.items = items;
+      }else{
+        this.selectNode._setModels(itmes);
+      }
+      this.initInputValue(items);
     },
     afterRender: function() {
       if (this._options.target) {
