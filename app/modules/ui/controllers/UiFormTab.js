@@ -25,7 +25,10 @@ define('UiFormTab', [], function (require, exports, module) {
              <div id="tab4" style="display:none;">tab4</div>
           </div>
           <div class="footer">
-            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'select-normal', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div>
+            <div class="left" bb-bbaseuiselect="{viewId: 'select-normal', cur:cur,items: items}"></div>
+            <div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="left">&nbsp;&nbsp;<a href="javascript:;" bb-click="addOne">添加选项</a></div>
           </div>
         </div>
       </div>
@@ -46,7 +49,10 @@ define('UiFormTab', [], function (require, exports, module) {
              <div id="tab4" style="display:none;">tab4</div>
           </div>
           <div class="footer">
-            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'select-text', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div>
+            <div class="left" bb-bbaseuiselect="{viewId: 'select-text', cur:cur,items: items}"></div>
+            <div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="left">&nbsp;&nbsp;<a href="javascript:;" bb-click="addOne">添加选项</a></div>
           </div>
         </div>
       </div>
@@ -67,7 +73,10 @@ define('UiFormTab', [], function (require, exports, module) {
              <div id="tab4" style="display:none;">tab4</div>
           </div>
           <div class="footer">
-            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'select-btn', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div>
+            <div class="left" bb-bbaseuiselect="{viewId: 'select-btn', cur:cur,items: items}"></div>
+            <div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="left">&nbsp;&nbsp;<a href="javascript:;" bb-click="addOne">添加选项</a></div>
           </div>
         </div>
       </div>
@@ -88,7 +97,10 @@ define('UiFormTab', [], function (require, exports, module) {
              <div id="tab4" style="display:none;">tab4</div>
           </div>
           <div class="footer">
-            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'select-tabblock', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div>
+            <div class="left" bb-bbaseuiselect="{viewId: 'select-tabblock', cur:cur,items: items}"></div>
+            <div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="left">&nbsp;&nbsp;<a href="javascript:;" bb-click="addOne">添加选项</a></div>
           </div>
         </div>
       </div>
@@ -109,7 +121,10 @@ define('UiFormTab', [], function (require, exports, module) {
              <div id="tab4" style="display:none;">tab4</div>
           </div>
           <div class="footer">
-            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'select-bbaseuitabunderline', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div>
+            <div class="left" bb-bbaseuiselect="{viewId: 'select-bbaseuitabunderline', cur:cur,items: items}"></div>
+            <div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="left">&nbsp;&nbsp;<a href="javascript:;" bb-click="addOne">添加选项</a></div>
           </div>
         </div>
       </div>
@@ -200,6 +215,15 @@ define('UiFormTab', [], function (require, exports, module) {
           { text: '部分完成', value: 'part', nodeId: '#tab4' }
         ]
       }
+    },
+     addOne: function () {
+      var list = BbaseEst.cloneDeep(this._get('items'));
+      list.push({
+        text: BbaseEst.nextUid('新增选项'),
+        value: BbaseEst.nextUid('option'),
+        moduleId: 'DemoListTodo'
+      });
+      this._set('items', list);
     },
     handleChange: function (item, init) {
       console.log(item);

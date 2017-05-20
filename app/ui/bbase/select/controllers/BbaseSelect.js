@@ -376,7 +376,7 @@ define('BbaseSelect', [], function(require, exports, module) {
       if (!this.selectNode){
         this._options.items = items;
       }else{
-        this.selectNode._setModels(itmes);
+        this.selectNode._setModels(items);
       }
       this.initInputValue(items);
     },

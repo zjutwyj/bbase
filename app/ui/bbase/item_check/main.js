@@ -6,7 +6,7 @@
 Bbase.MODULE['BbaseItemCheck'] = 'ui/bbase/item_check/controllers/BbaseItemCheck.js';
 
 function bbaseItemCheck(value, selector, type) {
-  var object = this._getObject(value, 'cur');
+  var object = this._getObject(value, ['cur', 'items']);
   this._require(['BbaseItemCheck'], function (ItemCheck) {
     var viewId = object.viewId;
     var checkAppend = false;
@@ -24,7 +24,7 @@ function bbaseItemCheck(value, selector, type) {
       cur: this._get(object.cur) || object.default || object.cur,
       checkAppend: BbaseEst.typeOf(object.append) === 'boolean' ? object.append : checkAppend,
       checkToggle: BbaseEst.typeOf(object.toggle) === 'boolean' ? object.toggle : checkToggle,
-      items: object.items || [],
+      items: this._get(object.items) || [],
       compare: object.compare, // 自定义比较器
       onChange: this._bind(function (item, init, event, values) {
         if (typeof this.model.attributes[object.cur] !== 'undefined' && !BbaseEst.isEmpty(object.cur) && !init) {
@@ -40,6 +40,9 @@ function bbaseItemCheck(value, selector, type) {
         this._view(viewId).setValue(this._get(object.cur));
       });
     }
+     this._watch([object.items], '', function(){
+          this._view(viewId).setList(this._get(object.items));
+      });
   });
 };
 

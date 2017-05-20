@@ -6,7 +6,7 @@
 Bbase.MODULE['BbaseTab'] = 'ui/bbase/tab/controllers/BbaseTab.js';
 
 function bbasetab(value, selector, theme){
-  var object = this._getObject(value, 'cur');
+  var object = this._getObject(value, ['cur', 'items']);
 
     this._require(['BbaseTab'], function (BbaseTab) {
       var viewId = object.viewId;
@@ -29,7 +29,7 @@ function bbasetab(value, selector, theme){
         direction: object.direction || 'h',
         contSelector: object.contSelector, // 【可选】容器选择符
         args: {},
-        items: object.items, // 传递给视图的参数, 具体数据见上面
+        items:this._get(object.items) || [], // 传递给视图的参数, 具体数据见上面
         onChange: BbaseEst.proxy(function (item, init, b, c) { // 点击事件回调
           if (typeof this.model.attributes[object.cur] !== 'undefined' && !BbaseEst.isEmpty(object.cur) && !init) {
             this._set(object.cur, item.value);
@@ -45,6 +45,9 @@ function bbasetab(value, selector, theme){
           this._view(viewId).setValue(this._get(object.cur));
         });
       }
+      this._watch([object.items], '', function(){
+          this._view(viewId).setList(this._get(object.items));
+      });
     });
 }
 

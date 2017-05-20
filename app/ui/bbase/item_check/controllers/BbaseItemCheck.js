@@ -118,6 +118,9 @@ define('BbaseItemCheck', [], function(require, exports, module) {
     getCurValue: function() {
       return this.options.data.cur;
     },
+    setList: function(items){
+      this._setModels(items);
+    },
     getValue: function() {
       return BbaseEst.map(this._getCheckedItems(true), this._bind(function(item) {
         return item[this.options.data.path];

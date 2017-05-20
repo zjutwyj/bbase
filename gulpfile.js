@@ -141,14 +141,20 @@ gulp.task('readme', function () {
     .pipe(gulp.dest(dist.readme));
 });
 
+gulp.task('doc', function(){
+  return gulp.src('src/Est/Est.source.js')
+    .pipe(yuidoc())
+    .pipe(gulp.dest('app/doc'))
+});
+
 gulp.task('build', function (callback) {
   DEBUG = true;
-  runSequence(['bbase_jquery'], ['bbase_zepto'], ['UserManagement', 'Mobile', 'Leaflet', 'lmc_wcd', 'Pc','readme'], callback);
+  runSequence(['bbase_jquery'], ['bbase_zepto'], ['UserManagement', 'Mobile', 'Leaflet', 'lmc_wcd', 'Pc','readme', 'doc'], callback);
 });
 
 gulp.task('dist', function (callback) {
   DEBUG = false;
-  runSequence(['bbase_jquery', 'bbase_zepto'], ['UserManagement', 'Mobile', 'Leaflet', 'lmc_wcd', 'Pc','readme'], callback);
+  runSequence(['bbase_jquery', 'bbase_zepto'], ['UserManagement', 'Mobile', 'Leaflet', 'lmc_wcd', 'Pc','readme', 'doc'], callback);
 });
 
 // dist

@@ -1,3 +1,5 @@
+<h3 id="bbaseest-">BbaseEst工具类</h3>
+<p><a href="http://www.bbase.com/manage/doc/classes/BbaseEst%20-%20%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%BA%93.html">点击查看详细</a></p>
 <h3 id="-">使用流程</h3>
 <p>第一步：视图定义</p>
 <pre><code class="lang-js">var FlyHeader = BbaseView.extend({
@@ -19,6 +21,9 @@ this._region(&#39;FlyHeader&#39;, FlyHeader, {
   el: &#39;#leaflet-main&#39;,
   viewId: &#39;FlyHeader&#39;
 });
+
+// 引用
+BbaseApp.getView(&#39;FlyHeader&#39;) 或 this._view(&#39;FlyHeader&#39;)
 </code></pre>
 <h3 id="-">最简视图类型(必填项)</h3>
 <pre><code class="lang-js">// 普通视图
@@ -44,6 +49,7 @@ var ProductList = BbaseList.extend({
       }),
       item: BbaseItem.extend({
         tagName: &#39;li&#39;,
+        className: &#39;item-li&#39;,
         template: `&lt;div&gt;item&lt;/div&gt;`
       }),
       render: &#39;.list-ul&#39;
@@ -73,33 +79,31 @@ var FlyHeader = BbaseView.extend({
   initialize: function(){
     this._super({
       template: `&lt;div&gt;content&lt;/div&gt;`,                   // 字符串模板
+
       toolTip: true,                                    // 是否显示title提示框   html代码： &lt;div class=&quot;tool-tip&quot; data-title=&quot;提示内容&quot;&gt;内容&lt;/div&gt;
+
       enter: &#39;#submit&#39;,                                 // 当按下回车键后，系统将会点击这个按钮
+
       data: {}                                          // 传递给模型类的数据， 常放于new一个视图的参数里
     });
   },
   initData: function(){                                 // 初始化模型类数据
-    this._setDefault(&#39;args.name&#39;, &#39;a&#39;);                 // 初始化数据
     return {
       message: &#39;我是一条消息&#39;
     }
   },
-  beforeRender: function(){                             // 视图插入到DOM前
+  beforeRender: function(){}                            // 视图插入到DOM前
 
-  },
-  afterRender: function(){                              // 视图插入到DOM后
+  afterRender: function(){}                             // 视图插入到DOM后
 
-  },
-  viewUpdate: function(){                               // 视图更新
+  viewUpdate: function(){}                              // 视图更新
 
-  },
-  update: function(name){                               // 监听的字段改变时回调
+  update: function(name){}                              // 监听的字段改变时回调
 
-  },
-  change: fucntion(path){                               // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+  change: fucntion(path){}                              // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
-  },
-  destory: function(){                                  // 组件销毁时
+  destory: function(){}                                 // 组件销毁时
+
 });
 </code></pre>
 <pre><code class="lang-js">// 列表视图
@@ -109,80 +113,101 @@ var ProductList = BbaseList.extend({
       template: `&lt;div&gt;&lt;ul class=&quot;list-ul&quot;&gt;&lt;/ul&gt;&lt;/div&gt;`, // 字符串模板
       model: BbaseModel.extend({
         baseId: &#39;productId&#39;,                            // 映射数据库主键字段
+
         baseUrl: CONST.API + &#39;/product/detail&#39;,         // 对应RESTFUL地址
+
         fields: [&#39;name&#39;],                               // 最终要获取的字段,即提交到服务器上的字段
       }),
+
       collection: BbaseCollection.extend({
         url: CONST.API + &#39;/product/list&#39;                // 对应RESTFUL地址
       }),
+
       item: BbaseItem.extend({
         tagName: &#39;li&#39;,                                  // 定义单视图包裹层DOM元素类型
+
         template: `&lt;div&gt;item&lt;/div&gt;`,                    // 单视图模板
+
         className: &#39;item-li&#39;                            // 在li标签上定义class选择符
+
         filter: function(model){ return false;},        // 当返回false时 该单视图不在列表中显示出来
       }),
+
       render: &#39;.list-ul&#39;,                               // 列表渲染到哪个DOM元素上
-      empty: false,                                     // 是否清空列表内的html代码，默认为true
+
       toolTip: true,                                    // 是否显示title提示框   html代码： &lt;div class=&quot;tool-tip&quot; data-title=&quot;提示内容&quot;&gt;内容&lt;/div&gt;
+
       enter: &#39;#submit&#39;,                                 // 当按下回车键后，系统将会点击这个按钮
+
       items: [],                                        // 手动定义列表模型集合，此时collection中的url将失效，即静态分页效果
+
       page: 1,                                          // 定义当前分页中的第几页
+
       pageSize: 20,                                     // 定义每页显示多少条数据
+
       diff: true,                                       // 最小渲染单元，此时item那里需添加bb-watch来监听数据变化
+
       data: {}                                          // 传递给模型类的数据， 常放于new一个视图的参数里
+
       append: false,                                    // 是否是追加内容， 默认为替换， 常用于“加载更多”场景中, 默认为false
+
+      checkAppend: false,                               // 鼠标点击checkbox， checkbox是否追加  需在BbaseItem事件中添加 &#39;click .toggle&#39;: &#39;_check&#39;,
+
+      checkToggle: true,                                // 是否选中切换
+
       empty: false,                                     // 追加单视图时， 默认会清空掉render元素内的所有dom,为false时， 不清空， 只是追加，默认为true
+
       pagination: true/selector,                        // 是否显示分页 view视图中相应加入&lt;div id=&quot;pagination-container&quot;&gt;&lt;/div&gt;; pagination可为元素选择符
+
       max: 5,                                           // 限制显示个数
+
       sortField: &#39;sort&#39;,                                // 上移下移字段名称， 默认为sort
+
       cache: true,                                      // 数据缓存到内存中
+
       session: true,                                    // 数据缓存到浏览器中，下次打开浏览器，请求的数据直接从浏览器缓存中读取
 
       // 以下为树型列表时 需要的参数
       subRender: &#39;.node-tree&#39;,                          // 下级分类的容器选择符
+
       collapse: &#39;.node-collapse&#39;                        // 展开/收缩元素选择符
+
       parentId: &#39;belongId&#39;,                             // 分类 的父类ID
+
       categoryId: &#39;categoryId&#39;,                         // 分类 的当前ID
+
       rootId: &#39;isroot&#39;,                                 // 一级分类字段名称
+
       rootValue: &#39;00&#39;                                   // 一级分类字段值  可为数组[null, &#39;Syscode_&#39;]   数组里的选项可为方法， 返回true与false
+
       extend: true                                      // false收缩 true为展开
     });
   },
   initData: function(){                                 // 初始化模型类数据
-    this._setDefault(&#39;args.name&#39;, &#39;a&#39;);                 // 初始化数据
     return {
       message: &#39;我是一条消息&#39;
     }
   },
-  beforeRender: function(){                             // 视图插入到DOM前
+  beforeRender: function(){}                            // 视图插入到DOM前
 
-  },
-  afterRender: function(){                              // 视图插入到DOM后
+  afterRender: function(){}                             // 视图插入到DOM后
 
-  },
-  viewUpdate: function(){                               // 视图更新
+  viewUpdate: function(){}                              // 视图更新
 
-  },
-  beforeLoad: function(){                               // 从服务器获取数据前回调
-  },
-  afterLoad: function(response){                        // 从服务器获取数据后回调
+  beforeLoad: function(){}                              // 从服务器获取数据前回调
 
-  },
-  errorFetch: fucntion(response){                       // 从服务器获取列表失败回调
+  afterLoad: function(response){}                       // 从服务器获取数据后回调
 
-  },
-  update: function(name){                               // 监听的字段改变时回调
+  errorFetch: fucntion(response){}                      // 从服务器获取列表失败回调
 
-  },
-  change: fucntion(path){                               // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+  update: function(name){}                              // 监听的字段改变时回调
 
-  },
-  destory: function(){                                  // 组件销毁时
+  change: fucntion(path){}                              // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
-  },
-  filter: function(){                                   // 过滤操作
+  destory: function(){}                                 // 组件销毁时
 
-  },
+  filter: function(){}                                  // 过滤操作
+
 });
 </code></pre>
 <pre><code class="lang-js">// 表单提交视图
@@ -194,119 +219,227 @@ var ProductDetail = BbaseDetail.extend({
       `,
       model: BbaseModel.extend({
         baseId: &#39;productId&#39;,                            // 映射数据库主键字段
+
         baseUrl: CONST.API + &#39;/product/detail&#39;,         // 对应RESTFUL地址
+
         fields: [&#39;name&#39;]                                // 最终要获取的字段,即提交到服务器上的字段
+
       }),
       form: &#39;#product-detail-form:#submit&#39; ,            // 定义表单提交作用域及提交按钮，中间以冒号分隔
+
       toolTip: true,                                    // 是否显示title提示框   html代码： &lt;div class=&quot;tool-tip&quot; data-title=&quot;提示内容&quot;&gt;内容&lt;/div&gt;
+
       enter: &#39;#submit&#39;,                                 // 当按下回车键后，系统将会点击这个按钮
+
       data: {}                                          // 传递给模型类的数据， 常放于new一个视图的参数里
+
     });
   },
   initData: function(response){                         // 初始化模型类数据, response 为服务器返回的数据
-    this._setDefault(&#39;args.name&#39;, &#39;a&#39;);                 // 初始化数据
     return {
       message: &#39;我是一条消息&#39;
     }
   },
-  beforeRender: function(){                             // 视图插入到DOM前
+  beforeRender: function(){}                            // 视图插入到DOM前
 
-  },
-  afterRender: function(){                              // 视图插入到DOM后
+  afterRender: function(){}                             // 视图插入到DOM后
 
-  },
-  viewUpdate: function(){                               // 视图更新
+  viewUpdate: function(){}                              // 视图更新
 
-  },
-  beforeSave: function(){                               // 模型类保存前
+  beforeSave: function(){}                              // 模型类保存前
 
-  },
-  afterSave: fucntion(response){                        // 模型类保存后
+  afterSave: fucntion(response){}                       // 模型类保存后
 
-  },
-  beforeLoad: function(){                               // 从服务器获取数据前回调
+  beforeLoad: function(){}                              // 从服务器获取数据前回调
 
-  },
-  afterLoad: function(response){                        // 从服务器获取数据后回调
+  afterLoad: function(response){}                       // 从服务器获取数据后回调
 
-  },
-  errorSave: function(response){                        // 模型类保存失败后回调
+  errorSave: function(response){}                       // 模型类保存失败后回调
 
-  },
-  errorFetch: fucntion(response){                       // 载入模型类失败回调
+  errorFetch: fucntion(response){}                      // 载入模型类失败回调
 
-  },
-  update: function(name){                               // 监听的字段改变时回调
+  update: function(name){}                              // 监听的字段改变时回调
 
-  },
-  change: fucntion(path){                               // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+  change: fucntion(path){}                              // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
-  },
-  destory: function(){                                  // 组件销毁时
+  destory: function(){}                                 // 组件销毁时
 
-  }
 });
 
 // 视图调用
 new ProductDetail({
   id: 1,                                                // 如果传入ID参数， 则系统会自动从服务端请求详细表单内容
+
   data: {},                                             // 传递给模型类的数据， 常放于new一个视图的参数里
+
   onChange: fucntion(){},                               // 手动调用，内可加逻辑代码
+
   onUpdate: function(){},                               // 当模型类改变时系统会实时调用这个回调
+
   onReady: fucntion(){},                                // 组件渲染完毕
+
+});
+</code></pre>
+<h3 id="-">视图通用方法</h3>
+<pre><code class="lang-js">this._super(type); // 引用父类，当参数type为view时返回上级视图 model时返回上级模型类，data上级模型类数据,options返回上级参数,&quot;_init&quot; 执行上级方法,为对象时调用父级的_initialize()方法 (注：BbaseItem中调用BbaseList中的方法，尽量用this._super(&#39;superFn&#39;, args))
+
+this._view(&#39;viewId&#39;, instance);// 注册视图(注：默认带this.cid)  注：如果路由那边注册的时候用的是BbaseApp.addRegion， 那么获取是用BbaseApp.getView(&#39;viewId&#39;) 来引用, 如果注册的时候用的是this._region(&#39;name&#39;, instance, {}), 那么获取可以用this._view(&#39;name&#39;)获取
+this._region(&#39;name&#39;, ProductList, {}); // 添加视图区域,当一个参数时则为获取视图(注：默认带this.cid),引用可用this._region(&#39;name&#39;)
+
+this._navigate(&#39;#/home&#39;, true); // 导航
+
+this._stringifyJSON([&#39;args&#39;, &#39;laymodList&#39;]); // 序列化成字符串
+this._parseJSON([&#39;args&#39;, &#39;laymodList&#39;]); // 反序列化
+
+this._setOption(&#39;itemId&#39;, &#39;111&#39;); // 设置组件参数
+this._getOption(&#39;itemId&#39;);// 获取组件参数
+this._getTpl(); // 获取模板字符串
+
+this._getTarget(e); // 获取鼠标点击时的那个元素
+this._getEventTarget(e); // 获取添加事件的那个元素
+
+this._one([&#39;ProductList&#39;], function(ProductList){}); // 只执行单次，当第一个参数为数组时，则为require这个模块
+this._require([&#39;ProductList&#39;], function(ProductList){}); // 请求模块
+
+this._delay(function(){}, 5000); // 延迟执行
+this._bind(function(){}); // 绑定上下文
+
+this._dialog({}); // 模块对话框 , this._dialog(&#39;viewId&#39;) -&gt; 获取对话框
+this._close(); // 关闭对话框
+this._initToolTip(parentNode, className); // 添加提示
+
+this._set(&#39;name&#39;, &#39;aaa&#39;); // 设置模型类，可传对象 this._set({key: value});
+this._get(&#39;name&#39;); // 获取值
+
+this._watch(&#39;color&#39;, &#39;.render:style&#39;, function(fieldName){}); // 数据监听 , 建议使用组件生命周期中的change:function(color){...} 方法中处理
+
+this._getPath(this._get(&#39;args.color&#39;), &#39;args.&#39;); // 获取路径(第二个参数为前缀)
+this._getField(&#39;remaining!== models.length&#39;); =&gt; &#39;remaining&#39;// 获取表达式字段
+this._getBoolean(&#39;true&#39;);   // 获取boolean值，&#39;true&#39; &#39;1&#39; &#39;str&#39; 均为true, &#39;false&#39;, &#39;0&#39;, &#39;&#39; 均为false
+this._getObject(&#39;{name: &#39;aa&#39;, value: &#39;getValue&#39;}&#39;); // 获取对象
+
+this._setParam(&#39;name&#39;, &#39;value&#39;);    // 设置请求参数
+this._getParam(&#39;name&#39;);             // 获取请求参数
+</code></pre>
+<h3 id="-">模型类操作</h3>
+<pre><code class="lang-js">// 重置模型类
+this._reset();
+this._reset({name: &#39;aaa&#39;}); // 重置模型类并设置name为aaa
+
+// 设置模型类值
+this._set(&#39;args.color&#39;, &#39;#999&#39;);
+this._set({
+  &#39;color&#39;: &#39;#999&#39;,
+  &#39;args.color&#39;: &#39;#999&#39;
+});
+
+// 获取模型类值
+this._get(&#39;args.color&#39;); ==&gt; #999
+
+// 设置模型类值，不触发change事件
+this._setAttr(&#39;args.color&#39;, &#39;#999&#39;); //
+this._setAttr({
+  &quot;color&quot;: &#39;#999&#39;,
+  &quot;args.color&quot;: &#39;#999&#39;
+});
+
+this._setDefault(&#39;args.color&#39;, &#39;#999&#39;); // 设置默认值 #999
+this._getDefault(&#39;args.color&#39;, &#39;#999&#39;); // 获取args.color值，若不存在则初始化为#999并返回
+</code></pre>
+<h3 id="bbaseitem-">BbaseItem操作</h3>
+<pre><code class="lang-js">this._getPage(); //获取当前列表第几页
+</code></pre>
+<h3 id="bbasedetail-">BbaseDetail操作</h3>
+<pre><code class="lang-js">this._save(function(response){}, function(response){}); // 保存表单
+</code></pre>
+<h3 id="bbaselist-">BbaseList列表操作</h3>
+<pre><code class="lang-js">this._push(model, dx); // model可为object对象或new model()对象， dx为插入的索引值，不填默认插入到尾部
+this._remove(start, end); // 移除元素
+this._insertOrder(evt.oldIndex, evt.newIndex, function(list) {}); //插序排序
+
+this._getItems(); // 获取全部列表
+this._getItem(dx); // 获取第index项
+this._getCheckedItems(isPluck); // 获取选中的列表项 isPluck为true时自动转化为model.toJSON()对象
+this._getCheckedIds(); // 获取选中项的ids数组
+
+this._getPage(); // 获取当前第几页
+this._setPage(5);// 设置当前第几页
+this._getPageSize();// 获取每页个数
+this._setPageSize(16);// 设置每页个数
+this._getCount();// 获取总个数
+this._setCount(5);// 设置总个数
+this._getTotalPage();// 获取总页数
+this._getLength(); // 获取列表长度
+
+this._reload();         // 刷新列表
+
+this._batch({  // 批量操作
+    url: CONST.API + &#39;/message/batch/del&#39;,
+    tip: &#39;删除成功&#39;
+});
+this._batchDel({
+    url: CONST.API + &#39;/message/batch/del&#39;,
+    field: &#39;id&#39;
+});
+</code></pre>
+<h3 id="bbasecollection-">BbaseCollection集合操作</h3>
+<pre><code class="lang-js">this.collection._set([{},{}])或this._setModels([{},{}]); // 重置列表(常用于过滤数据，排序等)
+this.collection.each(function(model){
+  model._set(&#39;name&#39;, &#39;aaa&#39;); // 设置模型类
+  model._get(&#39;name&#39;); // 获取值
 });
 </code></pre>
 <p>// BbaseUtils工具类</p>
-<p>// 对话框</p>
-<pre><code class="lang-js">BbaseUtils.dialog({
+<pre><code class="lang-js">// 对话框
+BbaseUtils.dialog({
    id: &#39;copyDialog&#39;,
    title: &#39;复制图片&#39;,
    target: &#39;.btn-email-bind&#39;,
    width: 800,
-   quickClose: true, // 点击空白处关闭对话框
-   hideCloseBtn: false, // 是否隐藏关闭按钮
+   quickClose: true,                                    // 点击空白处关闭对话框
+   hideCloseBtn: false,                                 // 是否隐藏关闭按钮
    content: this.copyDetail({
         filename: this.model.get(&#39;filename&#39;),
         serverPath: this.model.get(&#39;serverPath&#39;)
    }),
-   cover: true, // 是否显示遮罩
-   onshow: function(){// 对话框显示时回调
+   cover: true,                                         // 是否显示遮罩
+   onshow: function(){                                  // 对话框显示时回调
    },
-   load: function(){ // iframe载入完成后回调
+   load: function(){                                    // iframe载入完成后回调
       ...base.js
    },
-   success: function(){// 按确定按钮时回调
+   success: function(){                                 // 按确定按钮时回调
       this.close();
    }
 });
 </code></pre>
-<p>// 提示</p>
-<pre><code class="lang-js">BbaseUtils.tip(&#39;提示内容&#39;, {
+<pre><code class="lang-js">// 提示
+BbaseUtils.tip(&#39;提示内容&#39;, {
    time: 1000,
    title: &#39;温馨提示&#39;
 });
 </code></pre>
-<p>// 确认框</p>
-<pre><code class="lang-js"> BbaseUtils.confirm({
-   title: &#39;提示&#39;,
-   target: this.$(&#39;.name&#39;).get(0),
-   content: &#39;是否删除?&#39;,
-   success: function(){
-        ...
-   },
-   cancel: function(){
-     ...
-   }
+<pre><code class="lang-js">// 确认框
+BbaseUtils.confirm({
+ title: &#39;提示&#39;,
+ target: this.$(&#39;.name&#39;).get(0),
+ content: &#39;是否删除?&#39;,
+ success: function(){
+      ...
+ },
+ cancel: function(){
+   ...
+ }
 });
 </code></pre>
-<p>// 添加加载动画</p>
-<pre><code class="lang-js">BbaseUtils.addLoading();
+<pre><code class="lang-js">// 添加加载动画
+BbaseUtils.addLoading();
 </code></pre>
-<p>// 移除加载动画</p>
-<pre><code class="lang-js">BbaseUtils.removeLoading();
+<pre><code class="lang-js">// 移除加载动画
+BbaseUtils.removeLoading();
 </code></pre>
-<p>// 加载资源</p>
-<pre><code class="lang-js">BbaseUtils.loadFile(document, {
+<pre><code class="lang-js">// 加载资源
+BbaseUtils.loadFile(document, {
   href: CONST.HOST + &quot;/vendor/flatpickr/flatpickr.min.css&quot;,
   rel: &#39;stylesheet&#39;,
   tag: &quot;link&quot;,
@@ -318,21 +451,7 @@ new ProductDetail({
 </code></pre>
 <h3 id="-">其它说明</h3>
 <pre><code class="lang-js">var Module = BbaseView.extend({
-
-  // 组件初始化
-  initialize: fucntion  (){
-    this._super({
-      // BbaseList 部分
-      checkAppend: false, // 鼠标点击checkbox， checkbox是否追加  需在BbaseItem事件中添加 &#39;click .toggle&#39;: &#39;_check&#39;,
-      checkToggle: true,// 是否选中切换
-
-      page: parseInt(BbaseEst.cookie(&#39;orderList_page&#39;)) || 1, //设置起始页 所有的分页数据都会保存到cookie中， 以viewId + &#39;_page&#39;格式存储， 注意cookie取的是字符串， 要转化成int
-      pageSize: parseInt(BbaseEst.cookie(&#39;orderList_pageSize&#39;)) || 16, // 设置每页显示个数
-    );
-  },
-
-  // 数据监听(推荐写到html页面中，详见下面的绑定规则)
-  onWatch: fucntion(){
+  onWatch: fucntion(){  // 数据监听(推荐写到html页面中，详见下面的绑定规则)
     this._watch([&#39;args.name&#39;], &#39;.result:style&#39;, function(name){
       console.log(&#39;改变的字段为：&#39; + name);
     });
@@ -346,9 +465,9 @@ this.cid                                                // 唯一标识符， �
 <h3 id="-">视图重渲染</h3>
 <pre><code class="lang-js">this._region(&#39;imagePickerConfig&#39;, ImagePickerConfig, {
   el: &#39;.image-picker-config&#39;,
-  data: this.model.toJSON(),      // 将当前视图的模型类传入ImagePickerConfig中
-  diff: true,                     // 开启diff， 默认是重新渲染
-  onChange: this._bind(this._set) // 组件模型类改变回调
+  data: this.model.toJSON(),                            // 将当前视图的模型类传入ImagePickerConfig中
+  diff: true,                                           // 开启diff， 默认是重新渲染
+  onChange: this._bind(this._set)                       // 组件模型类改变回调
 });
 </code></pre>
 <h3 id="-">数据绑定</h3>
@@ -403,119 +522,9 @@ bb-show=&quot;models.length&quot;;   显示、隐藏   models为BbaseList中的t
 bb-disabled=&quot;models.length&quot;
 bb-src=&quot;&quot;
 </code></pre>
-<h3 id="-">视图通用方法</h3>
-<pre><code class="lang-js">this._super(type); // 引用父类，当参数type为view时返回上级视图 model时返回上级模型类，data上级模型类数据,options返回上级参数,&quot;_init&quot; 执行上级方法,为对象时调用父级的_initialize()方法 (注：BbaseItem中调用BbaseList中的方法，尽量用this._super(&#39;superFn&#39;, args))
-
-this._view(&#39;viewId&#39;, instance);// 注册视图(注：默认带this.cid)  注：如果路由那边注册的时候用的是app.addView， 那么获取是用app.getView(&#39;viewId&#39;) 来引用, 如果注册的时候用的是this._view(&#39;name&#39;, instance), 那么获取可以用this._view(&#39;name&#39;)获取
-this._region(&#39;name&#39;, ProductList, {}); // 添加视图区域,当一个参数时则为获取视图(注：默认带this.cid),引用可用this._region(&#39;name&#39;)
-
-this._service(&#39;productList&#39;).then(function(result){}); // 数据请求服务
-this._navigate(&#39;#/home&#39;, true); // 导航
-
-this._stringifyJSON([&#39;args&#39;, &#39;laymodList&#39;]); // 序列化成字符串
-this._parseJSON([&#39;args&#39;, &#39;laymodList&#39;]); // 反序列化
-
-this._setOption(&#39;itemId&#39;, &#39;111&#39;); // 设置组件参数
-this._getOption(&#39;itemId&#39;);// 获取组件参数
-this._getTpl(); // 获取模板字符串
-
-this._getTarget(e); // 获取鼠标点击时的那个元素
-this._getEventTarget(e); // 获取添加事件的那个元素
-
-this._one([&#39;ProductList&#39;], function(ProductList){}); // 只执行单次，当第一个参数为数组时，则为require这个模块
-this._require([&#39;ProductList&#39;], function(ProductList){}); // 请求模块
-
-this._delay(function(){}, 5000); // 延迟执行
-this._bind(function(){}); // 绑定上下文
-
-this._dialog({}); // 模块对话框 , this._dialog(&#39;viewId&#39;) -&gt; 获取对话框
-this._close(); // 关闭对话框
-this._initToolTip(parentNode, className); // 添加提示
-
-this._set(&#39;name&#39;, &#39;aaa&#39;); // 设置模型类，可传对象 this._set({key: value});
-this._get(&#39;name&#39;); // 获取值
-
-this._watch(&#39;color&#39;, &#39;.render:style&#39;, function(fieldName){}); // 数据监听 , 建议使用组件生命周期中的change:function(color){...} 方法中处理
-
-this._getPath(this._get(&#39;args.color&#39;), &#39;args.&#39;); // 获取路径(第二个参数为前缀)
-this._getField(&#39;remaining!== models.length&#39;); =&gt; &#39;remaining&#39;// 获取表达式字段
-this._getBoolean(&#39;true&#39;);   // 获取boolean值，&#39;true&#39; &#39;1&#39; &#39;str&#39; 均为true, &#39;false&#39;, &#39;0&#39;, &#39;&#39; 均为false
-this._getObject(&#39;{name: &#39;aa&#39;, value: &#39;getValue&#39;}&#39;); // 获取对象
-
-this._setParam(&#39;name&#39;, &#39;value&#39;);    // 设置请求参数
-this._getParam(&#39;name&#39;);             // 获取请求参数
-</code></pre>
-<h3 id="-">模型类操作</h3>
-<pre><code class="lang-js">// 重置模型类
-this._reset();
-this._reset({name: &#39;aaa&#39;}); // 重置模型类并设置name为aaa
-
-// 设置模型类值
-this._set(&#39;args.color&#39;, &#39;#999&#39;);
-this._set({
-  &quot;color&quot;: &#39;#999&#39;,
-  &quot;args.color&quot;: &#39;#999&#39;
-});
-
-// 获取模型类值
-this._get(&#39;args.color&#39;); ==&gt; #999
-
-// 设置模型类值，不触发change事件
-this._setAttr(&#39;args.color&#39;, &#39;#999&#39;); //
-this._setAttr({
-  &quot;color&quot;: &#39;#999&#39;,
-  &quot;args.color&quot;: &#39;#999&#39;
-});
-
-this._setDefault(&#39;args.color&#39;, &#39;#999&#39;); // 设置默认值 #999
-this._getDefault(&#39;args.color&#39;, &#39;#999&#39;); // 获取args.color值，若不存在则初始化为#999并返回
-</code></pre>
-<h3 id="bbaseitem-">BbaseItem操作</h3>
-<pre><code class="lang-js">this._getPage(); //获取当前列表第几页
-</code></pre>
-<h3 id="bbasedetail-">BbaseDetail操作</h3>
-<pre><code class="lang-js">this._save(function(response){}, function(response){}); // 保存表单
-</code></pre>
-<h3 id="-">列表操作</h3>
-<pre><code class="lang-js">this._push(model, dx); // model可为object对象或new model()对象， dx为插入的索引值，不填默认插入到尾部
-this._remove(start, end); // 移除元素
-this._insertOrder(evt.oldIndex, evt.newIndex, function(list) {}); //插序排序
-
-this._getItems(); // 获取全部列表
-this._getItem(index); // 获取第index项
-this._getCheckedItems(isPluck); // 获取选中的列表项 isPluck为true时自动转化为model.toJSON()对象
-this._getCheckedIds(); // 获取选中项的ids数组
-
-this._getPage(); // 获取当前第几页
-this._setPage(5);// 设置当前第几页
-this._getPageSize();// 获取每页个数
-this._setPageSize(16);// 设置每页个数
-this._getCount();// 获取总个数
-this._setCount(5);// 设置总个数
-this._getTotalPage();// 获取总页数
-this._getLength(); // 获取列表长度
-
-this._reload();         // 刷新列表
-
-this._batch({  // 批量操作
-    url: CONST.API + &#39;/message/batch/del&#39;,
-    tip: &#39;删除成功&#39;
-});
-this._batchDel({
-    url: CONST.API + &#39;/message/batch/del&#39;,
-    field: &#39;id&#39;
-});
-</code></pre>
-<h3 id="-">集合操作</h3>
-<pre><code class="lang-js">this.collection._set([{},{}])或this._setModels([{},{}]); // 重置列表(常用于过滤数据，排序等)
-this.collection.each(function(model){
-  model._set(&#39;name&#39;, &#39;aaa&#39;); // 设置模型类
-  model._get(&#39;name&#39;); // 获取值
-});
-</code></pre>
-<h3 id="-app-scripts-directives-directive-js-">组件指令 (具体使用详见app/scripts/directives/directive.js)</h3>
+<h3 id="-app-ui-app-components-main-js-">组件指令 (具体使用详见app/ui  app/components目录下的main.js)</h3>
 <pre><code class="lang-js">// js
-BbaseApp.addDirective(&#39;disabled&#39;, {
+Bbase.DIRECTIVE[&#39;bbaseuiradio&#39;] = {
   bind: function(value, selector) {
     // 获取表达式对象
     var object = this._getObject(value);
@@ -537,9 +546,9 @@ BbaseApp.addDirective(&#39;disabled&#39;, {
     // object里的参数为bind方法里返回的数据
     ...
   }
-});
+}
 // html
-bb-UiRadio=&quot;{viewId:&#39;radio-form&#39;,cur:getCurValue(formId),items:items, onChange: handleChange}&quot;
+bb-bbaseuiradio=&quot;{viewId:&#39;radio-form&#39;,cur:getCurValue(formId),items:items, onChange: handleChange}&quot;
 </code></pre>
 <h3 id="-">模板指令</h3>
 <pre><code class="lang-html">// 判断指令
@@ -548,6 +557,7 @@ bb-UiRadio=&quot;{viewId:&#39;radio-form&#39;,cur:getCurValue(formId),items:item
 {{#if isTrue}}true{{/if}} // 简单判断
 {{#If age===28&amp;&amp;name===&#39;jhon2&#39;}}age=28{{else}}age!=28{{/If}} // 复杂判断
 {{#isEmpty image}}&lt;img src=&#39;...&#39;/&gt;{{/isEmpty}} // 判断是否为空
+{{#isBlank image}}&lt;img src=&#39;...&#39;/&gt;{{/isBlank}} // 判断是否为空
 
 // 输出指令
 {{pipe &#39;Math.floor(age);age+1;plus(age, 1);plus(age, age);&#39;}} // 管道过滤指令, 以分号为间隔
