@@ -288,7 +288,7 @@ var BbaseDetail = BbaseSuperView.extend({
                 }
                 BbaseEst.setValue(ctx.model.attributes, modelKey, val);
               } catch (e) {
-                debug('Error18 -> _initSubmit -> ' + e); //debug__
+                console.log('Error18 -> _initSubmit -> ' + e); //debug__
               }
               //ctx.model.set(modelList[0], modelObj[modelList[0]]);
             } else {

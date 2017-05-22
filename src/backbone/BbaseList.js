@@ -378,7 +378,7 @@ var BbaseList = BbaseSuperView.extend({
           }
         } catch (e) {
           BbaseEst.trigger('checkLogin', null, true);
-          debug('Error4 -> _load -> ' + result.msg); //debug__
+          console.log('Error4 -> _load -> ' + result.msg); //debug__
         }
         ctx._afterLoad(result);
         //if (ctx._options.diff) ctx._setModels();
@@ -1190,7 +1190,7 @@ var BbaseList = BbaseSuperView.extend({
               thisNode.stopCollapse = false;
               nextNode.stopCollapse = false;
             } else {
-              debug('Error8 -> _insertOrder'); //debug__
+              console.log('Error8 -> _insertOrder'); //debug__
             }
           }
         });
@@ -1305,7 +1305,7 @@ var BbaseList = BbaseSuperView.extend({
           thisNode.stopCollapse = false;
           nextNode.stopCollapse = false;
         } else {
-          debug('Error8 -> _moveUp'); //debug__
+          console.log('Error8 -> _moveUp'); //debug__
         }
       }
     });
@@ -1354,7 +1354,7 @@ var BbaseList = BbaseSuperView.extend({
           thisNode.stopCollapse = false;
           nextNode.stopCollapse = false;
         } else {
-          debug('Error8 -> _moveDown'); //debug__
+          console.log('Error8 -> _moveDown'); //debug__
         }
       }
     });

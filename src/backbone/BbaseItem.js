@@ -433,7 +433,11 @@ var BbaseItem = BbaseSuperView.extend({
       }, this));
       list.length = 0;
     }
-    if (BbaseEst.typeOf(e) === 'boolean' && !e) return;
+
+    if ((BbaseEst.typeOf(e) === 'boolean') && !e){
+      this.$el.removeClass('item-active');
+      return;
+    }
     this.$el.addClass('item-active');
 
     _class = this.$el.attr('class').replace(/^.*(_item_el_.+?)\s+.*$/g, "$1");

@@ -464,7 +464,7 @@ BbaseEst.extend(BbaseApplication.prototype, {
       var sessionId = BbaseEst.typeOf(isSession) === 'undefined' ? '' : isSession ? this.data.sessionId : '';
       localStorage['___JHW_BACKBONE__' + BbaseEst.hash(sessionId + name)] = JSON.stringify(value);
     } catch (e) {
-      debug('Error9 -> addSession -> ' + e); //debug__
+      console.log('Error9 -> addSession -> ' + e); //debug__
     }
     return value;
   },

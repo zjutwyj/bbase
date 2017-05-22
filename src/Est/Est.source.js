@@ -2967,7 +2967,7 @@
         subscribers[len].func(topic, args);
       }
       subscribers.timer = null;
-    }, debounce ? 8 : 0);
+    }, debounce ? 3 : 0);
 
     return true;
   }

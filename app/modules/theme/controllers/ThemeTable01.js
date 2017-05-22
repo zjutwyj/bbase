@@ -4,11 +4,11 @@
  * @class ThemeTable01
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('ThemeTable01', [], function(require, exports, module){
+define('ThemeTable01', [], function (require, exports, module) {
   var ThemeTable01;
 
   var items = [];
-  for(var i = 0; i< 100; i++){
+  for (var i = 0; i < 100; i++) {
     items.push({
       name: 'name' + i,
       cellphone: new Date().getTime(),
@@ -17,12 +17,14 @@ define('ThemeTable01', [], function(require, exports, module){
   }
 
   ThemeTable01 = BbaseList.extend({
-    initialize: function(){
+    initialize: function () {
       var theme = BbaseEst.nextUid('ThemeTable01');
       this._super({
         template: `
           <div class="${theme}-wrap" style="padding:10px; width: 994px;">
             <style>
+              .${theme}-wrap .formPanel {font-size: 13px; box-sizing: border-box; overflow: hidden; border: 1px solid #dfdfdf; position: relative; margin-bottom:10px; }
+              /* header */
               .${theme}-wrap .formPanel .header {position: relative; height: 50px; line-height: 50px; padding-left: 14px; background-color: #f4f5f9; border-bottom: 1px solid #dfdfdf; font-size: 0; }
               .${theme}-wrap .formPanel .header .formIdArea {float: left; position: relative; font-size: 14px; }
               .${theme}-wrap .formPanel .header .dataType {display: inline-block; font-size: 14px; }
@@ -33,37 +35,38 @@ define('ThemeTable01', [], function(require, exports, module){
               .${theme}-wrap .formPanel .header .formIdArea .formIdComboBox li {cursor: pointer; padding-left: 6px; padding-right: 22px; max-width: 172px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; height: 40px; line-height: 32px; }
               .${theme}-wrap .formPanel .header .excelBtn {cursor: pointer; float: right; position: relative; color: #4e67ee; text-align: center; font-size: 15px; padding-right: 20px; }
               .${theme}-wrap .formPanel .header .excelBtn {cursor: pointer; float: right; position: relative; color: #4e67ee; text-align: center; font-size: 15px; padding-right: 20px; }
+              /* main */
               .${theme}-wrap .formPanel .main {padding-bottom: 50px; overflow:hidden; }
               .${theme}-wrap .formPanel .main .title {table-layout: fixed; width: 100%; height: 40px; line-height: 40px; border-collapse: collapse; text-align: center; font-size: 16px; background-color: #fbfbfb; }
-              .${theme}-wrap .formPanel .argName{background-color: #fbfbfb; }
               .${theme}-wrap .formPanel .main .title td {padding: 0 10px; position: relative; border-right: 1px solid #e7e7eb; text-align: center; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
               .${theme}-wrap .formPanel .main .title td:last-child {border-right: 0; }
               .${theme}-wrap .formPanel .main .content {width: 100%; border-collapse: collapse; text-align: center; table-layout: fixed; }
-              .${theme}-wrap .formPanel .footer {position: absolute; bottom: 1px; left: 1px; right: 1px; height: 50px; line-height: 50px; border-top: 1px solid #dadada; background-color: #f4f5f9; color: #666; box-sizing: border-box; }
-              .${theme}-wrap .formPanel .pageInfo {display: inline-block; position: relative; vertical-align: top; padding-left: 14px; }
-              .${theme}-wrap .formPanel .pageOperate {display: inline-block; position: relative; float: right; padding-right: 20px; top: -2px; }
-              .${theme}-wrap .formPanel .pageOperate .prevPage {cursor: pointer; display: inline-block; vertical-align: middle; width: 21px; height: 21px; line-height:22px;color:#000; background: url(img/manage/qt.png?v=201612191754) -333px -174px; border: 1px solid #a0a1a2; }
-              .${theme}-wrap .formPanel .pageOperate .currentPage {margin: 0 5px; display: inline-block; vertical-align: middle; height: 21px; line-height: 21px; }
-              .${theme}-wrap .formPanel .pageOperate .nextPage {cursor: pointer; display: inline-block; vertical-align: middle; width: 21px; height: 21px;line-height:22px; color:#000;background: url(img/manage/qt.png?v=201612191754) -351px -174px; border: 1px solid #a0a1a2; }
-              .${theme}-wrap .formPanel {font-size: 13px; box-sizing: border-box; overflow: hidden; border: 1px solid #dfdfdf; position: relative; margin-bottom:10px; }
               .${theme}-wrap .formPanel .main .content td {line-height: 40px; height: 40px; padding: 0 10px; border: 1px solid #e7e7eb; white-space: normal; text-overflow: ellipsis; overflow: hidden; }
               .${theme}-wrap .formPanel .main .content tr td:first-child {border-left: none; }
-              .${theme}-wrap .formPanel .pageOperate .disablePage {cursor: default; border-color: #e1e1e1; }
-              .${theme}-wrap .demo-item{padding:10px; }
-              .${theme}-wrap .red{color:red; }
-              .${theme}-wrap .form-api{width: 996px;margin-top:10px; }
-              .${theme}-wrap .form-api .anything{display:block; }
-              .${theme}-wrap .form-demo .header{padding-left:8px; }
-              .${theme}-wrap .form-demo  .footer{height: 40px; line-height: 40px; border-top: 1px solid #e7e7e7; background-color: #f4f5f9; padding-left:10px; }
-              .${theme}-wrap input[type=text], select, textarea {font-size: 12px; height: 27px; border: 1px solid #d6d6d6; text-indent: 8px; }
-              .${theme}-wrap button{font-size: 12px; height: 27px; border: 1px solid #d6d6d6; }
+              /* footer */
+              .${theme}-wrap .formPanel .footer {position: absolute; bottom: 1px; left: 1px; right: 1px; height: 50px; line-height: 50px; border-top: 1px solid #dadada; background-color: #f4f5f9; color: #666; box-sizing: border-box; }
+              .${theme}-wrap .formPanel .footer .pageInfo {display: inline-block; position: relative; vertical-align: top; padding-left: 14px; }
+              .${theme}-wrap .formPanel .footer .pageOperate {display: inline-block; position: relative; float: right; padding-right: 20px; top: -2px; }
+              .${theme}-wrap .formPanel .footer .pageOperate .prevPage {cursor: pointer; display: inline-block; vertical-align: middle; width: 21px; height: 21px; line-height:22px;color:#000; background: url(img/manage/qt.png?v=201612191754) -333px -174px; border: 1px solid #a0a1a2; }
+              .${theme}-wrap .formPanel .footer .pageOperate .currentPage {margin: 0 5px; display: inline-block; vertical-align: middle; height: 21px; line-height: 21px; }
+              .${theme}-wrap .formPanel .footer .pageOperate .nextPage {cursor: pointer; display: inline-block; vertical-align: middle; width: 21px; height: 21px;line-height:22px; color:#000;background: url(img/manage/qt.png?v=201612191754) -351px -174px; border: 1px solid #a0a1a2; }
+              .${theme}-wrap .formPanel .footer .pageOperate .disablePage {cursor: default; border-color: #e1e1e1; }
+
+              /* checkbox */
               .${theme}-wrap .checkboxAll{display: inline-block; height: 42px; padding-top: 8px; line-height: 50px; vertical-align: middle; }
+              .${theme}-wrap .td-checkbox .bbase-ui-itemcheck.ui-item-check-checkbox{margin-top: -15px; text-align: center; padding-left: 2px;}
+              .${theme}-wrap tr.item-active{background-color: #f4f5f9;}
+
+              /* demo */
+              .${theme}-wrap .form-demo .header{padding-left:8px; }
+              .${theme}-wrap .form-demo .footer{height: 40px; line-height: 40px; border-top: 1px solid #e7e7e7; background-color: #f4f5f9; padding-left:10px; }
+
             </style>
                <div class="formPanel form-demo">
                 <div class="anything" style="display: block;">
                   <div class="header">
                     <div class="formIdArea">
-                    <span class="checkboxAll" bb-bbaseuicheckbox="{viewId: 'checkAll', cur: checkAll,items: allItems,onChange: handleAllChange}"></span>
+                      <span class="checkboxAll" bb-bbaseuicheckbox="{viewId: 'checkAll', cur: checked_all,items: allItems}" bb-click="handleAllChange"></span>
                       <span class="name">我的表单1488173365180</span>
                     </div>
                     <div class="excelBtn">
@@ -103,46 +106,47 @@ define('ThemeTable01', [], function(require, exports, module){
         item: BbaseItem.extend({
           tagName: 'tr',
           template: `
-          <td title="xvdd td-checkbox" width="22" bb-bbaseuicheckbox="{viewId: viewId,cur: cur, items: items,onChange: handleChange}"></td>
-          <td title="xvdd"><span bb-watch="name:html">{{name}}</span></td>
-          <td title="xvc"><span bb-watch="cellphone:html">{{cellphone}}</span></td>
-          <td title="xvfd"><span bb-watch="email:html">{{email}}</span></td>
+          <td class="td-checkbox" width="22" bb-bbaseuicheckbox="{viewId: viewId,cur: checked, items: items}"></td>
+          <td><span bb-watch="name:html">{{name}}</span></td>
+          <td><span bb-watch="cellphone:html">{{cellphone}}</span></td>
+          <td><span bb-watch="email:html">{{email}}</span></td>
           `,
-          init: function () {
+          initData: function () {
             return {
-              cur: '00',
               viewId: 'checkbox' + this.cid,
-              items: [{text: '', value: '01'}]
+              items: [{ text: '', value: true }]
             }
           },
-          handleChange: function () {
-              console.log(this._get('cur'));
+          change: function (path) {
+            if (path === 'checked') {
+              if (BbaseEst.isEmpty(this._get('checked'))) {
+                this._set('checked', false);
+              }
+              if (!this._super('view').stopItemCheck) {
+                this._check(this._get('checked'));
+              }
+            }
           }
         }),
         items: items,
+        checkAppend: true,
         pagination: true,
         pageSize: 10,
         diff: true,
         render: '.uilist01-tbody'
       });
     },
-    init: function(){
+    init: function () {
       return {
-        cur: '00',
         page: 1,
         pageSize: 10,
         totalPage: 0,
         totalCount: 0,
-        checkAll: '00',
-        allItems: [{text: '全选', value: '01'}]
+        allItems: [{ text: '全选', value: true }]
       }
     },
-    beforeLoad: function(){
-      this.collection.each(this._bind(function(model){
-        model._set('cur', '00');
-      }));
-    },
-    afterLoad: function(){
+
+    afterLoad: function () {
       this._set({
         'page': this._getPage(),
         'pageSize': this._getPageSize(),
@@ -153,25 +157,33 @@ define('ThemeTable01', [], function(require, exports, module){
 
     // 全选
     handleAllChange: function () {
-      console.log(this._get('checkAll'));
-      this.collection.each(this._bind(function(model){
-        model._set('cur', this._get('checkAll'));
-      }));
+      var _this = this;
+      _this.stopItemCheck = true;
+      _this.collection.each(function (model) {
+        model._set('checked', _this._get('checked_all'));
+        model.view._itemActive({add: true}, BbaseEst.isEmpty(_this._get('checked_all')) ? false : _this._get('checked_all'));
+      });
+      setTimeout(function () {
+        _this.stopItemCheck = false;
+      }, 50);
+
     },
 
-    // 分页
-    prevPage: function(){
-      if (this._getPage() === 1){
+    // 上一页
+    prevPage: function () {
+      if (this._getPage() === 1) {
         return;
       }
       this._setPage(this._getPage() - 1);
       this._load();
     },
-    nextPage: function(){
-      if (this._getTotalPage() === this._getPage()){
+
+    // 下一页
+    nextPage: function () {
+      if (this._getTotalPage() === this._getPage()) {
         return;
       }
-      this._setPage(this._getPage() +1);
+      this._setPage(this._getPage() + 1);
       this._load();
     }
   });

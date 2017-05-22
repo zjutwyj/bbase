@@ -36,9 +36,9 @@ define('BbaseItemCheck', [], function(require, exports, module) {
     toggleChecked: function(e, init) {
       this._check(e);
       if (init) {
-        $(this._options.data.target).val(this.options.data.cur);
+        if (this._options.data.target) $(this._options.data.target).val(this.options.data.cur);
       } else {
-        $(this._options.data.target).val(this._checkAppend && this._super('view') ?
+        if (this._options.data.target) $(this._options.data.target).val(this._checkAppend && this._super('view') ?
           this._super('view').getAppendValue() : this._get('value'));
       }
       this.result = this.options.data.onChange.call(this, this.model.attributes, init, e, (init ? this._super('options').cur : this._super('view').getValue()));
@@ -105,12 +105,13 @@ define('BbaseItemCheck', [], function(require, exports, module) {
       });
     },
     setValue: function(value) {
-      if (!value || value === this.options.data.cur) return;
+      if (typeof value === 'undefined' || value === this.options.data.cur) return;
       this.options.data.cur = value;
       BbaseEst.each(this.views, this._bind(function(view) {
-        if (value !== '-' && this._super('view')._options.checkAppend ? value.indexOf(view._get(this.options.data.path)) !== -1:value === view._get(this.options.data.path) && !view._get('checked')) {
+        var isBoolean = BbaseEst.typeOf(value) === 'boolean';
+        if (value !== '-' && this._super('view')._options.checkAppend ? isBoolean ? value === view._get(this.options.data.path):value.indexOf(view._get(this.options.data.path)) !== -1:value === view._get(this.options.data.path) && !view._get('checked')) {
           view.toggleChecked(true, true);
-        } else if ((value === '-' || this._super('view')._options.checkAppend ? value.indexOf(view._get(this.options.data.path)) ===-1:value !== view._get(this.options.data.path)) && view._get('checked')) {
+        } else if ((value === '-' || this._super('view')._options.checkAppend ? isBoolean ? value !== view._get(this.options.data.path) : value.indexOf(view._get(this.options.data.path)) ===-1:value !== view._get(this.options.data.path)) && view._get('checked')) {
           view.toggleChecked(false, true);
         }
       }));

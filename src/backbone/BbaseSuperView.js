@@ -520,7 +520,6 @@ var BbaseSuperView = BbaseBackbone.View.extend({
             if (BbaseEst.msie()) {
               if (!this['h_temp_' + _hash])
                 _$template = this.$template.replace(new RegExp('\\sstyle=', "img"), ' ng-style=');
-              //console.log(item);
               this['h_temp_' + _hash] = this['h_temp_' + _hash] ||
                 BbaseHandlebars.compile($(_$template).find(item).wrapAll('<div>').parent().html().replace(/ng-style/img, 'style'));
             } else {
@@ -544,9 +543,9 @@ var BbaseSuperView = BbaseBackbone.View.extend({
       }
 
     } catch (e) {
-      debug('Error -> _viewReplace -> ' + e + 'selector:' + selector, {
-        e: e
-      });
+      console.log('Error -> _viewReplace -> selector:' + selector);
+      console.log(e.message);
+      console.log(e.stack);
     }
   },
   /**
@@ -1532,7 +1531,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
         }
       }
     } catch (e) {
-      debug('Error -> BbaseSuperView._one ->' + JSON.stringify(name) + e, { type: 'error' }); //debug__
+      console.log('Error -> BbaseSuperView._one ->' + JSON.stringify(name) + e, { type: 'error' }); //debug__
     }
   },
   /**

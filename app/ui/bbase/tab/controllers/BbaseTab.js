@@ -137,7 +137,7 @@ define('BbaseTab', [], function (require, exports, module) {
           this.$tabList.push(this.$listCont.find('.tab-cont-' + this.options.viewId + index));
         }
       } else if (item.nodeId) {
-        if ((this.hasCount && this.$listCont.find(item['nodeId']).size() ===0) || $('body').find(item['nodeId']).size() === 0){
+        if (this.$listCont.find(item['nodeId']).size() === 0 || $('body').find(item['nodeId']).size() === 0){
           this.$tabList.push(this.hasCount ? this.$listCont.find(item['nodeId']) : $('body').find(item['nodeId']));
         }
       }
@@ -217,6 +217,7 @@ define('BbaseTab', [], function (require, exports, module) {
     },
     setList: function (items) {
       this._setModels(items);
+      this.$tabList = [];
       BbaseEst.each(items, this._bind(this.addTab, this));
     },
     afterRender: function () {
