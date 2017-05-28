@@ -23,8 +23,8 @@ define('ThemeForm', [], function (require, exports, module) {
       return {
         curNav: 'ThemeFormButton01',
         navitems: [
-          { text: '按钮样式1', moduleId: 'ThemeFormButton01' },
-          { text: '文本域样式1', moduleId: 'ThemeFormInput01' }
+          { text: '按钮样式1', moduleId: 'ThemeFormButton01' ,oneRender: false},
+          { text: '文本域样式1', moduleId: 'ThemeFormInput01', oneRender: false }
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

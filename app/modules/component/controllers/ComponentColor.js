@@ -23,8 +23,8 @@ define('ComponentColor', [], function (require, exports, module) {
       return {
         cur: 'ComponentColorPick',
         items: [
-          { text: '颜色选择(弹)', moduleId: 'ComponentColorPick' },
-          { text: '颜色面板', moduleId: 'ComponentColorPanel' }
+          { text: '颜色选择(弹)', moduleId: 'ComponentColorPick' ,oneRender: false},
+          { text: '颜色面板', moduleId: 'ComponentColorPanel',oneRender: false }
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

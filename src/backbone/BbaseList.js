@@ -177,7 +177,7 @@ var BbaseList = BbaseSuperView.extend({
       }
       this.template = BbaseHandlebars.compile(BbaseEst.isEmpty(options.itemTemp) ? options.template :
         this.$template.html());
-
+      this.$el.hide();
       if (this._options.append) {
         this.$el.empty();
         this.$el.append(this.template(this.model.attributes));
@@ -419,6 +419,7 @@ var BbaseList = BbaseSuperView.extend({
    * @private
    */
   _finally: function () {
+    this.$el.show();
     if (this.afterRender) setTimeout(this._bind(function () {
       this.afterRender.call(this, this._options)
     }), 0);

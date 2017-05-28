@@ -23,7 +23,8 @@ define('ThemeTable', [], function (require, exports, module) {
       return {
         curNav: 'ThemeTable01',
         navitems: [
-          { text: '主题样式1', moduleId: 'ThemeTable01' }
+          { text: '主题样式1', moduleId: 'ThemeTable01' ,oneRender: false},
+          { text: '主题样式2', moduleId: 'ThemeTable02' , oneRender: false}
 
         ],
         tpl: `

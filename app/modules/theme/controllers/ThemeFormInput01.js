@@ -19,7 +19,7 @@ define('ThemeFormInput01', [], function(require, exports, module){
               .${theme}-wrap .group-label{font-size:14px;display: inline-block; width: 80px; height: 24px; line-height: 24px;}
               .${theme}-wrap .group-controls{display: inline-block; width:auto; height: 24px; line-height: 24px; }
               .${theme}-wrap .group-controls input.group-input,.${theme}-wrap .group-controls input.group-textarea{border: 1px solid #dfdfdf; height: 24px; line-height: 24px;text-indent: 5px;}
-              .${theme}-wrap .group-controls input.group-input:focus,.${theme}-wrap .group-controls input.group-textarea:focus{border: 1px solid #FF5241;}
+              .${theme}-wrap .group-controls input.group-input:focus,.${theme}-wrap .group-controls input.group-textarea:focus{border: 1px solid ${CONST.MAIN_COLOR};}
               .${theme}-wrap .group-controls textarea.group-textarea{height: auto;}
             </style>
 

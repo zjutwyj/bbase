@@ -23,10 +23,10 @@ define('ComponentPhoto', [], function (require, exports, module) {
       return {
         cur: 'ComponentPhotoPick',
         items: [
-          { text: '图片选择(弹)', moduleId: 'ComponentPhotoPick' },
-          { text: '图片裁切(弹)', moduleId: 'ComponentPhotoCrop' },
-          { text: '图册管理(弹)', moduleId: 'ComponentPhotoGallery' },
-          { text: '图片展示面板', moduleId: 'ComponentPhotoPanel' }
+          { text: '图片选择(弹)', moduleId: 'ComponentPhotoPick',oneRender: false },
+          { text: '图片裁切(弹)', moduleId: 'ComponentPhotoCrop',oneRender: false },
+          { text: '图册管理(弹)', moduleId: 'ComponentPhotoGallery',oneRender: false },
+          { text: '图片展示面板', moduleId: 'ComponentPhotoPanel',oneRender: false }
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

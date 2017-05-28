@@ -515,42 +515,9 @@
   color: #548cd4;
 }
 
-.addWork {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 1);
-  border: 8px solid transparent;
-  border-image: url(img/manage/imgBorder.png?v=201612261731) 8 8 round;
-  cursor: pointer;
-}
-
-.addWork:hover {
-  border-image: none;
-  border-color: #4e67ee;
-  border-width: 1px;
-  padding-top: 7px;
-}
-
 #createFlyer,
 #copyFlyer {
   transition-duration: 0s;
-}
-
-.addWork .bgPic {
-  width: 57px;
-  height: 57px;
-  position: relative;
-  top: 80px;
-  margin: 0 auto;
-  background: url(img/manage/manage_2.png?v=201611071734) no-repeat -150px 0;
-}
-
-.addWork .text {
-  color: #4e67ee;
-  font-size: 16px;
-  text-align: center;
-  position: relative;
-  top: 110px;
 }
 
 .flyerHeader .area .navBar .region {
@@ -1154,7 +1121,7 @@ button{
   display: inline-block;
   width: 22px;
   height: 22px;
-  background: url(/manage/styles/default/img/manage/tongyong2.png?v=201612191754) no-repeat;
+  background: url(img/manage/tongyong2.png?v=201612191754) no-repeat;
   vertical-align: middle;
 }
 

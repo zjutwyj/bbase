@@ -23,7 +23,7 @@ define('UiList', [], function(require, exports, module){
       return {
         curNav: 'UiListExpand',
         navitems: [
-          { text: '展开收起', moduleId: 'UiListExpand' }
+          { text: '展开收起', moduleId: 'UiListExpand',oneRender: false }
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

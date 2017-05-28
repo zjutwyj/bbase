@@ -8,10 +8,13 @@ Bbase.ROUTE['theme'] = function () {
 }
 Bbase.MODULE['ThemeTable'] = 'modules/theme/controllers/ThemeTable.js';
 Bbase.MODULE['ThemeTable01'] = 'modules/theme/controllers/ThemeTable01.js';
+Bbase.MODULE['ThemeTable02'] = 'modules/theme/controllers/ThemeTable02.js';
 
 
 
 Bbase.MODULE['ThemeList'] = 'modules/theme/controllers/ThemeList.js';
+Bbase.MODULE['ThemeList01'] = 'modules/theme/controllers/ThemeList01.js';
+Bbase.MODULE['ThemeList02'] = 'modules/theme/controllers/ThemeList02.js';
 
 Bbase.MODULE['ThemeTree'] = 'modules/theme/controllers/ThemeTree.js';
 Bbase.MODULE['ThemeTree01'] = 'modules/theme/controllers/ThemeTree01.js';

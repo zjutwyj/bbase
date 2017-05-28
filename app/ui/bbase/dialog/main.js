@@ -13,11 +13,12 @@ Bbase.DIRECTIVE['bbaseuidialog'] = {
         width: object.width || 'auto',
         height: object.height || 'auto',
         cover: object.cover,
-        data: {
+        data: BbaseEst.extend({
           id: object.id
-        },
+        }, object.data || {}),
         content: object.content,
         quickClose: object.quickClose,
+        onClose: object.onClose,
         align: object.align,
         onReady: this._bind(function(){
           BbaseApp.getCurrentDialog().reset();

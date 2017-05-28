@@ -21,9 +21,10 @@ define('ThemeList', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        curNav: 'ThemeListRadio',
+        curNav: 'ThemeList01',
         navitems: [
-          { text: '样式1', moduleId: 'ThemeList1' }
+          { text: '列表样式1', moduleId: 'ThemeList01' , oneRender: false},
+          { text: '列表样式2', moduleId: 'ThemeList02', oneRender: false }
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

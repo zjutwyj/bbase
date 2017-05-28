@@ -1,5 +1,5 @@
 ### BbaseEst工具类
-[点击查看详细](http://www.bbase.com/manage/doc/classes/BbaseEst%20-%20%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%BA%93.html)
+[点击查看详细](doc/classes/BbaseEst%20-%20%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%BA%93.html)
 
 ### 使用流程
 

@@ -23,15 +23,15 @@ define('UiForm', [], function (require, exports, module) {
       return {
         curNav: 'UiFormRadio',
         navitems: [
-          { text: '单选', moduleId: 'UiFormRadio' },
-          { text: '多选', moduleId: 'UiFormCheckbox' },
-          { text: '下拉菜单', moduleId: 'UiFormSelect' },
-          { text: '滑动条', moduleId: 'UiFormSlider' },
-          { text: '下拉框', moduleId: 'UiFormDropDown' },
-          { text: '组合切换', moduleId: 'UiFormGroup' },
+          { text: '单选', moduleId: 'UiFormRadio' ,oneRender: false},
+          { text: '多选', moduleId: 'UiFormCheckbox' ,oneRender: false},
+          { text: '下拉菜单', moduleId: 'UiFormSelect' ,oneRender: false},
+          { text: '滑动条', moduleId: 'UiFormSlider' ,oneRender: false},
+          { text: '下拉框', moduleId: 'UiFormDropDown' ,oneRender: false},
+          { text: '组合切换', moduleId: 'UiFormGroup' ,oneRender: false},
           { text: '选项卡', moduleId: 'UiFormTab' ,oneRender: false},
-          { text: '对话框', moduleId: 'UiFormDialog'},
-          { text: '编辑器', moduleId: 'UiFormTextEditor' }
+          { text: '对话框', moduleId: 'UiFormDialog',oneRender: false},
+          { text: '编辑器', moduleId: 'UiFormTextEditor',oneRender: false }
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

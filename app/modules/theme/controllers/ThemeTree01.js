@@ -68,6 +68,7 @@ define('ThemeTree01', [], function (require, exports, module) {
                .${theme}-wrap .tree-list-ul .x-caret-sub {    border: none; width: 24px; height: 40px; background: url(img/cate-sub.jpg)-1px -6px no-repeat; transform: rotate(-46deg); text-indent: 0px; font-size: 30px; color: #d1cece; padding-top: 10px;}
                .${theme}-wrap .tree-list-ul .x-caret-sub:hover{text-decoration: none;}
                .${theme}-wrap .tree-list-ul .pro-cate-name {float: right; }
+               .${theme}-wrap .tree-list-ul .x-caret-down {transform: rotate(90deg); margin-left: 3px;}
             </style>
             <div class="theme-black">
               <div class="form" style="background-color: #fff;padding: 20px;">

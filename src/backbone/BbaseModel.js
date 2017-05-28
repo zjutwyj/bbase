@@ -24,13 +24,13 @@ var BbaseModel = BbaseBackbone.Model.extend({
    * @return {*}
    * @author wyj 14.11.16
    */
-  url: function() {
+  url: function () {
     var base = this.baseUrl;
     var _url = '';
     if (!base) return '';
     if (BbaseEst.typeOf(base) === 'function')
       base = base.call(this);
-    this.params = this.params ? this.params + this._getParams(): this._getParams();
+    this.params = this.params ? this.params + this._getParams() : this._getParams();
     var sep = BbaseEst.isEmpty(this.params) ? '' : '?';
     if (this.isNew() && BbaseEst.isEmpty(this.id)) return base + sep + this.params;
     _url = base + (base.charAt(base.length - 1) == '/' ? '' : '/') + this.id + sep + this.params;
@@ -44,7 +44,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
    * @example
    *      this._initialize();
    */
-  _initialize: function(options) {
+  _initialize: function (options) {
     this.validateMsg = null;
     this.__params = this.__params || {};
   },
@@ -76,7 +76,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
    * @return {*}
    * @author wyj 14.11.16
    */
-  parse: function(response, options) {
+  parse: function (response, options) {
     var ctx = this,
       buttons = [],
       _isNew = false;
@@ -91,14 +91,13 @@ var BbaseModel = BbaseBackbone.Model.extend({
     }
     if (response.msgType === 'notLogin' && !this.stopCheckLogin) {
       BbaseEst.trigger('checkLogin', null, true);
-    }
-    else if (response.msgType === "nopriv" && CONST.NO_PRIV){
-        if (CONST.NO_PRIV.indexOf('#/') > -1){
-          ctx._navigate(CONST.NO_PRIV, true);
-        }else{
-          window.location.href=CONST.NO_PRIV;
-        }
+    } else if (response.msgType === "nopriv" && CONST.NO_PRIV) {
+      if (CONST.NO_PRIV.indexOf('#/') > -1) {
+        ctx._navigate(CONST.NO_PRIV, true);
+      } else {
+        window.location.href = CONST.NO_PRIV;
       }
+    }
     // 当服务器有返回msg消息 并参数设置hideTip为false时  弹出提示信息
     // 成功保存后 当为添加元素时 添加“继续添加”按钮， 点击继续添加按钮， 重新设置id为null, baseId为null, 使其变为新对象
     // 当参数hideOkBtn为false时添加 “确定”按钮， 当点击按钮地， 触发_dialog_submit_callback事件， 关闭_dialog对话框，
@@ -108,7 +107,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
         if (ctx.isNew() && this.continueAdd) {
           buttons.push({
             value: CONST.LANG.ADD_CONTINUE,
-            callback: function() {
+            callback: function () {
               ctx.set('id', null);
               ctx.set(ctx.baseId, null);
             }
@@ -119,7 +118,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
       if (this.saveTip) {
         buttons.push({
           value: CONST.LANG.CONFIRM,
-          callback: function() {
+          callback: function () {
             this.close();
           },
           autofocus: true
@@ -134,7 +133,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
           button: buttons
         });
         if (!this.continueAdd) {
-          setTimeout(function() {
+          setTimeout(function () {
             BbaseApp.getDialog('dialog_msg') && (ctx.autoHide || !_isNew) &&
               BbaseApp.getDialog('dialog_msg').close().remove();
           }, 2000);
@@ -151,7 +150,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
     if (response.attributes && response.attributes.data) {
       var keys = BbaseEst.keys(response.attributes);
       if (keys.length > 1) {
-        BbaseEst.each(keys, function(item) {
+        BbaseEst.each(keys, function (item) {
           if (item !== 'data')
             response.attributes['data'][item] = response.attributes[item];
         });
@@ -185,7 +184,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
    *          hideOkBtn: false // 是否隐藏确定按钮
    *        });
    */
-  _saveField: function(keyValue, ctx, options) {
+  _saveField: function (keyValue, ctx, options) {
     var wait = options.async || true;
     var newModel = new ctx.initModel({
       id: keyValue.id || ctx.model.get('id')
@@ -198,7 +197,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
     newModel.set('editField', true);
     if (newModel.baseUrl) {
       newModel.save(null, {
-        success: function(model, result) {
+        success: function (model, result) {
           if (result.msgType === 'notLogin' && !this.stopCheckLogin) {
             BbaseEst.trigger('checkLogin', null, true);
           }
@@ -220,10 +219,10 @@ var BbaseModel = BbaseBackbone.Model.extend({
    * @return {*}
    * @author wyj 14.12.18
    */
-  _getChildren: function(collection) {
-    return BbaseEst.map(this.get('children'), function(ref) {
+  _getChildren: function (collection) {
+    return BbaseEst.map(this.get('children'), function (ref) {
       // Lookup by ID in parent collection if string/num
-      if (typeof(ref) == 'string' || typeof(ref) == 'number')
+      if (typeof (ref) == 'string' || typeof (ref) == 'number')
         return collection.get(ref);
       // Else assume its a real object
       return ref;
@@ -237,7 +236,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
    * @example
    *      this.model._hideTip();
    */
-  _hideTip: function() {
+  _hideTip: function () {
     this.hideTip = true;
   },
   /**
@@ -248,7 +247,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
    * @example
    *      this.model._toggle();
    */
-  _toggle: function() {
+  _toggle: function () {
     this.set('checked', !this.get('checked'));
   },
   /**
@@ -267,7 +266,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
    *         });
    *        }
    */
-  _validation: function(attributes, callback) {
+  _validation: function (attributes, callback) {
     if (!attributes.silent && callback) {
       callback.call(this, attributes);
     }
@@ -282,7 +281,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
    * @example
    *      this._getValue('tip.name');
    */
-  _getValue: function(path) {
+  _getValue: function (path) {
     return BbaseEst.getValue(this.attributes, path);
   },
   /**
@@ -295,7 +294,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
    * @example
    *      this._setValue('tip.name', 'aaa');
    */
-  _setValue: function(path, val) {
+  _setValue: function (path, val) {
     BbaseEst.setValue(this.attributes, path, val);
   },
   /**
@@ -304,7 +303,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
    * @param {[type]} path [description]
    * @param {[type]} val  [description]
    */
-  _set: function(path, val) {
+  _set: function (path, val) {
     return this.view ? this.view._set(path, val) : this._setValue(path, val);
   },
   /**
@@ -313,7 +312,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
    * @param  {[type]} path [description]
    * @return {[type]}      [description]
    */
-  _get: function(path) {
+  _get: function (path) {
     return this.view ? this.view._get(path) : this._getValue(path);
   },
   /**
@@ -322,7 +321,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
    * @param  {[type]} path [description]
    * @return {[type]}      [description]
    */
-  _getInt: function(path) {
+  _getInt: function (path) {
     return parseInt(this._get(path), 10);
   },
   /**
@@ -331,10 +330,10 @@ var BbaseModel = BbaseBackbone.Model.extend({
    * @param  {[type]} path [description]
    * @return {[type]}      [description]
    */
-  _getFloat: function(path) {
+  _getFloat: function (path) {
     return parseFloat(this._get(path), 10);
   },
-    /**
+  /**
    * 设置请求参数
    * @method _setParam
    *
@@ -365,7 +364,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
     }, this);
     return result;
   },
-  initialize: function() {
+  initialize: function () {
     this._initialize();
   }
 });

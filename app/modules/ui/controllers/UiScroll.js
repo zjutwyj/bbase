@@ -23,8 +23,8 @@ define('UiScroll', [], function(require, exports, module){
       return {
         curNav: 'UiScrollbar',
         navitems: [
-          { text: '滚动条', moduleId: 'UiScrollbar' },
-          { text: '拖动排序', moduleId: 'UiSortable' }
+          { text: '滚动条', moduleId: 'UiScrollbar',oneRender: false },
+          { text: '拖动排序', moduleId: 'UiSortable' ,oneRender: false}
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

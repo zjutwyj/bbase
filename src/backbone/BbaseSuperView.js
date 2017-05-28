@@ -62,9 +62,9 @@ var BbaseSuperView = BbaseBackbone.View.extend({
             if (BbaseApp.getView(this.viewId)[type].timer) {
               clearTimeout(BbaseApp.getView(this.viewId)[type].timer);
             }
-            var _arguments =Array.prototype.slice.apply(arguments);
+            var _arguments = Array.prototype.slice.apply(arguments);
             BbaseApp.getView(this.viewId)[type].timer = setTimeout(this._bind(function () {
-              BbaseApp.getView(this.viewId)[type].apply(BbaseApp.getView(this.viewId), _arguments.splice(1, _arguments.length -1));
+              BbaseApp.getView(this.viewId)[type].apply(BbaseApp.getView(this.viewId), _arguments.splice(1, _arguments.length - 1));
               BbaseApp.getView(this.viewId)[type].timer = null;
             }), 20);
           }
@@ -1168,7 +1168,8 @@ var BbaseSuperView = BbaseBackbone.View.extend({
    */
   _getBoolean: function (value) {
     if (BbaseEst.isEmpty(value)) {
-      return false; };
+      return false;
+    };
     var bool = value;
     var field = this._getField(value);
     if (!BbaseEst.isEmpty(field)) {
@@ -1238,7 +1239,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
             return a === list[0];
           });
           if (dx !== -1) {
-            object[list[0]] = list[1];
+            object[list[0]] = list[1].replace(/'/img, '');
             return true;
           }
         } else if (BbaseEst.typeOf(ignore) === 'string') {
@@ -1330,6 +1331,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
       BbaseEst.setValue(this.model.attributes, path, val);
       BbaseEst.trigger(this.cid + path, path, true);
       this._m_change_ = true;
+      this._m_change_list && this._m_change_list.push(path);
     }
   },
   /**
@@ -1340,26 +1342,27 @@ var BbaseSuperView = BbaseBackbone.View.extend({
    * @param {string/object} val  [description]
    */
   _set: function (path, val) {
-    this._m_change_ = false;
+    var _this = this;
+    _this._m_change_ = false;
+    _this._m_change_list = [];
 
     if (BbaseEst.typeOf(path) === 'object') {
-      this._baseSetValues(this._getPath(path));
+      _this._baseSetValues(_this._getPath(path));
     } else {
-      this._setValue(path, val);
+      _this._setValue(path, val);
     }
-    if (this._m_change_ && this._ready_component_) {
-      if (this.options.onUpdate) {
-        this.options.onUpdate.call(this, this.model.toJSON());
+    if (_this._m_change_ && _this._ready_component_) {
+      if (_this.options.onUpdate) {
+        _this.options.onUpdate.call(_this, _this.model.toJSON());
       }
-      if (this.change && !this.change.timer) {
-        this.change.timer = setTimeout(this._bind(function () {
-          this.change.call(this, path, this.viewType);
-          this.change.timer = null;
-        }), 20);
-      };
-      if (this.viewType === 'item') {
-        //this._super('change', path, this.viewType);
-      }
+      BbaseEst.each(_this._m_change_list, function (item) {
+        if (_this.change && !_this.change.timer) {
+          _this.change.timer = setTimeout(_this._bind(function () {
+            _this.change.call(_this, item, _this.viewType);
+            _this.change.timer = null;
+          }), 20);
+        }
+      })
     }
   },
   /**
@@ -1666,7 +1669,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
    */
   _dialog: function (options, context) {
     var ctx = context || this;
-    if (BbaseEst.typeOf(options) === 'string'){
+    if (BbaseEst.typeOf(options) === 'string') {
       return BbaseApp.getDialog(options + this.cid);
     }
     var viewId = options.viewId ? options.viewId :
@@ -1753,7 +1756,7 @@ var BbaseSuperView = BbaseBackbone.View.extend({
       var offset = $(this).attr('data-offset') || 1;
       var title = $(this).attr('data-title') || $(this).attr('title');
 
-      if (!hash){
+      if (!hash) {
         $(this).attr('data-title', title);
         $(this).attr('title', '');
         if (BbaseEst.isEmpty(title)) return;
