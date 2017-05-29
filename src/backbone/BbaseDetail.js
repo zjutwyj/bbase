@@ -86,39 +86,40 @@ var BbaseDetail = BbaseSuperView.extend({
    *        this._render();
    */
   _render: function () {
-    if (this.beforeRender) this.beforeRender.call(this, this._options);
-    if (!this._options.append) this.list.empty();
+    var _this = this;
+    if (_this.beforeRender) _this.beforeRender.call(_this, _this._options);
+    if (!_this._options.append) _this.list.empty();
 
-    this.list.append(this.template(this.model.attributes));
+    _this.list.append(_this.template(_this.model.attributes));
 
-    if (this._options.modelBind) setTimeout(this._bind(function () {
-      this._modelBind();
+    if (_this._options.modelBind) setTimeout(_this._bind(function () {
+      _this._modelBind();
     }), 0);
-    if (window.topDialog) this.$('.form-actions').hide();
-    if (this._watchBind) setTimeout(this._bind(function () {
-      this._watchBind.call(this, this._options.template);
+    if (window.topDialog) _this.$('.form-actions').hide();
+    if (_this._watchBind) setTimeout(_this._bind(function () {
+      _this._watchBind.call(_this, _this._options.template);
     }), 0);
-    if (this._bbBind) setTimeout(this._bind(function () {
-      this._bbBind.call(this, this._options.template, this.$el);
+    if (_this._bbBind) setTimeout(_this._bind(function () {
+      _this._bbBind.call(_this, _this._options.template, _this.$el);
     }), 0);
-    if (this.afterRender) setTimeout(this._bind(function () {
-      this.afterRender.call(this, this._options);
+    if (_this.afterRender) setTimeout(_this._bind(function () {
+      _this.afterRender.call(_this, _this._options);
     }), 0);
-    if (this._options.onReady) setTimeout(this._bind(function () {
-      this._options.onReady.call(this, this._options);
+    if (_this._options.onReady) setTimeout(_this._bind(function () {
+      _this._options.onReady.call(_this, _this._options);
     }), 0);
-    if (this._options.toolTip) setTimeout(this._bind(function () {
-      this._initToolTip();
+    if (_this._options.toolTip) setTimeout(_this._bind(function () {
+      _this._initToolTip();
     }), 0);
-    if (this._options.form) {
-      this._formList = this._options.form.split(':');
-      this._form(this._formList[0])._initSubmit({
-        beforeSave: this.beforeSave,
-        afterSave: this.afterSave
-      }, this._formList.length > 1 ? this._formList[1] : null);
+    if (_this._options.form) {
+      _this._formList = _this._options.form.split(':');
+      _this._form(_this._formList[0])._initSubmit({
+        beforeSave: _this.beforeSave,
+        afterSave: _this.afterSave
+      }, _this._formList.length > 1 ? _this._formList[1] : null);
     }
 
-    this._ready_component_ = true;
+    _this._ready_component_ = true;
 
     BbaseUtils.removeLoading();
   },
@@ -134,17 +135,18 @@ var BbaseDetail = BbaseSuperView.extend({
    * @author wyj 14.11.15
    */
   _initModel: function (model, ctx) {
-    this._options.id = BbaseEst.typeOf(this._options.id) === 'number' ? this._options.id + '' : this._options.id;
-    this._options.data.id = BbaseEst.typeOf(this._options.data.id) === 'number' ? this._options.data.id + '' : this._options.data.id;
-    ctx.passId = this.options.id || this._options.data.id || BbaseEst.getUrlParam('id', window.location.href);
+    var _this = this;
+    _this._options.id = BbaseEst.typeOf(_this._options.id) === 'number' ? _this._options.id + '' : _this._options.id;
+    _this._options.data.id = BbaseEst.typeOf(_this._options.data.id) === 'number' ? _this._options.data.id + '' : _this._options.data.id;
+    ctx.passId = _this.options.id || _this._options.data.id || BbaseEst.getUrlParam('id', window.location.href);
 
-    if (!BbaseEst.isEmpty(this.passId)) {
+    if (!BbaseEst.isEmpty(_this.passId)) {
       ctx.model = new model();
       ctx.model.set('id', ctx.passId);
       ctx.model.set('_data', ctx._options.data);
       ctx.model.set('CONST', CONST);
-      if (ctx._initDefault) ctx._initDefault.call(this);
-      if (ctx.beforeLoad) ctx.beforeLoad.call(this);
+      if (ctx._initDefault) ctx._initDefault.call(_this);
+      if (ctx.beforeLoad) ctx.beforeLoad.call(_this);
       ctx.model.fetch().done(function (response) {
         if (response.msgType === 'notLogin') {
           BbaseEst.trigger('checkLogin', null, true);
@@ -166,16 +168,16 @@ var BbaseDetail = BbaseSuperView.extend({
       });
     } else {
       ctx.passId = new Date().getTime();
-      ctx.model = new model(this._options.data || {});
+      ctx.model = new model(_this._options.data || {});
       ctx.model.set('_data', ctx._options.data);
       ctx.model.set('_isAdd', ctx._isAdd = true);
-      if (ctx._initDefault) ctx._initDefault.call(this);
+      if (ctx._initDefault) ctx._initDefault.call(_this);
       ctx.render();
     }
 
-    if (this._options.hideOkBtn) ctx.model.hideOkBtn = true;
-    if (this._options.hideSaveBtn) ctx.model.hideSaveBtn = true;
-    if (this._options.autoHide) ctx.model.autoHide = true;
+    if (_this._options.hideOkBtn) ctx.model.hideOkBtn = true;
+    if (_this._options.hideSaveBtn) ctx.model.hideSaveBtn = true;
+    if (_this._options.autoHide) ctx.model.autoHide = true;
 
   },
   /**
