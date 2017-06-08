@@ -106,15 +106,17 @@ var FlyHeader = BbaseView.extend({
       message: '我是一条消息'
     }
   },
-  beforeRender: function(){}                            // 视图插入到DOM前
+  beforeRender: function(){},                           // 视图插入到DOM前
 
-  afterRender: function(){}                             // 视图插入到DOM后
+  afterRender: function(){},                            // 视图插入到DOM后
 
-  viewUpdate: function(){}                              // 视图更新
+  afterShow: function(){},                              // 视图显示后执行
 
-  update: function(name){}                              // 监听的字段改变时回调
+  viewUpdate: function(){},                             // 视图更新
 
-  change: fucntion(path){}                              // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
+  update: function(name){},                             // 监听的字段改变时回调
+
+  change: fucntion(path){},                             // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
   destory: function(){}                                 // 组件销毁时
 
@@ -208,6 +210,8 @@ var ProductList = BbaseList.extend({
 
   afterRender: function(){}                             // 视图插入到DOM后
 
+  afterShow: function(){},                              // 视图显示后执行
+
   viewUpdate: function(){}                              // 视图更新
 
   beforeLoad: function(){}                              // 从服务器获取数据前回调
@@ -262,6 +266,8 @@ var ProductDetail = BbaseDetail.extend({
 
   afterRender: function(){}                             // 视图插入到DOM后
 
+  afterShow: function(){},                              // 视图显示后执行
+
   viewUpdate: function(){}                              // 视图更新
 
   beforeSave: function(){}                              // 模型类保存前
@@ -295,6 +301,8 @@ new ProductDetail({
   onUpdate: function(){},                               // 当模型类改变时系统会实时调用这个回调
 
   onReady: fucntion(){},                                // 组件渲染完毕
+
+  onShow: function(){}                                  // 组件显示后回调
 
 });
 ```
@@ -605,6 +613,9 @@ Bbase.DIRECTIVE['bbaseuiradio'] = {
       compile: BbaseEst.compile('{{' + value + '}}')
     }
   },
+  show: function(value, selector){
+    // 视图显示后执行
+  },
   update: function(name, node, selector, result) {
     node.prop('disabled', this._getBoolean(result));
   },
@@ -696,6 +707,10 @@ new BbaseService().factory({
 兼容所有浏览器(包括IE6789)
 
 ### 更新记录
+>2017.05.30
+添加生命周期：afterShow
+添加指令参数：show
+
 >2017.04.23
 修改组件生命周期change回调函数，参数统一为path(字段)，type(类型)
 修改_super方法，如果未找到父组件或方法将返回undefined

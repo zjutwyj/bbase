@@ -25,6 +25,9 @@ function baseBbaseDropdown(value, selector, theme) {
         if (!object.lazy){
           this.reset && this.reset();
         }
+      },
+      onShow: function(){
+        this.reset && this.reset();
       }
     });
   });
@@ -39,5 +42,10 @@ Bbase.DIRECTIVE['bbaseuidropdown'] = {
 Bbase.DIRECTIVE['bbaseuidropdownwin'] = {
   bind: function (value, selector) {
     baseBbaseDropdown.apply(this, [value, selector, 'win']);
+  }
+}
+Bbase.DIRECTIVE['bbaseuidropdownwix'] = {
+  bind: function(value, selector){
+    baseBbaseDropdown.apply(this, [value, selector, 'wix']);
   }
 }

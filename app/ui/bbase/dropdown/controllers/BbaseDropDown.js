@@ -7,7 +7,31 @@
 define('BbaseDropDown', [], function (require, exports, module) {
   var BbaseDropDown, template;
 
-  template = '<div class="bbase-ui-dropdown bui-list-picker bui-picker bui-overlay bui-ext-position x-align-bl-tl bui-select-custom" aria-disabled="false" aria-pressed="false"style="visibility: visible;width:{{width}}; display: none;"> <div class="bui-simple-list bui-select-list" aria-disabled="false" aria-pressed="false" style="height: {{height}};overflow-x: {{overflowX}};width: {{width}};max-height: none;"> 正在加载... </div> <div bb-show="showClose" class="popupWindowClose closeBtn bbasefont bbase-close_thin" bb-click="close"></div></div>';
+  template = `
+    <div class="bbase-ui-dropdown bui-list-picker bui-picker bui-overlay bui-ext-position x-align-bl-tl bui-select-custom" aria-disabled="false" aria-pressed="false"style="visibility: visible;width:{{width}}; display: none;">
+      <div class="bui-simple-list bui-select-list" aria-disabled="false" aria-pressed="false" style="height: {{height}};overflow-x: {{overflowX}};width: {{width}};max-height: none;"> 正在加载...
+      </div>
+      <div bb-show="showClose" class="popupWindowClose closeBtn bbasefont bbase-close_thin" bb-click="close"></div>
+    </div>
+  `;
+
+  var template2 = `
+    <div class=" bbase-ui-dropdown-wix-dialog dialog-align-right bui-list-picker header-account-dialog dialog-load-complete" style="width:{{width}};display:none;">
+      <div class="wix-header-dialog-chupchik" style="right: 20px;"></div>
+      <div class="header-dialog-content-wrapper">
+        <div class="header-dialog-loading ng-hide" aria-hidden="true">
+          <div md-mode="indeterminate" aria-valuemin="0" aria-valuemax="100" role="progressbar" class="md-progress-circular ng-isolate-scope md-mode-indeterminate" style="width: 50px; height: 50px;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" style="width: 50px; height: 50px; transform-origin: 25px 25px 25px;">
+              <path fill="none" stroke-width="5" stroke-linecap="square" d="M25,2.5A22.5,22.5 0 1 1 2.5,25" stroke-dasharray="106.02875205865553" stroke-dashoffset="108.69237612626767" transform="rotate(-270 25 25)"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="header-dialog-content" aria-hidden="false" style="height: {{height}};overflow-x: {{overflowX}};width: {{width}};max-height: none;">
+
+        </div>
+      </div>
+    </div>
+  `;
 
   /**
    * 下拉框
@@ -19,6 +43,9 @@ define('BbaseDropDown', [], function (require, exports, module) {
       'click .bui-list-picker': 'preventDefault'
     },
     initialize: function () {
+      if (this.options.theme === 'wix'){
+        template = template2;
+      }
       this._super({
         el: 'body',
         template: template
@@ -30,61 +57,76 @@ define('BbaseDropDown', [], function (require, exports, module) {
       }
     },
     beforeRender: function () {
-      this.hasContent = false;
-      this.dropDownInit = true;
-      this.isShow = false;
+      var _this = this;
+      _this.hasContent = false;
+      _this.dropDownInit = true;
+      _this.isShow = false;
+      _this.stopHide = false;
 
-      this._options.align = this._options.align || 'center';
+      _this._options.align = _this._options.align || 'center';
 
-      this.model.set('width', this._options.data.width ?
-        (BbaseEst.typeOf(this._options.data.width) === 'string' ?
-          this._options.data.width : (this._options.data.width + 'px')) : 'auto');
+      _this.model.set('width', _this._options.data.width ?
+        (BbaseEst.typeOf(_this._options.data.width) === 'string' ?
+          _this._options.data.width : (_this._options.data.width + 'px')) : 'auto');
 
-      this._set('showClose', this._options.showClose);
-      if (this._options.theme === 'win') {
-        this._set('width', '100%');
-        this._set('showClose', true);
+      _this._set('showClose', _this._options.showClose);
+      if (_this._options.theme === 'win') {
+        _this._set('width', '100%');
+        _this._set('showClose', true);
       }
 
-      this.model.set('height', this._options.data.height ?
-        (BbaseEst.typeOf(this._options.data.height) === 'string' ?
-          this._options.data.height : (this._options.data.height + 'px')) : 'auto');
+      _this.model.set('height', _this._options.data.height ?
+        (BbaseEst.typeOf(_this._options.data.height) === 'string' ?
+          _this._options.data.height : (_this._options.data.height + 'px')) : 'auto');
 
-      this.model.set('overflowX', this._options.data.overflowX ?
-        this._options.data.overflowX : 'hidden');
+      _this.model.set('overflowX', _this._options.data.overflowX ?
+        _this._options.data.overflowX : 'hidden');
 
-      this.model.set('overflowY', this._options.data.overflowY ?
-        this._options.data.overflowY : 'hidden');
+      _this.model.set('overflowY', _this._options.data.overflowY ?
+        _this._options.data.overflowY : 'hidden');
 
     },
     afterRender: function () {
       this.initType();
     },
     initType: function () {
-      this.$picker = this.$('.bui-list-picker');
-      this.$target = $(this._options.target);
-      this.$content = this.$('.bui-select-list');
-      if (this._options.mouseHover) {
-        this.$target.hover(BbaseEst.proxy(this.show, this), BbaseEst.proxy(this.hide, this));
-        if (this._options.mouseFollow) {
-          this.$target.mousemove(BbaseEst.proxy(this.show, this));
-          this.$target.mouseout(BbaseEst.proxy(this.hide, this));
+      var _this = this;
+      _this.$picker = _this.$('.bui-list-picker');
+      _this.$target = $(_this._options.target);
+      _this.$content = _this.$('.bui-select-list');
+      if (_this._options.mouseHover) {
+        _this.$target.hover(_this._bind(_this.show), function(){
+          setTimeout(function(){
+            if (!_this.stopHide){
+                _this.hide();
+            }
+          }, 200);
+        });
+        _this.$picker.hover(function(){
+          _this.stopHide = true;
+        }, function(){
+          _this.stopHide = false;
+          _this.hide();
+        });
+        if (_this._options.mouseFollow) {
+          _this.$target.mousemove(_this._bind(_this.show));
+          _this.$target.mouseout(_this._bind(_this.hide));
         }
       } else {
-        this.$target.click(BbaseEst.proxy(function (e) {
+        _this.$target.click(function (e) {
           e.stopImmediatePropagation();
-          if (this.isShow) {
-            this.hide(e);
+          if (_this.isShow) {
+            _this.hide(e);
           } else {
-            this.show(e);
+            _this.show(e);
           }
-        }, this));
+        });
         //  Safari 3.1 到 6.0 版本代码
-        this.$picker.get(0).addEventListener("webkitTransitionEnd", this._bind(this.myFunction));
+        _this.$picker.get(0).addEventListener("webkitTransitionEnd", _this._bind(_this.myFunction));
         // 标准语法
-        this.$picker.get(0).addEventListener("transitionend", this._bind(this.myFunction));
+        _this.$picker.get(0).addEventListener("transitionend", _this._bind(_this.myFunction));
       }
-      if (this._options.theme) this.$picker.addClass('bbase-ui-dropdown-' + this._options.theme);
+      if (_this._options.theme) _this.$picker.addClass('bbase-ui-dropdown-' + _this._options.theme);
     },
     myFunction: function () {
 
@@ -197,21 +239,25 @@ define('BbaseDropDown', [], function (require, exports, module) {
       }
     },
     doRender: function (instance) {
-      this.viewId = BbaseEst.typeOf(this._options.moduleId) === 'string' ? (this._options.viewId.split('view0')[0] + 'drop_downview0' + this._options.viewId.split('view0')[1]) : BbaseEst.nextUid('BbaseDropDown');
-      delete this._options.template;
-      this.$content.html('');
+      var _this = this;
+      _this.viewId = BbaseEst.typeOf(_this._options.moduleId) === 'string' ? (_this._options.viewId.split('view0')[0] + 'drop_downview0' + _this._options.viewId.split('view0')[1]) : BbaseEst.nextUid('BbaseDropDown');
+      delete _this._options.template;
+      _this.$content.html('');
       // jquery对象无法通过BbaseEst.each遍历， 需备份到this._target,
       // 再移除target, 待克隆完成后把target添加到参数中
-      if (this._options.target && BbaseEst.typeOf(this._options.target) !== 'String') {
-        this._target = this._options.target;
-        delete this._options.target;
+      if (_this._options.target && BbaseEst.typeOf(_this._options.target) !== 'String') {
+        _this._target = _this._options.target;
+        delete _this._options.target;
       }
-      BbaseApp.addView(this.viewId, new instance(BbaseEst.extend(BbaseEst.cloneDeep(this._options), {
-        el: this.$content,
-        dropDownId: this._options.viewId,
-        viewId: this.viewId,
-        afterRender: this._options.callback,
-        target: this._target
+      BbaseApp.addView(_this.viewId, new instance(BbaseEst.extend(BbaseEst.cloneDeep(_this._options), {
+        el: _this.$content,
+        dropDownId: _this._options.viewId,
+        viewId: _this.viewId,
+        afterRender: _this._options.callback,
+        target: _this._target,
+        onShow: function(){
+          _this._options.onShow && _this._options.onShow.call(_this);
+        }
       })));
     },
     empty: function () {

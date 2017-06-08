@@ -6,10 +6,10 @@
 QUnit.module( "【CacheUtils】" );
 
 
-/*QUnit.test("Est.getCache", function(assert){
+/*QUnit.test("BbaseEst.getCache", function(assert){
     var session = {},
         cache_data = {name:1};
-    Est.getCache('uId', session, {
+    BbaseEst.getCache('uId', session, {
         area : 'dd',
         getData : function(){
             return cache_data;

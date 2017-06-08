@@ -14,10 +14,10 @@ var justifyOpts = {
         justifylist.eq(i).css("margin-right", space);
     }
 };
-Est.girdJustify(justifyOpts);
+BbaseEst.girdJustify(justifyOpts);
 $(window).bind("resize", function () {
-    Est.delay(function(){
+    BbaseEst.delay(function(){
         justifyOpts.containerWidth = justifyCont.width();
-        Est.girdJustify(justifyOpts);
+        BbaseEst.girdJustify(justifyOpts);
     }, 1);
 });*/

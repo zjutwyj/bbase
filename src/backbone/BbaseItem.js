@@ -18,7 +18,7 @@
  * @class BbaseItem - 单视图
  * @author yongjin<zjut_wyj@163.com> 2014/12/8
  */
-
+(function(BbaseBackbone, BbaseEst, BbaseApp, BbaseUtils, BbaseHandlebars,BbaseSuperView, undefined){
 var BbaseItem = BbaseSuperView.extend({
   /**
    * 初始化, 若该视图的子元素有hover选择符， 则自动为其添加鼠标经过显示隐藏事件
@@ -44,13 +44,14 @@ var BbaseItem = BbaseSuperView.extend({
        *        });
    */
   _initialize: function(options) {
-    this._initOptions(options);
-    this._initCollapse(this.model.get('_options'));
-    this._initTemplate(this._options);
-    this._initBind(this._options);
-    this._initView(this._options);
-    this._initStyle(this._options);
-    this._initEnterEvent(this._options);
+    var _this = this;
+    _this._initOptions(options);
+    _this._initCollapse(_this.model.get('_options'));
+    _this._initTemplate(_this._options);
+    _this._initBind(_this._options);
+    _this._initView(_this._options);
+    _this._initStyle(_this._options);
+    _this._initEnterEvent(_this._options);
   },
   /**
    * 初始化参数
@@ -60,10 +61,11 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 15.1.12
    */
   _initOptions: function(options) {
-    this._options = BbaseEst.extend(this.options, options || {});
-    this._options.speed = this._options.speed || 9;
-    this.viewId = this._options.viewId;
-    this.viewType = 'item';
+    var _this = this;
+    _this._options = BbaseEst.extend(_this.options, options || {});
+    _this._options.speed = _this._options.speed || 9;
+    _this.viewId = _this._options.viewId;
+    _this.viewType = 'item';
   },
   /**
    * 初始化展开收缩
@@ -74,9 +76,10 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 15.2.14
    */
   _initCollapse: function(options) {
+    var _this = this;
     if (options._speed > 1) {
-      this.model.stopCollapse = false;
-      this.collapsed = options ? options._extend : false;
+      _this.model.stopCollapse = false;
+      _this.collapsed = options ? options._extend : false;
     }
   },
   /**
@@ -87,15 +90,16 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 15.1.12
    */
   _initTemplate: function(options) {
-    options.template = this.template || options.template || options.itemTemp;
+    var _this = this;
+    options.template = _this.template || options.template || options.itemTemp;
     if (options.template) {
-      this.$template = '<div>' + options.template + '</div>';
+      _this.$template = '<div>' + options.template + '</div>';
       if (options.viewId) {
         if (!BbaseApp.getCompileTemp(options.viewId)) {
-          BbaseApp.addCompileTemp(options.viewId, BbaseHandlebars.compile(this._parseHbs(options.template)));
+          BbaseApp.addCompileTemp(options.viewId, BbaseHandlebars.compile(_this._parseHbs(options.template)));
         }
       } else {
-        this.hbstemplate = BbaseHandlebars.compile(this._parseHbs(options.template));
+        _this.hbstemplate = BbaseHandlebars.compile(_this._parseHbs(options.template));
       }
     }
   },
@@ -107,10 +111,11 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 14.11.16
    */
   _initBind: function(options) {
+    var _this = this;
     if (options.speed > 1) {
-      this.model.bind('reset', this.render, this);
-      this.model.bind('change', this.render, this);
-      this.model.bind('destroy', this.remove, this);
+      _this.model.bind('reset', _this.render, _this);
+      _this.model.bind('change', _this.render, _this);
+      _this.model.bind('destroy', _this.remove, _this);
     }
   },
   /**
@@ -122,9 +127,10 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 15.2.14
    */
   _initView: function(options) {
+    var _this = this;
     if (options.speed > 1) {
-      if (this.model.view) this.model.view.remove();
-      this.model.view = this;
+      if (_this.view) _this.model.view.remove();
+      _this.model.view = _this;
     }
   },
   /**
@@ -135,12 +141,13 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 15.2.14
    */
   _initStyle: function(options) {
+    var _this = this;
     if (options.speed > 1) {
-      var item_id = this._get('id') ? (this._get('id') + '') : (this._get('dx') + 1 + '');
-      if (this._get('dx') % 2 === 0) this.$el.addClass('bui-grid-row-even');
-      this.$el.addClass('_item_el_' + (this.viewId || '') + '_' + item_id.replace(/^[^1-9]+/, ""));
-      if (this.$el.hover) {
-        this.$el.hover(function() {
+      var item_id = _this._get('id') ? (_this._get('id') + '') : (_this._get('dx') + 1 + '');
+      if (_this._get('dx') % 2 === 0) _this.$el.addClass('bui-grid-row-even');
+      _this.$el.addClass('_item_el_' + (_this.viewId || '') + '_' + item_id.replace(/^[^1-9]+/, ""));
+      if (_this.$el.hover) {
+        _this.$el.hover(function() {
           $(this).addClass('hover');
         }, function() {
           $(this).removeClass('hover');
@@ -156,33 +163,34 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 14.11.18
    */
   _render: function() {
-    this._onBeforeRender();
-    if (this._options && this._options.filter){
-      var fresult = this._options.filter.call(this, this.model);
+    var _this = this;
+    _this._onBeforeRender();
+    if (_this._options && _this._options.filter){
+      var fresult = _this._options.filter.call(_this, _this.model);
       if (typeof fresult !== 'undefined' && !fresult){
-        this.$el.remove();
+        _this.$el.remove();
         return ;
       }
     }
     // 添加判断是否存在this.$el
-    this._beforeTransition();
-    this.$el.html(this.hbstemplate ? this.hbstemplate(this.model.attributes) :
-      this.viewId && BbaseApp.getCompileTemp(this.viewId) && BbaseApp.getCompileTemp(this.viewId)(this.model.attributes));
-    this._onAfterRender();
+    _this._beforeTransition();
+    _this.$el.html(_this.hbstemplate ? _this.hbstemplate(_this.model.attributes) :
+      _this.viewId && BbaseApp.getCompileTemp(_this.viewId) && BbaseApp.getCompileTemp(_this.viewId)(_this.model.attributes));
+    _this._onAfterRender();
     // 判断是否存在子元素
-    var modelOptions = this._get('_options');
-    if (modelOptions && modelOptions._subRender && this._get('children') &&
+    var modelOptions = _this._get('_options');
+    if (modelOptions && modelOptions._subRender && _this._get('children') &&
 
-      this._get('children').length > 0) {
+      _this._get('children').length > 0) {
       // Build child views, insert and render each
-      var ctx = this;
+      var ctx = _this;
       var childView = null;
-      var level = this._get('level') || 1;
+      var level = _this._get('level') || 1;
 
-      var tree = this.$(modelOptions._subRender + ':first');
-      this._setupEvents(modelOptions);
+      var tree = _this.$(modelOptions._subRender + ':first');
+      _this._setupEvents(modelOptions);
 
-      BbaseEst.each(this.model._getChildren(modelOptions._collection), function(newmodel) {
+      BbaseEst.each(_this.model._getChildren(modelOptions._collection), function(newmodel) {
         var childView = null;
 
         newmodel.set('_options', modelOptions);
@@ -212,7 +220,7 @@ var BbaseItem = BbaseSuperView.extend({
       }
     }
 
-    return this;
+    return _this;
   },
   /**
    * 设置viewId
@@ -223,7 +231,8 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 14.12.20
    */
   _setViewId: function(name) {
-    if (this._options) this._options.viewId = this.viewId = name;
+    var _this = this;
+    if (_this._options) _this._options.viewId = _this.viewId = name;
   },
   /**
    * 设置模型类
@@ -246,8 +255,8 @@ var BbaseItem = BbaseSuperView.extend({
   _setupEvents: function(opts) {
     // Hack to get around event delegation not supporting ">" selector
     var that = this;
-    that._toggleCollapse.call(this, opts);
-    this.$(opts._collapse + ':first').click(function() {
+    that._toggleCollapse.call(that, opts);
+    that.$(opts._collapse + ':first').click(function() {
       that._toggleCollapse.call(that, opts);
     });
   },
@@ -260,18 +269,18 @@ var BbaseItem = BbaseSuperView.extend({
    */
   _toggleCollapse: function(opts) {
     var ctx = this;
-    if (this.model.stopCollapse) {
-      this.$(opts._subRender + ':first').addClass('hide');
+    if (ctx.model.stopCollapse) {
+      ctx.$(opts._subRender + ':first').addClass('hide');
       return;
     }
     ctx.collapsed = !ctx.collapsed;
 
     if (ctx.collapsed) {
-      this.$(opts._collapse + ':first').removeClass('x-caret-down');
-      this.$(opts._subRender + ':first').slideUp(CONST.COLLAPSE_SPEED).addClass('hide');
+      ctx.$(opts._collapse + ':first').removeClass('x-caret-down');
+      ctx.$(opts._subRender + ':first').slideUp(CONST.COLLAPSE_SPEED).addClass('hide');
     } else {
-      this.$(opts._collapse + ':first').addClass('x-caret-down');
-      this.$(opts._subRender + ':first').slideDown(CONST.COLLAPSE_SPEED).removeClass('hide');
+      ctx.$(opts._collapse + ':first').addClass('x-caret-down');
+      ctx.$(opts._subRender + ':first').slideDown(CONST.COLLAPSE_SPEED).removeClass('hide');
     }
   },
   /**
@@ -282,8 +291,9 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 14.12.3
    */
   _onBeforeRender: function() {
-    if (this._initDefault) this._initDefault.call(this);
-    if (this.beforeRender) this.beforeRender.call(this, this.model);
+    var _this = this;
+    if (_this._initDefault) _this._initDefault.call(_this);
+    if (_this.beforeRender) _this.beforeRender.call(_this, _this.model);
   },
   /**
    * 渲染后事件
@@ -293,23 +303,24 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 14.12.3
    */
   _onAfterRender: function() {
-    if (this._options.modelBind) setTimeout(this._bind(function() {
-      this._modelBind();
-    }), 0);
-    if (this._options.toolTip) setTimeout(this._bind(function() {
-      this._initToolTip();
-    }), 0);
-    if (this.afterRender) setTimeout(this._bind(function() {
-      this.afterRender.call(this, this.model);
-    }), 0);
-    if (this._watchBind) setTimeout(this._bind(function() {
-      this._watchBind.call(this, this._options.template);
-    }), 0);
-    if (this._bbBind) setTimeout(this._bind(function() {
-      this._bbBind.call(this, this._options.template, this.$el);
-    }), 0);
+    var _this = this;
+    if (_this._options.modelBind) setTimeout(function() {
+      _this._modelBind();
+    }, 0);
+    if (_this._options.toolTip) setTimeout(function() {
+      _this._initToolTip();
+    }, 0);
+    if (_this.afterRender) setTimeout(function() {
+      _this.afterRender.call(_this, _this.model);
+    }, 0);
+    if (_this._watchBind) setTimeout(function() {
+      _this._watchBind.call(_this, _this._options.template);
+    }, 0);
+    if (_this._bbBind) setTimeout(function() {
+      _this._bbBind.call(_this, _this._options.template, _this.$el);
+    }, 0);
 
-    this._ready_component_ = true;
+    _this._ready_component_ = true;
   },
   /**
    * 移除监听
@@ -344,46 +355,47 @@ var BbaseItem = BbaseSuperView.extend({
    *      }
    */
   _check: function(e) {
-    var checked = this._get('checked');
+    var _this = this;
+    var checked = _this._get('checked');
     var beginDx = null;
     var endDx = null;
     var dx = null;
     var checked_all = true;
 
-    this._checkAppend = typeof this._get('_options')._checkAppend === 'undefined' ? false :
-      this._get('_options')._checkAppend;
-    this._checkToggle = typeof this._get('_options')._checkToggle === 'undefined' ? false :
-      this._get('_options')._checkToggle;
+    _this._checkAppend = typeof _this._get('_options')._checkAppend === 'undefined' ? false :
+      _this._get('_options')._checkAppend;
+    _this._checkToggle = typeof _this._get('_options')._checkToggle === 'undefined' ? false :
+      _this._get('_options')._checkToggle;
 
     // 单选， 清除选中项
-    if (!this._checkAppend) {
-      if (this.viewId) {
-        if (BbaseApp.getView(this.viewId))
-          BbaseApp.getView(this.viewId)._clearChecked();
+    if (!_this._checkAppend) {
+      if (_this.viewId) {
+        if (BbaseApp.getView(_this.viewId))
+          BbaseApp.getView(_this.viewId)._clearChecked();
       }
     }
 
-    if (this._checkToggle) {
-      this._set('checked', BbaseEst.typeOf(e) === 'boolean' ? e : !checked);
+    if (_this._checkToggle) {
+      _this._set('checked', BbaseEst.typeOf(e) === 'boolean' ? e : !checked);
     } else {
-      this._set('checked', BbaseEst.typeOf(e) === 'boolean' ? e : true);
-      this._itemActive({
-        add: this._checkAppend
+      _this._set('checked', BbaseEst.typeOf(e) === 'boolean' ? e : true);
+      _this._itemActive({
+        add: _this._checkAppend
       }, e);
     }
-    if (this._get('checked') && this._checkToggle) {
-      this._itemActive({
-        add: this._checkAppend
+    if (_this._get('checked') && _this._checkToggle) {
+      _this._itemActive({
+        add: _this._checkAppend
       }, e);
-    } else if (this._checkToggle) {
-      this.$el.removeClass('item-active');
-      this._set('checked', false);
+    } else if (_this._checkToggle) {
+      _this.$el.removeClass('item-active');
+      _this._set('checked', false);
     }
     //TODO shift + 多选
-    if (e && e.shiftKey && this._checkAppend) {
+    if (e && e.shiftKey && _this._checkAppend) {
       beginDx = BbaseApp.getData('curChecked');
-      endDx = this._get('dx');
-      BbaseEst.each(this.model.collection.models, function(model) {
+      endDx = _this._get('dx');
+      BbaseEst.each(_this.model.collection.models, function(model) {
         dx = model.get('dx');
         if (beginDx < dx && dx < endDx) {
           model.view._set('checked', true);
@@ -391,23 +403,23 @@ var BbaseItem = BbaseSuperView.extend({
         }
       });
     } else {
-      BbaseApp.addData('curChecked', this._get('dx'));
+      BbaseApp.addData('curChecked', _this._get('dx'));
     }
     //TODO 如果
     if (BbaseEst.typeOf(e) !== 'boolean' && e)
     //e.stopImmediatePropagation();
-      BbaseEst.trigger(this.cid + 'checked', 'checked', true);
-    if (!this._get('checked')) {
+      BbaseEst.trigger(_this.cid + 'checked', 'checked', true);
+    if (!_this._get('checked')) {
       checked_all = false;
     } else {
-      BbaseEst.each(this.model.collection.models, function(model) {
+      BbaseEst.each(_this.model.collection.models, function(model) {
         if (!model.attributes.checked) {
           checked_all = false;
         }
       });
     }
-    if (BbaseApp.getView(this.viewId))
-      BbaseApp.getView(this.viewId)._set('checked_all',checked_all);
+    if (BbaseApp.getView(_this.viewId))
+      BbaseApp.getView(_this.viewId)._set('checked_all',checked_all);
   },
   /**
    * 添加当前ITEM的CLASS为item-active
@@ -421,26 +433,27 @@ var BbaseItem = BbaseSuperView.extend({
    *        });
    */
   _itemActive: function(options, e) {
+    var _this = this;
     var _class = null;
     options = options || {};
-    if (!BbaseApp.getData('itemActiveList' + this.viewId))
-      BbaseApp.addData('itemActiveList' + this.viewId, []);
-    var list = BbaseApp.getData('itemActiveList' + this.viewId);
+    if (!BbaseApp.getData('itemActiveList' + _this.viewId))
+      BbaseApp.addData('itemActiveList' + _this.viewId, []);
+    var list = BbaseApp.getData('itemActiveList' + _this.viewId);
     if (!options.add) {
-      BbaseEst.each(list, BbaseEst.proxy(function(selecter) {
-        $('.' + selecter, BbaseApp.getView(this.viewId) ?
-          BbaseApp.getView(this.viewId).$el : $("body")).removeClass('item-active');
-      }, this));
+      BbaseEst.each(list, function(selecter) {
+        $('.' + selecter, BbaseApp.getView(_this.viewId) ?
+          BbaseApp.getView(_this.viewId).$el : $("body")).removeClass('item-active');
+      });
       list.length = 0;
     }
 
     if ((BbaseEst.typeOf(e) === 'boolean') && !e){
-      this.$el.removeClass('item-active');
+      _this.$el.removeClass('item-active');
       return;
     }
-    this.$el.addClass('item-active');
+    _this.$el.addClass('item-active');
 
-    _class = this.$el.attr('class').replace(/^.*(_item_el_.+?)\s+.*$/g, "$1");
+    _class = _this.$el.attr('class').replace(/^.*(_item_el_.+?)\s+.*$/g, "$1");
     if (BbaseEst.findIndex(list, function(item) {
         return item === _class;
       }) === -1) {
@@ -455,12 +468,13 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 14.12.14
    */
   _moveUp: function(e) {
+    var _this = this;
     e && e.stopImmediatePropagation();
-    this.collapsed = true;
-    if (!this.viewId) {
+    _this.collapsed = true;
+    if (!_this.viewId) {
       return false;
     }
-    BbaseApp.getView(this.viewId)._moveUp(this.model);
+    BbaseApp.getView(_this.viewId)._moveUp(_this.model);
   },
   /**
    * 下移
@@ -470,12 +484,13 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 14.12.14
    */
   _moveDown: function(e) {
+    var _this = this;
     e&& e.stopImmediatePropagation();
-    this.collapsed = true;
-    if (!this.viewId) {
+    _this.collapsed = true;
+    if (!_this.viewId) {
       return false;
     }
-    BbaseApp.getView(this.viewId)._moveDown(this.model);
+    BbaseApp.getView(_this.viewId)._moveDown(_this.model);
   },
   /**
    * 保存sort排序
@@ -485,9 +500,9 @@ var BbaseItem = BbaseSuperView.extend({
    */
   _saveSort: function() {
     var ctx = this;
-    var sort = this.$('.input-sort').val();
-    this.model._saveField({
-      id: this._get('id'),
+    var sort = ctx.$('.input-sort').val();
+    ctx.model._saveField({
+      id: ctx._get('id'),
       sort: sort
     }, ctx, {
       success: function() {
@@ -505,16 +520,17 @@ var BbaseItem = BbaseSuperView.extend({
    * @return {[type]} [description]
    */
   _save: function() {
-    if (this.model.attributes._response) delete this.model.attributes._response;
-    if (this.beforeSave) this.beforeSave.call(this);
-    BbaseEst.off('errorSave' + this.model.cid).on('errorSave' + this.model.cid, this._bind(function(type, response) {
-      if (this.errorSave) this.errorSave.call(this, response);
-    }));
-    var response = this.model.save({}, {
-      silent: this._options.diff,
+    var _this = this;
+    if (_this.model.attributes._response) delete _this.model.attributes._response;
+    if (_this.beforeSave) _this.beforeSave.call(_this);
+    BbaseEst.off('errorSave' + _this.model.cid).on('errorSave' + _this.model.cid, function(type, response) {
+      if (_this.errorSave) _this.errorSave.call(_this, response);
+    });
+    var response = _this.model.save({}, {
+      silent: _this._options.diff,
       wait: true
     });
-    if (this.afterSave) this.afterSave.call(this, response);
+    if (_this.afterSave) _this.afterSave.call(_this, response);
   },
   /**
    * 获取当前列表第几页
@@ -592,12 +608,13 @@ var BbaseItem = BbaseSuperView.extend({
    * @return {[type]}            [description]
    */
   _remove: function(e, callback) {
-    this.model.destroy({
+    var _this = this;
+    _this.model.destroy({
       wait: true,
-      success: this._bind(function() {
-        this._removeFromItems(this.model.get('dx'));
-        if (callback) callback.call(this);
-      })
+      success: function() {
+        _this._removeFromItems(_this.model.get('dx'));
+        if (callback) callback.call(_this);
+      }
     });
   },
   /**
@@ -610,15 +627,18 @@ var BbaseItem = BbaseSuperView.extend({
    *      this._removeFromItems(context.model.get('dx'));
    */
   _removeFromItems: function(dx) {
-    BbaseEst.trigger(this._super('view').cid + 'models', null, true);
+    var _this = this;
+    BbaseEst.trigger(_this._super('view').cid + 'models', null, true);
     if (BbaseEst.typeOf(dx) === 'undefined') return;
-    if (BbaseApp.getView(this.viewId)) {
-      if (BbaseApp.getView(this.viewId)._options.items){
-        if (!BbaseApp.getView(this.viewId)._options.diff){
-          BbaseApp.getView(this.viewId)._options.items.splice(dx, 1);
+    if (BbaseApp.getView(_this.viewId)) {
+      if (BbaseApp.getView(_this.viewId)._options.items){
+        if (!BbaseApp.getView(_this.viewId)._options.diff){
+          BbaseApp.getView(_this.viewId)._options.items.splice(dx, 1);
         }
       }
-      BbaseApp.getView(this.viewId)._resetDx();
+      BbaseApp.getView(_this.viewId)._resetDx();
     }
   }
 });
+window.BbaseItem = BbaseItem;
+})(window.BbaseBackbone, window.BbaseEst, window.BbaseApp, window.BbaseUtils, window.BbaseHandlebars,window.BbaseSuperView);

@@ -41,18 +41,18 @@ gulp.task('bbase_jquery', function () {
     'src/vendor/backbone/backbone-debug-est.js',
     'src/vendor/handlebars/handlebars-debug.js',
 
-    'src/handlebars/HandlebarsHelper.js',
+
     'src/backbone/BbaseApp.js',
+    'src/handlebars/HandlebarsHelper.js',
     'src/backbone/BbaseUtils.js',
     'src/backbone/BbaseService.js',
     'src/backbone/BbaseSuperView.js',
+    'src/backbone/BbaseModel.js',
     'src/backbone/BbaseView.js',
     'src/backbone/BbaseList.js',
     'src/backbone/BbaseItem.js',
     'src/backbone/BbaseCollection.js',
-    'src/backbone/BbaseModel.js',
     'src/backbone/BbaseDetail.js',
-    'src/backbone/BbaseBootstrap.js',
     'src/backbone/BbaseDirective.js',
     'src/backbone/BbaseStatus.js',
     'src/backbone/BbaseEnd.js'
@@ -83,13 +83,12 @@ gulp.task('bbase_zepto', function () {
     'src/backbone/BbaseUtils.js',
     'src/backbone/BbaseService.js',
     'src/backbone/BbaseSuperView.js',
+    'src/backbone/BbaseModel.js',
     'src/backbone/BbaseView.js',
     'src/backbone/BbaseList.js',
     'src/backbone/BbaseItem.js',
     'src/backbone/BbaseCollection.js',
-    'src/backbone/BbaseModel.js',
     'src/backbone/BbaseDetail.js',
-    'src/backbone/BbaseBootstrap.js',
     'src/backbone/BbaseDirective.js',
     'src/backbone/BbaseStatus.js',
     'src/backbone/BbaseEnd.js'
@@ -132,6 +131,16 @@ gulp.task('Pc', function () {
   gulp.src(dist.bbase + '/**').pipe(gulp.dest('C:/software/WorkProjects/Pc/app/vendor/bbase'));
   gulp.src('./app/ui/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/Pc/app/ui/bbase'));
   gulp.src('./app/components/bbase/**').pipe(gulp.dest('C:/software/WorkProjects/Pc/app/components/bbase'));
+});
+
+gulp.task('jsmin', [], function () {
+
+  return gulp.src([
+      'src/backbone/BbaseStatus.js'
+    ])
+    .pipe(babel({ presets: [es2015Preset] }))
+    .pipe(uglify())
+    .pipe(gulp.dest('./test/src'));
 });
 
 

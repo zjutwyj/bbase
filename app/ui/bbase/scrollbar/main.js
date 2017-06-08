@@ -20,11 +20,15 @@ Bbase.DIRECTIVE['bbaseuiscrollbar'] = {
         disableMouse: BbaseEst.typeOf(object.disableMouse) === 'boolean' ? object.mouseWheel : isMobile ? true : false,
         disablePointer:  BbaseEst.typeOf(object.disablePointer) === 'boolean' ? object.mouseWheel : true,
         interactiveScrollbars:  BbaseEst.typeOf(object.interactiveScrollbars) === 'boolean' ? object.mouseWheel : true,
+        preventDefault: BbaseEst.typeOf(object.preventDefault) === 'boolean' ? object.preventDefault : false
       });
     });
     return {
       id: object.id
     }
+  },
+  show: function(value, selector){
+    if (this[this._object.id]) this[this._object.id].refresh();
   },
   unbind: function (object) {
     if (this[this._object.id]) {

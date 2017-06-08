@@ -1,4 +1,7 @@
 var status = {};
+(function(status, BbaseEst,BbaseHandlebars, undefined){
+
+
 if (typeof app !== 'undefined' && app.getAllStatus){
   status = app.getAllStatus();
 }
@@ -20,3 +23,5 @@ BbaseEst.each(status, function (val, key) {
     return result;
   });
 });
+})(status, window.BbaseEst, window.BbaseHandlebars);
+

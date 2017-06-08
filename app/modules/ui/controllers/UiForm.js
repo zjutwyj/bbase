@@ -31,6 +31,7 @@ define('UiForm', [], function (require, exports, module) {
           { text: '组合切换', moduleId: 'UiFormGroup' ,oneRender: false},
           { text: '选项卡', moduleId: 'UiFormTab' ,oneRender: false},
           { text: '对话框', moduleId: 'UiFormDialog',oneRender: false},
+          { text: '提示框', moduleId: 'UiFormTip',oneRender: false},
           { text: '编辑器', moduleId: 'UiFormTextEditor',oneRender: false }
         ],
         tpl: `

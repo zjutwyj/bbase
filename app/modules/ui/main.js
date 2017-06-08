@@ -25,6 +25,7 @@ Bbase.MODULE['UiFormTextEditor'] = 'modules/ui/controllers/UiFormTextEditor.js';
 Bbase.MODULE['UiFormGroup'] = 'modules/ui/controllers/UiFormGroup.js';
 Bbase.MODULE['UiFormTab'] = 'modules/ui/controllers/UiFormTab.js';
 Bbase.MODULE['UiFormDialog'] = 'modules/ui/controllers/UiFormDialog.js';
+Bbase.MODULE['UiFormTip'] = 'modules/ui/controllers/UiFormTip.js';
 
 Bbase.MODULE['UiScroll'] = 'modules/ui/controllers/UiScroll.js';
 Bbase.MODULE['UiScrollbar'] = 'modules/ui/controllers/UiScrollbar.js';

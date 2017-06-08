@@ -24,6 +24,9 @@ Bbase.DIRECTIVE['bbaseuidialog'] = {
           BbaseApp.getCurrentDialog().reset();
           if (object.onReady) object.onReady.call(this, arguments.length > 0 ? arguments.slice(0) : null);
         }),
+        afterShow: function(){
+          BbaseApp.getCurrentDialog().reset();
+        },
         onChange: this._bind(function () {
           if (object.onChange) object.onChange.call(this, arguments.length > 0 ? arguments.slice(0) : null);
         })

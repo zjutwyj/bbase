@@ -46,6 +46,23 @@ define('UiFormDropDown', [], function (require, exports, module) {
         </div>
       </div>
 
+      <div class="formPanel form-demo">
+        <div class="anything">
+          <div class="header">
+            <div class="formIdArea">
+              <span class="name">指令用法：bbaseuidropdownwix="{viewId:'bbaseuidropdownwix',moduleId: 'DemoListTodo'}"</span>
+            </div>
+          </div>
+          <div class="main clearfix">
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdownwix="{viewId:'bbaseuidropdownwix',mouseHover: true,moduleId: 'ThemeTable01',top:72}">wix风格下拉框</div>
+
+          </div>
+          <div class="footer">
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'select-win', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+          </div>
+        </div>
+      </div>
+
       <div class="formPanel form-api">
         <div class="anything">
           <div class="main">

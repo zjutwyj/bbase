@@ -27,7 +27,6 @@ define('DemoTableDynamic', [], function (require, exports, module) {
           <div class="anything" style="display: block;">
             <div class="header">
               <div class="formIdArea">
-                <span class="checkboxAll" bb-bbaseuicheckbox="{viewId: 'checkAll', cur: checked_all,items: allItems}" bb-click="handleAllChange"></span>
                 <span class="name">点到第2页的时候，列数将改变</span>
               </div>
               <div class="excelBtn">

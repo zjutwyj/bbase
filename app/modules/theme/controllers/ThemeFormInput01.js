@@ -7,7 +7,7 @@
 define('ThemeFormInput01', [], function(require, exports, module){
   var ThemeFormInput01;
 
-  ThemeFormInput01 = BbaseView.extend({
+  ThemeFormInput01 = BbaseDetail.extend({
     initialize: function(){
       var theme = BbaseEst.nextUid('ThemeFormInput01');
       this._super({
@@ -32,7 +32,10 @@ define('ThemeFormInput01', [], function(require, exports, module){
               </div>
             <!---->
           </div>
-        `
+        `,
+        model: BbaseModel.extend({
+
+        })
       });
     },
     initData: function(){
