@@ -481,7 +481,7 @@
     right: 16px;
     width: 32px;
     height: 32px;
-    color: #000;
+    color: #bbb;
     font-size: 33px;
     text-align: center;
     vertical-align: middle;
@@ -512,16 +512,16 @@
   left: 50%;
   top: 50%;
   margin-top: .3rem;
-  margin-left: -1.6rem;
+  margin-left: -3.2rem;
   z-index: 999999999
 }
 
 #loading .object {
-  width: .6rem;
-  height: .6rem;
-  background-color: $mainColor;
+  width: 1rem;
+  height: 1rem;
+  background-color: lighten($mainColor, 10%);
   float: left;
-  margin-right: .6rem;
+  margin-right: 1rem;
   -moz-border-radius: 50% 50% 50% 50%;
   -webkit-border-radius: 50% 50% 50% 50%;
   border-radius: 50% 50% 50% 50%

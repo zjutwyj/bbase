@@ -7,7 +7,7 @@
 define('ThemeFormButton01', [], function(require, exports, module){
   var ThemeFormButton01;
 
-  ThemeFormButton01 = BbaseView.extend({
+  ThemeFormButton01 = BbaseDetail.extend({
     initialize: function(){
       var theme = BbaseEst.nextUid('AdminLayoutDetail');
       this._super({
@@ -29,7 +29,10 @@ define('ThemeFormButton01', [], function(require, exports, module){
               <input bb-click="_close" type="button" value="取消" class="faiButton cancelButton faiButton-hover">
             </div>
           </div>
-        `
+        `,
+        model: BbaseModel.extend({
+
+        })
       });
     },
     initData: function(){

@@ -54,7 +54,7 @@ define('ThemeTable01', [], function (require, exports, module) {
               /* checkbox */
               .${theme}-wrap .checkboxAll{display: inline-block; height: 42px; padding-top: 8px; line-height: 50px; vertical-align: middle; }
               .${theme}-wrap .td-checkbox .bbase-ui-itemcheck.ui-item-check-checkbox{margin-top: -15px; text-align: center; padding-left: 2px;}
-              .${theme}-wrap tr.item-active{background-color: ${CONST.LIGHTEN_COLOR};}
+              .${theme}-wrap tr.item-active,.${theme}-wrap tr:hover{background-color: ${CONST.LIGHTEN_COLOR};}
 
               /* demo */
               .${theme}-wrap .form-demo .header{padding-left:8px; }

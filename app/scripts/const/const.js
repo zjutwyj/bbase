@@ -9,7 +9,7 @@
 var CONST = {
   APP_VERSION: '1.5.5_1', // 版本号
   HOST: 'http://www.bbase.com/manage', // HOST
-  API: 'http://www.bbase.com/rest', // 后端API地址，需登录验证
+  API: 'http://www.bbase.com/rest/api', // 后端API地址，需登录验证
   PUBLIC_API: 'http://www.bbase.com/rest', // 无登录验证
   DOMAIN: 'http://www.bbase.com', // 域名
   STATIC_URL: 'http://www.bbase.com/html/', // 静态页面存放地址

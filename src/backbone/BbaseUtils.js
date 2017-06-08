@@ -3,6 +3,7 @@
  * @class BbaseUtils - 底层工具类
  * @author yongjin<zjut_wyj@163.com> 2015/1/27
  */
+(function(BbaseBackbone, BbaseEst, BbaseApp, undefined){
 var BbaseUtils = {
   /**
    * 对话框
@@ -246,8 +247,8 @@ var BbaseUtils = {
    */
   loadFile: function(doc, obj, fn) {
     var ctx=this;
-    this.tmpList = this.tmpList || [];
-    var item = this.getItem(doc, obj);
+    ctx.tmpList = ctx.tmpList || [];
+    var item = ctx.getItem(doc, obj);
     if (item) {
       if (item.ready) {
         fn && fn();
@@ -256,7 +257,7 @@ var BbaseUtils = {
       }
       return;
     }
-    this.tmpList.push({
+    ctx.tmpList.push({
       doc: doc,
       url: obj.src || obj.href,
       funs: [fn]
@@ -311,3 +312,6 @@ var BbaseUtils = {
     return BbaseUtils[name] && BbaseUtils[name].apply(BbaseUtils, [].slice.call(arguments, 1));
   }
 };
+window.BbaseUtils = BbaseUtils;
+})(window.BbaseBackbone, window.BbaseEst, window.BbaseApp);
+

@@ -9,8 +9,8 @@
  * @classb BbaseCollection 集合类
  * @author yongjin<zjut_wyj@163.com> 2014/11/6
  */
-
-var BbasePaginationModel = BbaseBackbone.Model.extend({
+(function(BbaseBackbone, BbaseEst, BbaseApp, BbaseUtils, undefined){
+  var BbasePaginationModel = BbaseBackbone.Model.extend({
   defaults: {
     page: 1,
     pageSize: 16,
@@ -30,8 +30,9 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
    * @author wyj 14.12.16
    */
   constructor: function(options) {
-    this.options = options || {};
-    BbaseBackbone.Collection.apply(this, [null, arguments]);
+    var _this = this;
+    _this.options = options || {};
+    BbaseBackbone.Collection.apply(_this, [null, arguments]);
   },
   /**
    * 调用父类方法
@@ -39,30 +40,31 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
    * @return {[type]} [description]
    */
   _super: function(type, args) {
+    var _this = this;
     if (BbaseEst.typeOf(type) === 'object') {
-      this._initialize(type);
+      _this._initialize(type);
     } else {
       switch (type) {
         case 'data':
-          if (BbaseApp.getView(this.options.viewId)) {
-            return BbaseApp.getView(this.options.viewId).model.toJSON();
+          if (BbaseApp.getView(_this.options.viewId)) {
+            return BbaseApp.getView(_this.options.viewId).model.toJSON();
           } else {
-            return this.options.data;
+            return _this.options.data;
           }
           break;
         case 'model':
-          if (BbaseApp.getView(this.options.viewId)) {
-            return BbaseApp.getView(this.options.viewId).model;
+          if (BbaseApp.getView(_this.options.viewId)) {
+            return BbaseApp.getView(_this.options.viewId).model;
           } else {
-            var model = this.model;
-            return new model(this.options.data);
+            var model = _this.model;
+            return new model(_this.options.data);
           }
           break;
         case 'view':
-          return BbaseApp.getView(this.options.viewId);
+          return BbaseApp.getView(_this.options.viewId);
         default:
-          if (BbaseApp.getView(this.options.viewId)[type]) BbaseApp.getView(this.options.viewId)[type](args);
-          return this;
+          if (BbaseApp.getView(_this.options.viewId)[type]) BbaseApp.getView(_this.options.viewId)[type](args);
+          return _this;
       }
     }
   },
@@ -77,12 +79,13 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
               }
    */
   _initialize: function() {
-    this._baseUrl = this.url;
-    this.__params = this.__params || {};
-    if (!this.paginationModel) {
-      this.paginationModel = new BbasePaginationModel({
-        page: this.options.page || 1,
-        pageSize: this.options.pageSize || 16
+    var _this = this;
+    _this._baseUrl = _this.url;
+    _this.__params = _this.__params || {};
+    if (!_this.paginationModel) {
+      _this.paginationModel = new BbasePaginationModel({
+        page: _this.options.page || 1,
+        pageSize: _this.options.pageSize || 16
       });
     }
   },
@@ -105,7 +108,7 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
       return [];
     }
     if (!resp.success && resp.msg) {
-      if (resp.msgType === "notLogin" && !BbaseEst.isEmpty(this.url)) {
+      if (resp.msgType === "notLogin" && !BbaseEst.isEmpty(ctx.url)) {
         BbaseEst.trigger('checkLogin', null, true);
       }
       else if (resp.msgType === "nopriv" && CONST.NO_PRIV){
@@ -119,11 +122,11 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
         BbaseUtils.tip(resp.msg, { zIndex: 5000 });
       }
     }
-    this._parsePagination(resp);
-    this._parseUrl(this.paginationModel);
+    ctx._parsePagination(resp);
+    ctx._parseUrl(ctx.paginationModel);
     //TODO this.options.pagination 防止被其它无分页的列表覆盖
-    if (this.options.pagination && this.paginationModel) {
-      this._paginationRender();
+    if (ctx.options.pagination && ctx.paginationModel) {
+      ctx._paginationRender();
     }
     return resp.attributes.data;
   },
@@ -136,20 +139,21 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
    * @author wyj 14.11.16
    */
   _parseUrl: function(model) {
+    var _this = this;
     var page = 1,
       pageSize = 16;
     if (model && model.get('pageSize')) {
       pageSize = model.get('pageSize');
       page = model.get('page');
     }
-    if (this.options.subRender) {
+    if (_this.options.subRender) {
       page = 1;
       pageSize = 9000;
     }
-    if (typeof this.url !== 'function') {
+    if (typeof _this.url !== 'function') {
       var end = '';
-      if (!BbaseEst.isEmpty(this._itemId)) end = '/' + this._itemId;
-      this.url = this._baseUrl + end + '?page=' + page + '&pageSize=' + pageSize + this._getParams();
+      if (!BbaseEst.isEmpty(_this._itemId)) end = '/' + _this._itemId;
+      _this.url = _this._baseUrl + end + '?page=' + page + '&pageSize=' + pageSize + _this._getParams();
     }
   },
   /**
@@ -160,8 +164,9 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
    * @param {[type]} value [description]
    */
   _setParam: function(name, value) {
-    this.__params[name] = value;
-    this._parseUrl(this.paginationModel);
+    var _this = this;
+    _this.__params[name] = value;
+    _this._parseUrl(_this.paginationModel);
   },
   /**
    * 获取请求参数
@@ -179,9 +184,10 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
    */
   _getParams: function() {
     var result = '';
-    BbaseEst.each(this.__params, function(val, key) {
+    var _this = this;
+    BbaseEst.each(_this.__params, function(val, key) {
       result += ('&' + key + '=' + val);
-    }, this);
+    }, _this);
     return result;
   },
   /**
@@ -193,15 +199,16 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
    * @author wyj 14.11.16
    */
   _parsePagination: function(resp) {
+    var _this = this;
     resp.attributes = resp.attributes || {
       page: 1,
       per_page: 10,
       count: 10
     };
-    if (this.paginationModel) {
-      this.paginationModel.set('page', resp.attributes.page || 1);
-      this.paginationModel.set('pageSize', resp.attributes.per_page || 16);
-      this.paginationModel.set('count', resp.attributes.count || 1);
+    if (_this.paginationModel) {
+      _this.paginationModel.set('page', resp.attributes.page || 1);
+      _this.paginationModel.set('pageSize', resp.attributes.per_page || 16);
+      _this.paginationModel.set('count', resp.attributes.count || 1);
     }
   },
   /**
@@ -212,24 +219,25 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
    * @author wyj 14.11.16
    */
   _paginationRender: function() {
-    seajs.use(['BbasePagination'], BbaseEst.proxy(function(Pagination) {
+    var _this = this;
+    seajs.use(['BbasePagination'], function(Pagination) {
       if (!Pagination) return;
-      if (!this.pagination) {
-        var $el = $(this.options.el);
-        var isStr = BbaseEst.typeOf(this.options.pagination) === 'string';
+      if (!_this.pagination) {
+        var $el = $(_this.options.el);
+        var isStr = BbaseEst.typeOf(_this.options.pagination) === 'string';
         var _$el = $(!isStr ? "#pagination-container" :
-          this.options.pagination, $el.size() > 0 ? $el : $('body'));
+          _this.options.pagination, $el.size() > 0 ? $el : $('body'));
         if (isStr) {
-          this.paginationModel.set('numLength', parseInt(_$el.attr('data-numLength') || 7, 10));
+          _this.paginationModel.set('numLength', parseInt(_$el.attr('data-numLength') || 7, 10));
         }
-        this.pagination = new Pagination({
+        _this.pagination = new Pagination({
           el: _$el,
-          model: this.paginationModel
+          model: _this.paginationModel
         });
       } else {
-        this.pagination.render();
+        _this.pagination.render();
       }
-    }, this));
+    });
   },
   /**
    * 加载列表
@@ -249,13 +257,14 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
    *         }
    */
   _load: function(instance, context, model) {
-    this._parseUrl(model);
+    var _this = this;
+    _this._parseUrl(model);
     return instance.fetch({
       success: function() {
         if (!context.options.diff) context._empty();
       },
-      cacheData: this.options.cache,
-      session: this.options.session
+      cacheData: _this.options.cache,
+      session: _this.options.session
     });
   },
   /**
@@ -285,13 +294,14 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
    * @author wyj 14.11.15
    */
   _empty: function() {
-    if (this.collection) {
-      var len = this.collection.length;
+    var _this = this;
+    if (_this.collection) {
+      var len = _this.collection.length;
       while (len > -1) {
-        this.collection.remove(this.collection[len]);
+        _this.collection.remove(_this.collection[len]);
         len--;
       }
-      BbaseEst.trigger(this._super('view').cid + 'models', null, true)
+      BbaseEst.trigger(_this._super('view').cid + 'models', null, true)
     }
   },
   _getPage: function () {
@@ -301,7 +311,8 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
     this.paginationModel.set('page', page);
   },
   _getTotalPage: function () {
-    return this._getCount() % this._getPageSize() == 0 ? this._getCount() / this._getPageSize() : Math.floor(this._getCount() / this._getPageSize()) + 1;
+    var _this = this;
+    return _this._getCount() % _this._getPageSize() == 0 ? _this._getCount() / _this._getPageSize() : Math.floor(_this._getCount() / _this._getPageSize()) + 1;
   },
   _getCount: function () {
     return this.paginationModel.get('count');
@@ -316,3 +327,6 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
     this.paginationModel.set('pageSize', pageSize);
   }
 });
+window.BbaseCollection = BbaseCollection;
+})(window.BbaseBackbone, window.BbaseEst, window.BbaseApp, window.BbaseUtils);
+

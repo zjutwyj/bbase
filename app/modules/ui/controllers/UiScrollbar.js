@@ -118,6 +118,12 @@ define('UiScrollbar', [], function (require, exports, module) {
                   <td class="argType"><span>boolean</span></td>
                   <td class="argDefault"><span>true</span></td>
                 </tr>
+                <tr>
+                  <td class="argName"><span>preventDefault</span></td>
+                  <td class="argDesc"><span>阻止事件冒泡,开启后文本框将不能选择</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>false</span></td>
+                </tr>
               </tbody>
             </table>
           </div>

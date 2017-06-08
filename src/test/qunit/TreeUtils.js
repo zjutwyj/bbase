@@ -13,7 +13,7 @@ QUnit.test("bulidSubNode -> 4ms*1", function(assert) {
             root.push(list[i]);
         }
     }
-    Est.bulidSubNode(root, list);
+    BbaseEst.bulidSubNode(root, list);
     var list2 = [{ "alias": null, "belong_id": "Category_00000000000000000002312", "category_id": "Category_00000000000000000002316", "cates": [], "cdesc": "", "grade": "03", "hasChild": false, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "14寸", "sort": "9" }, { "alias": null, "belong_id": "Category_00000000000000000002312", "category_id": "Category_00000000000000000002315", "cates": [], "cdesc": "", "grade": "03", "hasChild": false, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "13寸", "sort": "8" }, { "alias": null, "belong_id": "Category_00000000000000000002306", "category_id": "Category_00000000000000000002312", "cates": [{ "alias": null, "belong_id": "Category_00000000000000000002312", "category_id": "Category_00000000000000000002316", "cates": [], "cdesc": "", "grade": "03", "hasChild": false, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "14寸", "sort": "9" }, { "alias": null, "belong_id": "Category_00000000000000000002312", "category_id": "Category_00000000000000000002315", "cates": [], "cdesc": "", "grade": "03", "hasChild": false, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "13寸", "sort": "8" }], "cdesc": "", "grade": "02", "hasChild": true, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "苹果", "sort": "7" }, { "alias": null, "belong_id": "Category_00000000000000000002306", "category_id": "Category_00000000000000000002314", "cates": [], "cdesc": "", "grade": "02", "hasChild": false, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "联想", "sort": "6" }, { "alias": null, "belong_id": "Category_00000000000000000002306", "category_id": "Category_00000000000000000002313", "cates": [], "cdesc": "", "grade": "02", "hasChild": false, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "华硕", "sort": "5" }, { "alias": null, "belong_id": "/", "category_id": "Category_00000000000000000002290", "cates": [], "cdesc": "默认分类", "grade": "01", "hasChild": false, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "默认分类", "sort": "4" }, { "alias": null, "belong_id": "/", "category_id": "Category_00000000000000000002306", "cates": [{ "alias": null, "belong_id": "Category_00000000000000000002306", "category_id": "Category_00000000000000000002312", "cates": [{ "alias": null, "belong_id": "Category_00000000000000000002312", "category_id": "Category_00000000000000000002316", "cates": [], "cdesc": "", "grade": "03", "hasChild": false, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "14寸", "sort": "9" }, { "alias": null, "belong_id": "Category_00000000000000000002312", "category_id": "Category_00000000000000000002315", "cates": [], "cdesc": "", "grade": "03", "hasChild": false, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "13寸", "sort": "8" }], "cdesc": "", "grade": "02", "hasChild": true, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "苹果", "sort": "7" }, { "alias": null, "belong_id": "Category_00000000000000000002306", "category_id": "Category_00000000000000000002314", "cates": [], "cdesc": "", "grade": "02", "hasChild": false, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "联想", "sort": "6" }, { "alias": null, "belong_id": "Category_00000000000000000002306", "category_id": "Category_00000000000000000002313", "cates": [], "cdesc": "", "grade": "02", "hasChild": false, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "华硕", "sort": "5" }], "cdesc": "", "grade": "01", "hasChild": true, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "电脑", "sort": "3" }, { "alias": null, "belong_id": "/", "category_id": "Category_00000000000000000002307", "cates": [], "cdesc": "", "grade": "01", "hasChild": false, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "包包", "sort": "2" }, { "alias": null, "belong_id": "/", "category_id": "Category_00000000000000000002305", "cates": [], "cdesc": "", "grade": "01", "hasChild": false, "hunkdisplay": null, "image": null, "isdisplay": "1", "key": null, "name": "手机", "sort": "1" }];
     assert.deepEqual(list, list2, "passed!");
 
@@ -27,8 +27,8 @@ QUnit.test("bulidSelectNode -> 4ms*1", function(assert) {
             root.push(list[i]);
         }
     }
-    Est.bulidSubNode(root, list);
-    Est.bulidSelectNode(root, 2, {
+    BbaseEst.bulidSubNode(root, list);
+    BbaseEst.bulidSelectNode(root, 2, {
         name: 'name'
     });
     var result = [{
@@ -186,7 +186,7 @@ QUnit.test('bulidBreakNav -> 1ms*1', function(assert) {
         { album_id: "Album_00000000000000000000059144", name: "四级分类", add_time: "2014-07-09T14:41:37.539Z", update_time: "2014-07-09T14:41:37.539Z", parent_id: "Album_00000000000000000000059143" }
     ];
 
-    var result = Est.bulidBreakNav(list, 'album_id', 'Album_00000000000000000000059144', 'name', 'parent_id');
+    var result = BbaseEst.bulidBreakNav(list, 'album_id', 'Album_00000000000000000000059144', 'name', 'parent_id');
     assert.deepEqual(result, [{ "name": "默认相册", "nodeId": "Album_00000000000000000000033002" }, { "name": "二级分类", "nodeId": "Album_00000000000000000000059142" }, { "name": "三级分类", "nodeId": "Album_00000000000000000000059143" }, { "name": "四级分类", "nodeId": "Album_00000000000000000000059144" }], 'passed!');
 });
 
@@ -210,7 +210,7 @@ QUnit.test('bulidTreeNode -> 9ms*2', function(assert) {
         { addTime: 1331009742781, grade: "04", cdesc: "运动、休闲 > 女包 > 时装包 > 手提包 > 女式 > 红色 > ", sort: 22, enterpriseId: "Enterp_0000000000000000000000039", categoryId: "Category_00000000000000000008423", sonCate: null, adduserId: "User_000000000000000000000000082", belongId: "Category_00000000000000000008426", categoryId2: "8423", isroot: "00", isdisplay: "1", hunkDisplay: null, c_url: null, alias: null, ifLeaf: false, newsList: null, image: null, image2: null, name: "美的", key: null, state: "01", type: "10" },
         { addTime: 1331009725046, grade: "03", cdesc: "运动、休闲 > 女包 > 时装包 > 手提包 > 女式 > ", sort: 21, enterpriseId: "Enterp_0000000000000000000000039", categoryId: "Category_00000000000000000008422", sonCate: null, adduserId: "User_000000000000000000000000082", belongId: "Category_00000000000000000008417", categoryId2: "8422", isroot: "00", isdisplay: "1", hunkDisplay: null, c_url: null, alias: null, ifLeaf: false, newsList: null, image: null, image2: null, name: "黑色", key: null, state: "01", type: "10" }
     ];
-    var result = Est.bulidTreeNode(list, 'isroot', '01', {
+    var result = BbaseEst.bulidTreeNode(list, 'isroot', '01', {
         categoryId: 'categoryId', // 分类ＩＤ
         belongId: 'belongId', // 父类ＩＤ
         childTag: 'cates', // 子分类集的字段名称
@@ -240,7 +240,7 @@ QUnit.test('bulidTreeNode -> 9ms*2', function(assert) {
         { addTime: null, areaId: "402881882ba8753a012ba8c73d920045", updateTime: null, name: "秦皇岛市", path: "402881882ba8753a012ba8c689d30042,402881882ba8753a012ba8c73d920045", level: 1, belongId: '402881882ba8753a012ba8c689d30042' },
         { addTime: null, areaId: "402881882ba8753a012ba8c7656d0046", updateTime: null, name: "邯郸市", path: "402881882ba8753a012ba8c689d30042,402881882ba8753a012ba8c7656d0046", level: 1, belongId: '402881882ba8753a012ba8c689d30042' }
     ];
-    var result = Est.bulidTreeNode(list3, 'level', 0, {
+    var result = BbaseEst.bulidTreeNode(list3, 'level', 0, {
         categoryId: 'areaId', // 分类ＩＤ
         belongId: 'belongId', // 父类ＩＤ
         childTag: 'cates', // 子分类集的字段名称

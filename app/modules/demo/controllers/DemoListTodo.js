@@ -158,7 +158,7 @@ define('DemoListTodo', [], function (require, exports, module) {
     },
 
     handleItemChange: function(model, dx){
-      this.filteredTodos[dx] = model;
+      if(this.filteredTodos) this.filteredTodos[dx] = model;
       this._set('remaining', this.active().length);
       this._set('allDone', this._get('remaining') === 0 ? true : false);
     },

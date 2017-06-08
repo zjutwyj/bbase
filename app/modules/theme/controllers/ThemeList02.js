@@ -7,63 +7,18 @@ define('ThemeList02', [], function (require, exports, module) {
   var ThemeList02, template;
 
   var items = [];
-  for (var i = 1; i <= 20; i++) {
+  for (var i = 1; i <= 200; i++) {
     items.push({ wcdId: 'name' + i, seoTitle: 'title' + i, views: i, rviews: i });
   }
-
-
-  var LayoutAdd = BbaseDetail.extend({
-    initialize: function () {
-      this._super({
-        template: `
-          <div></div>
-        `,
-        model: BbaseModel.extend({
-          baseUrl: CONST.API + '/baseLayout/detail',
-          baseId: 'layoutId'
-        })
-      });
-    },
-    initData: function () {
-      return {
-        'title': '我的网站',
-        'language': 'cn',
-        'grade': 1,
-        'name': '我的网站',
-        'cellphone': '',
-        'entName': '',
-        'areaPath': ''
-      };
-    },
-    afterRender: function () {
-      var ctx = this;
-      switch (CONST.USER.userType) {
-        case '营销版':
-          ctx._set('grade', 1);
-          break;
-        case '电商版':
-          ctx._set('grade', 2);
-          break;
-        default:
-          ctx._set('grade', 1);
-      }
-    },
-    afterSave: function (e, response) {
-      if (response) {
-        BbaseUtils.tip('手机网站已添加,需审核后才能使用');
-        BbaseApp.getView('ManageNav').handleNavChange('ManageCenter');
-      }
-    }
-  });
 
   ThemeList02 = BbaseList.extend({
     initialize: function () {
       var theme = BbaseEst.nextUid('ThemeList02');
       this._super({
         template: `
-          <div class="theme-black ${theme}-wrap" style="padding-top:20px;width: 1000px;">
-            <style>
-              .${theme}-wrap .i-template {display: block; width: 322px; height: 218px; outline: 0; cursor: default; text-decoration: none; float: left; margin-right: 60px; margin-bottom: 48px; position: relative; background: url(http://dfwjjingtai.b0.upaiyun.com/upload//a//a1//admin//picture//2017//05//23/9c42cdda-6592-441f-a508-e4f9abe50c3f.png) no-repeat 0 0; }
+          <div class="theme-black ${theme}-wrap" style="padding:20px;width: 1016px; padding-right: 0;">
+          <style>
+              .${theme}-wrap .i-template {display: block; width: 322px; height: 218px; outline: 0; cursor: default; text-decoration: none; float: left; margin-right: 16px; margin-bottom: 16px; position: relative; background: url(http://dfwjjingtai.b0.upaiyun.com/upload//a//a1//admin//picture//2017//05//23/9c42cdda-6592-441f-a508-e4f9abe50c3f.png) no-repeat 0 0; }
               .${theme}-wrap .i-templateImg, .${theme}-wrap .i-template .i-templateLayer, .${theme}-wrap .i-template .i-templateCover {width: 320px; height: 200px; position: absolute; top: 17px; left: 1px; }
               .${theme}-wrap .i-templateImg {overflow: hidden; }
               .${theme}-wrap .i-template .i-templateLayer {visibility: hidden; z-index: 2; }
@@ -80,7 +35,7 @@ define('ThemeList02', [], function (require, exports, module) {
               .${theme}-wrap .wrap-load-more a{cursor: pointer;}
             </style>
             <div class="case-list square-scene">
-                <div class="addWork workDiv i-template" bb-click="addOne">
+                <div class="addWork workDiv i-template">
                   <div class="bgPic"></div>
                   <div class="text">新建空白</div>
                 </div>
@@ -130,7 +85,7 @@ define('ThemeList02', [], function (require, exports, module) {
             this.$('.hooked').removeClass('hooked');
           }
         }),
-        pageSize: 19,
+        pageSize: 5,
         append: true,
         render: '.case-list',
         items: items,
@@ -139,14 +94,7 @@ define('ThemeList02', [], function (require, exports, module) {
       });
     },
     beforeLoad: function () {
-      this._setParam('vip', this._get('vip'));
-      this._setParam('manage', this._get('manage'));
-      if (this._getPage() === 1) {
-        this._setPageSize(19);
-      } else {
-        this._setPageSize(20);
-      }
-      window.curThemeList02Type = null;
+      this._setPageSize(this._getPage() === 1 ? 5 : 6);
     },
     afterLoad: function () {
       this.$('.no-result').hide();
@@ -156,9 +104,6 @@ define('ThemeList02', [], function (require, exports, module) {
       } else {
         this.$('.wrap-load-more').show();
       }
-    },
-    addOne: function(){
-      new LayoutAdd()._save();
     },
     loadMore: function () {
       this._setPage(this._getPage() + 1);

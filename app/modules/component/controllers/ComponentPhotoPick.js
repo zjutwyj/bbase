@@ -69,6 +69,11 @@ define('ComponentPhotoPick', [], function(require, exports, module){
                   <td class="argDesc"><span>详细API</span></td>
                   <td class="argType"><span>string</span></td>
                   <td class="argDefault"><span>/att/detail</span></td>
+                </tr><tr>
+                  <td class="argName"><span>uploadApi</span></td>
+                  <td class="argDesc"><span>图片上传API</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>/upload/todo</span></td>
                 </tr>
                 <tr>
                   <td class="argName"><span>size</span></td>

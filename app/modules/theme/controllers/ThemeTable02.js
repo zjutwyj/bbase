@@ -55,7 +55,7 @@ define('ThemeTable02', [], function (require, exports, module) {
               .${theme}-wrap .str_ctrl {overflow: hidden; white-space: nowrap; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; text-overflow: ellipsis }
               .${theme}-wrap .link_separate {border-bottom: 1px solid gainsboro }
               .${theme}-wrap .input-transparent {background: 0 0; border: none !important; }
-              .${theme}-wrap .input-transparent:focus {border: 1px solid #FF5241 !important; }
+              .${theme}-wrap .input-transparent:focus {border: 1px solid ${CONST.LIGHT_COLOR} !important; }
               .${theme}-wrap .select, .${theme}-wrap .text {height: 22px; text-indent: 8px; line-height: 22px; margin-right: 2px; }
               /* footer */
               .${theme}-wrap .formPanel .footer {position: absolute; bottom: 1px; left: 0px; right: 0px; height: 32px; line-height: 32px; border-bottom: 1px solid ${CONST.LIGHT_COLOR}; border-left: 1px solid ${CONST.LIGHT_COLOR}; border-right: 1px solid ${CONST.LIGHT_COLOR}; border-top: 1px solid ${CONST.LIGHTEN_COLOR}; background-color: ${CONST.LIGHTEN_COLOR}; color: #666; box-sizing: border-box;}

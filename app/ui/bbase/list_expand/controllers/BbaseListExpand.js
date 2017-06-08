@@ -69,7 +69,7 @@ define('BbaseListExpand', [], function (require, exports, module) {
       this._set('showMore', this.collection.models.length <= parseInt(this._options.max, 10) ? false : true);
       this._set('hasMore', this._getCount() <= parseInt(this._options.max, 10) ? false : true);
       setTimeout(function () {
-        _this.iscroll.refresh();
+        _this.iscroll && _this.iscroll.refresh();
       }, 100);
       if (this._options.cur) {
         this.handleClick(this._options.cur);
