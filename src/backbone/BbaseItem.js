@@ -475,16 +475,10 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 14.12.14
    */
   _moveUp: function(e) {
-<<<<<<< HEAD
-    e && e.stopImmediatePropagation();
-    this.collapsed = true;
-    if (!this.viewId) {
-=======
     var _this = this;
     e && e.stopImmediatePropagation();
     _this.collapsed = true;
     if (!_this.viewId) {
->>>>>>> develop
       return false;
     }
     BbaseApp.getView(_this.viewId)._moveUp(_this.model);
@@ -497,16 +491,10 @@ var BbaseItem = BbaseSuperView.extend({
    * @author wyj 14.12.14
    */
   _moveDown: function(e) {
-<<<<<<< HEAD
-    e&& e.stopImmediatePropagation();
-    this.collapsed = true;
-    if (!this.viewId) {
-=======
     var _this = this;
     e&& e.stopImmediatePropagation();
     _this.collapsed = true;
     if (!_this.viewId) {
->>>>>>> develop
       return false;
     }
     BbaseApp.getView(_this.viewId)._moveDown(_this.model);

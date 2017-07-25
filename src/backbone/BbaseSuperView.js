@@ -418,148 +418,10 @@
           list.pop();
           list = list.concat(t_list);
         }
-<<<<<<< HEAD
-      });
-    });
-  },
-  /**
-   * 视图到模型类的绑定
-   *
-   * @method [绑定] - _modelBind
-   * @private
-   * @author wyj 14.12.25
-   * @example
-   *        this._modelBind();
-   */
-  _modelBind: function (parent, selector, changeFn) {
-    var _self = this;
-    if (selector) this._singleBind(parent, selector, this.model, changeFn);
-    else this.$("input, textarea, select").each(function () {
-      _self._singleBind(null, $(this), _self.model, changeFn);
-    });
-  },
-  /**
-   * 获取模板
-   *
-   * @method _getCompileTemp
-   * @param  {string} attrName   属性名称
-   * @param  {jquery} node       作用元素
-   * @param  {string} selector   选择符
-   * @param  {string} ngAttrName 属性名称(针对IE浏览器)
-   * @return {Handlebar}         模板
-   */
-  _getCompileTemp: function (dirName, node, selector, ngDirName, fieldName) {
-    var hbsStr = null,
-      compileStr = '';
-
-    switch (dirName) {
-      case 'html':
-        compileStr = this._parseHbs(node.html());
-        return { compile: BbaseHandlebars.compile(compileStr), compileStr: compileStr };
-      case 'checked':
-        compileStr = '{{' + /bb-checked=\"(.*?)\"\s?/img.exec(selector)[1] + '}}';
-        return { compile: BbaseEst.compile(compileStr), compileStr: compileStr };
-      case 'show':
-        hbsStr = node.attr('bb-show').split(':');
-        if (hbsStr.length > 1) hbsStr = hbsStr[1];
-        else hbsStr = hbsStr[0];
-        compileStr = '{{' + hbsStr + '}}';
-        return { compile: BbaseEst.compile(compileStr), compileStr: compileStr };
-      default:
-        if (BbaseApp.getDirective(dirName)) {
-          compileStr = node.attr('bb-' + ngDirName);
-          compileStr = compileStr || fieldName;
-          return { compile: BbaseApp.getDirective(dirName).compile ? BbaseApp.getDirective(dirName).compile : compileStr.indexOf('{{') > -1 ? BbaseHandlebars.compile(compileStr) : BbaseEst.compile('{{' + compileStr + '}}'), compileStr: selector };
-        } else {
-          hbsStr = this._parseHbs(node.attr(ngDirName));
-          if (!hbsStr && node.is('textarea')) hbsStr = this._parseHbs(node.html());
-          compileStr = (BbaseEst.isEmpty(hbsStr) || hbsStr.indexOf('{{') === -1) ? '{{' + fieldName + '}}' : hbsStr;
-          return {
-            compile: BbaseHandlebars.compile(compileStr),
-            compileStr: compileStr,
-            directive: ngDirName === 'value' ? selector.indexOf('bb-model') > -1 ? 'model' : ngDirName : ngDirName
-          };
-        }
-    }
-  },
-  /**
-   * 元素替换
-   *
-   * @method [替换] - _replaceNode
-   * @param  {string} attrName   属性名称
-   * @param  {jquery} node       元素
-   * @param  {string} result     模板结果字符串
-   * @param  {string} selector   选择符
-   * @param  {string} ngAttrName 属性名称(针对IE)
-   */
-  _replaceNode: function (attrName, node, result, selector, ngAttrName) {
-    switch (attrName) {
-      case 'value':
-        if (node.is(':checkbox')) {
-          if (result === 'false' || result === '0' || BbaseEst.isEmpty(result)) node.prop('checked', false);
-          else node.prop('checked', true);
-        }
-        node.val(result);
-        break;
-      case 'html':
-        node.html(result);
-        break;
-      case 'show':
-        if ((result === 'false' || result === '0' || BbaseEst.isEmpty(result))) node.hide();
-        else node.show();
-        break;
-      case 'checked':
-        //node.prop('checked', this._get(/bb-checked=\"(.*?)\"\s?/img.exec(selector)[1]));
-        if (this._get(/bb-checked=\"(.*?)\"\s?/img.exec(selector)[1])) {
-          node.prop('checked', true);
-        } else {
-          node.prop('checked', false);
-        }
-        break;
-      default:
-        if (BbaseApp.getDirective(attrName) && BbaseApp.getDirective(attrName).update) {
-          BbaseApp.getDirective(attrName).update.apply(this, [attrName, node, selector, result]);
-        } else {
-          node.attr(ngAttrName, result);
-        }
-    }
-  },
-  /**
-   * 执行替换操作
-   *
-   * @method _handleReplace
-   * @param  {object} item       缓存的替换对象集
-   * @param  {object} model      模型类
-   * @param  {string} selector   选择符
-   * @param  {string} attrName   属性名称
-   * @param  {string} ngAttrName 属性名称(针对IE)
-   */
-  _handleReplace: function (item, model, selector, attrName, ngAttrName, name) {
-    var _result = '';
-    /*if (this.collection && !BbaseEst.equal(model._previousAttributes.models, this.collection.models)) {
-      model._previousAttributes.models = BbaseEst.clone(this.collection.models);
-      BbaseEst.trigger(this.cid + 'models');
-    }*/
-    _result = item.compile(model.attributes);
-
-    // 比对数据，若无改变则返回
-    if (!(!BbaseEst.isEmpty(item.directive) && item.directive === 'model') &&
-      item.result === _result) {
-      return;
-    }
-    // 缓存node
-    if (!item.node || (item.node.size && item.node.size() === 0)) {
-      item.node = this.$(selector).eq(item.index);
-      if (item.node.size() === 0) {
-        // 针对bb-src
-        item.node = this.$('.directive_' + BbaseEst.hash(selector)).eq(item.index);
-        //console.error("error: call wyj for more info");
-=======
       } else if (item.indexOf('://') > -1) {
         list = [item];
       } else {
         list = item.split(':');
->>>>>>> develop
       }
       _this._attr_list[hash] = list;
       return list;
@@ -1503,10 +1365,6 @@
         key: helper,
         args: args
       };
-<<<<<<< HEAD
-      if (this.viewType === 'item') {
-        //this._super('change', path, this.viewType);
-=======
     },
     /**
      * 设置model值
@@ -1526,7 +1384,6 @@
         BbaseEst.trigger(_this.cid + path, path, true);
         _this._m_change_ = true;
         _this._m_change_list && _this._m_change_list.push(path);
->>>>>>> develop
       }
     },
     /**
@@ -1603,122 +1460,6 @@
       if (_this._options.onChange) {
         _this._options.onChange.call(_this, keyVals);
       }
-<<<<<<< HEAD
-    }));
-  },
-  /**
-   * 关闭对话框
-   *
-   * @method _close
-   */
-  _close: function () {
-    if (BbaseApp.getDialog(this.viewId)) {
-      BbaseApp.getDialog(this.viewId).close().remove();
-    }
-  },
-  render: function () {
-    this._render();
-  },
-  /**
-   * 静态对话框， 当你需要显示某个组件的视图但不是以iframe形式打开时
-   * 对话框参数将作为模块里的options参数
-   *
-   * @method [对话框] - _dialog ( 静态对话框 )
-   * @param options
-   * @author wyj 15.1.22
-   * @example
-   *        // 获取对话框
-   *          BbaseApp.getDialog('moduleId || id');
-   *          this._dialog({
-   *                moduleId: 'SeoDetail', // 模块ID
-   *                title: 'Seo修改', // 对话框标题
-   *                id: this.model.get('id'), // 初始化模块时传入的ID， 如productId
-   *                width: 600, // 对话框宽度
-   *                height: 250, // 对话框高度
-   *                skin: 'form-horizontal', // className
-   *                hideSaveBtn: false, // 是否隐藏保存按钮， 默认为false
-   *                autoClose: true, // 提交后按确定按钮  自动关闭对话框
-   *                quickClose: true, // 点击空白处关闭对话框
-   *                button: [ // 自定义按钮
-   *                  {
-   *                    value: '保存',
-   *                    callback: function () {
-   *                    this.title('正在提交..');
-   *                    $("#SeoDetail" + " #submit").click(); // 弹出的对话ID选择符为id
-   *                     (注：当不存在id时，为moduleId值)
-   *                    BbaseApp.getView('SeoDetail'); // 视图为moduleId
-   *                    return false; // 去掉此行将直接关闭对话框
-   *                  }}
-   *                ],
-   *                onShow: function(){ // 对话框弹出后调用   [注意，当调用show方法时，
-   *                 对话框会重新渲染模块视图，若想只渲染一次， 可以在这里返回false]
-   *                    return true;
-   *                },
-   *                onClose: function(){
-   *                    this._reload(); // 列表刷新
-   *                    this.collection.push(BbaseEst.cloneDeep(BbaseApp.getModels()));
-   *                    // 向列表末尾添加数据, 注意必须要深复制
-   *                    this.model.set(BbaseApp.getModels().pop()); // 修改模型类
-   *                }
-   *            }, this);
-   */
-  _dialog: function (options, context) {
-    var ctx = context || this;
-    if (BbaseEst.typeOf(options) === 'string'){
-      return BbaseApp.getDialog(options + this.cid);
-    }
-    var viewId = options.viewId ? options.viewId :
-      BbaseEst.typeOf(options.dialogId) === 'string' ? options.dialogId : options.moduleId;
-    if (BbaseEst.typeOf(viewId) === 'function') viewId = BbaseEst.nextUid('dialog_view');
-    options.viewId = viewId + this.cid;
-    var comm = {
-      width: 'auto',
-      title: null,
-      cover: false,
-      autofocus: false,
-      hideOkBtn: true,
-      hideCloseBtn: true,
-      button: [],
-      quickClose: options.cover ? false :
-        (BbaseEst.typeOf(options.autofocus) === 'boolean' ? options.quickClose : false),
-      skin: 'dialog_min'
-    };
-
-    if (options.moduleId && BbaseApp.getStatus(options.moduleId)) {
-      comm = BbaseEst.extend(comm, BbaseApp.getStatus(options.moduleId));
-    }
-    options = BbaseEst.extend(comm, options);
-
-    options = BbaseEst.extend(options, {
-      el: '#base_item_dialog' + options.viewId,
-      content: options.content || '<div id="' + options.viewId + '"></div>',
-      viewId: options.viewId,
-      onshow: function () {
-        try {
-          var result = options.onShow && options.onShow.call(this, options);
-          if (typeof result !== 'undefined' && !result)
-            return;
-          if (BbaseEst.typeOf(options.moduleId) === 'function') {
-            options.dialogId = options.dialogId || options.viewId;
-            BbaseApp.addPanel(options.viewId, {
-              el: '#' + options.dialogId,
-              template: '<div id="base_item_dialog' + options.dialogId + '" class="region ' +
-                options.viewId + '"></div>'
-            }).addView(options.viewId, new options.moduleId(options));
-          } else if (BbaseEst.typeOf(options.moduleId) === 'string') {
-            seajs.use([options.moduleId], function (instance) {
-              try {
-                if (!instance) {
-                  console.error(options.moduleId + ' is not defined');
-                }
-                BbaseApp.addPanel(options.viewId, {
-                  el: '#' + options.viewId,
-                  template: '<div id="base_item_dialog' + options.viewId + '" class="region"></div>'
-                }).addView(options.viewId, new instance(options));
-              } catch (e) {
-                console.error(e);
-              }
-=======
     },
 
     /**
@@ -1844,7 +1585,6 @@
           if (isArray) {
             BbaseEst.each(name, function (item) {
               _nameList.push(item.replace(/^(.+)-(\d+)?$/g, "$1"));
->>>>>>> develop
             });
             _this._require(_nameList, callback);
           } else if (callback) {

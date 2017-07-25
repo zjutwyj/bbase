@@ -151,18 +151,10 @@
           if (response.msgType === 'notLogin') {
             BbaseEst.trigger('checkLogin', null, true);
           }
-<<<<<<< HEAD
-        }
-        ctx._attributes = response.attributes;
-        BbaseEst.each(ctx.__def_vals_, function (value, key) {
-          if (typeof ctx._get(key) === 'undefined') {
-            ctx._set(key, value);
-=======
           if (!response.success) {
             if (ctx.errorFetch) {
               ctx.errorFetch.call(ctx, response);
             }
->>>>>>> develop
           }
           ctx._attributes = response.attributes;
           BbaseEst.each(ctx.__def_vals_, function (value, key) {
@@ -391,126 +383,17 @@
     _saveItem: function (callback, error) {
       var _this = this;
 
-<<<<<<< HEAD
-        if (!BbaseEst.isEmpty(ctx.model.url())) ctx._baseSave(function (response) {
-          if (options.afterSave) {
-            options.afterSave = BbaseEst.inject(options.afterSave, function (response) {
-              return new BbaseEst.setArguments(arguments);
-            }, function (response) {
-              if (bt) {
-                $button.val(preText);
-              } else {
-                $button.html(preText);
-              }
-              $button.prop('disabled', false);
-            });
-            options.afterSave.call(ctx, BbaseEst.typeOf(response) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
-              BbaseEst.getValue(response, 'attributes._response') : { msg: null, msgType: null, success: true });
-          }
-          $button.html(preText);
-        }, function (response) {
-          if (response.msgType === 'notLogin') {
-            BbaseEst.trigger('checkLogin', null, true);
-          }
-          if (ctx.errorSave) ctx.errorSave.call(ctx, response);
-          if (options.onErrorSave) options.onErrorSave.call(ctx, response);
-        });
-        setTimeout(function () {
-          $button.html(preText);
-          $button.prop('disabled', false);
-        }, 5000);
-      }
-      return false;
-    });
-  },
-  _baseSave: function(callback, error){
-    this._saveItem(callback, error);
-  },
-  /**
-   * 保存结果
-   *
-   * @method [private] - _save
-   * @private
-   * @author wyj 14.11.18
-   */
-  _save: function (callback, error) {
-    var _this = this,
-    isPassed;
-    if (typeof _this.beforeSave !== 'undefined')
-      isPassed = _this.beforeSave.call(_this);
-    if (BbaseEst.typeOf(isPassed) !== 'undefined' && !isPassed) return false;
-    this._saveItem(function (response) {
-      if (_this.afterSave) {
-        _this.afterSave.call(_this, BbaseEst.typeOf(response) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(response, 'attributes._response.success')) === 'boolean' ?
-          BbaseEst.getValue(response, 'attributes._response') : { msg: null, msgType: null, success: true });
-      }
-      if (callback) callback.call(_this, Array.prototype.splice.call(arguments, 0));
-    }, function () {
-      if (_this.errorSave) {
-        _this.errorSave.call(_this, Array.prototype.splice.call(arguments, 0));
-      }
-      if (error) error.call(_this, Array.prototype.splice.call(arguments, 0));
-    });
-  },
-  /**
-   * 保存表单
-   *
-   * @method [private] - _saveItem
-   * @private
-   * @param callback
-   * @param context
-   * @author wyj 14.11.15
-   */
-  _saveItem: function (callback, error) {
-    var _this = this;
-
-    if (BbaseEst.isEmpty(this.model.url())) {
-      return;
-    }
-    if (this.model.attributes._response) {
-      delete this.model.attributes._response;
-    }
-=======
       if (BbaseEst.isEmpty(_this.model.url())) {
         return;
       }
       if (_this.model.attributes._response) {
         delete _this.model.attributes._response;
       }
->>>>>>> develop
 
       BbaseEst.off('errorSave' + _this.model.cid).on('errorSave' + _this.model.cid, _this._bind(function (type, response) {
         if (_this.errorSave) _this.errorSave.call(_this, response);
       }));
 
-<<<<<<< HEAD
-    this.model.save(null, {
-      wait: true,
-      success: function (response) {
-        BbaseApp.addModel(BbaseEst.cloneDeep(response.attributes));
-        try {
-          if (top && top.model) {
-            top.model = response.attributes;
-          }
-        } catch (e) {}
-        if (callback && typeof callback === 'function')
-          callback.call(this, response);
-      },
-      error: function (model, XMLHttpRequest, errorThrown) {
-        if (XMLHttpRequest.status === 200) {
-          if (callback) {
-            callback.call(this, XMLHttpRequest.responseText);
-          } else if (_this.afterSave) {
-            _this.afterSave.call(_this,BbaseEst.typeOf(XMLHttpRequest.responseText) === 'string' ? { msg: null, msgType: null, success: true } : BbaseEst.typeOf(BbaseEst.getValue(XMLHttpRequest.responseText, 'attributes._response.success')) === 'boolean' ?
-              BbaseEst.getValue(XMLHttpRequest.responseText, 'attributes._response') : { msg: null, msgType: null, success: true });
-          }
-
-        } else if (error && typeof error === 'function') {
-          if (error) {
-            error.call(this, XMLHttpRequest, model, errorThrown);
-          } else if (_this.errorSave) {
-            _this.errorSave.call(_this, XMLHttpRequest.responseText);
-=======
       _this.model.save(null, {
         wait: true,
         success: function (response) {
@@ -538,7 +421,6 @@
             } else if (_this.errorSave) {
               _this.errorSave.call(_this, XMLHttpRequest.responseText);
             }
->>>>>>> develop
           }
         }
       });
