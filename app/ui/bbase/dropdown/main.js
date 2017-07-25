@@ -2,6 +2,7 @@ Bbase.MODULE['BbaseDropDown'] = 'ui/bbase/dropdown/controllers/BbaseDropDown.js'
 
 function baseBbaseDropdown(value, selector, theme) {
   this._require(['BbaseDropDown'], function (BbaseDropDown) {
+    var _this = this;
     var object = this._getObject(value, 'cur');
     var viewId = object.viewId;
     this._region(viewId, BbaseDropDown, {
@@ -18,16 +19,20 @@ function baseBbaseDropdown(value, selector, theme) {
       showClose: object.showClose,
       top: object.top,
       lazy: object.lazy,
+      lazyLoad: object.lazyLoad,
       align: object.align,
       items: object.items,
       theme: theme,
       onReady: function () {
-        if (!object.lazy){
-          this.reset && this.reset();
+        if (object.onReady){
+          object.onReady.call(_this);
         }
       },
       onShow: function(){
-        this.reset && this.reset();
+        //this.reset && this.reset();
+        if (object.onShow){
+          object.onShow.call(_this);
+        }
       }
     });
   });

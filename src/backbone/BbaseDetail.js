@@ -158,7 +158,7 @@
           }
           ctx._attributes = response.attributes;
           BbaseEst.each(ctx.__def_vals_, function (value, key) {
-            if (typeof ctx._get(key) === 'undefined') {
+            if (typeof ctx._get(key) === 'undefined' || ctx._get(key) === null) {
               ctx._set(key, value);
             }
           });

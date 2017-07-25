@@ -2302,7 +2302,7 @@ define('BbaseMusicPick', ['BbaseItemCheck'], function (require, exports, module)
               this.musicPlay = true;
               BbaseApp.getView(this._options.viewId).playMusic(this.model.get('serverPath'));
             }
-
+          this.$('.music-name').click();
           },
           afterRender: function () {
 

@@ -1,0 +1,123 @@
+.bbase-component-poductpick {
+  padding: 0px;
+  height: 441px;
+  overflow: hidden;
+  ul,
+  li {
+    list-style: none;
+  }
+  .plugin-product-list {
+    padding: 0 10px;
+  }
+  #icon-btns {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+  }
+  #icon-btns .cancel,
+  #icon-btns .submit {
+    width: 70px;
+    height: 36px;
+  }
+  #icon-btns .cancel {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  #icon-btns .submit {
+    border: none;
+    background: $mainColor;
+    color: #fff;
+    cursor: pointer;
+  }
+  #icon-btns .submit:hover {
+    background-color: lighten($mainColor, 10%);
+  }
+  #product-pagination {
+    position: absolute;
+    bottom: 12px;
+    left: 15px;
+  }
+  #product-pagination .page-per-page {
+    display: none;
+  }
+  .plugin-product-header {
+    line-height: 40px;
+    height: 40px;
+  }
+  .plugin-product-header,
+  .pro-header {
+    background: #efefef;
+    overflow: hidden;
+  }
+  .pro-6 {
+    width: 60%;
+    float: left;
+  }
+  span {
+    padding: 0 10px;
+    display: inline-block;
+  }
+  .pro-2 {
+    width: 20%;
+    float: left;
+  }
+  .plugin-product-search {
+    width: 85px;
+    height: 28px;
+    line-height: 28px;
+    padding: 1px 8px;
+    border: 1px solid #ddd !important;
+  }
+  .plugin-pro-item {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    overflow: hidden;
+    line-height: 60px;
+    height: 60px;
+  }
+  .plugin-pro-item img {
+    max-width: 60px;
+    padding: 0 5px;
+    float: left;
+  }
+  .plugin-pro-item img {
+    max-width: 60px;
+    padding: 0 5px;
+    float: left;
+  }
+  .pro-title a {
+    color: #666;
+    text-decoration: none;
+  }
+  .plugin-product-list input[type=button] {
+    border: 1px solid #aaa;
+    margin-top: 5px;
+    border-radius: 2px;
+    padding: 8px 21px;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  .plugin-product-list input[type=button]:hover {
+    background: #f5f5f5;
+  }
+  .plugin-product-list input[type=button].checked {
+    border: 1px solid $mainColor !important;
+    background: $mainColor;
+    color: #fff !important;
+  }
+  .search-btn {
+    width: 40px;
+    height: 30px;
+    vertical-align: middle;
+    background: #fff;
+    border: 1px solid #cfcfcf;
+    cursor: pointer;
+  }
+  .search-btn:hover {
+    background: #efeeee;
+  }
+  .header-pic{
+    display:inline-block;margin-right: 7px; margin-left: 8px;
+  }
+}

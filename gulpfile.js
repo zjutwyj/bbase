@@ -100,6 +100,7 @@ gulp.task('bbase_zepto', function () {
   }
   return gulp.src(source)
     .pipe(concat('bbase_zepto.min.js'))
+    .pipe(babel({ presets: [es2015Preset] }))
     .pipe(uglify())
     .pipe(gulp.dest(dist.bbase));
 });

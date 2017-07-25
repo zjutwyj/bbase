@@ -198,6 +198,21 @@ var BbaseUtils = {
     if (window.$loading) window.$loading.remove();
     else $('.loading').remove();
   },
+
+  addRegionLoading: function($node, options){
+    var options = options || {};
+    var rloading = BbaseEst.nextUid('rloaing');
+    var color = CONST.LIGHT_COLOR || CONST.MAIN_COLOR || '#666';
+    var bgColor = options.backgroundColor || '#fff';
+    $node.attr('data-rloading', rloading);
+    var html = "<div style=\"background-color: " + bgColor+";z-index: 9999999999999999999; position: relative;\"> <svg version=\"1.1\" id=\""+rloading+"\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"40px\" height=\"40px\" viewBox=\"0 0 50 50\" style=\"enable-background:new 0 0 50 50;\" xml:space=\"preserve\"> <path fill=\"" + color+ "\" d=\"M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z\"> <animateTransform attributeType=\"xml\" attributeName=\"transform\" type=\"rotate\" from=\"0 25 25\" to=\"360 25 25\" dur=\"0.6s\" repeatCount=\"indefinite\"/> </path> </svg> </div>";
+    $node.append($(html));
+  },
+
+  removeRegionLoading: function($node){
+    $node.find('#' + $node.attr('data-rloading')).remove();
+  },
+
   getItem: function(doc, obj) {
     try {
       for (var i = 0, ci; ci = this.tmpList[i++];) {

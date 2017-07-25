@@ -23,3 +23,10 @@ Bbase.MODULE['ComponentColorPanel'] = 'modules/component/controllers/ComponentCo
 
 Bbase.MODULE['ComponentIcon'] = 'modules/component/controllers/ComponentIcon.js';
 Bbase.MODULE['ComponentIconPick'] = 'modules/component/controllers/ComponentIconPick.js';
+
+Bbase.MODULE['ComponentProduct'] = 'modules/component/controllers/ComponentProduct.js';
+Bbase.MODULE['ComponentProductPick'] = 'modules/component/controllers/ComponentProductPick.js';
+
+
+Bbase.MODULE['ComponentList'] = 'modules/component/controllers/ComponentList.js';
+Bbase.MODULE['ComponentListPick'] = 'modules/component/controllers/ComponentListPick.js';

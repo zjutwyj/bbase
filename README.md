@@ -292,7 +292,7 @@ var ProductDetail = BbaseDetail.extend({
 
 // 视图调用
 new ProductDetail({
-  id: 1,                                                // 如果传入ID参数， 则系统会自动从服务端请求详细表单内容
+  id: 1,                                                // 如果传入ID参数， 则系统会自动从服务端请求详细表单内容(注：id可放入data对象中)
 
   data: {},                                             // 传递给模型类的数据， 常放于new一个视图的参数里
 
@@ -610,10 +610,11 @@ Bbase.DIRECTIVE['bbaseuiradio'] = {
     this.$(selector).prop('disabled', boolean);
 
     return {
-      compile: BbaseEst.compile('{{' + value + '}}')
+      id: id,         //  返回指令唯一ID
+      compile: BbaseEst.compile('{{' + value + '}}') // 返回编译后的模板
     }
   },
-  show: function(value, selector){
+  show: function(object, value, selector){
     // 视图显示后执行
   },
   update: function(name, node, selector, result) {

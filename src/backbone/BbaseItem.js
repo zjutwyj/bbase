@@ -319,8 +319,15 @@ var BbaseItem = BbaseSuperView.extend({
     if (_this._bbBind) setTimeout(function() {
       _this._bbBind.call(_this, _this._options.template, _this.$el);
     }, 0);
+    _this._onAfterShow();
 
     _this._ready_component_ = true;
+  },
+  _onAfterShow: function(){
+    var _this = this;
+    if (_this.afterShow) setTimeout(function(){
+      _this.afterShow.call(_this);
+    }, 80)
   },
   /**
    * 移除监听

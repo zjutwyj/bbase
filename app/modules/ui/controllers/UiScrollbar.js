@@ -71,7 +71,7 @@ define('UiScrollbar', [], function (require, exports, module) {
                   <td class="argDefault"><span>-</span></td>
                 </tr>
                 <tr>
-                  <td class="argName"><span>id</span></td>
+                  <td class="argName"><span>id</span><span class="red">&nbsp;(必填)</span></td>
                   <td class="argDesc"><span title="返回的对象， 在视图中可以使用this[id]来获取scroll对象">返回的对象， 在视图中可以使用this[id]来获取scroll对象</span></td>
                   <td class="argType"><span>string</span></td>
                   <td class="argDefault"><span>iscroll</span></td>
@@ -124,6 +124,19 @@ define('UiScrollbar', [], function (require, exports, module) {
                   <td class="argType"><span>boolean</span></td>
                   <td class="argDefault"><span>false</span></td>
                 </tr>
+                <tr>
+                  <td class="argName"><span>minScroll</span></td>
+                  <td class="argDesc"><span>滚动到顶部回调</span></td>
+                  <td class="argType"><span>function</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
+                 <tr>
+                  <td class="argName"><span>maxScroll</span></td>
+                  <td class="argDesc"><span>滚动到底部回调</span></td>
+                  <td class="argType"><span>function</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
+
               </tbody>
             </table>
           </div>

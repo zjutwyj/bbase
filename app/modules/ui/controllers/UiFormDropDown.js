@@ -17,10 +17,10 @@ define('UiFormDropDown', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main clearfix">
-            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdown',content: content, align:'left'}">点击显示下拉框[居左]</div>
-            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdownhover',content: content, mouseHover: true, align:'right'}">鼠标移入显示下拉框[居右]</div>
-            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdownmodule',moduleId: 'DemoListTodo',align: 'center', showClose: true}">请求模块下拉框[居中]</div>
-            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdownfollow',content: content, mouseHover: true, mouseFollow: true,align:'center'}">鼠标跟随下拉框</div>
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdown',content: content, align:'left',lazyLoad: true}">点击显示下拉框[居左]</div>
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdownhover',content: content, mouseHover: true, align:'right',lazyLoad: true}">鼠标移入显示下拉框[居右]</div>
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdownmodule',moduleId: 'DemoListTodo',align: 'center', showClose: true,lazyLoad: true}">请求模块下拉框[居中]</div>
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdownwix="{viewId:'bbaseuidropdownfollow',content: content, mouseHover: true, mouseFollow: true,align:'center',lazyLoad: true}">鼠标跟随下拉框</div>
 
           </div>
           <div class="footer">
@@ -37,7 +37,7 @@ define('UiFormDropDown', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main clearfix">
-            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdownwin="{viewId:'bbaseuidropdownwin',moduleId: 'ThemeTable01',top:72}">全屏下拉框</div>
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdownwin="{viewId:'bbaseuidropdownwin',moduleId: 'ThemeTable01',top:72,lazyLoad: true}">全屏下拉框</div>
 
           </div>
           <div class="footer">
@@ -54,7 +54,7 @@ define('UiFormDropDown', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main clearfix">
-            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdownwix="{viewId:'bbaseuidropdownwix',mouseHover: true,moduleId: 'ThemeTable01',top:72}">wix风格下拉框</div>
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdownwix="{viewId:'bbaseuidropdownwix',mouseHover: true,moduleId: 'DemoListTodo',top:72,lazyLoad: true, align: 'left'}">wix风格下拉框</div>
 
           </div>
           <div class="footer">
@@ -125,6 +125,24 @@ define('UiFormDropDown', [], function (require, exports, module) {
                   <td class="argDesc"><span>显示关闭按钮</span></td>
                   <td class="argType"><span>boolean</span></td>
                   <td class="argDefault"><span>false</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>lazyLoad</span></td>
+                  <td class="argDesc"><span>模块延迟加载</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>false</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>onReady</span></td>
+                  <td class="argDesc"><span>下拉菜单渲染完成</span></td>
+                  <td class="argType"><span>function</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>onShow</span></td>
+                  <td class="argDesc"><span>下拉菜单显示</span></td>
+                  <td class="argType"><span>function</span></td>
+                  <td class="argDefault"><span>-</span></td>
                 </tr>
               </tbody>
             </table>

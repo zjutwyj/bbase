@@ -335,7 +335,7 @@
       }
       //TODO 若存在items且有page与pageSize  处理静态分页
       if (ctx._options.items) {
-        if (!ctx._options.diff) ctx._empty();
+        if (!ctx._options.diff && !ctx._options.append) ctx._empty();
         ctx._initItems();
       }
       // page pageSize保存到cookie中
@@ -708,6 +708,7 @@
             list[i]['dx'] = dx;
             dx++;
             model.view && model.view._set(_this._getPath(list[i]));
+            model.view && model.view._onAfterShow();
           }
         }
       }));
@@ -888,7 +889,7 @@
       _this.startIndex = (_this.page - 1) * parseInt(_this.pageSize, 10);
       _this.endIndex = _this.startIndex + parseInt(_this.pageSize, 10);
 
-      if (_this._options.diff) {
+      if (_this._options.diff && !_this._options.append) {
         var models = [];
         for (var i = _this.startIndex; i < _this.endIndex; i++) {
           if (_this._options.items[i]) {
@@ -902,11 +903,15 @@
         for (var i = _this.startIndex; i < _this.endIndex; i++) {
           _this.collection.push(_this._options.items[i]);
         }
+        if (_this.viewUpdate) setTimeout(_this._bind(function () {
+          _this.viewUpdate.call(_this, _this._options)
+        }), 0);
       }
 
       // 渲染分页
       _this._setCount(_this._options.items.length);
       _this.collection._paginationRender();
+      BbaseUtils.removeLoading();
       return _this.collection;
     },
 
@@ -1590,6 +1595,17 @@
     },
     _getLength: function () {
       return this.collection.models.length;
+    },
+    _loadMore: function () {
+      var _this = this;
+      _this._options.append = true;
+      if (_this._getTotalPage() === 0 ||
+        _this._getPage('page') === _this._getTotalPage()) {
+        return false;
+      }
+      _this._setPage(_this._getPage() + 1);
+      BbaseUtils.addLoading();
+      _this._load();
     }
   });
   window.BbaseList = BbaseList;

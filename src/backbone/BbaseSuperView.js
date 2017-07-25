@@ -818,12 +818,13 @@
                 if (BbaseApp.getDirective(item.name).show) {
                   _this._directives_show_.push({
                     name: item.name,
+                    object: _this._getObject(item.value),
                     value: item.value,
                     selector: '[bb-' + item.name + '="' + item.value + '"]'
                   });
                 }
 
-                _this._directives_.push({ name: item.name, object: BbaseApp.getDirective(item.name) });
+                _this._directives_.push({ name: item.name, object: _this._getObject(item.value) });
               } else {
                 _this._handleEvents(parent, item.name, item.value);
               }
@@ -835,7 +836,7 @@
     _handleDirectiveShow: function(){
       var _this = this;
       BbaseEst.each(_this._directives_show_, function(item){
-        BbaseApp.getDirective(item.name).show.call(_this,
+        BbaseApp.getDirective(item.name).show.call(_this, item.object,
                   item.value, '[bb-' + item.name + '="' + item.value + '"]');
       });
     },
@@ -1246,6 +1247,7 @@
     _getObject: function (str, ignore) {
       var _this = this;
 
+      if (str.indexOf('{') === -1) return null;
       var result = '',
         object = { fields: {} },
         list = [],
@@ -1288,25 +1290,34 @@
             }
           }
         }
-        if (BbaseEst.typeOf(list[1]) === 'string' && list[1].indexOf('{') > -1) {
+        var ltype = BbaseEst.typeOf(list[1]);
+        if (ltype === 'string' && list[1].indexOf('{') > -1) {
+          // 子对象
           var key = list.shift();
           object[key] = _this._getObject(list.join(':'));
         } else if (list[1].indexOf('\'') > -1) {
+          // 字符串
           object[list[0]] = list[1] === "''" ? '' : BbaseEst.trim(list[1].replace(/'/img, ''));
         } else if (list[1] in _this.model.attributes) {
+          // 模型值
           object[list[0]] = _this._get(list[1]);
           object.fields[list[0]] = list[1];
         } else if (_this[list[1].replace(/(\(.*\))/img, '')]) {
+          // 方法
           if (list[1].indexOf('(') > -1) {
             fnInfo = _this._getFunction(list[1], _this.model.attributes);
             object[list[0]] = _this[fnInfo.key].apply(_this, fnInfo.args);
           } else {
             object[list[0]] = _this[list[1]];
           }
-
         } else if (_this._isBoolean(list[1])) {
+          // boolean
           object[list[0]] = _this._getBoolean(list[1]);
-        } else {
+        } else if (BbaseEst.validation(list[1], 'number')){
+          // number
+          object[list[0]] = parseFloat(list[1], 10);
+        }
+        else {
           object[list[0]] = BbaseEst.trim(BbaseEst.compile('{{' + list[1] + '}}', _this.model.attributes));
         }
       });
