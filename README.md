@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-=======
 ### BbaseEst工具类
 [点击查看详细](doc/classes/BbaseEst%20-%20%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%BA%93.html)
 
->>>>>>> develop
 ### 使用流程
 
 第一步：视图定义
@@ -29,12 +26,9 @@ this._region('FlyHeader', FlyHeader, {
   el: '#leaflet-main',
   viewId: 'FlyHeader'
 });
-<<<<<<< HEAD
-=======
 
 // 引用
 BbaseApp.getView('FlyHeader') 或 this._view('FlyHeader')
->>>>>>> develop
 ```
 
 ### 最简视图类型(必填项)
@@ -120,16 +114,11 @@ var FlyHeader = BbaseView.extend({
 
   viewUpdate: function(){},                             // 视图更新
 
-<<<<<<< HEAD
-  },
-  change: fucntion(path){                               // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
-=======
   update: function(name){},                             // 监听的字段改变时回调
 
   change: fucntion(path){},                             // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
   destory: function(){}                                 // 组件销毁时
->>>>>>> develop
 
 });
 ```
@@ -223,27 +212,15 @@ var ProductList = BbaseList.extend({
 
   afterShow: function(){},                              // 视图显示后执行
 
-<<<<<<< HEAD
-  },
-  beforeLoad: function(){                               // 从服务器获取数据前回调
-  },
-  afterLoad: function(response){                        // 从服务器获取数据后回调
-=======
   viewUpdate: function(){}                              // 视图更新
 
   beforeLoad: function(){}                              // 从服务器获取数据前回调
->>>>>>> develop
 
   afterLoad: function(response){}                       // 从服务器获取数据后回调
 
   errorFetch: fucntion(response){}                      // 从服务器获取列表失败回调
 
-<<<<<<< HEAD
-  },
-  change: fucntion(path){                               // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
-=======
   update: function(name){}                              // 监听的字段改变时回调
->>>>>>> develop
 
   change: fucntion(path){}                              // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
@@ -293,21 +270,11 @@ var ProductDetail = BbaseDetail.extend({
 
   viewUpdate: function(){}                              // 视图更新
 
-<<<<<<< HEAD
-  },
-  afterSave: fucntion(response){                        // 模型类保存后
-=======
   beforeSave: function(){}                              // 模型类保存前
->>>>>>> develop
 
   afterSave: fucntion(response){}                       // 模型类保存后
 
-<<<<<<< HEAD
-  },
-  afterLoad: function(response){                        // 从服务器获取数据后回调
-=======
   beforeLoad: function(){}                              // 从服务器获取数据前回调
->>>>>>> develop
 
   afterLoad: function(response){}                       // 从服务器获取数据后回调
 
@@ -315,12 +282,7 @@ var ProductDetail = BbaseDetail.extend({
 
   errorFetch: fucntion(response){}                      // 载入模型类失败回调
 
-<<<<<<< HEAD
-  },
-  change: fucntion(path){                               // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
-=======
   update: function(name){}                              // 监听的字段改变时回调
->>>>>>> develop
 
   change: fucntion(path){}                              // 当模型类改变时系统会实时调用这个回调 (注：状态字段改变时也会触发此方法)
 
