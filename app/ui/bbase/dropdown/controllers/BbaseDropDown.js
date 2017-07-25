@@ -7,7 +7,24 @@
 define('BbaseDropDown', [], function (require, exports, module) {
   var BbaseDropDown, template;
 
-  template = '<div class="bbase-ui-dropdown bui-list-picker bui-picker bui-overlay bui-ext-position x-align-bl-tl bui-select-custom" aria-disabled="false" aria-pressed="false"style="visibility: visible;width:{{width}}; display: none;"> <div class="bui-simple-list bui-select-list" aria-disabled="false" aria-pressed="false" style="height: {{height}};overflow-x: {{overflowX}};width: {{width}};max-height: none;"> 正在加载... </div> <div bb-show="showClose" class="popupWindowClose closeBtn bbasefont bbase-close_thin" bb-click="close"></div></div>';
+  template = `
+    <div class="bbase-ui-dropdown bui-list-picker bui-picker bui-overlay bui-ext-position x-align-bl-tl bui-select-custom" aria-disabled="false" aria-pressed="false"style="visibility: visible;width:{{width}}; display: none;">
+      <div class="bui-simple-list bui-select-list" aria-disabled="false" aria-pressed="false" style="height: {{height}};overflow-x: {{overflowX}};width: {{width}};max-height: none;">
+      </div>
+      <div bb-show="showClose" class="popupWindowClose closeBtn bbasefont bbase-close_thin" bb-click="close"></div>
+    </div>
+  `;
+
+  var template2 = `
+    <div class=" bbase-ui-dropdown-wix-dialog dialog-align-right bui-list-picker header-account-dialog dialog-load-complete" style="width:{{width}};display:none;">
+      <div class="wix-header-dialog-chupchik" bb-watch="targetOffsetCenter:style" style="left: {{targetOffsetCenter}}px;"></div>
+      <div class="header-dialog-content-wrapper">
+        <div class="header-dialog-content bui-select-list" aria-hidden="false" style="height: {{height}};overflow-x: {{overflowX}};width: {{width}};max-height: none;">
+
+        </div>
+      </div>
+    </div>
+  `;
 
   /**
    * 下拉框
@@ -21,75 +38,104 @@ define('BbaseDropDown', [], function (require, exports, module) {
     initialize: function () {
       this._super({
         el: 'body',
-        template: template
+        template: this.options.theme === 'wix' ? template2 : template
       });
     },
     initData: function () {
       return {
-        showClose: false
+        showClose: false,
+        targetOffsetCenter: 0
       }
     },
     beforeRender: function () {
-      this.hasContent = false;
-      this.dropDownInit = true;
-      this.isShow = false;
+      var _this = this;
+      _this.hasContent = false;
+      _this.dropDownInit = true;
+      _this.isShow = false;
+      _this.stopHide = false;
 
-      this._options.align = this._options.align || 'center';
+      _this._options.align = _this._options.align || 'center';
 
-      this.model.set('width', this._options.data.width ?
-        (BbaseEst.typeOf(this._options.data.width) === 'string' ?
-          this._options.data.width : (this._options.data.width + 'px')) : 'auto');
+      _this.model.set('width', _this._options.data.width ?
+        (BbaseEst.typeOf(_this._options.data.width) === 'string' ?
+          _this._options.data.width : (_this._options.data.width + 'px')) : 'auto');
 
-      this._set('showClose', this._options.showClose);
-      if (this._options.theme === 'win') {
-        this._set('width', '100%');
-        this._set('showClose', true);
+      _this._set('showClose', _this._options.showClose);
+      if (_this._options.theme === 'win') {
+        _this._set('width', '100%');
+        _this._set('showClose', true);
       }
 
-      this.model.set('height', this._options.data.height ?
-        (BbaseEst.typeOf(this._options.data.height) === 'string' ?
-          this._options.data.height : (this._options.data.height + 'px')) : 'auto');
+      _this.model.set('height', _this._options.data.height ?
+        (BbaseEst.typeOf(_this._options.data.height) === 'string' ?
+          _this._options.data.height : (_this._options.data.height + 'px')) : 'auto');
 
-      this.model.set('overflowX', this._options.data.overflowX ?
-        this._options.data.overflowX : 'hidden');
+      _this.model.set('overflowX', _this._options.data.overflowX ?
+        _this._options.data.overflowX : 'hidden');
 
-      this.model.set('overflowY', this._options.data.overflowY ?
-        this._options.data.overflowY : 'hidden');
+      _this.model.set('overflowY', _this._options.data.overflowY ?
+        _this._options.data.overflowY : 'hidden');
 
     },
     afterRender: function () {
       this.initType();
     },
     initType: function () {
-      this.$picker = this.$('.bui-list-picker');
-      this.$target = $(this._options.target);
-      this.$content = this.$('.bui-select-list');
-      if (this._options.mouseHover) {
-        this.$target.hover(BbaseEst.proxy(this.show, this), BbaseEst.proxy(this.hide, this));
-        if (this._options.mouseFollow) {
-          this.$target.mousemove(BbaseEst.proxy(this.show, this));
-          this.$target.mouseout(BbaseEst.proxy(this.hide, this));
-        }
-      } else {
-        this.$target.click(BbaseEst.proxy(function (e) {
+      var _this = this;
+      _this.$picker = _this.$('.bui-list-picker');
+      _this.$target = $(_this._options.target);
+      _this.$content = _this.$('.bui-select-list');
+      if (_this._options.mouseHover) {
+        _this.$target.hover(_this._bind(_this.show), function () {
+          _this.hideTimeout = setTimeout(function () {
+            if (!_this.stopHide) {
+              _this.hide();
+            }
+          }, 200);
+        });
+        _this.$target.click(function (e) {
           e.stopImmediatePropagation();
-          if (this.isShow) {
-            this.hide(e);
+          _this.show(e);
+        });
+        _this.$picker.hover(function (e) {
+          _this.stopHide = true;
+          clearTimeout(_this.hideTimeout);
+          _this.hideTimeout = null;
+        }, function (e) {
+          _this.stopHide = false;
+          _this.hideTimeout = setTimeout(function () {
+            if (!_this.stopHide) {
+              _this.hide();
+            }
+          }, 200);
+        });
+        if (_this._options.mouseFollow) {
+          _this.$target.mousemove(_this._bind(_this.show));
+          _this.$target.mouseout(_this._bind(_this.hide));
+        }
+        _this.$picker.click(function(event) {
+          event.stopPropagation();
+        });
+      } else {
+        _this.$target.click(function (e) {
+          e.stopImmediatePropagation();
+          if (_this.isShow) {
+            _this.hide(e);
           } else {
-            this.show(e);
+            _this.show(e);
           }
-        }, this));
+        });
         //  Safari 3.1 到 6.0 版本代码
-        this.$picker.get(0).addEventListener("webkitTransitionEnd", this._bind(this.myFunction));
+        _this.$picker.get(0).addEventListener("webkitTransitionEnd", _this._bind(_this.myFunction));
         // 标准语法
-        this.$picker.get(0).addEventListener("transitionend", this._bind(this.myFunction));
+        _this.$picker.get(0).addEventListener("transitionend", _this._bind(_this.myFunction));
       }
-      if (this._options.theme) this.$picker.addClass('bbase-ui-dropdown-' + this._options.theme);
+      if (_this._options.theme) _this.$picker.addClass('bbase-ui-dropdown-' + _this._options.theme);
     },
     myFunction: function () {
 
-       !this.isShow&& this.$picker.hide();
-       this.$picker.removeClass('bbaseDropdownMoveDownDebounce').addClass('bbaseDropdownMoveDownDebounce');
+      !this.isShow && this.$picker.hide();
+      this.$picker.removeClass('bbaseDropdownMoveDownDebounce').addClass('bbaseDropdownMoveDownDebounce');
 
     },
     preventDefault: function (e) {
@@ -97,14 +143,18 @@ define('BbaseDropDown', [], function (require, exports, module) {
       this.bindCloseEvent();
     },
     bindCloseEvent: function () {
-      if (this._options.theme === 'win'){return;}
+      if (this._options.theme === 'win') {
+        return; }
       $(document).one('click', BbaseEst.proxy(this.hide, this));
     },
     show: function (event) {
-      this.reset();
       this.isShow = true;
       if (event) event.stopImmediatePropagation();
       this.$picker.show();
+      this.reset();
+      if (!this.hasContent) {
+        this.initContent();
+      }
       if (this._options.theme === 'win') {
         this.$picker.css({
           'top': parseFloat(this._options.top, 10) || 0,
@@ -113,6 +163,7 @@ define('BbaseDropDown', [], function (require, exports, module) {
       }
     },
     hide: function () {
+      console.log('hide');
       this.isShow = false;
       if (this._options.theme === 'win') {
         this.$picker.css({
@@ -126,10 +177,11 @@ define('BbaseDropDown', [], function (require, exports, module) {
     },
     reset: function () {
       var _this = this;
+      var targetOffsetCenter = 0;
       if (!_this.$picker) return;
 
       if (!_this.hasContent) _this.initContent();
-      $(document).click();
+      //$(document).click();
       _this.bindCloseEvent();
       if (_this._options.theme === 'win') {
         _this.$picker.css({
@@ -146,11 +198,13 @@ define('BbaseDropDown', [], function (require, exports, module) {
       var mw = pw / 2 - tw / 2;
       if (_this._options.align === 'left') {
         mw = 0;
+        targetOffsetCenter = tw / 2;
       } else if (_this._options.align === 'right') {
         mw = 2 * tl + tw - pw;
         if (_this._options.mouseFollow) {
           mw = pw;
         }
+        targetOffsetCenter = pw - tw / 2;
       } else {
         if (mw > tl) {
           mw = tl;
@@ -158,11 +212,13 @@ define('BbaseDropDown', [], function (require, exports, module) {
         if (_this._options.mouseFollow) {
           mw = pw / 2;
         }
+        targetOffsetCenter = pw / 2;
       }
       _this.$picker.css({
         left: _this._options.mouseFollow && event ? (event.pageX + 1 - mw) : Math.abs(tl - mw),
         top: _this._options.mouseFollow && event ? event.pageY + 1 : tt + th
       });
+      _this._set('targetOffsetCenter', targetOffsetCenter);
 
       return this;
     },
@@ -179,6 +235,11 @@ define('BbaseDropDown', [], function (require, exports, module) {
       this.show();
     },
     initContent: function () {
+      if (this._options.lazyLoad) {
+        this._options.lazyLoad = false;
+        return;
+      };
+      console.log('initContent');
       this.hasContent = true;
       if (this._options.content) {
         this.$content.html(this._options.content);
@@ -191,27 +252,35 @@ define('BbaseDropDown', [], function (require, exports, module) {
           seajs.use([this._options.moduleId], BbaseEst.proxy(function (instance) {
             this.doRender(instance);
           }, this));
-        } else {
-          this.doRender(this._options.moduleId);
+        }
+         else{
+          this.doRender(this._options.moduleId.call(this));
         }
       }
     },
     doRender: function (instance) {
-      this.viewId = BbaseEst.typeOf(this._options.moduleId) === 'string' ? (this._options.viewId + 'drop_down') : BbaseEst.nextUid('BbaseDropDown');
-      delete this._options.template;
-      this.$content.html('');
+      var _this = this;
+      _this.viewId = BbaseEst.typeOf(_this._options.moduleId) === 'string' ? (_this._options.viewId.split('view0')[0] + 'drop_downview0' + _this._options.viewId.split('view0')[1]) : BbaseEst.nextUid('BbaseDropDown');
+      delete _this._options.template;
+      _this.$content.html('');
       // jquery对象无法通过BbaseEst.each遍历， 需备份到this._target,
       // 再移除target, 待克隆完成后把target添加到参数中
-      if (this._options.target && BbaseEst.typeOf(this._options.target) !== 'String') {
-        this._target = this._options.target;
-        delete this._options.target;
+      if (_this._options.target && BbaseEst.typeOf(_this._options.target) !== 'String') {
+        _this._target = _this._options.target;
+        delete _this._options.target;
       }
-      BbaseApp.addView(this.viewId, new instance(BbaseEst.extend(BbaseEst.cloneDeep(this._options), {
-        el: this.$content,
-        dropDownId: this._options.viewId,
-        viewId: this.viewId,
-        afterRender: this._options.callback,
-        target: this._target
+      BbaseUtils.addRegionLoading(_this.$content);
+      BbaseApp.addView(_this.viewId, new instance(BbaseEst.extend(BbaseEst.cloneDeep(_this._options), {
+        el: _this.$content,
+        dropDownId: _this._options.viewId,
+        viewId: _this.viewId,
+        afterRender: _this._options.callback,
+        target: _this._target,
+        onShow: function () {
+          BbaseUtils.removeRegionLoading(_this.$content);
+          _this.show();
+          _this._options.onShow && _this._options.onShow.call(_this);
+        }
       })));
     },
     empty: function () {

@@ -1,11 +1,13 @@
+(function(BbaseEst, BbaseApp, BbaseHandlebars, undefined){
 // bb-disabled="models.length"
 BbaseApp.addDirective('disabled', {
 
   bind: function (value, selector) {
+    var _this = this;
     // 为某个字段绑定监听
-    this._watch([this._getField(value)], selector + ':disabled');
+    _this._watch([_this._getField(value)], selector + ':disabled');
     // 设置是否失效
-    this.$(selector).prop('disabled', this._getBoolean(value));
+    _this.$(selector).prop('disabled', _this._getBoolean(value));
     // 返回一个编译模板
     // 当没有返回compile时， 系统自动会加上以这个指令的表达式为字符串的模板引擎
     return {
@@ -24,28 +26,29 @@ BbaseApp.addDirective('disabled', {
 BbaseApp.addDirective('src', {
 
   bind: function (value, selector) {
+    var _this = this;
     var isHbs = false,
       result = '';
 
     // 判断是否是handlebar模板
     if (value.indexOf('{{') > -1) {
       isHbs = true;
-      result = BbaseHandlebars.compile(value)(this.model.attributes);
+      result = BbaseHandlebars.compile(value)(_this.model.attributes);
     } else {
-      result = BbaseEst.compile('{{' + value + '}}', this.model.attributes);
+      result = BbaseEst.compile('{{' + value + '}}', _this.model.attributes);
     }
     // 替换handlebars编译后的$amp;转译内容
     result = result.replace(/&amp;/img, '&').replace(/\\/img, '/');
-    var $node = this.$('[bb-src="' + result + '"]').eq(0);
+    var $node = _this.$('[bb-src="' + result + '"]').eq(0);
     if ($node.size() === 0) {
-      $node = this.$('[bb-src="' + value + '"]').eq(0);
+      $node = _this.$('[bb-src="' + value + '"]').eq(0);
     }
     $node.attr('src', result);
     $node.attr('bb-src', value);
     $node.addClass('directive_' + BbaseEst.hash('[bb-src="' + value + '"]'));
 
     // 注意，watch中的选择符必需跟实际dom中的选择符一致
-    this._watch([this._getField(value)], '[bb-src="' + value + '"]' + ':src');
+    _this._watch([_this._getField(value)], '[bb-src="' + value + '"]' + ':src');
   },
 
   update: function (name, node, selector, result) {
@@ -57,3 +60,4 @@ if (typeof Bbase !== 'undefined') {
     BbaseApp.addDirective(key, val);
   });
 }
+})(window.BbaseEst, window.BbaseApp, window.BbaseHandlebars);

@@ -115,16 +115,8 @@ define('BbaseTab', [], function (require, exports, module) {
         onChange: this.options.onChange || function () {}
       });
 
-      var hasCount = this.options.contSelector ? true : false;
-
-      BbaseEst.each(this.options.items, this._bind(function (item, index) {
-        if (item.moduleId) {
-          this.$tabList.push($('<div class="tab-cont-div tab-cont-' + this.options.viewId + index + '" style="display: none;"></div>'));
-          this.$listCont.append(this.$tabList[index]);
-        } else if (item.nodeId) {
-          this.$tabList.push(hasCount ? this.$listCont.find(item['nodeId']) : $('body').find(item['nodeId']));
-        }
-      }, this));
+      this.hasCount = this.options.contSelector ? true : false;
+      BbaseEst.each(this.options.items, this._bind(this.addTab, this));
 
       var theme = (this.options.theme || 'tab-ul-normal');
       this._super({
@@ -136,20 +128,34 @@ define('BbaseTab', [], function (require, exports, module) {
         checkAppend: false
       });
     },
+    addTab: function (item, index) {
+      if (item.moduleId) {
+        if (this.$listCont.find('.tab-cont-' + this.options.viewId + index).size() === 0) {
+          this.$tabList.push($('<div class="tab-cont-div tab-cont-' + this.options.viewId + index + '" style="display: none;"></div>'));
+          this.$listCont.append(this.$tabList[index]);
+        } else {
+          this.$tabList.push(this.$listCont.find('.tab-cont-' + this.options.viewId + index));
+        }
+      } else if (item.nodeId) {
+        if (this.$listCont.find(item['nodeId']).size() === 0 || $('body').find(item['nodeId']).size() === 0){
+          this.$tabList.push(this.hasCount ? this.$listCont.find(item['nodeId']) : $('body').find(item['nodeId']));
+        }
+      }
+    },
     renderModule: function (index, moduleName, viewId) {
       try {
         if (!moduleName) {
-          return; }
+          return;
+        }
         var viewId = viewId || (moduleName + '-' + index);
         this.renderType = BbaseEst.typeOf(this.options.items[index]['oneRender']) === 'undefined' ? '_one' :
           this.options.items[index]['oneRender'] ? '_one' : '_require';
 
         this[this.renderType]([moduleName + (this.renderType === '_one' ? '-' + index : '')], function (instance) {
-          BbaseApp.addRegion(moduleName + '-' + index, instance, {
+          this._region(moduleName + '-' + index, instance, {
             el: this.$tabList[index],
             viewId: viewId,
-            passData: BbaseEst.typeOf(this.options.items[index]['data']) === 'undefined' ?
-              BbaseApp.getView(this.$el.parents('.region:first').attr('data-view')).model.toJSON() : this.options.items[index]['data'] || {}
+            data: this.options.items[index]['data'] || {}
           });
         });
         if (BbaseApp.getView(viewId) && BbaseApp.getView(viewId).refresh)
@@ -198,7 +204,8 @@ define('BbaseTab', [], function (require, exports, module) {
     setValue: function (value) {
       var checkModel = this._getCheckedItems();
       if (checkModel.length > 0 && checkModel[0]._get(this._options.path || 'value') === value) {
-        return; }
+        return;
+      }
       this.collection.each(this._bind(function (model) {
         if (model._get(this._options.path || 'value') === value) {
           model.view.toggleChecked();
@@ -207,6 +214,11 @@ define('BbaseTab', [], function (require, exports, module) {
     },
     getType: function () {
       return this._options.theme;
+    },
+    setList: function (items) {
+      this._setModels(items);
+      this.$tabList = [];
+      BbaseEst.each(items, this._bind(this.addTab, this));
     },
     afterRender: function () {
       this.$el.find('.bbase-ui-tab').append(this.$tabCont);

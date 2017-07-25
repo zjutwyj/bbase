@@ -4,7 +4,8 @@ Bbase.DIRECTIVE['bbasecomponentmusicpick'] = {
     var object = this._getObject(value, 'cur');
     var viewId = object.viewId || BbaseEst.nextUid('bbasecomponentmusicpick');
 
-    $(selector).click(this._bind(function (e) {
+    this.$(selector).eq(0).click(this._bind(function (e) {
+      e.stopImmediatePropagation();
       this._dialog({
         moduleId: 'BbaseMusicPick',
         viewId: viewId,

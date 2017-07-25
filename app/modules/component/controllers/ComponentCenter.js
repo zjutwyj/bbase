@@ -21,15 +21,17 @@ define('ComponentCenter', [], function(require, exports, module){
     },
     init: function () {
       return {
-        cur: 'ComponentPhoto',
+        cur: 'ComponentList',
         items: [
           { text: '图片', moduleId: 'ComponentPhoto' ,oneRender: false},
           { text: '颜色', moduleId: 'ComponentColor' ,oneRender: false},
           { text: '音乐', moduleId: 'ComponentMusic' ,oneRender: false},
-          { text: '图标', moduleId: 'ComponentIcon' ,oneRender: false}
+          { text: '图标', moduleId: 'ComponentIcon' ,oneRender: false},
+          { text: '产品', moduleId: 'ComponentProduct' ,oneRender: false},
+          { text: '列表', moduleId: 'ComponentList' ,oneRender: false}
         ],
         tpl:  `
-          <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTab{{moduleId}} tabImgComm"></div><span>{{text}}</span></a>
+          <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabPlus dataTab{{moduleId}} tabImgComm"></div><span>{{text}}</span></a>
         `
       }
     },

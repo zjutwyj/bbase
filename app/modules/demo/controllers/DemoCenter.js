@@ -28,7 +28,7 @@ define('DemoCenter', [], function (require, exports, module) {
           { text: '表格', moduleId: 'DemoTable' ,oneRender: false}
         ],
         tpl:  `
-          <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTab{{moduleId}} tabImgComm"></div><span>{{text}}</span></a>
+          <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabPlus dataTab{{moduleId}} tabImgComm"></div><span>{{text}}</span></a>
         `
       }
     },

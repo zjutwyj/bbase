@@ -9,7 +9,7 @@
 var CONST = {
   APP_VERSION: '1.5.5_1', // 版本号
   HOST: 'http://www.bbase.com/manage', // HOST
-  API: 'http://www.bbase.com/rest', // 后端API地址，需登录验证
+  API: 'http://www.bbase.com/rest/api', // 后端API地址，需登录验证
   PUBLIC_API: 'http://www.bbase.com/rest', // 无登录验证
   DOMAIN: 'http://www.bbase.com', // 域名
   STATIC_URL: 'http://www.bbase.com/html/', // 静态页面存放地址
@@ -17,6 +17,10 @@ var CONST = {
   PIC_URL: 'http://img.jihui88.com/wcd', // 图片服务器地址
   CDN: 'http://img.jihui88.com/wcd/cnd/manage', // 修改后记得改gulpfile里的cdn_root
   MUSIC_URL: 'http://f.bbase.com', // 音乐服务器地址
+  MAIN_COLOR: '#5289db', // 主题颜色
+  LIGHT_COLOR: '#7da9e8', // hover颜色
+  LIGHTEN_COLOR: '#f2f5fa', // background颜色
+  LIGHTEST_COLOR: '#f7f9fd',
   SEP: '/', // 地址分隔符
   PIC_NONE: '/manage/images/nopic.jpg?v=001', // 无图片时的替换图片
   BG_NONE: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==', // 空白背景图片

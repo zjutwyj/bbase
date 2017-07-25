@@ -61,9 +61,7 @@
   }
   .more-sections div {
     color: $mainColor;
-    margin-left: 6px;
     display: inline-block;
-    vertical-align: middle;
   }
   .section-button-container .section-button:not(.selected):hover {
     background-color: lighten($mainColor, 35%);

@@ -3,6 +3,7 @@
  * @class BbaseUtils - 底层工具类
  * @author yongjin<zjut_wyj@163.com> 2015/1/27
  */
+(function(BbaseBackbone, BbaseEst, BbaseApp, undefined){
 var BbaseUtils = {
   /**
    * 对话框
@@ -197,6 +198,119 @@ var BbaseUtils = {
     if (window.$loading) window.$loading.remove();
     else $('.loading').remove();
   },
+
+  addRegionLoading: function($node, options){
+    var options = options || {};
+    var rloading = BbaseEst.nextUid('rloaing');
+    var color = CONST.LIGHT_COLOR || CONST.MAIN_COLOR || '#666';
+    var bgColor = options.backgroundColor || '#fff';
+    $node.attr('data-rloading', rloading);
+    var html = "<div style=\"background-color: " + bgColor+";z-index: 9999999999999999999; position: relative;\"> <svg version=\"1.1\" id=\""+rloading+"\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"40px\" height=\"40px\" viewBox=\"0 0 50 50\" style=\"enable-background:new 0 0 50 50;\" xml:space=\"preserve\"> <path fill=\"" + color+ "\" d=\"M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z\"> <animateTransform attributeType=\"xml\" attributeName=\"transform\" type=\"rotate\" from=\"0 25 25\" to=\"360 25 25\" dur=\"0.6s\" repeatCount=\"indefinite\"/> </path> </svg> </div>";
+    $node.append($(html));
+  },
+
+  removeRegionLoading: function($node){
+    $node.find('#' + $node.attr('data-rloading')).remove();
+  },
+
+  getItem: function(doc, obj) {
+    try {
+      for (var i = 0, ci; ci = this.tmpList[i++];) {
+        if (ci.doc === doc && ci.url == (obj.src || obj.href)) {
+          return ci;
+        }
+      }
+    } catch (e) {
+      return null;
+    }
+
+  },
+  /**
+   * 加载资源
+   * @param  {[type]}   doc [description]
+   * @param  {[type]}   obj [description]
+   * @param  {Function} fn  [description]
+   * @return {[type]}       [description]
+   * @example
+   *
+   *  BbaseUtils.loadFile(document, {
+          href: CONST.HOST + "/vendor/flatpickr/flatpickr.min.css",
+          rel: 'stylesheet',
+          tag: "link",
+          type: "text/css",
+          defer: "defer"
+        }, function() {
+          $(".publishTime").flatpickr({
+            minuteIncrement:1,
+            onChange: function(selectedDates, dateStr, instance) {
+              ctx.model.set('publishTime', dateStr);
+            },
+            onClose: function(selectedDates, dateStr, instance){
+              ctx.model.set('publishTime', dateStr);
+            }
+          });
+          $(".unpublishTime").flatpickr({
+            minuteIncrement:1,
+            onChange: function(selectedDates, dateStr, instance) {
+              ctx.model.set('unpublishTime', dateStr);
+            },
+            onClose: function(selectedDates, dateStr, instance){
+              ctx.model.set('unpublishTime', dateStr);
+            }
+          });
+        });
+   */
+  loadFile: function(doc, obj, fn) {
+    var ctx=this;
+    ctx.tmpList = ctx.tmpList || [];
+    var item = ctx.getItem(doc, obj);
+    if (item) {
+      if (item.ready) {
+        fn && fn();
+      } else {
+        item.funs.push(fn)
+      }
+      return;
+    }
+    ctx.tmpList.push({
+      doc: doc,
+      url: obj.src || obj.href,
+      funs: [fn]
+    });
+    if (!doc.body) {
+      var html = [];
+      for (var p in obj) {
+        if (p == 'tag') continue;
+        html.push(p + '="' + obj[p] + '"')
+      }
+      doc.write('<' + obj.tag + ' ' + html.join(' ') + ' ></' + obj.tag + '>');
+      return;
+    }
+    if (obj.id && doc.getElementById(obj.id)) {
+      return;
+    }
+    var element = doc.createElement(obj.tag);
+    delete obj.tag;
+    for (var p in obj) {
+      element.setAttribute(p, obj[p]);
+    }
+    element.onload = element.onreadystatechange = function() {
+      if (!this.readyState || /loaded|complete/.test(this.readyState)) {
+        item = ctx.getItem(doc, obj);
+        if (item.funs.length > 0) {
+          item.ready = 1;
+          for (var fi; fi = item.funs.pop();) {
+            fi();
+          }
+        }
+        element.onload = element.onreadystatechange = null;
+      }
+    };
+    element.onerror = function() {
+      throw Error('The load ' + (obj.href || obj.src) + ' fails')
+    };
+    doc.getElementsByTagName("head")[0].appendChild(element);
+  },
   /**
    * 调用方法 - 命令模式[说明， 只有在需要记录日志，撤销、恢复操作等功能时调用该方法]
    *
@@ -213,3 +327,6 @@ var BbaseUtils = {
     return BbaseUtils[name] && BbaseUtils[name].apply(BbaseUtils, [].slice.call(arguments, 1));
   }
 };
+window.BbaseUtils = BbaseUtils;
+})(window.BbaseBackbone, window.BbaseEst, window.BbaseApp);
+

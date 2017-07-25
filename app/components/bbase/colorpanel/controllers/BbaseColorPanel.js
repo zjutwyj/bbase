@@ -23,6 +23,7 @@ define('BbaseColorPanel', [], function (require, exports, module) {
     initData: function () {
       color=this._options.color || '#ffffff';
       return {
+        cur: color,
         items:  [
           { text: '透明', value: 'transparent'  ,borderColor: 'transparent'},
           { text: '白色', value: '#ffffff', rgb: 'rgb(255, 255, 255)' ,borderColor: '#fff'},

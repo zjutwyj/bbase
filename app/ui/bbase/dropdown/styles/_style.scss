@@ -21,13 +21,11 @@
     transform: translateY(2%);
     opacity: 1
   }
-
-  40%{
+  40% {
     -webkit-transform: translateY(4%);
     transform: translateY(4%);
   }
-
-  80%{
+  80% {
     -webkit-transform: translateY(0%);
     transform: translateY(0%);
   }
@@ -94,4 +92,52 @@
   -webkit-animation-direction: initial;
   -webkit-transform-origin: initial;
   -webkit-animation-fill-mode: forwards;
+}
+
+.bbase-ui-dropdown-wix-dialog {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 0 17px 0 rgba(23, 50, 68, .17);
+  margin-top: 15px;
+  position: absolute;
+  z-index: 800;
+  .wix-header-dialog-chupchik {
+    background-color: #fff;
+    box-shadow: 3px 3px 3px 0 rgba(23, 50, 68, .08);
+    content: ' ';
+    height: 15px;
+    position: absolute;
+    top: -6.5px;
+    -webkit-transform: translateX(-50%) rotateZ(-135deg);
+    transform: translateX(-50%) rotateZ(-135deg);
+    width: 15px;
+  }
+  .header-dialog-loading {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  .md-progress-circular svg {
+    position: absolute;
+    overflow: visible;
+    top: 0;
+    left: 0;
+  }
+  .md-progress-circular.md-mode-indeterminate svg {
+    -webkit-animation: indeterminate-rotate 1568.63ms linear infinite;
+    animation: indeterminate-rotate 1568.63ms linear infinite;
+  }
+  .md-progress-circular.md-default-theme path,
+  .md-progress-circular path {
+    stroke: rgb(63, 81, 181);
+  }
 }

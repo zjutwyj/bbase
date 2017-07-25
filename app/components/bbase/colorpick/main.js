@@ -4,7 +4,8 @@ Bbase.DIRECTIVE['bbasecomponentcolorpick'] = {
     var object = this._getObject(value, 'cur');
     var viewId = object.viewId || BbaseEst.nextUid('bbasecomponentcolorpick');
 
-    $(selector).click(this._bind(function (e) {
+    this.$(selector).eq(0).click(this._bind(function (e) {
+      e.stopImmediatePropagation();
       this._dialog({
         viewId: viewId,
         moduleId: 'BbaseColorPick',

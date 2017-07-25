@@ -4,7 +4,8 @@ Bbase.DIRECTIVE['bbasecomponenticonpick'] = {
     var object = this._getObject(value, ['cur', 'iconColor', 'iconColorState']);
     var viewId = object.viewId || BbaseEst.nextUid('bbasecomponenticonpick');
 
-    $(selector).click(this._bind(function (e) {
+    this.$(selector).eq(0).click(this._bind(function (e) {
+      e.stopImmediatePropagation();
       this._dialog({
         viewId: viewId,
         moduleId: 'BbaseIconPick',

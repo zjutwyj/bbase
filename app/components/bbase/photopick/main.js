@@ -4,7 +4,8 @@ Bbase.DIRECTIVE['bbasecomponentphotopick'] = {
     var object = this._getObject(value, 'cur');
      var viewId = object.viewId || BbaseEst.nextUid('bbasecomponentmusicpick');
 
-    $(selector).click(this._bind(function (e) {
+    this.$(selector).eq(0).click(this._bind(function (e) {
+      e.stopImmediatePropagation();
       this._dialog({
         viewId: viewId,
         moduleId: 'BbasePhotoPick',
@@ -14,6 +15,7 @@ Bbase.DIRECTIVE['bbasecomponentphotopick'] = {
         items: object.items,
         listApi: object.listApi,
         detailApi: object.detailApi,
+        uploadApi: object.uploadApi,
         size: object.size,
         quickClose: true,
         onChange: this._bind(function (result) {

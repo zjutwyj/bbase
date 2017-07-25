@@ -1,4 +1,4 @@
-Est.mixin({
+BbaseEst.mixin({
   /**
    * @description 模块模式 - 模块定义 如果项目中存在require.js 则调用require.js
    * @method [模式] - define ( 模块定义 )
@@ -85,7 +85,7 @@ Est.mixin({
    * @param {Object} extra 额外对象
    * @return {*}
    * @example
-   *      var target = {x:'dont change me'};var newObject = Est.inherit(target); =>
+   *      var target = {x:'dont change me'};var newObject = BbaseEst.inherit(target); =>
    *      dont change me
    */
   inherit: function(target, extra) {
@@ -141,7 +141,7 @@ Est.mixin({
    * @return {*}
    * @author wyj on 14-04-26
    * @example
-   *      Est.clearAllNode(document.getElementById("showResFilesContent"));
+   *      BbaseEst.clearAllNode(document.getElementById("showResFilesContent"));
    */
   clearAllNode: function(parentNode) {
     while (parentNode.firstChild) {
@@ -159,7 +159,7 @@ Est.mixin({
    * @return {Function}
    * @author wyj on 14/5/24
    * @example
-   *     Est.delay(function(){}, 5);
+   *     BbaseEst.delay(function(){}, 5);
    */
   delay: function(func, wait) {
     if (typeOf(func) !== 'function') {
@@ -178,7 +178,7 @@ Est.mixin({
    * @return {number}
    * @author wyj on 14.9.14
    * @example
-   *      var days = Est.getDays('2014', '9'); => 31  // 这里的9表示 8月份
+   *      var days = BbaseEst.getDays('2014', '9'); => 31  // 这里的9表示 8月份
    */
   getDays: function(Year, Mon) {
     var days =
@@ -211,7 +211,7 @@ Est.mixin({
    * @return {string} 返回标签符号
    * @author wyj on 14/5/6
    * @example
-   *     Est.getTagName(document.getElementById('a')); ==>　'div'
+   *     BbaseEst.getTagName(document.getElementById('a')); ==>　'div'
    */
   getTagName: function(target) {
     return target.tagName.toLowerCase();
@@ -225,7 +225,7 @@ Est.mixin({
    * @return {string} 返回当前元素的选择符
    * @author wyj on 14/5/5
    * @example
-   *     Est.getSelector($('#gird-li').get(0), 'moveChild')) => ;
+   *     BbaseEst.getSelector($('#gird-li').get(0), 'moveChild')) => ;
    */
   getSelector: function(target, parentClass, $) {
     var selector = "";
@@ -252,7 +252,7 @@ Est.mixin({
    * @return {*} 返回缓存数据
    * @author wyj on 14/5/3
    * @example
-   *     Est.getCache('uId', session, {
+   *     BbaseEst.getCache('uId', session, {
    *          area : 'dd',
    *          getData : function(data){
    *              return cache_data;
@@ -264,7 +264,7 @@ Est.mixin({
       area: 'templates',
       getData: null
     }
-    Est.extend(opts, options);
+    BbaseEst.extend(opts, options);
     ctx.cache = ctx.cache || {};
     if (typeof ctx.cache[opts.area] === 'undefined') {
       ctx.cache[opts.area] = {};
@@ -293,10 +293,10 @@ Est.mixin({
    *                      justifylist.eq(i).css("margin-right", space);
    *                  }
    *              };
-   *          Est.girdJustify(justifyOpts);
+   *          BbaseEst.girdJustify(justifyOpts);
    *          $(window).bind("resize", function () {
    *              justifyOpts.containerWidth = justifyCont.width();
-   *              Est.girdJustify(justifyOpts);
+   *              BbaseEst.girdJustify(justifyOpts);
    *          });
    *      </script>
    */
@@ -332,7 +332,7 @@ Est.mixin({
    * @param {Object} opts 详见例子
    * @author wyj on 14.9.4
    * @example
-   *        Est.drawImage({
+   *        BbaseEst.drawImage({
    *            context2D: context2D, // canvas.getContext("2d")
    *            canvas: canvas, // 画布
    *            image: imageObj, // image对象
@@ -399,7 +399,7 @@ Est.mixin({
    * @return {boolean} 返回 true 与 false
    * @author wyj on 14/8/30
    * @example
-   *       Est.imagePreview({
+   *       BbaseEst.imagePreview({
    *               inputFile: $("input[type=file]").get(0),
    *               imgNode: $(".img").get(0)
    *        });
@@ -460,7 +460,7 @@ Est.mixin({
    *           $(this).load(function(response, status, xhr){
    *               var w = $(this).get(0).naturalWidth, h = $(this).get(0).naturalHeight;
    *               var width = $(this).attr("data-width"), height = $(this).attr("data-height");
-   *               $(this).css(Est.imageCrop(w, h, width, height), 'fast');
+   *               $(this).css(BbaseEst.imageCrop(w, h, width, height), 'fast');
    *               $(this).fadeIn('fast');
    *           });
    *       });
@@ -531,10 +531,10 @@ Est.mixin({
    * @return {string}
    * @author wyj on 14/7/25
    * @example
-   *      Est.picUrl(src, 5);
+   *      BbaseEst.picUrl(src, 5);
    */
   picUrl: function(src, zoom) {
-    if (!Est.isEmpty(src)) {
+    if (!BbaseEst.isEmpty(src)) {
       var type = src.substring(src.lastIndexOf(".") + 1, src.length);
       var hasZoom = src.lastIndexOf('_') > 0 ? true : false;
       return src.substring(0, src.lastIndexOf(hasZoom ? '_' : '.')) + "_" + zoom + "." + type;
@@ -547,7 +547,7 @@ Est.mixin({
    * @return {{}}
    * @author wyj on 14/6/23
    * @example
-   *      var object = Est.makeMap("a, aa, aaa"); => {"a":true, "aa": true, "aaa": true}
+   *      var object = BbaseEst.makeMap("a, aa, aaa"); => {"a":true, "aa": true, "aaa": true}
    */
   makeMap: function(str) {
     var obj = {},
@@ -566,7 +566,7 @@ Est.mixin({
    * @author wyj on 14/6/23
    * @example
    *      var list = ['a', 'b', 'b'];
-   *      var result = Est.arrayRemove(list, 'a'); => ['a', 'b']
+   *      var result = BbaseEst.arrayRemove(list, 'a'); => ['a', 'b']
    */
   arrayRemove: function(array, value) {
     var index = indexOf(array, value);
@@ -583,7 +583,7 @@ Est.mixin({
    * @author wyj on 14/8/5
    * @example
    *      var results = [];
-   *      var fn = Est.getType;
+   *      var fn = BbaseEst.getType;
    *      results.push(fn({a: 4})); // "Object"
    *      results.push(fn([1, 2, 3])); // "Array"
    *      (function() { results.push(fn(arguments));}()); // "Argements"
@@ -626,7 +626,7 @@ Est.mixin({
    * @return {Object}
    * @author wyj 15.1.28
    * @example
-   *        Est.objToPath({a: {b: 'c'}}); ===> {'a.b': 'c'}
+   *        BbaseEst.objToPath({a: {b: 'c'}}); ===> {'a.b': 'c'}
    */
   objToPath: function(obj) {
     var ret = {},
@@ -919,10 +919,10 @@ Est.mixin({
    *        route1: function(reponse){ },
    *        route2: function(){ }
    *      }
-   *      Est.keyRoute(handle, 'route1', {});
+   *      BbaseEst.keyRoute(handle, 'route1', {});
    */
   keyRoute: function(handle, pathname, response) {
-    if (Est.typeOf(handle[pathname]) === 'function') {
+    if (BbaseEst.typeOf(handle[pathname]) === 'function') {
       return handle[pathname](response);
     } else {
       console.log("No request handler found for " + pathname);
@@ -936,7 +936,7 @@ Est.mixin({
    * @return {String} 返回字符串
    * @author wyj on 14-04-23
    * @example
-   *      Est.repeat('ruby', 2); => rubyruby
+   *      BbaseEst.repeat('ruby', 2); => rubyruby
    */
   repeat: function(target, n) {
     var s = target,
@@ -962,7 +962,7 @@ Est.mixin({
    * @return {string}
    * @author wyj on 14-04-23
    * @example
-   *     Est.truncate('aaaaaa', 4, '...'); => 'aaa...'
+   *     BbaseEst.truncate('aaaaaa', 4, '...'); => 'aaa...'
    */
   truncate: function(target, length, truncation) {
     length = length || 30;
@@ -976,7 +976,7 @@ Est.mixin({
    * @return {String} 返回新字符串
    * @author wyj on 14/5/6
    * @example
-   *     Est.reverse('abc'); => 'cba'
+   *     BbaseEst.reverse('abc'); => 'cba'
    */
   reverse: function(str) {
     str = str.split('');
@@ -995,7 +995,7 @@ Est.mixin({
    * @return {Boolean} 返回是否删除成功
    * @author wyj on 14/5/24
    * @example
-   *      Est.removeAt(list, dx) => ;
+   *      BbaseEst.removeAt(list, dx) => ;
    */
   removeAt: function(list, index) {
     return !!list.splice(index, 1).length;
@@ -1008,7 +1008,7 @@ Est.mixin({
    * @return {Number} 返回最大页数
    * @author wyj on 14/04/26
    * @example
-   *     Est.getMaxPage(parseInt(50), parseInt(10));
+   *     BbaseEst.getMaxPage(parseInt(50), parseInt(10));
    *     ==> 5
    */
   getMaxPage_2: function(totalCount, pageSize) {
@@ -1066,7 +1066,7 @@ Est.mixin({
         right.push(arr[i]);
       }
     }
-    return Est.quickSort(left).concat([pivot], Est.quickSort(right));
+    return BbaseEst.quickSort(left).concat([pivot], BbaseEst.quickSort(right));
   },
   swap: function(arr, i, j) {
     arr[i] = [arr[j], arr[j] = arr[i]][0]
@@ -1085,7 +1085,7 @@ Est.mixin({
     for (var i = 0; i < end - 1; i++) {
       for (var j = end - 1; j > i; j--) {
         if (arr[j] < arr[j - 1]) {
-          Est.swap(arr, j, j - 1);
+          BbaseEst.swap(arr, j, j - 1);
           exchange = false;
         }
       }

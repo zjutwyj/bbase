@@ -25,10 +25,12 @@ Bbase.MODULE['UiFormTextEditor'] = 'modules/ui/controllers/UiFormTextEditor.js';
 Bbase.MODULE['UiFormGroup'] = 'modules/ui/controllers/UiFormGroup.js';
 Bbase.MODULE['UiFormTab'] = 'modules/ui/controllers/UiFormTab.js';
 Bbase.MODULE['UiFormDialog'] = 'modules/ui/controllers/UiFormDialog.js';
+Bbase.MODULE['UiFormTip'] = 'modules/ui/controllers/UiFormTip.js';
 
 Bbase.MODULE['UiScroll'] = 'modules/ui/controllers/UiScroll.js';
 Bbase.MODULE['UiScrollbar'] = 'modules/ui/controllers/UiScrollbar.js';
 Bbase.MODULE['UiSortable'] = 'modules/ui/controllers/UiSortable.js';
+Bbase.MODULE['UiScrollfix'] = 'modules/ui/controllers/UiScrollfix.js';
 
 Bbase.MODULE['UiList'] = 'modules/ui/controllers/UiList.js';
 Bbase.MODULE['UiListExpand'] = 'modules/ui/controllers/UiListExpand.js';

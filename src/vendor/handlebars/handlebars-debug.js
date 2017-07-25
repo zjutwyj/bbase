@@ -22,7 +22,7 @@
 
      */
     // lib/handlebars/browser-prefix.js
-    var BbaseHandlebars = {};
+    var BbaseHandlebars = window.BbaseHandlebars  = {};
     (function(BbaseHandlebars, undefined) {
         // lib/handlebars/base.js
         BbaseHandlebars.VERSION = "1.0.0";

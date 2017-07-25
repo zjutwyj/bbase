@@ -24,7 +24,7 @@ define('BbasePhotoPanel', [], function (require, exports, module) {
     <div class="c4-overlay preview"  aria-hidden="true" style="">
       <div class="c4-overlay-default-buttons" >
       <!---->
-      <button class="p9c-primary cc-x-height" data-hook="replace-menu" bb-bbasecomponentphotopick="{viewId: 'photoPanelPick', cur: serverPath, items: items, listApi: listApi, onChange: handlePickChange}"><span class="cc-x-height font-t2" >替换</span></button>
+      <button class="p9c-primary cc-x-height" data-hook="replace-menu" bb-bbasecomponentphotopick="{viewId: 'photoPanelPick', cur: cur, items: items, listApi: listApi, onChange: handlePickChange}"><span class="cc-x-height font-t2" >替换</span></button>
       <!---->
       <button bb-show="showCropBtn" class="p9c-primary -icon-only" data-hook="crop-menu" ><i cc-tooltip-position="top" cc-tooltip="crop" class="cc-icon-circle cc-icon-crop tooltipstered bbasefont bbase-crop"></i></button>
       <!---->

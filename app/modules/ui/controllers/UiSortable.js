@@ -9,6 +9,9 @@ define('UiSortable', [], function(require, exports, module){
 
   template = `
    <div class="UiSortable-wrap module-wrap">
+        <style>
+          .s-li{padding: 5px; background: #efefef; margin-bottom: 5px; cursor: pointer; }
+        </style>
         <div class="formPanel form-demo">
         <div class="anything">
           <div class="header">
@@ -17,11 +20,11 @@ define('UiSortable', [], function(require, exports, module){
             </div>
           </div>
           <div class="main">
-             <ul class="demo-item clearfix" bb-bbaseuisortable="{viewId:'bbaseuisortable',onEnd: onSortEnd}" style="height:50px;width:200px;">
-                <li>11111</li>
-                <li>22222</li>
-                <li>33333</li>
-                <li>44444</li>
+             <ul class="demo-item clearfix" bb-bbaseuisortable="{viewId:'bbaseuisortable',onEnd: onSortEnd}" style="height:150px;width:200px;">
+                <li class="s-li">点我拖动1</li>
+                <li class="s-li">点我拖动2</li>
+                <li class="s-li">点我拖动3</li>
+                <li class="s-li">点我拖动4</li>
              </ul>
           </div>
           <div class="footer">

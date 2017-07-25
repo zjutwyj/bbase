@@ -5,7 +5,7 @@
  */
 QUnit.module( "【CssUtils】" );
 
-/*QUnit.test("Est.getSelector", function(assert){
-    var selector = Est.getSelector($('#qunit').get(0), 'moveChild', $);
+/*QUnit.test("BbaseEst.getSelector", function(assert){
+    var selector = BbaseEst.getSelector($('#qunit').get(0), 'moveChild', $);
     assert.equal(selector, '#wide_product #qunit', 'passed!');
 });*/

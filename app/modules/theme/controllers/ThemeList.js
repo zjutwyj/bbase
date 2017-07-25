@@ -9,7 +9,7 @@ define('ThemeList', [], function (require, exports, module) {
 
   template = `
     <div class="ThemeList-wrap">
-      <div id="ui-nav" bb-bbaseuitab="{viewId: 'uiFormNavTab', cur: curNav,theme:'tab-ul-line',path: 'moduleId', tpl: tpl, items: navitems, direction: 'v'}"></div>
+      <div id="ui-nav" bb-bbaseuitab="{viewId: 'themeListTab', cur: curNav,theme:'tab-ul-line',path: 'moduleId', tpl: tpl, items: navitems, direction: 'v'}"></div>
     </div>
   `;
 
@@ -21,17 +21,10 @@ define('ThemeList', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        curNav: 'ThemeListRadio',
+        curNav: 'ThemeList01',
         navitems: [
-          { text: '单选', moduleId: 'ThemeListRadio' },
-          { text: '多选', moduleId: 'ThemeListCheckbox' },
-          { text: '下拉菜单', moduleId: 'ThemeListSelect' },
-          { text: '滑动条', moduleId: 'ThemeListSlider' },
-          { text: '下拉框', moduleId: 'ThemeListDropDown' },
-          { text: '组合切换', moduleId: 'ThemeListGroup' },
-          { text: '选项卡', moduleId: 'ThemeListTab' ,oneRender: false},
-          { text: '对话框', moduleId: 'ThemeListDialog'},
-          { text: '编辑器', moduleId: 'ThemeListTextEditor' }
+          { text: '列表样式1', moduleId: 'ThemeList01' , oneRender: false},
+          { text: '列表样式2', moduleId: 'ThemeList02', oneRender: false }
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

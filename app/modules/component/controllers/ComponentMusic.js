@@ -23,7 +23,7 @@ define('ComponentMusic', [], function (require, exports, module) {
       return {
         cur: 'ComponentMusicPick',
         items: [
-          { text: '音乐选择(弹)', moduleId: 'ComponentMusicPick' }
+          { text: '音乐选择(弹)', moduleId: 'ComponentMusicPick' ,oneRender: false}
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

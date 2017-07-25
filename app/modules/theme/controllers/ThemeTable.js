@@ -9,7 +9,7 @@ define('ThemeTable', [], function (require, exports, module) {
 
   template = `
     <div class="ThemeTable-wrap">
-      <div id="ui-nav" bb-bbaseuitab="{viewId: 'uiFormNavTab', cur: curNav,theme:'tab-ul-line',path: 'moduleId', tpl: tpl, items: navitems, direction: 'v'}"></div>
+      <div id="ui-nav" bb-bbaseuitab="{viewId: 'themeTableTab', cur: curNav,theme:'tab-ul-line',path: 'moduleId', tpl: tpl, items: navitems, direction: 'v'}"></div>
     </div>
   `;
 
@@ -23,7 +23,8 @@ define('ThemeTable', [], function (require, exports, module) {
       return {
         curNav: 'ThemeTable01',
         navitems: [
-          { text: '主题样式1', moduleId: 'ThemeTable01' }
+          { text: '主题样式1', moduleId: 'ThemeTable01' ,oneRender: false},
+          { text: '主题样式2', moduleId: 'ThemeTable02' , oneRender: false}
 
         ],
         tpl: `

@@ -119,7 +119,10 @@ define('ComponentIconPick', [], function (require, exports, module) {
           { text: '', value: 'bbase-pause', content: '"\\e604"' },
           { text: '', value: 'bbase-yuandian', content: '"\\e601"' },
           { text: '', value: 'bbase-xialasanjiao', content: '"\\e63a"' },
-          { text: '', value: 'bbase-delete', content: '"\\e64c"' }
+          { text: '', value: 'bbase-delete', content: '"\\e64c"' },
+          { text: '', value: 'bbase-yihen', content: '"\\e62f"' },
+          { text: '', value: 'bbase-search', content: '"\\e62a"' },
+          { text: '', value: 'bbase-copy', content: '"\\e75d"' }
         ]
       }
     },

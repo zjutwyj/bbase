@@ -5,8 +5,8 @@
  */
 Bbase.MODULE['BbaseItemCheck'] = 'ui/bbase/item_check/controllers/BbaseItemCheck.js';
 
-function itemCheck(value, selector, type) {
-  var object = this._getObject(value, 'cur');
+function bbaseItemCheck(value, selector, type) {
+  var object = this._getObject(value, ['cur', 'items']);
   this._require(['BbaseItemCheck'], function (ItemCheck) {
     var viewId = object.viewId;
     var checkAppend = false;
@@ -24,7 +24,7 @@ function itemCheck(value, selector, type) {
       cur: this._get(object.cur) || object.default || object.cur,
       checkAppend: BbaseEst.typeOf(object.append) === 'boolean' ? object.append : checkAppend,
       checkToggle: BbaseEst.typeOf(object.toggle) === 'boolean' ? object.toggle : checkToggle,
-      items: object.items || [],
+      items: this._get(object.items) || [],
       compare: object.compare, // 自定义比较器
       onChange: this._bind(function (item, init, event, values) {
         if (typeof this.model.attributes[object.cur] !== 'undefined' && !BbaseEst.isEmpty(object.cur) && !init) {
@@ -40,43 +40,46 @@ function itemCheck(value, selector, type) {
         this._view(viewId).setValue(this._get(object.cur));
       });
     }
+     this._watch([object.items], '', function(){
+          this._view(viewId).setList(this._get(object.items));
+      });
   });
 };
 
 //bb-bbaseuiradio="{viewId:'radio-form',cur:getCurValue(formId),items:items, onChange: handleChange}"
 Bbase.DIRECTIVE['bbaseuiradio'] = {
   bind: function (value, selector) {
-    itemCheck.apply(this, [value, selector, 'radio']);
+    bbaseItemCheck.apply(this, [value, selector, 'radio']);
   }
 }
 
 //bb-bbaseuicheckbox="{viewId:'radio-form',cur:getCurValue(formId),items:items, onChange: handleChange}"
 Bbase.DIRECTIVE['bbaseuicheckbox'] = {
   bind: function (value, selector) {
-    itemCheck.apply(this, [value, selector, 'checkbox']);
+    bbaseItemCheck.apply(this, [value, selector, 'checkbox']);
   }
 }
 
 //bb-bbaseuiitemtab="{viewId:'ui-item-tab',cur:getCurValue(formId),items:items, onChange: handleChange}"
 Bbase.DIRECTIVE['bbaseuiitemtab'] = {
   bind: function (value, selector) {
-    itemCheck.apply(this, [value, selector, 'tab']);
+    bbaseItemCheck.apply(this, [value, selector, 'tab']);
   }
 }
 //bb-bbaseuiitemcheck="{viewId:'radio-form',cur:getCurValue(formId),items:items, onChange: handleChange}"
 Bbase.DIRECTIVE['bbaseuiitemcheck'] = {
   bind: function (value, selector) {
-    itemCheck.apply(this, [value, selector, 'normal']);
+    bbaseItemCheck.apply(this, [value, selector, 'normal']);
   }
 }
 Bbase.DIRECTIVE['bbaseuiitemtext'] = {
   bind: function (value, selector) {
-    itemCheck.apply(this, [value, selector, 'text']);
+    bbaseItemCheck.apply(this, [value, selector, 'text']);
   }
 }
 //bb-bbaseuiitembtn="{viewId:'ui-item-tab',cur:getCurValue(formId),items:items, onChange: handleChange}"
 Bbase.DIRECTIVE['bbaseuiitembtn'] = {
   bind: function (value, selector) {
-    itemCheck.apply(this, [value, selector, 'btn']);
+    bbaseItemCheck.apply(this, [value, selector, 'btn']);
   }
 }

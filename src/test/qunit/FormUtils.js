@@ -13,12 +13,12 @@ QUnit.test("validation -> 26ms*6", function(assert){
     var digits = '39';
     var url = 'http://www.eqil.com';
 
-    var result_n = Est.validation(number, 'number');
-    var result_e = Est.validation(email, 'email');
-    var result_c = Est.validation(cellphone, 'cellphone');
-    var result_c2 = Est.validation(cellphone2, 'cellphone');
-    var result_d = Est.validation(digits, 'digits');
-    var result_u = Est.validation(url, 'url');
+    var result_n = BbaseEst.validation(number, 'number');
+    var result_e = BbaseEst.validation(email, 'email');
+    var result_c = BbaseEst.validation(cellphone, 'cellphone');
+    var result_c2 = BbaseEst.validation(cellphone2, 'cellphone');
+    var result_d = BbaseEst.validation(digits, 'digits');
+    var result_u = BbaseEst.validation(url, 'url');
 
     assert.ok(result_n, 'passed!');
     assert.ok(result_e, 'passed!');

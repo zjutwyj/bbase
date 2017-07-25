@@ -17,10 +17,10 @@ define('UiFormDropDown', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main clearfix">
-            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdown',content: content, align:'left'}">点击显示下拉框[居左]</div>
-            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdownhover',content: content, mouseHover: true, align:'right'}">鼠标移入显示下拉框[居右]</div>
-            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdownmodule',moduleId: 'DemoListTodo',align: 'center', showClose: true}">请求模块下拉框[居中]</div>
-            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdownfollow',content: content, mouseHover: true, mouseFollow: true,align:'center'}">鼠标跟随下拉框</div>
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdown',content: content, align:'left',lazyLoad: true}">点击显示下拉框[居左]</div>
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdownhover',content: content, mouseHover: true, align:'right',lazyLoad: true}">鼠标移入显示下拉框[居右]</div>
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdown="{viewId:'bbaseuidropdownmodule',moduleId: 'DemoListTodo',align: 'center', showClose: true,lazyLoad: true}">请求模块下拉框[居中]</div>
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdownwix="{viewId:'bbaseuidropdownfollow',content: content, mouseHover: true, mouseFollow: true,align:'center',lazyLoad: true}">鼠标跟随下拉框</div>
 
           </div>
           <div class="footer">
@@ -37,7 +37,24 @@ define('UiFormDropDown', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main clearfix">
-            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdownwin="{viewId:'bbaseuidropdownwin',moduleId: 'ThemeTable01',top:72}">全屏下拉框</div>
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdownwin="{viewId:'bbaseuidropdownwin',moduleId: 'ThemeTable01',top:72,lazyLoad: true}">全屏下拉框</div>
+
+          </div>
+          <div class="footer">
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'select-win', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formPanel form-demo">
+        <div class="anything">
+          <div class="header">
+            <div class="formIdArea">
+              <span class="name">指令用法：bbaseuidropdownwix="{viewId:'bbaseuidropdownwix',moduleId: 'DemoListTodo'}"</span>
+            </div>
+          </div>
+          <div class="main clearfix">
+            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidropdownwix="{viewId:'bbaseuidropdownwix',mouseHover: true,moduleId: 'DemoListTodo',top:72,lazyLoad: true, align: 'left'}">wix风格下拉框</div>
 
           </div>
           <div class="footer">
@@ -63,7 +80,7 @@ define('UiFormDropDown', [], function (require, exports, module) {
               <tbody class="uilist01-tbody">
                 <tr>
                   <td class="argName"><span>viewId</span><span class="red">&nbsp;(必填)</span></td>
-                  <td class="argDesc"><span>视图标识符</span></td>
+                  <td class="argDesc"><span>视图标识符(如果需要引用弹出的视图的话， 需要在viewId后面加drop_down)</span></td>
                   <td class="argType"><span>string</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
@@ -108,6 +125,24 @@ define('UiFormDropDown', [], function (require, exports, module) {
                   <td class="argDesc"><span>显示关闭按钮</span></td>
                   <td class="argType"><span>boolean</span></td>
                   <td class="argDefault"><span>false</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>lazyLoad</span></td>
+                  <td class="argDesc"><span>模块延迟加载</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>false</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>onReady</span></td>
+                  <td class="argDesc"><span>下拉菜单渲染完成</span></td>
+                  <td class="argType"><span>function</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>onShow</span></td>
+                  <td class="argDesc"><span>下拉菜单显示</span></td>
+                  <td class="argType"><span>function</span></td>
+                  <td class="argDefault"><span>-</span></td>
                 </tr>
               </tbody>
             </table>

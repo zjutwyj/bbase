@@ -21,9 +21,10 @@ define('DemoList', [], function(require, exports, module){
     },
     init: function(){
       return {
-        curListType: 'DemoListTodo',
+        curListType: 'DemoListScrollbar',
         ListTypeitems: [
-          {text: 'TodoMVC', moduleId: 'DemoListTodo', oneRender: false}
+          {text: 'TodoMVC', moduleId: 'DemoListTodo', oneRender: false},
+          {text: '滚动加载', moduleId: 'DemoListScrollbar', oneRender: false}
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

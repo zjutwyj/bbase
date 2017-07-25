@@ -9,48 +9,50 @@
  * @method [判断] - compare
  * @author wyj 2014-03-27
  * @example
- *      {{#compare ../page '!==' this}}danaiPageNum{{else}}active{{/compare}}
+ *      {{#compare ./page '!==' this}}danaiPageNum{{else}}active{{/compare}}
  */
+(function(BbaseEst, BbaseApp, BbaseHandlebars, undefined){
 BbaseHandlebars.registerHelper('compare', function (v1, operator, v2, options) {
+  var _this = this;
   if (arguments.length < 3)
     throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
   try {
     switch (operator.toString()) {
       case '==':
-        return (v1 == v2) ? options.fn(this) :
-          options.inverse(this);
+        return (v1 == v2) ? options.fn(_this) :
+          options.inverse(_this);
       case '!=':
-        return (v1 != v2) ? options.fn(this) :
-          options.inverse(this);
+        return (v1 != v2) ? options.fn(_this) :
+          options.inverse(_this);
       case '===':
-        return (v1 === v2) ? options.fn(this) :
-          options.inverse(this);
+        return (v1 === v2) ? options.fn(_this) :
+          options.inverse(_this);
       case '!==':
-        return (v1 !== v2) ? options.fn(this) :
-          options.inverse(this);
+        return (v1 !== v2) ? options.fn(_this) :
+          options.inverse(_this);
       case '<':
-        return (v1 < v2) ? options.fn(this) :
-          options.inverse(this);
+        return (v1 < v2) ? options.fn(_this) :
+          options.inverse(_this);
       case '<=':
-        return (v1 <= v2) ? options.fn(this) :
-          options.inverse(this);
+        return (v1 <= v2) ? options.fn(_this) :
+          options.inverse(_this);
       case '>':
-        return (v1 > v2) ? options.fn(this) :
-          options.inverse(this);
+        return (v1 > v2) ? options.fn(_this) :
+          options.inverse(_this);
       case '>=':
-        return (v1 >= v2) ? options.fn(this) :
-          options.inverse(this);
+        return (v1 >= v2) ? options.fn(_this) :
+          options.inverse(_this);
       case '&&':
-        return (v1 && v2) ? options.fn(this) :
-          options.inverse(this);
+        return (v1 && v2) ? options.fn(_this) :
+          options.inverse(_this);
       case '||':
-        return (v1 || v2) ? options.fn(this) :
-          options.inverse(this);
+        return (v1 || v2) ? options.fn(_this) :
+          options.inverse(_this);
       case 'indexOf':
-        return (v1.indexOf(v2) > -1) ? options.fn(this) :
-          options.inverse(this);
+        return (v1.indexOf(v2) > -1) ? options.fn(_this) :
+          options.inverse(_this);
       default:
-        return options.inverse(this);
+        return options.inverse(_this);
     }
   } catch (e) {
     console.log('Errow: hbs.compare v1=' + v1 + ';v2=' + v2 + e);
@@ -64,7 +66,7 @@ BbaseHandlebars.registerHelper('compare', function (v1, operator, v2, options) {
  * @author wyj 2014-03-27
  * @example
  *        {{#pagination page totalPage}}
- <li class="bui-bar-item bui-button-number bui-inline-block {{#compare ../page this operator='!=='}}danaiPageNum
+ <li class="bui-bar-item bui-button-number bui-inline-block {{#compare ./page this operator='!=='}}danaiPageNum
  {{else}}active{{/compare}}" data-page="{{this}}" aria-disabled="false" id="{{this}}" aria-pressed="false">
  <a href="javascript:;">{{this}}</a></li>
  {{/pagination}}
@@ -92,16 +94,17 @@ BbaseHandlebars.registerHelper('pagination', function (page, totalPage, sum, blo
  *      BbaseHandlebars.helpers["get"].apply(this, date)
  */
 BbaseHandlebars.registerHelper('get', function (path, options) {
+  var _this = this;
   if (typeof path !== 'undefined' && BbaseEst.typeOf(path) === 'string') {
     var list = path.split('.');
-    if (list[0] in this) {
+    if (list[0] in _this) {
       if (list.length > 1) {
-        if (BbaseEst.typeOf(this[list[0]]) !== 'object') {
-          this[list[0]] = JSON.parse(this[list[0]]);
+        if (BbaseEst.typeOf(_this[list[0]]) !== 'object') {
+          _this[list[0]] = JSON.parse(_this[list[0]]);
         }
-        return BbaseEst.getValue(this, path);
+        return BbaseEst.getValue(_this, path);
       } else {
-        return this[list[0]];
+        return _this[list[0]];
       }
     }
   } else {
@@ -126,11 +129,12 @@ BbaseHandlebars.registerHelper('dateFormat', function (date, fmt, options) {
  * @method [判断] - contains
  * @author wyj 14.11.17
  * @example
- *      {{#contains ../element this}}checked="checked"{{/contains}}
+ *      {{#contains ./element this}}checked="checked"{{/contains}}
  */
 BbaseHandlebars.registerHelper('contains', function (target, thisVal, options) {
+  var _this = this;
   if (BbaseEst.isEmpty(target)) return;
-  return BbaseEst.contains(target, thisVal) ? options.fn(this) : options.inverse(this);
+  return BbaseEst.contains(target, thisVal) ? options.fn(_this) : options.inverse(_this);
 });
 
 /**
@@ -159,10 +163,10 @@ BbaseHandlebars.registerHelper('minus', function (num1, num2, opts) {
  * @method [字符串] - cutByte
  * @author wyj 2014-03-27
  * @example
- *      {{cutByte name 5 end='...'}}
+ *      {{cutByte name 5 end='..'}}
  */
 BbaseHandlebars.registerHelper('cutByte', function (str, len, options) {
-  return BbaseEst.cutByte(str, len, options.hash.end || '...');
+  return BbaseEst.cutByte(str, len, options.hash.end || '..');
 });
 
 /**
@@ -174,15 +178,16 @@ BbaseHandlebars.registerHelper('cutByte', function (str, len, options) {
  *
  */
 BbaseHandlebars.registerHelper("x", function (expression, options) {
+  var _this = this;
   var fn = function () {},
     result;
   try {
-    fn = Function.apply(this, ['window', 'return ' + expression + ';']);
+    fn = Function.apply(_this, ['window', 'return ' + expression + ';']);
   } catch (e) {
     console.warn('[warning] {{x ' + expression + '}} is invalid javascript', e);
   }
   try {
-    result = fn.bind(this)(window);
+    result = fn.bind(_this)(window);
   } catch (e) {
     console.warn('[warning] {{x ' + expression + '}} runtime error', e);
   }
@@ -198,7 +203,8 @@ BbaseHandlebars.registerHelper("x", function (expression, options) {
               this.shippingStatus == 'unshipped'"}}disabled{{/xif}}
  */
 BbaseHandlebars.registerHelper("xif", function (expression, options) {
-  return BbaseHandlebars.helpers["x"].apply(this, [expression, options]) ? options.fn(this) : options.inverse(this);
+  var _this = this;
+  return BbaseHandlebars.helpers["x"].apply(_this, [expression, options]) ? options.fn(_this) : options.inverse(_this);
 });
 
 /**
@@ -209,7 +215,8 @@ BbaseHandlebars.registerHelper("xif", function (expression, options) {
  * @return {[type]}            [description]
  */
 BbaseHandlebars.registerHelper('If', function (expression, options) {
-  var bool = BbaseEst.compile('{{' + expression.replace(/_quote_/img, "'").replace(/&amp;/img, "&") + '}}', this);
+  var _this = this;
+  var bool = BbaseEst.compile('{{' + expression.replace(/_quote_/img, "'").replace(/&amp;/img, "&") + '}}', _this);
 
   if (bool === 'true' || bool === '1') {
     bool = true;
@@ -219,7 +226,7 @@ BbaseHandlebars.registerHelper('If', function (expression, options) {
     bool = true;
   }
 
-  return bool ? options.fn(this) : options.inverse(this);
+  return bool ? options.fn(_this) : options.inverse(_this);
 });
 
 /**
@@ -289,6 +296,7 @@ BbaseHandlebars.registerHelper('_picUrl', function (src, number, options) {
  *        {{PIC pic 5}} ==> http://img.jihui88.com/upload/a/a1/picture/2015/12/20/pic_5.jpg?v=2015-12-20_12:30
  */
 BbaseHandlebars.registerHelper('PIC', function (name, number, options) {
+  var _this = this;
   var version = '';
   var options = options;
   var def = CONST.PIC_NONE;
@@ -307,16 +315,16 @@ BbaseHandlebars.registerHelper('PIC', function (name, number, options) {
     version += (name.indexOf('?') > -1 ? ('&v=' + BbaseEst.hash(CONST.APP_VERSION)) :
       '?v=' + BbaseEst.hash(CONST.APP_VERSION));
     if (BbaseEst.startsWidth(name, 'CONST')) {
-      name = BbaseHandlebars.helpers['CONST'].apply(this, [name.replace('CONST.', ''), options]);
+      name = BbaseHandlebars.helpers['CONST'].apply(_this, [name.replace('CONST.', ''), options]);
     }
   }
   if (!name || !/[^\s]+\.(?:jpe?g|gif|png|bmp)/i.test(name)) return def.indexOf('http://') > -1 ? def : CONST.DOMAIN + def + version;
   if (name.indexOf('upaiyun.com') === -1 && BbaseEst.startsWidth(name, 'http') && name.indexOf('upload') > -1) {
     name = name.substring(name.indexOf('upload'), name.length);
   }
-  if (name.indexOf('upaiyun.com') === -1 && BbaseEst.startsWidth(name, 'upload')) {
-    return arguments.length < 3 ? domain + '/' + name + version :
-      BbaseHandlebars.helpers['_picUrl'].apply(this, [name, number, options]) + version;
+  if (name.indexOf('upaiyun.com') === -1 && BbaseEst.startsWidth(name, 'upload') || options.hash.upload) {
+    return arguments.length < 3 ? domain + (BbaseEst.startsWidth(name, '/') ? '' : '/') + name + version :
+      BbaseHandlebars.helpers['_picUrl'].apply(_this, [name, number, options]) + version;
   }
 
   return BbaseEst.startsWidth(name, 'http') ? name + version : CONST.DOMAIN + name + version;
@@ -327,11 +335,12 @@ BbaseHandlebars.registerHelper('PIC', function (name, number, options) {
  * @method [判断] - isEmpty
  * @author wyj 14.12.27
  * @example
- *      {{#isEmpty image}}<img src='...'></img>{{/isEmpty}}
+ *      {{#isEmpty image}}<img src='..'></img>{{/isEmpty}}
  */
 BbaseHandlebars.registerHelper('isEmpty', function (value, options) {
-  return BbaseEst.isEmpty(value) ? options.fn(this) :
-    options.inverse(this);
+  var _this = this;
+  return BbaseEst.isEmpty(value) ? options.fn(_this) :
+    options.inverse(_this);
 });
 
 /**
@@ -430,9 +439,9 @@ BbaseHandlebars.registerHelper('keyMap', function (val1, val2, options) {
  */
 BbaseHandlebars.registerHelper('radio', function (options) {
   var result = [], list = $.parseJSON ? $.parseJSON(options.hash.option) : JSON.parse(options.hash.options);
-  Est.each(list, function (val, key, list, index) {
+  BbaseEst.each(list, function (val, key, list, index) {
     var checked = options.hash.value === val ? 'checked' : '';
-    result.push('<label><input id="model' + index + '-' + options.hash.name + '" type="radio" name="' + options.hash.name +
+    result.push('<label><input bb-model="'+options.hash.name+'" id="model' + index + '-' + options.hash.name + '" type="radio" name="' + options.hash.name +
       '" value="' + val + '" ' + checked + '>&nbsp;' + key + '</label>&nbsp;&nbsp;');
   });
   return result.join('');
@@ -448,15 +457,15 @@ BbaseHandlebars.registerHelper('radio', function (options) {
  */
 BbaseHandlebars.registerHelper('checkbox', function (options) {
   var id = options.hash.id ? options.hash.id : ('model-' + options.hash.name);
-  var random = Est.nextUid('checkbox'); // 随机数
+  var random = BbaseEst.nextUid('checkbox'); // 随机数
   var icon_style = "font-size: 32px;"; // 图标大小
-  var value = Est.isEmpty(options.hash.value) ? options.hash.falseVal : options.hash.value; // 取值
+  var value = BbaseEst.isEmpty(options.hash.value) ? options.hash.falseVal : options.hash.value; // 取值
   var isChecked = value === options.hash.trueVal ? true : false; // 是否选中状态
   var defaultClass = isChecked ? 'icon-checkbox' : 'icon-checkboxno';
   var args = ("'" + random + "'"); // 参数
 
   var result = '<div> <label for="' + id + '" style="overflow:hidden;display:inline-block;"> ' +
-    '<input onclick="window.ckToggleClass(' + args + ');" type="checkbox" name="' + options.hash.name + '" id="' + id + '" value="' + value + '" ' + (isChecked ? 'checked' : '') + ' true-value="' + options.hash.trueVal + '" false-value="' + options.hash.falseVal + '"  class="rc-hidden" style="display: none;">' +
+    '<input bb-model="'+options.hash.name+'" onclick="window.ckToggleClass(' + args + ');" type="checkbox" name="' + options.hash.name + '" id="' + id + '" value="' + value + '" ' + (isChecked ? 'checked' : '') + ' true-value="' + options.hash.trueVal + '" false-value="' + options.hash.falseVal + '"  class="rc-hidden" style="display: none;">' +
     '<i id="' + random + '" class="iconfont ' + defaultClass + '" style="' + icon_style + '"></i>' + options.hash.label +
     '</label></div>';
   return result;
@@ -473,8 +482,8 @@ BbaseHandlebars.registerHelper('checkbox', function (options) {
  */
 BbaseHandlebars.registerHelper('select', function (options) {
   var id = options.hash.id ? options.hash.id : ('model-' + options.hash.name);
-  var str = '<select name="' + options.hash.name + '" id="' + id + '"  class="' + (options.hash.className || '') + '" style="' + (options.hash.style || '') + '"> ';
-  Est.each(options.hash.list, function (item) {
+  var str = '<select bb-model="'+options.hash.name+'" name="' + options.hash.name + '" id="' + id + '"  class="' + (options.hash.className || '') + '" style="' + (options.hash.style || '') + '"> ';
+  BbaseEst.each(options.hash.list, function (item) {
     var selected = options.hash.value === item[options.hash.key] ? 'selected' : '';
     str += '<option value="' + item[options.hash.key] + '" ' + selected + '>' + item[options.hash.text] + '</option>';
   });
@@ -517,7 +526,7 @@ BbaseHandlebars.registerHelper('pipe', function (expression) {
         } else {
           dollars.push(BbaseEst.getValue(obj, name));
         }
-      }, this);
+      });
     }
 
     helper = BbaseEst.trim(pipe.replace(/\(.*\)/g, ''));
@@ -560,7 +569,10 @@ BbaseHandlebars.registerHelper('pipe', function (expression) {
     }
     obj[key] = result;
 
-  }, this);
+  });
 
   return result;
 });
+window.BbaseHandlebars = BbaseHandlebars;
+})(window.BbaseEst, window.BbaseApp, window.BbaseHandlebars);
+

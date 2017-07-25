@@ -7,16 +7,16 @@ QUnit.module("【ObjectUtils】");
 
 QUnit.test('compile', function(assert){
   var value = "{handle: @.todo@, draggable: @.todo@, name: @{{name}}@}";
-  var compile = Est.compile(value);
+  var compile = BbaseEst.compile(value);
   var result = compile({name: 'aaa'});
 
   assert.equal(result, '{handle: @.todo@, draggable: @.todo@, name: @aaa@}', 'passed');
   result = result.replace(/@/img, '"');
   var items = result.substring(1, result.length -1).split(',');
   var result1 = "{";
-  Est.each(items, function(item, dx){
+  BbaseEst.each(items, function(item, dx){
     var list = item.split(':');
-    result1 += ((dx===0 ? '': ',') + '"' + Est.trim(list[0]) + '":' + list[1]);
+    result1 += ((dx===0 ? '': ',') + '"' + BbaseEst.trim(list[0]) + '":' + list[1]);
   });
   result = result1 + '}';
  // result = result.replace(//img, '$1');
@@ -27,41 +27,41 @@ console.log(JSON.parse(result));
 QUnit.test('equal -> 1ms*8', function(assert) {
   var obj1 = { name: 'aaa', age: 33 };
   var obj2 = { name: 'aaa', age: 33 };
-  var result = Est.equal(obj1, obj2);
+  var result = BbaseEst.equal(obj1, obj2);
   assert.ok(result, 'passed');
-  var result = Est.equal(0, -0);
+  var result = BbaseEst.equal(0, -0);
   assert.ok(!result, 'passed');
-  var result = Est.equal(null, undefined);
+  var result = BbaseEst.equal(null, undefined);
   assert.ok(!result, 'passed');
 
-  var result = Est.equal(true, true);
+  var result = BbaseEst.equal(true, true);
   assert.ok(result, 'passed');
 
-  var result = Est.equal(false, false);
+  var result = BbaseEst.equal(false, false);
   assert.ok(result, 'passed');
 
-  var result = Est.equal(null, null);
+  var result = BbaseEst.equal(null, null);
   assert.ok(result, 'passed');
 
-  var result = Est.equal(undefined, undefined);
+  var result = BbaseEst.equal(undefined, undefined);
   assert.ok(result, 'passed');
 
-  var result = Est.equal('', '');
+  var result = BbaseEst.equal('', '');
   assert.ok(result, 'passed');
 
 });
 
 QUnit.test('defaults -> 2ms*1', function(assert) {
-  var result = Est.defaults({ 'user': 'barney' }, { 'age': 36 }, { 'user': 'fred' });
+  var result = BbaseEst.defaults({ 'user': 'barney' }, { 'age': 36 }, { 'user': 'fred' });
   assert.deepEqual(result, { 'user': 'barney', 'age': 36 }, 'passed')
 });
 
-/*QUnit.test('Est.objToPath', function (assert) {
+/*QUnit.test('BbaseEst.objToPath', function (assert) {
   var obj = {
     level1: { level2: 'value2' },
     level3: { level4: 'value4', level5: { level6: 'value6' } }
   };
-  var result = Est.objToPath(obj);
+  var result = BbaseEst.objToPath(obj);
   assert.deepEqual(result, {
     "level1.level2": "value2",
     "level3.level4": "value4",
@@ -79,10 +79,10 @@ QUnit.test('getValue -> 2ms*2', function(assert) {
       name: 'aaa'
     }
   }
-  var result = Est.getValue(object, 'item.name');
+  var result = BbaseEst.getValue(object, 'item.name');
   assert.equal(result, 'aaa', 'passed');
   assert.deepEqual(object, object2, 'passed');
-  var result2 = Est.getValue(object, 'item.ent');
+  var result2 = BbaseEst.getValue(object, 'item.ent');
   assert.equal(result2, undefined, 'passed');
 });
 QUnit.test('result -> 1ms*1', function(assert) {
@@ -94,7 +94,7 @@ QUnit.test('result -> 1ms*1', function(assert) {
       }
     }
   };
-  var result3 = Est.result(object3, 'item.age');
+  var result3 = BbaseEst.result(object3, 'item.age');
   assert.equal(result3, 22, 'passed');
 });
 QUnit.test('setValue -> 3ms*4', function(assert) {
@@ -114,14 +114,14 @@ QUnit.test('setValue -> 3ms*4', function(assert) {
       name: 'bbb'
     }
   }
-  Est.setValue(object, 'item.name', 'bbb');
+  BbaseEst.setValue(object, 'item.name', 'bbb');
   assert.deepEqual(object, object2, 'passed');
 
 
   var object3 = {
     item: {}
   };
-  Est.setValue(object3, 'item.name', 'bbb');
+  BbaseEst.setValue(object3, 'item.name', 'bbb');
   assert.deepEqual(object3, {
     "item": {
       "name": "bbb"
@@ -129,7 +129,7 @@ QUnit.test('setValue -> 3ms*4', function(assert) {
   }, 'passed');
 
   var object4 = {};
-  Est.setValue(object4, 'item.name', 'bbb');
+  BbaseEst.setValue(object4, 'item.name', 'bbb');
   assert.deepEqual(object4, {
     "item": {
       "name": "bbb"
@@ -138,7 +138,7 @@ QUnit.test('setValue -> 3ms*4', function(assert) {
 
   var object5 = null;
 
-  Est.setValue(object5, 'item.name', 'bbb');
+  BbaseEst.setValue(object5, 'item.name', 'bbb');
   assert.deepEqual(object5, null, 'passed');
 });
 QUnit.test("chain -> 3ms*2", function(assert) {
@@ -153,12 +153,12 @@ QUnit.test("chain -> 3ms*2", function(assert) {
     'age': 1
   }];
 
-  var youngest = Est.chain(characters)
+  var youngest = BbaseEst.chain(characters)
     .sortBy('age').take(0)
     .pluck('age').value();
   // → 'pebbles is 1'
   assert.equal(youngest, 1, 'passed!');
-  var youngesttwo = Est.chain(characters).sortBy('age').take().pluck('age').value();
+  var youngesttwo = BbaseEst.chain(characters).sortBy('age').take().pluck('age').value();
   assert.equal(youngesttwo, 1, 'passed!');
 });
 QUnit.test("pick -> 1ms*1", function(assert) {
@@ -167,7 +167,7 @@ QUnit.test("pick -> 1ms*1", function(assert) {
     sort: '1',
     sId: '000002'
   };
-  var object2 = Est.pick(object1, ['name', 'sort']);
+  var object2 = BbaseEst.pick(object1, ['name', 'sort']);
   var object3 = {
     name: 'a',
     sort: '1'
@@ -176,7 +176,7 @@ QUnit.test("pick -> 1ms*1", function(assert) {
 })
 QUnit.test("typeOf -> 0ms*1", function(assert) {
   var results = [];
-  var fn = Est.typeOf;
+  var fn = BbaseEst.typeOf;
   results.push(fn({
     a: 4
   })); // "Object"
@@ -197,9 +197,9 @@ QUnit.test("typeOf -> 0ms*1", function(assert) {
 
   assert.deepEqual(results, ["object", "array", "object", "error", "date", "regexp", "object", "object", "object", "object", "object", 'null', 'function'], 'passed!');
 });
-/*QUnit.test("Est.getType", function (assert) {
+/*QUnit.test("BbaseEst.getType", function (assert) {
   var results = [];
-  var fn = Est.getType;
+  var fn = BbaseEst.getType;
 
   results.push(fn({a: 4})); // "Object"
   results.push(fn([1, 2, 3])); // "Array"
@@ -224,31 +224,31 @@ QUnit.test("hasKey -> 0ms*1", function(assert) {
   var obj = {
     name: 1
   };
-  var has = Est.hasKey(obj, 'name');
+  var has = BbaseEst.hasKey(obj, 'name');
   assert.equal(has, true, 'passed!');
 });
 QUnit.test("hashKey -> 0ms*1", function(assert) {
   var obj = {};
-  var value = Est.hashKey(obj);
+  var value = BbaseEst.hashKey(obj);
   assert.equal(value, 'object:003', "passed!");
 });
 QUnit.test("isEmpty -> 1ms*5", function(assert) {
   var obj = {};
-  var result = Est.isEmpty(obj);
+  var result = BbaseEst.isEmpty(obj);
   assert.ok(result, "passed!");
   var list = [];
-  var result2 = Est.isEmpty(list);
+  var result2 = BbaseEst.isEmpty(list);
   assert.ok(result2, "passed!");
   var str = '';
-  var result3 = Est.isEmpty(str);
+  var result3 = BbaseEst.isEmpty(str);
   assert.ok(result3, "passed!");
   var fn = function() {}
-  var result4 = Est.isEmpty(fn);
+  var result4 = BbaseEst.isEmpty(fn);
   assert.ok(result4, "passed!");
   var obj1 = {
     name: 1
   };
-  var result5 = Est.isEmpty(obj1);
+  var result5 = BbaseEst.isEmpty(obj1);
   assert.ok(!result5, "passed!");
 });
 QUnit.test('pluck -> 0ms*1', function(assert) {
@@ -259,7 +259,7 @@ QUnit.test('pluck -> 0ms*1', function(assert) {
     'name': 'fred',
     'age': 40
   }];
-  var result = Est.pluck(characters, 'name');
+  var result = BbaseEst.pluck(characters, 'name');
   assert.deepEqual(result, ["barney", "fred"], 'passed!');
 });
 QUnit.test('cloneDeep -> 49ms*3', function(assert) {
@@ -270,7 +270,7 @@ QUnit.test('cloneDeep -> 49ms*3', function(assert) {
       'array': ['1', '2']
     }
   };
-  var object_r = Est.cloneDeep(object);
+  var object_r = BbaseEst.cloneDeep(object);
   assert.deepEqual(object_r, {
     "age": 36,
     "info": {
@@ -287,7 +287,7 @@ QUnit.test('cloneDeep -> 49ms*3', function(assert) {
     'name': 'fred',
     'age': 40
   }];
-  var clone = Est.clone(characters);
+  var clone = BbaseEst.clone(characters);
   assert.deepEqual(clone, [{
     "age": 36,
     "name": "barney"
@@ -297,7 +297,7 @@ QUnit.test('cloneDeep -> 49ms*3', function(assert) {
   }], 'passed!');
   //assert.ok(clone[0] === characters[0], 'passed!');
 
-  var cloneDeep = Est.cloneDeep(characters);
+  var cloneDeep = BbaseEst.cloneDeep(characters);
   assert.deepEqual(cloneDeep, [{
     "age": 36,
     "name": "barney"
@@ -2197,6 +2197,6 @@ QUnit.test('cloneDeep -> 49ms*3', function(assert) {
     thumbnail_path: 'upload/d/d1/dabao/picture/2013/05/07/4cb3818d-1ab9-411f-9ef1-92184f71fcf0_5.jpg'
   }];
 
-  var result5 = Est.cloneDeep(list);
+  var result5 = BbaseEst.cloneDeep(list);
   assert.deepEqual(result5, list, 'passed!');
 });

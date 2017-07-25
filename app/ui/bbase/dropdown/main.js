@@ -1,7 +1,8 @@
 Bbase.MODULE['BbaseDropDown'] = 'ui/bbase/dropdown/controllers/BbaseDropDown.js';
 
-function baseDropdown(value, selector, theme) {
+function baseBbaseDropdown(value, selector, theme) {
   this._require(['BbaseDropDown'], function (BbaseDropDown) {
+    var _this = this;
     var object = this._getObject(value, 'cur');
     var viewId = object.viewId;
     this._region(viewId, BbaseDropDown, {
@@ -18,12 +19,19 @@ function baseDropdown(value, selector, theme) {
       showClose: object.showClose,
       top: object.top,
       lazy: object.lazy,
+      lazyLoad: object.lazyLoad,
       align: object.align,
       items: object.items,
       theme: theme,
       onReady: function () {
-        if (!object.lazy){
-          this.reset && this.reset();
+        if (object.onReady){
+          object.onReady.call(_this);
+        }
+      },
+      onShow: function(){
+        //this.reset && this.reset();
+        if (object.onShow){
+          object.onShow.call(_this);
         }
       }
     });
@@ -33,11 +41,16 @@ function baseDropdown(value, selector, theme) {
 
 Bbase.DIRECTIVE['bbaseuidropdown'] = {
   bind: function (value, selector) {
-    baseDropdown.apply(this, [value, selector, null]);
+    baseBbaseDropdown.apply(this, [value, selector, null]);
   }
 }
 Bbase.DIRECTIVE['bbaseuidropdownwin'] = {
   bind: function (value, selector) {
-    baseDropdown.apply(this, [value, selector, 'win']);
+    baseBbaseDropdown.apply(this, [value, selector, 'win']);
+  }
+}
+Bbase.DIRECTIVE['bbaseuidropdownwix'] = {
+  bind: function(value, selector){
+    baseBbaseDropdown.apply(this, [value, selector, 'wix']);
   }
 }

@@ -9,6 +9,9 @@ define('UiScrollbar', [], function (require, exports, module) {
 
   template = `
     <div class="UiScrollbar-wrap module-wrap">
+        <style>
+          .s-li{padding: 5px; background: #efefef; margin-bottom: 5px; cursor: pointer; }
+        </style>
         <div class="formPanel form-demo">
         <div class="anything">
           <div class="header">
@@ -17,24 +20,28 @@ define('UiScrollbar', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main">
-             <div class="demo-item clearfix" bb-bbaseuiscrollbar="{viewId:'bbaseuiscrollbar',id:'iscroll',disableMouse:false}" style="height:50px;width:200px;">
-              <div class="inner">
-                 鼠标拖动1<br>
-                 鼠标拖动2<br>
-                 鼠标拖动3<br>
-                 鼠标拖动4<br>
-                 鼠标拖动5<br>
-                 鼠标拖动6<br>
-                 鼠标拖动7<br>
-                 鼠标拖动8<br>
-                 鼠标拖动9<br>
-                 鼠标拖动10<br>
-                 鼠标拖动11<br>
-                 鼠标拖动12<br>
-                 鼠标拖动13<br>
-                 鼠标拖动14<br>
-                 鼠标拖动15<br>
-              </div>
+             <div class="demo-item clearfix" bb-bbaseuiscrollbar="{viewId:'bbaseuiscrollbar',id:'iscroll'}" style="height:50px;width:200px;">
+              <ul class="inner s-ul">
+              <li class="s-li" data-id="s-li-1">鼠标拖动1</li>
+              <li class="s-li" data-id="s-li-2">鼠标拖动2</li>
+              <li class="s-li" data-id="s-li-3">鼠标拖动3</li>
+              <li class="s-li" data-id="s-li-4">鼠标拖动4</li>
+              <li class="s-li" data-id="s-li-5">鼠标拖动5</li>
+              <li class="s-li" data-id="s-li-6">鼠标拖动6</li>
+              <li class="s-li" data-id="s-li-7">鼠标拖动7</li>
+              <li class="s-li" data-id="s-li-8">鼠标拖动8</li>
+              <li class="s-li" data-id="s-li-9">鼠标拖动9</li>
+              <li class="s-li" data-id="s-li-10">鼠标拖动10</li>
+              <li class="s-li" data-id="s-li-11">鼠标拖动11</li>
+              <li class="s-li" data-id="s-li-12">鼠标拖动12</li>
+              <li class="s-li" class="s-li" class="s-li" class="s-li" data-id="s-li-13">鼠标拖动13</li>
+              <li class="s-li" class="s-li" class="s-li" data-id="s-li-14">鼠标拖动14</li>
+              <li class="s-li" class="s-li" data-id="s-li-15">鼠标拖动15</li>
+              <li class="s-li" data-id="s-li-16">鼠标拖动16</li>
+              <li class="s-li" data-id="s-li-17">鼠标拖动17</li>
+              <li class="s-li" data-id="s-li-18">鼠标拖动18</li>
+              <li class="s-li" data-id="s-li-19">鼠标拖动19</li>
+              </ul>
              </div>
           </div>
           <div class="footer">
@@ -64,7 +71,7 @@ define('UiScrollbar', [], function (require, exports, module) {
                   <td class="argDefault"><span>-</span></td>
                 </tr>
                 <tr>
-                  <td class="argName"><span>id</span></td>
+                  <td class="argName"><span>id</span><span class="red">&nbsp;(必填)</span></td>
                   <td class="argDesc"><span title="返回的对象， 在视图中可以使用this[id]来获取scroll对象">返回的对象， 在视图中可以使用this[id]来获取scroll对象</span></td>
                   <td class="argType"><span>string</span></td>
                   <td class="argDefault"><span>iscroll</span></td>
@@ -111,6 +118,25 @@ define('UiScrollbar', [], function (require, exports, module) {
                   <td class="argType"><span>boolean</span></td>
                   <td class="argDefault"><span>true</span></td>
                 </tr>
+                <tr>
+                  <td class="argName"><span>preventDefault</span></td>
+                  <td class="argDesc"><span>阻止事件冒泡,开启后文本框将不能选择</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>false</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>minScroll</span></td>
+                  <td class="argDesc"><span>滚动到顶部回调</span></td>
+                  <td class="argType"><span>function</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
+                 <tr>
+                  <td class="argName"><span>maxScroll</span></td>
+                  <td class="argDesc"><span>滚动到底部回调</span></td>
+                  <td class="argType"><span>function</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
+
               </tbody>
             </table>
           </div>
@@ -141,6 +167,11 @@ define('UiScrollbar', [], function (require, exports, module) {
     },
     update: function(){
       this._set('cur', parseInt(this._get('cur')));
+    },
+    afterRender: function(){
+      this.$('.s-ul li').click(function(){
+        alert($(this).attr('data-id'));
+      });
     }
   });
 

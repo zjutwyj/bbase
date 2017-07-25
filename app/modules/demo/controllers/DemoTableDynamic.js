@@ -14,9 +14,15 @@ define('DemoTableDynamic', [], function (require, exports, module) {
       addTime: new Date().getTime()
     });
   }
-
+  var theme = BbaseEst.nextUid('ThemeTable01');
   template = `
     <div class="DemoTableDynamic-wrap" style="padding:10px; width: 994px;">
+      <style>
+         /* checkbox */
+        .${theme}-wrap .checkboxAll{display: inline-block; height: 42px; padding-top: 8px; line-height: 50px; vertical-align: middle; }
+        .${theme}-wrap .td-checkbox .bbase-ui-itemcheck.ui-item-check-checkbox{margin-top: -15px; text-align: center; padding-left: 2px;}
+        .${theme}-wrap tr.item-active{background-color: #f4f5f9;}
+      </style>
       <div class="formPanel form-demo">
           <div class="anything" style="display: block;">
             <div class="header">
@@ -64,13 +70,31 @@ define('DemoTableDynamic', [], function (require, exports, module) {
         item: BbaseItem.extend({
           tagName: 'tr',
           template: `
+          <td class="td-checkbox" width="22" bb-bbaseuicheckbox="{viewId: viewId,cur: checked, items: items}"></td>
           <td><span bb-watch="paymentSn:html">{{paymentSn}}</span></td>
           <td><span bb-watch="amount:html">{{amount}}</span></td>
           <td><span bb-watch="nickname:html">{{nickname}}</span></td>
           <td><span bb-watch="addTime:html">{{dateFormat addTime 'yyyy-MM-dd hh:mm'}}</span></td>
           `,
+          initData: function(){
+            return {
+             viewId: 'checkbox' + this.cid,
+              items: [{ text: '', value: true }]
+            }
+          },
+          change: function (path) {
+            if (path === 'checked') {
+              if (BbaseEst.isEmpty(this._get('checked'))) {
+                this._set('checked', false);
+              }
+              if (!this._super('view').stopItemCheck) {
+                this._check(this._get('checked'));
+              }
+            }
+          }
         }),
         pagination: true,
+        checkAppend: true,
         pageSize: 10,
         diff: true,
         items: items,
@@ -79,12 +103,11 @@ define('DemoTableDynamic', [], function (require, exports, module) {
     },
     initData: function () {
       return {
-        page: 1,
+         page: 1,
         pageSize: 10,
         totalPage: 0,
         totalCount: 0,
-        checkAll: '00',
-        allItems: [{ text: '全选', value: '01' }]
+        allItems: [{ text: '全选', value: true }]
       }
     },
     afterLoad: function () {
@@ -136,9 +159,16 @@ define('DemoTableDynamic', [], function (require, exports, module) {
 
     // 全选
     handleAllChange: function () {
-      this.collection.each(this._bind(function (model) {
-        model._set('cur', this._get('checkAll'));
-      }));
+      var _this = this;
+      _this.stopItemCheck = true;
+      _this.collection.each(function (model) {
+        model._set('checked', _this._get('checked_all'));
+        model.view._itemActive({add: true}, _this._get('checked_all'));
+      });
+      setTimeout(function () {
+        _this.stopItemCheck = false;
+      }, 50);
+
     },
 
     // 分页

@@ -3,7 +3,7 @@
  * @class BbaseService - 数据请求
  * @author yongjin<zjut_wyj@163.com> 2015/1/26
  */
-
+(function(BbaseBackbone, BbaseEst, BbaseApp, BbaseUtils, undefined){
 var BbaseService = function() {
   if (typeof BbaseService.instance === 'object') {
     return BbaseService.instance;
@@ -31,7 +31,6 @@ BbaseService.prototype = {
     return $.ajax({
       type: 'post',
       url: options.url,
-      async: false,
       cache: options.cache,
       data: data,
       success: function(result) {}
@@ -183,7 +182,7 @@ BbaseService.prototype = {
       result = BbaseApp.getSession(cacheId);
       if (result) {
         return new $q(function(topResolve, topReject) {
-          topResolve(JSON.parse(result));
+          topResolve(result);
         });
       }
     }
@@ -269,7 +268,7 @@ BbaseService.prototype = {
       result = BbaseApp.getSession(cacheId);
       if (result) {
         return new $q(function(topResolve, topReject) {
-          topResolve(JSON.parse(result));
+          topResolve(result);
         });
       }
     }
@@ -290,3 +289,6 @@ BbaseService.prototype = {
     });
   }
 }
+window.BbaseService = BbaseService;
+})(window.BbaseBackbone, window.BbaseEst, window.BbaseApp, window.BbaseUtils);
+
