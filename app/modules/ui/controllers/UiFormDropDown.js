@@ -50,7 +50,7 @@ define('UiFormDropDown', [], function (require, exports, module) {
         <div class="anything">
           <div class="header">
             <div class="formIdArea">
-              <span class="name">指令用法：bbaseuidropdownwix="{viewId:'bbaseuidropdownwix',moduleId: 'DemoListTodo'}"</span>
+              <span class="name">指令用法：bbaseuidropdownwix="{viewId:'bbaseuidropdownwix',moduleId: 'DemoListTodo',mouseHover: true}"</span>
             </div>
           </div>
           <div class="main clearfix">

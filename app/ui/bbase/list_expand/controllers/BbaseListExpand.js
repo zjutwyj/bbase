@@ -93,7 +93,7 @@ define('BbaseListExpand', [], function (require, exports, module) {
       if (this._options.onChange) {
         var init = this.initView;
         this.initView = false;
-        this._options.onChange.call(this, curModel, init);
+        curModel && this._options.onChange.call(this, curModel, init);
       }
     },
     setValue: function (value) {

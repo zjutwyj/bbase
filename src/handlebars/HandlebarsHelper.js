@@ -319,10 +319,12 @@ BbaseHandlebars.registerHelper('PIC', function (name, number, options) {
     }
   }
   if (!name || !/[^\s]+\.(?:jpe?g|gif|png|bmp)/i.test(name)) return def.indexOf('http://') > -1 ? def : CONST.DOMAIN + def + version;
-  if (name.indexOf('upaiyun.com') === -1 && BbaseEst.startsWidth(name, 'http') && name.indexOf('upload') > -1) {
+
+  var ignoreDomain = name.indexOf('upaiyun.com') === -1 && name.indexOf('leminchou.com') === -1; // 忽略的域名
+  if (ignoreDomain && BbaseEst.startsWidth(name, 'http') && name.indexOf('upload') > -1) {
     name = name.substring(name.indexOf('upload'), name.length);
   }
-  if (name.indexOf('upaiyun.com') === -1 && BbaseEst.startsWidth(name, 'upload') || options.hash.upload) {
+  if (ignoreDomain && BbaseEst.startsWidth(name, 'upload') || options.hash.upload) {
     return arguments.length < 3 ? domain + (BbaseEst.startsWidth(name, '/') ? '' : '/') + name + version :
       BbaseHandlebars.helpers['_picUrl'].apply(_this, [name, number, options]) + version;
   }

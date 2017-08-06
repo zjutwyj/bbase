@@ -69,7 +69,7 @@
               BbaseApp.getView(_this.viewId)[type].timer = setTimeout(_this._bind(function () {
                 BbaseApp.getView(_this.viewId)[type].apply(BbaseApp.getView(_this.viewId), _arguments.splice(1, _arguments.length - 1));
                 BbaseApp.getView(_this.viewId)[type].timer = null;
-              }), 20);
+              }), 10);
             }
         }
       }
@@ -1412,7 +1412,7 @@
             _this.change.timer = setTimeout(_this._bind(function () {
               _this.change.call(_this, item, _this.viewType);
               _this.change.timer = null;
-            }), 20);
+            }), 10);
           }
         })
       }
@@ -1858,8 +1858,15 @@
       }, function () {
         var _this = this;
         try {
-          BbaseApp.getDialog($(_this).attr('data-hash')).close();
-        } catch (e) {}
+          if ($(_this).attr('data-hash')){
+              BbaseApp.getDialog($(_this).attr('data-hash')).close();
+          }
+        } catch (e) {
+          debugger
+          BbaseEst.each(BbaseApp.getData('toolTipList'), function (item) {
+            if (BbaseApp.getDialog(item)) BbaseApp.getDialog(item).close();
+          });
+        }
       });
     }
   });

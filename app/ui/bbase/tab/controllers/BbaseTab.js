@@ -48,8 +48,8 @@ define('BbaseTab', [], function (require, exports, module) {
     },
     showCurModule: function (modId, nodeId, lazy) {
       if (BbaseApp.getView(this._options.viewId)) {
-        this._super('view').showModule(modId, nodeId, this.model.get('dx'), this.model.get('viewId'));
         if (this._super('view').getType() === 'tab-ul-line') this.setSliderBar(lazy);
+        this._super('view').showModule(modId, nodeId, this.model.get('dx'), this.model.get('viewId'));
       }
     },
     setSliderBar: function (lazy) {
