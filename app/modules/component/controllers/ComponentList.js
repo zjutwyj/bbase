@@ -21,9 +21,10 @@ define('ComponentList', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        cur: 'ComponentListPick',
+        cur: 'ComponentNavigatorPanel',
         items: [
-          { text: '部件选择(弹)', moduleId: 'ComponentListPick' ,oneRender: false}
+          { text: '部件选择(弹)', moduleId: 'ComponentListPick' ,oneRender: false},
+          { text: '导航列表', moduleId: 'ComponentNavigatorPanel' ,oneRender: false}
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

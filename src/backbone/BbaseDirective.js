@@ -52,6 +52,7 @@ BbaseApp.addDirective('src', {
   },
 
   update: function (name, node, selector, result) {
+    node.attr('src', '');
     node.attr('src', result);
   }
 });

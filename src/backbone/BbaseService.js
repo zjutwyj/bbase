@@ -28,8 +28,11 @@ BbaseService.prototype = {
    */
   ajax: function(options) {
     var data = BbaseEst.extend({ _method: 'GET' }, options);
+    if (options.data){
+      data = options.data;
+    }
     return $.ajax({
-      type: 'post',
+      type: options.type || 'post',
       url: options.url,
       cache: options.cache,
       data: data,

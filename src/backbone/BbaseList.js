@@ -417,6 +417,9 @@
         if (!ctx._ready_component_) {
           ctx._finally();
         }
+        if (ctx.viewUpdate){
+          ctx.viewUpdate.call(ctx);
+        }
       }
     },
     /**
@@ -669,6 +672,8 @@
           roots.push(thisModel);
         }
       });
+      // 清空原先生成的dom元素
+      ctx.list.empty();
       BbaseEst.each(roots, function (model) {
         model.set('isroot', '01');
         if (!ctx._options.diff) {

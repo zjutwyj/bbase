@@ -13,7 +13,7 @@
 <p>第二步：将视图添加到DOM中</p>
 <pre><code class="lang-js">BbaseApp.addRegion(&#39;FlyHeader&#39;, FlyHeader, {
    el: &#39;#leaflet-main&#39;,
-   viewId: &#39;FlyHeader&#39; // 选填
+   viewId: &#39;FlyHeader&#39; // 选填 注：如果加个viewId, 获取视图不能用this._region或this._view  只能用BbaseApp.getView(&#39;FlyHeader&#39;)
 });
 
 // 组件中可使用
@@ -23,7 +23,7 @@ this._region(&#39;FlyHeader&#39;, FlyHeader, {
 });
 
 // 引用
-BbaseApp.getView(&#39;FlyHeader&#39;) 或 this._view(&#39;FlyHeader&#39;)
+BbaseApp.getView(&#39;FlyHeader&#39;) 或未加viewId时this._view(&#39;FlyHeader&#39;)
 </code></pre>
 <h3 id="-">最简视图类型(必填项)</h3>
 <pre><code class="lang-js">// 普通视图

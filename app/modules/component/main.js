@@ -30,3 +30,8 @@ Bbase.MODULE['ComponentProductPick'] = 'modules/component/controllers/ComponentP
 
 Bbase.MODULE['ComponentList'] = 'modules/component/controllers/ComponentList.js';
 Bbase.MODULE['ComponentListPick'] = 'modules/component/controllers/ComponentListPick.js';
+Bbase.MODULE['ComponentNavigatorPanel'] = 'modules/component/controllers/ComponentNavigatorPanel.js';
+
+
+Bbase.MODULE['ComponentShape'] = 'modules/component/controllers/ComponentShape.js';
+Bbase.MODULE['ComponentShapePick'] = 'modules/component/controllers/ComponentShapePick.js';

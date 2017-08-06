@@ -18,7 +18,7 @@ var FlyHeader = BbaseView.extend({
 ```js
 BbaseApp.addRegion('FlyHeader', FlyHeader, {
    el: '#leaflet-main',
-   viewId: 'FlyHeader' // 选填
+   viewId: 'FlyHeader' // 选填 注：如果加个viewId, 获取视图不能用this._region或this._view  只能用BbaseApp.getView('FlyHeader')
 });
 
 // 组件中可使用
@@ -28,7 +28,7 @@ this._region('FlyHeader', FlyHeader, {
 });
 
 // 引用
-BbaseApp.getView('FlyHeader') 或 this._view('FlyHeader')
+BbaseApp.getView('FlyHeader') 或未加viewId时this._view('FlyHeader')
 ```
 
 ### 最简视图类型(必填项)

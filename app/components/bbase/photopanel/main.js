@@ -7,7 +7,7 @@ Bbase.DIRECTIVE['bbasecomponentphotopanel'] = {
     this._require(['BbasePhotoPanel'], function (BbasePhotoPanel) {
       this._region(viewId, BbasePhotoPanel, {
         el: this.$(selector),
-        cur: this._get(object.cur) || object.default || object.cur,
+        cur: this._get(object.cur) || object.default || '',
         listApi: object.listApi,
         items: object.items,
         width: object.width,

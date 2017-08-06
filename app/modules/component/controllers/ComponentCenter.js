@@ -28,7 +28,8 @@ define('ComponentCenter', [], function(require, exports, module){
           { text: '音乐', moduleId: 'ComponentMusic' ,oneRender: false},
           { text: '图标', moduleId: 'ComponentIcon' ,oneRender: false},
           { text: '产品', moduleId: 'ComponentProduct' ,oneRender: false},
-          { text: '列表', moduleId: 'ComponentList' ,oneRender: false}
+          { text: '列表', moduleId: 'ComponentList' ,oneRender: false},
+          { text: '形状', moduleId: 'ComponentShape' ,oneRender: false}
         ],
         tpl:  `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabPlus dataTab{{moduleId}} tabImgComm"></div><span>{{text}}</span></a>
