@@ -1,0 +1,151 @@
+.bbase-component-albumpick{
+ body,
+  button,
+  input,
+  select,
+  textarea {
+    font-size: 12px;
+  }
+  .materialLeftPanel {
+    width: 138px;
+    height: 542px;
+    display: table-cell;
+    background: #f4f5f9;
+    vertical-align: top;
+    padding: 0;
+    float: left;
+  }
+  .materialLeftPanel li {
+    height: 54px;
+    line-height: 54px;
+    list-style: none;
+    text-align: center;
+    outline: 0;
+  }
+  .materialLeftPanel li.ui-state-active {
+    background: #fff;
+  }
+  .uploadPhoto {
+    width: 138px;
+    position: absolute;
+    color: #fff;
+    background: $mainColor;
+    bottom: 0;
+    font-size: 16px;
+  }
+  .uploadPhoto:hover {
+    background: lighten($mainColor, 10%);
+  }
+  .materialLeftPanel li {
+    height: 54px;
+    line-height: 54px;
+    list-style: none;
+    text-align: center;
+    outline: 0;
+  }
+  .uploadify-button {
+    position: absolute;
+    bottom: 0;
+  }
+  .materialLeftPanel a {
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    outline: 0;
+    display: block;
+  }
+  .materialLeftPanel a:link,
+  .materialLeftPanel a:visited,
+  .materialLeftPanel a:hover,
+  .materialLeftPanel a:active {
+    text-decoration: none;
+  }
+  .closeBtn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 20px;
+    height: 18px;
+    color: #BEBEBE;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 2px;
+    font-weight: normal;
+    z-index: 1;
+    cursor: pointer;
+    -moz-transition: all .15s;
+    -webkit-transition: all .15s;
+    -o-transition: all .15s;
+    transition: all .15s;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    line-height: 1;
+  }
+  .closeBtn:hover {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  #photo-main {
+    float: left;
+    padding-left: 24px;
+    width: 695px;
+  }
+  .photo-tool {
+    width: 100%;
+    height: 34px;
+    line-height: 34px;
+    padding-top: 20px;
+    padding-left: 7px;
+  }
+  .photo-list li {
+    float: left;
+    width: 134px;
+    list-style: none;
+  }
+  #photo-pagination {
+    position: absolute;
+    bottom: 12px;
+    left: 170px;
+  }
+  #photo-pagination .page-per-page {
+    display: none;
+  }
+  #photo-btns {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+  }
+  #photo-btns .cancel,
+  #photo-btns .submit {
+    width: 70px;
+    height: 36px;
+  }
+  #photo-btns .cancel {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  #photo-btns .submit {
+    border: none;
+    background: $mainColor;
+    color: #fff;
+    cursor: pointer;
+  }
+  #photo-btns .submit:hover {
+    background-color: lighten($mainColor, 10%);
+  }
+.mod-album {
+    padding: 6px;
+    border-width: 0;
+    border-bottom-width: 1px\9;
+    box-shadow: 0 1px 4px rgba(0,0,0,.15);
+}
+
+}

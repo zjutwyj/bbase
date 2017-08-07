@@ -66,7 +66,7 @@ define('ThemeTable01', [], function (require, exports, module) {
                   <div class="header">
                     <div class="formIdArea">
                       <span class="checkboxAll" bb-bbaseuicheckbox="{viewId: 'checkAll', cur: checked_all,items: allItems}" bb-click="handleAllChange"></span>
-                      <span class="name">我的表单1488173365180</span>
+                      <span class="name tool-tip" data-title="我的表单1488173365180">我的表单1488173365180</span>
                     </div>
                     <div class="excelBtn">
                       <span class="formExcelClick">导出为EXCEL</span>
@@ -106,7 +106,7 @@ define('ThemeTable01', [], function (require, exports, module) {
           tagName: 'tr',
           template: `
           <td class="td-checkbox" width="22" bb-bbaseuicheckbox="{viewId: viewId,cur: checked, items: items}"></td>
-          <td><span bb-watch="name:html">{{name}}</span></td>
+          <td><span bb-watch="name:html" class="tool-tip" data-title="{{name}}">{{name}}</span></td>
           <td><span bb-watch="cellphone:html">{{cellphone}}</span></td>
           <td><span bb-watch="email:html">{{email}}</span></td>
           `,
@@ -130,6 +130,7 @@ define('ThemeTable01', [], function (require, exports, module) {
         items: items,
         checkAppend: true,
         pagination: true,
+        toolTip:true,
         pageSize: 10,
         diff: true,
         render: '.uilist01-tbody'

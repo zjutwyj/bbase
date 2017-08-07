@@ -1812,6 +1812,10 @@
       var _className = className || '.tool-tip';
       var $tip = $parent ? $(_className, $parent) : this.$(_className);
 
+      if (this._options.render){
+        $tip = $tip.not(this._options.render + ' .tool-tip');
+      }
+
       $tip.hover(function (e) {
         var _this = this;
         var hash = $(_this).attr('data-hash');
@@ -1832,6 +1836,13 @@
           BbaseApp.getDialog(hash) && BbaseApp.getDialog(hash).show();
           return;
         }
+        BbaseApp.getData('toolTipList').push(hash);
+        $(window).one('click', function () {
+          BbaseEst.each(BbaseApp.getData('toolTipList'), function (item) {
+            if (BbaseApp.getDialog(item)) BbaseApp.getDialog(item).close();
+          });
+          BbaseApp.addData('toolTipList', []);
+        });
 
         BbaseUtils.dialog({
           dialogId: hash,
@@ -1846,15 +1857,6 @@
           target: $(_this).get(0)
         });
 
-        BbaseApp.getData('toolTipList').push(hash);
-
-        $(window).one('click', function () {
-          BbaseEst.each(BbaseApp.getData('toolTipList'), function (item) {
-            if (BbaseApp.getDialog(item)) BbaseApp.getDialog(item).close();
-          });
-          BbaseApp.addData('toolTipList', []);
-        });
-
       }, function () {
         var _this = this;
         try {
@@ -1866,6 +1868,7 @@
           BbaseEst.each(BbaseApp.getData('toolTipList'), function (item) {
             if (BbaseApp.getDialog(item)) BbaseApp.getDialog(item).close();
           });
+          BbaseApp.emptyDialog();
         }
       });
     }

@@ -21,7 +21,7 @@ define('ComponentCenter', [], function(require, exports, module){
     },
     init: function () {
       return {
-        cur: 'ComponentList',
+        cur: 'ComponentAlbum',
         items: [
           { text: '图片', moduleId: 'ComponentPhoto' ,oneRender: false},
           { text: '颜色', moduleId: 'ComponentColor' ,oneRender: false},
@@ -29,7 +29,8 @@ define('ComponentCenter', [], function(require, exports, module){
           { text: '图标', moduleId: 'ComponentIcon' ,oneRender: false},
           { text: '产品', moduleId: 'ComponentProduct' ,oneRender: false},
           { text: '列表', moduleId: 'ComponentList' ,oneRender: false},
-          { text: '形状', moduleId: 'ComponentShape' ,oneRender: false}
+          { text: '形状', moduleId: 'ComponentShape' ,oneRender: false},
+          { text: '相册', moduleId: 'ComponentAlbum' ,oneRender: false}
         ],
         tpl:  `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabPlus dataTab{{moduleId}} tabImgComm"></div><span>{{text}}</span></a>

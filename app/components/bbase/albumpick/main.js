@@ -1,14 +1,14 @@
-Bbase.MODULE['BbasePhotoPick'] = 'components/bbase/photopick/controllers/BbasePhotoPick.js';
-Bbase.DIRECTIVE['bbasecomponentphotopick'] = {
+Bbase.MODULE['BbaseAlubmPick'] = 'components/bbase/albumpick/controllers/BbaseAlbumPick.js';
+Bbase.DIRECTIVE['bbasecomponentalbumpick'] = {
   bind: function (value, selector) {
     var object = this._getObject(value, 'cur');
-     var viewId = object.viewId || BbaseEst.nextUid('bbasecomponentphotopick');
+     var viewId = object.viewId || BbaseEst.nextUid('bbasecomponentalbumpick');
 
     this.$(selector).eq(0).click(this._bind(function (e) {
       e.stopImmediatePropagation();
       this._dialog({
         viewId: viewId,
-        moduleId: 'BbasePhotoPick',
+        moduleId: 'BbaseAlubmPick',
         width: object.width || 876,
         cover: true,
         height: object.height || 542,

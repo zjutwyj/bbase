@@ -23,6 +23,7 @@ var CONST = {
   LIGHTEST_COLOR: '#f7f9fd',
   SEP: '/', // 地址分隔符
   PIC_NONE: '/manage/images/nopic.jpg?v=001', // 无图片时的替换图片
+  PIC_LOADING:'/manage/images/nopic.jpg',
   BG_NONE: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==', // 空白背景图片
   DELIVERY_URL: 'http://api.ickd.cn/?id=108377&secret=1d323e291b7778da812664d0386f7b11&type=json&ord=desc&encode=utf8&ver=2', // 物流查询地址
   ENTER_KEY: 13, // 回车键值

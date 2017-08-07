@@ -4,7 +4,7 @@
  * @author yongjin<zjut_wyj@163.com> 2014/12/8
  */
 
-(function (BbaseBackbone, BbaseEst, BbaseApp, BbaseUtils, BbaseHandlebars, BbaseSuperView, BbaseModel, undefined) {
+(function(BbaseBackbone, BbaseEst, BbaseApp, BbaseUtils, BbaseHandlebars, BbaseSuperView, BbaseModel, undefined) {
   var BbaseList = BbaseSuperView.extend({
     /**
      * 传递options进来
@@ -76,7 +76,7 @@
          *        extend: true // false收缩 true为展开
          *       });
      */
-    _initialize: function (options) {
+    _initialize: function(options) {
       var _this = this;
       _this.dx = 0;
       _this.views = [];
@@ -91,7 +91,7 @@
      * @param options [beforeLoad: 加载数据前执行] [item: 集合单个视图] [model: 模型类]
      * @author wyj 14.11.16
      */
-    _initOpt: function (collection, options) {
+    _initOpt: function(collection, options) {
       var _this = this;
       _this._initOptions(options);
       _this._initDataModel(BbaseModel.extend({}));
@@ -113,7 +113,7 @@
      * @private
      * @author wyj 15.1.12
      */
-    _initOptions: function (options) {
+    _initOptions: function(options) {
       var _this = this;
       _this._options = BbaseEst.extend(_this.options, options || {});
       _this._options.sortField = 'sort';
@@ -130,7 +130,7 @@
      * @param model
      * @author wyj 14.11.20
      */
-    _initDataModel: function (model) {
+    _initDataModel: function(model) {
       var _this = this;
       if (_this._options.data) {
         _this._options.data.CONST = CONST;
@@ -146,7 +146,7 @@
      * @private
      * @author wyj 15.1.12
      */
-    _initTemplate: function (options) {
+    _initTemplate: function(options) {
       var _this = this;
       _this._data = options.data = options.data || {};
       if (options.template) {
@@ -198,9 +198,9 @@
      * @private
      * @author wyj 14.12.10
      */
-    _initEnterEvent: function (options, ctx) {
+    _initEnterEvent: function(options, ctx) {
       if (options.enterRender) {
-        ctx.$('input').keyup(function (e) {
+        ctx.$('input').keyup(function(e) {
           if (e.keyCode === CONST.ENTER_KEY) {
             ctx.$(options.enterRender).click();
           }
@@ -214,7 +214,7 @@
      * @private
      * @author wyj 15.1.12
      */
-    _initList: function (options) {
+    _initList: function(options) {
       var _this = this;
       _this.list = options.render ? _this.$(options.render) : _this.$el;
       if (_this.list.size() === 0)
@@ -227,7 +227,7 @@
      * @param collection
      * @private
      */
-    _initCollection: function (options, collection) {
+    _initCollection: function(options, collection) {
       var _this = this;
       if (!collection.prototype.hasOwnProperty('model')) { collection.prototype.model = _this._options.model };
       if (!_this.collection || (_this.collection && !_this.collection.remove))
@@ -244,7 +244,7 @@
      * @param itemView
      * @author wyj 14.11.16
      */
-    _initItemView: function (itemView) {
+    _initItemView: function(itemView) {
       this.item = itemView;
     },
     /**
@@ -255,7 +255,7 @@
      * @param model
      * @author wyj 14.11.20
      */
-    _initModel: function (model) {
+    _initModel: function(model) {
       this.initModel = model;
     },
     /**
@@ -264,7 +264,7 @@
      * @private
      * @author wyj 14.11.16
      */
-    _initBind: function (collection) {
+    _initBind: function(collection) {
       var _this = this;
       if (collection) {
         collection.bind('add', _this._addOne, _this);
@@ -282,12 +282,12 @@
      * @private
      * @author wyj 14.11.17
      */
-    _initPagination: function (options) {
+    _initPagination: function(options) {
       var ctx = this;
       if (ctx.collection && ctx.collection.paginationModel) {
         // 单一观察者模式， 监听reloadList事件
         ctx.collection.paginationModel.on('reloadList',
-          function (model) {
+          function(model) {
             ctx._set('checked_all', false);
             if (!ctx._options.diff) ctx._clear.call(ctx);
             ctx._load.call(ctx, options, model);
@@ -316,7 +316,7 @@
      *          ctx.after();
      *        });
      */
-    _load: function (options, model) {
+    _load: function(options, model) {
       var ctx = this;
       options = options || ctx._options || {};
       ctx._beforeLoad(options);
@@ -333,6 +333,7 @@
         //TODO 移除BbaseList默认的page 与pageSize使每页显示条数生效
         options.page = options.pageSize = null;
       }
+      if (!ctx._options.diff) { ctx.list.hide(); }
       //TODO 若存在items且有page与pageSize  处理静态分页
       if (ctx._options.items) {
         if (!ctx._options.diff && !ctx._options.append) ctx._empty();
@@ -359,7 +360,7 @@
         // 数据载入
         BbaseUtils.addLoading()
         ctx.collection._load(ctx.collection, ctx, model || ctx.collection.paginationModel).
-        done(function (result) {
+        done(function(result) {
           if (result && result.msg && result.msg === CONST.LANG.AUTH_FAILED) {
             BbaseUtils.tip(CONST.LANG.AUTH_LIMIT + '！', {
               time: 2000
@@ -402,7 +403,7 @@
           }
           // 视图更新
           if (ctx._ready_component_ && !ctx._options.diff) {
-            if (ctx.viewUpdate) setTimeout(ctx._bind(function () {
+            if (ctx.viewUpdate) setTimeout(ctx._bind(function() {
               ctx.viewUpdate.call(ctx, ctx._options)
             }), 0);
           }
@@ -417,7 +418,7 @@
         if (!ctx._ready_component_) {
           ctx._finally();
         }
-        if (ctx.viewUpdate){
+        if (ctx.viewUpdate) {
           ctx.viewUpdate.call(ctx);
         }
       }
@@ -428,13 +429,13 @@
      * @method [private] - _finally
      * @private
      */
-    _finally: function () {
+    _finally: function() {
       var _this = this;
-      if (_this.afterRender) setTimeout(function () { _this.afterRender.call(_this, _this._options); }, 0)
+      if (_this.afterRender) setTimeout(function() { _this.afterRender.call(_this, _this._options); }, 0)
       if (_this._options.onReady) _this._options.onReady.call(_this, _this._options);
       if (_this._options.toolTip) _this._initToolTip();
       _this._ready_component_ = true;
-      setTimeout(function () {
+      setTimeout(function() {
         _this.$el.show();
         _this._handleDirectiveShow();
         if (_this._options.afterShow) _this._options.afterShow.call(_this);
@@ -442,19 +443,19 @@
         if (_this.afterShow) _this.afterShow.call(_this);
       }, 80)
     },
-    _resetModels: function () {
+    _resetModels: function() {
       var _this = this;
       _this._set('models', _this.collection.models);
       if (_this.cms) {
         BbaseEst.off(_this.cid + 'models', _this.cms);
       }
-      _this.cms = BbaseEst.on(_this.cid + 'models', _this._bind(function () {
+      _this.cms = BbaseEst.on(_this.cid + 'models', _this._bind(function() {
         //debug('reset model models');
         _this._set('models', _this.collection.models);
       }));
       BbaseUtils.removeLoading();
     },
-    _filter: function () {
+    _filter: function() {
       var _this = this;
       if (_this.filter) {
         _this._appendAble_ = true;
@@ -463,7 +464,7 @@
         _this._appendAble_ = false;
       }
     },
-    _handleListNode: function () {
+    _handleListNode: function() {
       var _this = this;
       _this._set('result_none', true);
       _this._options.append ? _this.list.append('<div class="no-result">' + CONST.LANG.LOAD_ALL + '</div>') :
@@ -472,7 +473,7 @@
         _this.trigger('resultListNone' + _this._options.viewId, {});
       }
     },
-    _removeNoResult: function () {
+    _removeNoResult: function() {
       this.list.find('.no-result').remove();
     },
     /**
@@ -483,7 +484,7 @@
      * @example
      *        this._reload();
      */
-    _reload: function (options) {
+    _reload: function(options) {
       var _this = this;
       if (!_this._options.diff) {
         _this._empty.call(_this); // 清空视图
@@ -500,7 +501,7 @@
      * @param options
      * @private
      */
-    _beforeLoad: function (options) {
+    _beforeLoad: function(options) {
       var _this = this;
       if (_this.beforeLoad)
         _this.beforeLoad.call(_this, _this.collection);
@@ -511,8 +512,9 @@
      * @method [private] - _afterLoad
      * @private
      */
-    _afterLoad: function (response) {
+    _afterLoad: function(response) {
       var _this = this;
+      _this.list.show();
       if (_this.afterLoad)
         _this.afterLoad.call(_this, response);
     },
@@ -523,7 +525,7 @@
      * @private
      * @author wyj 15.1.8
      */
-    _initItems: function () {
+    _initItems: function() {
       var _this = this;
       if (BbaseEst.typeOf(_this._options.items) === 'function') {
         _this._options.items = _this._options.items.apply(_this, arguments);
@@ -536,7 +538,7 @@
       if (_this._options._page || _this._options._pageSize) {
         _this._renderListByPagination();
       } else {
-        BbaseEst.each(_this._options.items, function (item) {
+        BbaseEst.each(_this._options.items, function(item) {
           if (_this._checkStop()) return false;
           _this.collection.push(new this.initModel(item));
         }, _this);
@@ -554,7 +556,7 @@
      * @private
      * @author wyj 15.2.14
      */
-    _setTemplate: function (compile) {
+    _setTemplate: function(compile) {
       this.compileTemp = compile;
     },
     /**
@@ -564,7 +566,7 @@
      * @private
      * @author wyj 15.2.14
      */
-    _getTemplate: function () {
+    _getTemplate: function() {
       return this.compileTemp;
     },
     /**
@@ -575,7 +577,7 @@
      * @example
      *        this._stop();
      */
-    _stop: function () {
+    _stop: function() {
       this.stopIterator = true;
     },
     /**
@@ -586,7 +588,7 @@
      * @return {boolean}
      * @author wyj 15.1.27
      */
-    _checkStop: function () {
+    _checkStop: function() {
       var _this = this;
       if (_this.stopIterator) {
         _this.stopIterator = false;
@@ -602,7 +604,7 @@
      * @example
      *
      */
-    _render: function () {
+    _render: function() {
       var _this = this;
       _this._addAll();
       _this.trigger('after', _this);
@@ -614,7 +616,7 @@
      * @private
      * @author wyj 14.12.9
      */
-    _filterRoot: function () {
+    _filterRoot: function() {
       var ctx = this;
       var temp = [];
       var roots = [];
@@ -623,13 +625,13 @@
        return model.get('sort');
        }
        ctx.collection.sort();*/
-      BbaseEst.each(ctx.collection.models, function (item) {
+      BbaseEst.each(ctx.collection.models, function(item) {
         temp.push({
           categoryId: item.attributes[ctx._options.categoryId],
           belongId: item.attributes[ctx._options.parentId]
         });
       });
-      ctx.collection.each(function (thisModel) {
+      ctx.collection.each(function(thisModel) {
         var i = temp.length,
           _children = [];
         while (i > 0) {
@@ -646,7 +648,7 @@
 
         if (BbaseEst.typeOf(ctx._options.rootValue) === 'array') {
           //TODO 如果存入的rootValue为数组
-          BbaseEst.each(ctx._options.rootValue, function (item) {
+          BbaseEst.each(ctx._options.rootValue, function(item) {
             if (BbaseEst.typeOf(item) === 'function') {
               // 判断是否是方法， 如果返回true则添加到roots中
               if (item.call(ctx, item)) {
@@ -674,7 +676,7 @@
       });
       // 清空原先生成的dom元素
       ctx.list.empty();
-      BbaseEst.each(roots, function (model) {
+      BbaseEst.each(roots, function(model) {
         model.set('isroot', '01');
         if (!ctx._options.diff) {
           ctx._addOne(model);
@@ -684,7 +686,7 @@
         ctx._setModels(roots);
       }
     },
-    _remove: function (start, end) {
+    _remove: function(start, end) {
       var _this = this;
       var end = typeof end === 'undefined' ? (start + 1) : end;
       if (end > _this.collection.models.length) {
@@ -696,18 +698,19 @@
         end--;
       }
     },
-    _setModels: function (list) {
+    _setModels: function(list) {
       var _this = this;
       var len_c = _this.collection.models.length;
       var len_l = _this._options.max < 99999 ? _this._options.max > list.length ? list.length : _this._options.max : list.length;
       var dx = (_this._getPageSize() || 16) *
         ((_this._getPage() - 1) || 0);
       if (len_l > 0 && list[0].view) {
-        list = BbaseEst.map(list, function (model) {
+        list = BbaseEst.map(list, function(model) {
           return model.attributes;
         });
       }
-      _this.collection.each(_this._bind(function (model, i) {
+      _this.list.hide();
+      _this.collection.each(_this._bind(function(model, i) {
         if (i > len_l - 1) {} else {
           if (list[i]) {
             list[i]['dx'] = dx;
@@ -726,7 +729,9 @@
       } else if (len_l < len_c) {
         _this._remove(len_l, len_c);
       }
-      if (_this.viewUpdate) setTimeout(_this._bind(function () {
+      _this.list.show();
+
+      if (_this.viewUpdate) setTimeout(_this._bind(function() {
         _this.viewUpdate.call(_this, _this._options)
       }), 0);
     },
@@ -738,7 +743,7 @@
      * @param model
      * @author wyj 14.11.16
      */
-    _addOne: function (model, arg1, arg2) {
+    _addOne: function(model, arg1, arg2) {
       var ctx = this;
       if (!ctx.composite && ctx.dx < ctx._options.max) {
         model.set({
@@ -797,7 +802,7 @@
      *        this._push(new model(), 0); // 表示在第一个元素后面添加新元素
      *        this._push(new pictureModel(model), this._findIndex(curModel) + 1);
      */
-    _push: function (model, index) {
+    _push: function(model, index) {
       var _this = this;
       // 判断第二个参数是否是数字， 否-> 取当前列表的最后一个元素的索引值
       // 判断index是否大于列表长度
@@ -810,7 +815,7 @@
       };
       if (!model.cid) model = new this.initModel(model);
       if (_this._options.items) {
-        obj = BbaseEst.typeOf(model) === 'array' ? BbaseEst.pluck(model, function (item) {
+        obj = BbaseEst.typeOf(model) === 'array' ? BbaseEst.pluck(model, function(item) {
           return item.attributes;
         }) : model.attributes;
         if (!_this._options.diff) _this._options.items.splice(opts.at - 1, 0, obj);
@@ -837,7 +842,7 @@
      * @param  {number} index 索引值
      * @return {array}       [description]
      */
-    _eq: function (index) {
+    _eq: function(index) {
       return this.collection.models[index].view.$el;
     },
     /**
@@ -846,11 +851,11 @@
      * @private
      * @author wyj 15.9.3
      */
-    _resetDx: function () {
+    _resetDx: function() {
       var _this = this;
       var _dx = (_this._getPageSize() || 16) *
         ((_this._getPage() - 1) || 0);;
-      BbaseEst.each(_this.collection.models, function (item) {
+      BbaseEst.each(_this.collection.models, function(item) {
         item.view && item.view._set('dx', _dx);
         _dx++;
       });
@@ -865,7 +870,7 @@
      * @example
      *      this._findIndex(this.curModel); ==> 1
      */
-    _findIndex: function (model) {
+    _findIndex: function(model) {
       return BbaseEst.findIndex(this.collection.models, {
         cid: model.cid
       });
@@ -887,7 +892,7 @@
      * @private
      * @author wyj 15.1.8
      */
-    _renderListByPagination: function () {
+    _renderListByPagination: function() {
       var _this = this;
       _this.page = _this._getPage();
       _this.pageSize = _this._getPageSize();
@@ -908,7 +913,7 @@
         for (var i = _this.startIndex; i < _this.endIndex; i++) {
           _this.collection.push(_this._options.items[i]);
         }
-        if (_this.viewUpdate) setTimeout(_this._bind(function () {
+        if (_this.viewUpdate) setTimeout(_this._bind(function() {
           _this.viewUpdate.call(_this, _this._options)
         }), 0);
       }
@@ -929,7 +934,7 @@
      * @example
      *      this._empty();
      */
-    _empty: function () {
+    _empty: function() {
       var _this = this;
       _this.dx = 0;
       if (_this._options.append) {
@@ -950,7 +955,7 @@
           ((_this._getPage() - 1) || 0);
       }
       //遍历views数组，并对每个view调用BbaseBackbone的remove
-      BbaseEst.each(_this.views, function (view) {
+      BbaseEst.each(_this.views, function(view) {
         view.off().remove();
       });
       //清空views数组，此时旧的view就变成没有任何被引用的不可达对象了
@@ -970,7 +975,7 @@
      * @example
      *        this._clear();
      */
-    _clear: function () {
+    _clear: function() {
       var _this = this;
       _this._empty.call(_this);
       _this.list.empty();
@@ -983,7 +988,7 @@
      * @private
      * @author wyj 14.11.16
      */
-    _addAll: function () {
+    _addAll: function() {
       var _this = this;
       _this._empty();
       _this.collection.each(_this._addOne, _this);
@@ -1138,7 +1143,7 @@
      * @method [选取] - _checkAll ( 全选checkbox选择框 )
      * @author wyj 14.11.16
      */
-    _checkAll: function (e) {
+    _checkAll: function(e) {
       var checked,
         _self = this,
         $check = null;
@@ -1159,7 +1164,7 @@
         _self._setValue('checked_all', !_self._getValue('checked_all'));
       }
       checked = _self._getValue('checked_all');
-      _self.collection.each(function (model) {
+      _self.collection.each(function(model) {
         model._set('checked', checked);
         //if (!_self._options.diff) model.view.render();
       });
@@ -1171,7 +1176,7 @@
      * @param  {[type]} checked [description]
      * @return {[type]}         [description]
      */
-    _checkedAll: function (checked) {
+    _checkedAll: function(checked) {
       this._setValue('checked_all', checked);
     },
     /**
@@ -1181,7 +1186,7 @@
      * @param model
      * @author wyj 14.12.4
      */
-    _saveSort: function (model) {
+    _saveSort: function(model) {
       var _this = this;
       var sortOpt = {
         id: model.get('id')
@@ -1192,7 +1197,7 @@
         hideTip: true
       });
     },
-    _saveSorts: function (model, args) {
+    _saveSorts: function(model, args) {
       var sortOpt = {
         id: model.get('id')
       };
@@ -1212,16 +1217,16 @@
      * @example
      *    this._insertOrder(1, 6);
      */
-    _insertOrder: function (begin, end, callback) {
+    _insertOrder: function(begin, end, callback) {
       var _this = this;
       if (begin < end) {
         end++;
       }
       BbaseEst.arrayInsert(_this.collection.models, begin, end, {
-        arrayExchange: function (list, begin, end, opts) {
+        arrayExchange: function(list, begin, end, opts) {
           _this._exchangeOrder(begin, end, {
             path: _this._options.sortField || 'sort',
-            success: function (thisNode, nextNode) {
+            success: function(thisNode, nextNode) {
               if (thisNode.get('id') && nextNode.get('id')) {
                 //this._saveSort(thisNode);
                 //this._saveSort(nextNode);
@@ -1233,7 +1238,7 @@
             }
           });
         },
-        callback: function (list) {
+        callback: function(list) {
           if (callback) callback.call(_this, list);
         }
       });
@@ -1250,7 +1255,7 @@
      * @private
      * @author wyj 14.12.5
      */
-    _exchangeOrder: function (original_index, new_index, options) {
+    _exchangeOrder: function(original_index, new_index, options) {
       var _this = this;
       var tempObj = {},
         nextObj = {};
@@ -1307,20 +1312,20 @@
      *        sortField: 'orderList'
      *      })._moveUp(this.model);
      */
-    _moveUp: function (model) {
+    _moveUp: function(model) {
       var ctx = this;
       var first = ctx.collection.indexOf(model);
       var last, parentId;
       var result = [];
       if (ctx._options.subRender) {
         parentId = model.get(ctx._options.parentId);
-        ctx.collection.each(function (thisModel) {
+        ctx.collection.each(function(thisModel) {
           if (parentId === thisModel.get(ctx._options.parentId)) {
             result.push(thisModel);
           }
         });
         //TODO 找出下一个元素的索引值
-        var thisDx = BbaseEst.findIndex(result, function (item) {
+        var thisDx = BbaseEst.findIndex(result, function(item) {
           return item.get('id') === model.get('id');
         });
         if (thisDx === 0) return;
@@ -1332,7 +1337,7 @@
       //model.stopCollapse = true;
       ctx._exchangeOrder(first, last, {
         path: ctx._options.sortField || 'sort',
-        success: function (thisNode, nextNode) {
+        success: function(thisNode, nextNode) {
           if (thisNode.get('id') && nextNode.get('id')) {
             //this._saveSort(thisNode);
             //this._saveSort(nextNode);
@@ -1356,20 +1361,20 @@
      * @param model
      * @author wyj 14.12.4
      */
-    _moveDown: function (model) {
+    _moveDown: function(model) {
       var ctx = this;
       var first = ctx.collection.indexOf(model);
       var last, parentId;
       var result = [];
       if (ctx._options.subRender) {
         parentId = model.get(ctx._options.parentId);
-        ctx.collection.each(function (thisModel) {
+        ctx.collection.each(function(thisModel) {
           if (parentId === thisModel.get(ctx._options.parentId)) {
             result.push(thisModel);
           }
         });
         //TODO 找出上一个元素的索引值
-        var thisDx = BbaseEst.findIndex(result, function (item) {
+        var thisDx = BbaseEst.findIndex(result, function(item) {
           return item.get('id') === model.get('id');
         });
         if (thisDx === result.length - 1) return;
@@ -1381,7 +1386,7 @@
       //model.stopCollapse = true;
       ctx._exchangeOrder(first, last, {
         path: ctx._options.sortField,
-        success: function (thisNode, nextNode) {
+        success: function(thisNode, nextNode) {
           if (thisNode.get('id') && nextNode.get('id')) {
             //this._saveSort(thisNode);
             //this._saveSort(nextNode);
@@ -1407,10 +1412,10 @@
      * @example
      *      this._getCheckedIds(); => ['id1', 'id2', 'id3', ...]
      */
-    _getCheckedIds: function (field) {
+    _getCheckedIds: function(field) {
       return BbaseEst.pluck(this._getCheckedItems(), BbaseEst.isEmpty(field) ? 'id' : ('attributes.' + field));
     },
-    __filter: function (item) {
+    __filter: function(item) {
       return item.attributes.checked;
     },
     /**
@@ -1423,7 +1428,7 @@
      *      this._getCheckedItems(); => [{model}, {model}, {model}, ...]
      *      this._getCheckedItems(true); => [{item}, {item}, {item}, ...]
      */
-    _getCheckedItems: function (pluck) {
+    _getCheckedItems: function(pluck) {
       var _this = this;
       return pluck ? BbaseEst.chain(_this.collection.models).filter(_this.__filter).pluck('attributes').value() :
         BbaseEst.chain(_this.collection.models).filter(_this.__filter).value();
@@ -1436,8 +1441,8 @@
      * @example
      *      BbaseApp.getView('productList').getItems();
      */
-    _getItems: function (options) {
-      return BbaseEst.map(this.collection.models, function (model) {
+    _getItems: function(options) {
+      return BbaseEst.map(this.collection.models, function(model) {
         return model.toJSON(options);
       });
     },
@@ -1449,7 +1454,7 @@
      * @return {*}
      * @author wyj 15.5.22
      */
-    _getItem: function (index) {
+    _getItem: function(index) {
       var list = this._getItems();
       index = index || 0;
       if (list.length > index) return list[index];
@@ -1463,7 +1468,7 @@
      * @example
      *      BbaseApp.getView('productList')._add(new model());
      */
-    _add: function (model) {
+    _add: function(model) {
       this.collection.push(model);
     },
     /**
@@ -1479,7 +1484,7 @@
                 });
      *
      */
-    _batch: function (options) {
+    _batch: function(options) {
       var ctx = this;
       options = BbaseEst.extend({
         tip: CONST.LANG.SUCCESS + '！'
@@ -1497,7 +1502,7 @@
           data: {
             ids: ctx.checkboxIds.join(',')
           },
-          success: function (result) {
+          success: function(result) {
             if (!result.success) {
               BbaseUtils.tip(result.msg);
             } else
@@ -1509,7 +1514,7 @@
           }
         });
       } else {
-        BbaseEst.each(ctx._getCheckedItems(), function (item) {
+        BbaseEst.each(ctx._getCheckedItems(), function(item) {
           item.destroy();
         });
         BbaseEst.trigger(ctx.cid + 'models', null, true);
@@ -1530,7 +1535,7 @@
      *        field: 'id',
      *      });
      */
-    _batchDel: function (options, callback) {
+    _batchDel: function(options, callback) {
       var ctx = this;
       var url = null;
       var field = 'id';
@@ -1550,7 +1555,7 @@
         return;
       }
       BbaseUtils.confirm({
-        success: function () {
+        success: function() {
           ctx._batch({
             url: url,
             field: field,
@@ -1568,40 +1573,40 @@
      * @example
      *      this._clearChecked();
      */
-    _clearChecked: function (focus) {
-      BbaseEst.each(this.collection.models, function (model) {
+    _clearChecked: function(focus) {
+      BbaseEst.each(this.collection.models, function(model) {
         if ((!BbaseEst.equal(model._previousAttributes.checked, model.attributes.checked) || focus) && model.view) {
           model.attributes.checked = false;
           BbaseEst.trigger(model.view.cid + 'checked', 'checked', true);
         }
       });
     },
-    _getPage: function () {
+    _getPage: function() {
       return this.collection.paginationModel.get('page');
     },
-    _setPage: function (page) {
+    _setPage: function(page) {
       this.collection.paginationModel.set('page', page);
     },
-    _getTotalPage: function () {
+    _getTotalPage: function() {
       var _this = this;
       return _this._getCount() % _this._getPageSize() == 0 ? _this._getCount() / _this._getPageSize() : Math.floor(_this._getCount() / _this._getPageSize()) + 1;
     },
-    _getCount: function () {
+    _getCount: function() {
       return this.collection.paginationModel.get('count');
     },
-    _setCount: function (count) {
+    _setCount: function(count) {
       this.collection.paginationModel.set('count', count);
     },
-    _getPageSize: function () {
+    _getPageSize: function() {
       return this.collection.paginationModel.get('pageSize');
     },
-    _setPageSize: function (pageSize) {
+    _setPageSize: function(pageSize) {
       this.collection.paginationModel.set('pageSize', pageSize);
     },
-    _getLength: function () {
+    _getLength: function() {
       return this.collection.models.length;
     },
-    _loadMore: function () {
+    _loadMore: function() {
       var _this = this;
       _this._options.append = true;
       if (_this._getTotalPage() === 0 ||

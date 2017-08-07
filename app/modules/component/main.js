@@ -35,3 +35,6 @@ Bbase.MODULE['ComponentNavigatorPanel'] = 'modules/component/controllers/Compone
 
 Bbase.MODULE['ComponentShape'] = 'modules/component/controllers/ComponentShape.js';
 Bbase.MODULE['ComponentShapePick'] = 'modules/component/controllers/ComponentShapePick.js';
+
+Bbase.MODULE['ComponentAlbum'] = 'modules/component/controllers/ComponentAlbum.js';
+Bbase.MODULE['ComponentAlbumPick'] = 'modules/component/controllers/ComponentAlbumPick.js';
