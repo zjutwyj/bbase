@@ -11,16 +11,18 @@ Bbase.DIRECTIVE['bbasecomponentalbumpick'] = {
         moduleId: 'BbaseAlubmPick',
         width: object.width || 876,
         cover: true,
-        height: object.height || 542,
+        height: object.height || 585,
+        cur: this._get(object.cur),
         items: object.items,
         listApi: object.listApi,
         detailApi: object.detailApi,
-        uploadApi: object.uploadApi,
         size: object.size,
+        domain: object.domain,
         quickClose: true,
-        onChange: this._bind(function (result) {
-          this._set(object.cur, result[0].serverPath);
-          if (object.onChange) object.onChange.call(this, result);
+        manageHref: object.manageHref || 'http://www.jihui88.com/member/index.html#/album',
+        onChange: this._bind(function (result, init) {
+          this._set(object.cur, result.album_id);
+          if (object.onChange) object.onChange.call(this, result, init);
         })
       });
       return false;

@@ -38,3 +38,4 @@ Bbase.MODULE['ComponentShapePick'] = 'modules/component/controllers/ComponentSha
 
 Bbase.MODULE['ComponentAlbum'] = 'modules/component/controllers/ComponentAlbum.js';
 Bbase.MODULE['ComponentAlbumPick'] = 'modules/component/controllers/ComponentAlbumPick.js';
+Bbase.MODULE['ComponentAlbumPanel'] = 'modules/component/controllers/ComponentAlbumPanel.js';

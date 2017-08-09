@@ -9,25 +9,29 @@ define('BbaseAlubmPick', [], function(require, exports, module){
 
   BbaseAlubmPick = BbaseList.extend({
     initialize: function(){
+      var size = typeof this.options.size === 'undefined' ? 120 : this.options.size;
+      var domain = typeof this.options.domain === 'undefined' ? '' : ('domain="'+ this.options.domain+'"');
+      var height = typeof this.options.height === 'undefined' ? 582 : this.options.height;
       this._super({
         template: `
           <div class="BbaseAlubmPick-wrap bbase-component-albumpick">
             <div id="popupWindowClose_8484" class="closeBtn bbasefont bbase-x" bb-click="_close" style="top: 16px; right: 16px;"></div>
-            <ul class="materialLeftPanel ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+            <ul class="materialLeftPanel ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist" style="height:${height}px">
               <li id="materialCookie" class="ui-state-default ui-corner-top" style="display:none;">
                 <a id="material_select" href="javascript:;" class="ui-tabs-anchor">我的相册</a>
               </li>
               <li id="myPhotoCookie" class="ui-state-default ui-corner-top ui-tabs-active ui-state-active">
                 <a id="myPhoto_select" href="javascript:;" class="ui-tabs-anchor">我的相册</a>
               </li>
-              <li class="uploadPhoto">
-                <span id="uploadButton" class="uploadify" style="cursor: pointer;">管理相册
-                  <a id="file_upload_1-button" href="javascript:void(0)" class="uploadify-button"></a>
+              <li class="uploadPhoto" style="display:none;">
+                <span id="uploadButton" class="uploadify" style="cursor: pointer;">相册管理
+                  <a id="file_upload_1-button" target="_blank" href="{{manageHref}}" class="uploadify-button"></a>
                   </span>
               </li>
             </ul>
             <div id="photo-main">
               <div class="photo-tool">
+              <a href="{{manageHref}}" bb-click="_close" class="album-add" target="_blank">新增相册</a>
               </div>
               <ul class="photo-list js-album-list-ul">
               </ul>
@@ -50,20 +54,41 @@ define('BbaseAlubmPick', [], function(require, exports, module){
         }),
         item: BbaseItem.extend({
           tagName: 'li',
+          className: 'i-template',
           template: `
-             <div class="bg bor3 mod-album js-album-item js-album-transition" style="width: 122px; top: 0px; left: 0px;">
-              <div class="album-bd js-album-item-imgBox" style="height: 110px;">
+             <div class="bg bor3 mod-album js-album-item js-album-transition">
+              <div class="album-bd js-album-item-imgBox" bb-watch="mainPic:style" style="background-image:url({{PIC mainPic ${size} ${domain} }})">
                 <a href="javascript:;" class="album-cover js-album-cover" >
-                <img class="js-cover-img" bb-src="{{PIC serverPath}}" style="width: 147.786px; height: 110px; margin-top: 0px; margin-left: -13px;">
-                <span class="pic-num-wrap"><span class="pic-num">3</span></span>    <span class="album-status js-album-new"></span>   </a>
+                <span class="pic-num-wrap"><span class="pic-num" bb-watch="attCount:html">{{attCount}}</span></span>    <span class="album-status js-album-new"></span>   </a>
+                 <div class="i-templateLayer">
+              <div class="i-templateBtnContainer">
+                <a href="{{manageHref}}?albumId={{albumId}}" hidefocus="true" target="_blank" class="i-templateBtn i-lookTemplateBtn">
+                  <span class="i-icon bbasefont bbase-edit"></span>
+                  <span class="i-text">编辑</span>
+                </a>
+                <a href="javascript:;" hidefocus="true" bb-click="selectItem" class="i-templateBtn i-copyTemplateBtn">
+                  <span class="i-icon bbasefont bbase-correct"></span>
+                  <span class="i-text">选择</span>
+                </a>
+              </div>
+            </div>
+            <div class="i-templateCover">&nbsp;</div>
               </div>
               <div class="album-ft">
                 <div class="album-desc ">
-                  <div class="album-tit"><a href="javascript:;" class="c-tx2 js-album-desc-a" title="我的相册1" data-hottag="list.albumtitle">我的相册1</a></div>
+                  <div class="album-tit"><a href="javascript:;" class="c-tx2 js-album-desc-a" bb-watch="name:html" title="{{name}}" data-hottag="list.albumtitle">{{name}}</a></div>
                 </div>
               </div>
             </div>
-          `
+          `,
+          initData(){
+            return {
+              manageHref: this._super('view')._get('manageHref')
+            }
+          },
+          selectItem(e){
+            this._super('view').selectItem(this.model.toJSON(true));
+          }
         }),
         render: '.photo-list',
         pagination: '#photo-pagination',
@@ -75,7 +100,14 @@ define('BbaseAlubmPick', [], function(require, exports, module){
     },
     initData: function(){
       return {
+        manageHref: this._options.manageHref
       }
+    },
+    selectItem(model){
+      if (this._options.onChange){
+        this._options.onChange.call(this, model);
+      }
+      this._close();
     }
   });
 

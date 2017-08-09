@@ -283,6 +283,9 @@ BbaseHandlebars.registerHelper('_picUrl', function (src, number, options) {
   var domain = CONST.PIC_URL;
   if (options && options.hash.domain) {
     domain = options.hash.domain;
+    if (domain.indexOf('http://') === -1){
+      domain = 'http://' + domain;
+    }
   }
   return domain + '/' + BbaseHandlebars.helpers['picUrl'].apply(this, [src, number, options]);
 });
@@ -309,6 +312,9 @@ BbaseHandlebars.registerHelper('PIC', function (name, number, options) {
   }
   if (options && options.hash.domain) {
     domain = options.hash.domain;
+    if (domain.indexOf('http://') === -1){
+      domain = "http://" + domain;
+    }
   }
   if (name) {
     name = name.replace(/\\/img, '/');

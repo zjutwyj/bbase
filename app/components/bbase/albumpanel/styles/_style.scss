@@ -1,4 +1,4 @@
-.bbase-component-photopanel {
+.bbase-component-albumpanel {
   .c4-overlay.preview {
     display: none;
   }
@@ -107,6 +107,6 @@
   }
 }
 
-.bbase-component-photopanel:hover .c4-overlay.preview {
+.bbase-component-albumpanel:hover .c4-overlay.preview {
   display: flex;
 }

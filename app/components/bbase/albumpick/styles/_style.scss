@@ -1,5 +1,5 @@
-.bbase-component-albumpick{
- body,
+.bbase-component-albumpick {
+  body,
   button,
   input,
   select,
@@ -108,6 +108,8 @@
     float: left;
     width: 134px;
     list-style: none;
+    margin: 0px 5px 5px 0;
+    position: relative;
   }
   #photo-pagination {
     position: absolute;
@@ -141,11 +143,163 @@
   #photo-btns .submit:hover {
     background-color: lighten($mainColor, 10%);
   }
-.mod-album {
+
+
+
+
+  .mod-album {
     padding: 6px;
     border-width: 0;
     border-bottom-width: 1px\9;
-    box-shadow: 0 1px 4px rgba(0,0,0,.15);
-}
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .15);
+  }
+  .js-album-transition {
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+  }
+  .album-list .mod-album,
+  .mod-album {
+    width: 122px;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+  }
+  .js-album-item-imgBox {
+    height: 110px;
+    background-size: cover;
+        background-repeat: no-repeat;
+    background-position: center center;
+  }
+  .js-cover-img {
+    width: 147.786px;
+    height: 110px;
+    margin-top: 0px;
+    margin-left: -13px;
+  }
+  .mod-album .album-bd {
+    position: relative;
+  }
+  .mod-album .album-bd .album-cover {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .mod-album .album-bd .pic-num-wrap {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    text-align: right;
+    background-image: -webkit-linear-gradient(top, transparent, rgba(26, 26, 26, .4));
+    background-image: -moz-linear-gradient(top, transparent, rgba(26, 26, 26, .4));
+    background-image: -o-linear-gradient(top, transparent, rgba(26, 26, 26, .4));
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(26, 26, 26, .4));
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#00FFFFFF', endColorstr='#661A1A1A',gradientType=0)";
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00FFFFFF', endColorstr='#661A1A1A', gradientType=0);
+  }
+  .mod-album .album-bd .pic-num-wrap .pic-num {
+    display: inline-block;
+    margin: 20px 5px 0 0;
+    font-size: 26px;
+    line-height: 1;
+    font-family: Gulim;
+    color: #FFF;
+  }
+  .mod-album .album-desc {
+    padding: 10px 0 3px;
+  }
+  .mod-album .album-desc .album-tit {
+    float: left;
+    width: 100%;
+    height: 21px;
+    line-height: 21px;
+  }
+  .mod-album .album-desc .album-tit a {
+    font-size: 14px;
+    display: inline-block;
+    max-width: 100%;
+    _width: 100%;
+    white-space: nowrap;
+    word-wrap: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #666;
+    text-decoration: none;
+  }
+
+
+  .i-template .i-templateLayer {
+    visibility: hidden;
+    z-index: 9999;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .i-templateBtnContainer {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 0;
+        padding-top: 10px;
+  }
+  .i-lookTemplateBtn,
+  .i-copyTemplateBtn {
+    display: inline-block;
+    width: 102px;
+        height: 45px;
+    line-height: 45px;
+    color: #fff !important;
+    font-size: 14px;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+    border-radius: 25px;
+    background-color: #mainColor;
+  }
+  .i-lookTemplateBtn .i-icon,
+  .i-copyTemplateBtn .i-icon {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin: 8px 0 0 0px;
+    background-repeat: no-repeat;
+    font-size: 28px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .i-template .i-templateCover {
+    visibility: hidden;
+    opacity: 0;
+    filter: alpha(opacity=70);
+    background: #000;
+    height:100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .i-template:hover .i-templateLayer {
+    visibility: visible;
+  }
+  .i-template:hover .i-templateCover {
+    visibility: visible;
+    opacity: .7;
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+  }
+
+
+  .album-add{
+    color: $mainColor;
+  }
+  .i-text:hover{
+    text-decoration:underline;
+  }
 
 }

@@ -107,7 +107,8 @@ define('MemberHeader', [], function (require, exports, module) {
           { text: '综合示例', value: '#/demo' },
           { text: '样式示例', value: '#/theme' },
           { text: 'Ui展示', value: '#/ui' },
-          { text: '组件展示', value: '#/component' }
+          { text: '组件展示', value: '#/component' },
+          { text: '测试', value: '#/test' }
         ]
       }
     },
