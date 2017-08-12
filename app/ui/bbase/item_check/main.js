@@ -27,7 +27,7 @@ function bbaseItemCheck(value, selector, type) {
       items: this._get(object.items) || [],
       compare: object.compare, // 自定义比较器
       onChange: this._bind(function (item, init, event, values) {
-        if (typeof this.model.attributes[object.cur] !== 'undefined' && !BbaseEst.isEmpty(object.cur) && !init) {
+        if (typeof this._get(object.cur) !== 'undefined' && !BbaseEst.isEmpty(object.cur) && !init) {
           this._set(object.cur, type === 'checkbox' ? values : item.value);
         }
         if (object.onChange) {

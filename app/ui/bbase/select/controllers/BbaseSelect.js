@@ -196,8 +196,7 @@ define('BbaseSelect', [], function(require, exports, module) {
    */
   BbaseSelect = BbaseView.extend({
     events: {
-      'click .bui-select-input': 'showSelect',
-      'click .down': 'showSelect'
+      'click .bbase-ui-select': 'showSelect'
     },
     initialize: function() {
       if (BbaseEst.typeOf(this.options.render) !== 'string') {
@@ -307,9 +306,14 @@ define('BbaseSelect', [], function(require, exports, module) {
      */
     showSelect: function(event) {
       if (this._options.disabled) return;
-      $(document).click();
+      if (this.$('.bui-select').hasClass('select-down')){
+        $(document).click();
+        return;
+      }
+
       event.stopImmediatePropagation();
       if (!this.selectNode) this.initSelect(this._options.items);
+
       this.$('.bui-select').addClass('select-down');
       this.$select.css({
         zIndex: 100000,

@@ -395,13 +395,12 @@
      * @param  {object} item 缓存的模板对象
      * @return {array}       属性列表
      */
-    _getAttrList: function (item) {
+    _getAttrList: function (item, hash) {
       var _this = this;
       var tempList = [],
         list = [],
         t_list = [];
 
-      var hash = BbaseEst.hash(item);
       if (hash in _this._attr_list) return _this._attr_list[hash];
 
       if (item.indexOf(']:') > -1) {
@@ -490,7 +489,7 @@
             _hash = BbaseEst.hash(item);
 
             // 获取属性列表
-            list = _this._getAttrList(item);
+            list = _this._getAttrList(item, _hash);
 
             if (list.length > 1) {
 
@@ -768,6 +767,10 @@
           });
         }
         BbaseEst.each(_this.bbList, function (item) {
+
+          if (item.value.indexOf('$dx') > -1){
+            item.value = item.value.replace(/\$dx/img, _this.model.attributes.dx);
+          }
 
           hash = BbaseEst.hash(item.name + item.value);
           if (hash in map) return;
@@ -1382,6 +1385,7 @@
       if (!BbaseEst.equal(BbaseEst.getValue(_this.model.attributes, path), val)) {
         BbaseEst.setValue(_this.model.attributes, path, val);
         BbaseEst.trigger(_this.cid + path, path, true);
+        //console.log('path=' + path + ',val=' + val);
         _this._m_change_ = true;
         _this._m_change_list && _this._m_change_list.push(path);
       }
@@ -1820,7 +1824,7 @@
         var _this = this;
         var hash = $(_this).attr('data-hash');
         var offset = $(_this).attr('data-offset') || 1;
-        var title = $(_this).attr('data-title') || $(_this).attr('title');
+        var title = $(_this).attr('data-title') || $(_this).attr('title') || '';
 
         if (!hash) {
           $(_this).attr('data-title', title);
@@ -1832,17 +1836,19 @@
         }
 
         if (!BbaseApp.getData('toolTipList')) BbaseApp.addData('toolTipList', []);
-        if (BbaseEst.indexOf(BbaseApp.getData('toolTipList'), hash) > -1) {
+        /*if (BbaseEst.indexOf(BbaseApp.getData('toolTipList'), hash) > -1) {
           BbaseApp.getDialog(hash) && BbaseApp.getDialog(hash).show();
           return;
-        }
+        }*/
         BbaseApp.getData('toolTipList').push(hash);
         $(window).one('click', function () {
+          var has = false;
           BbaseEst.each(BbaseApp.getData('toolTipList'), function (item) {
-            if (BbaseApp.getDialog(item)) BbaseApp.getDialog(item).close();
+            if (BbaseApp.getDialog(item)) {BbaseApp.getDialog(item).close().remove();has=true;};
           });
-          BbaseApp.addData('toolTipList', []);
+          if (!has){$('.tool-tip-dialog').parent().hide();}
         });
+
 
         BbaseUtils.dialog({
           dialogId: hash,
@@ -1861,12 +1867,12 @@
         var _this = this;
         try {
           if ($(_this).attr('data-hash')){
-              BbaseApp.getDialog($(_this).attr('data-hash')).close();
+              BbaseApp.getDialog($(_this).attr('data-hash')).close().remove();
           }
         } catch (e) {
           debugger
           BbaseEst.each(BbaseApp.getData('toolTipList'), function (item) {
-            if (BbaseApp.getDialog(item)) BbaseApp.getDialog(item).close();
+            if (BbaseApp.getDialog(item)) BbaseApp.getDialog(item).close().remove();
           });
           BbaseApp.emptyDialog();
         }

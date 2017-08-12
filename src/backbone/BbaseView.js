@@ -40,10 +40,10 @@
     _initialize: function (options) {
       var _this = this;
       _this._initOptions(options);
-      _this._initTemplate(_this._options.template);
       _this._initModel(_this._options.data, BbaseModel.extend({
         fields: _this._options.fields
       }));
+      _this._initTemplate(_this._options.template);
       _this._initBind(_this._options);
       _this.render();
       return _this;

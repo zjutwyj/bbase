@@ -13,6 +13,13 @@ define('BbaseProductPick', [], function (require, exports, module) {
 
   BbaseProductPick = BbaseList.extend({
     initialize() {
+      var productIdPath = this.productIdPath = this.options.productIdPath || 'productId';
+      var picPathPath = this.picPathPath = this.options.picPathPath || 'picPath';
+      var namePath = this.namePath = this.options.namePath || 'name';
+      var prodtypePath = this.prodtypePath = this.options.prodtypePath || 'prodtype';
+      var addTimePath = this.addTimePath = this.options.addTimePath || 'addTime';
+      var domain = this.domain = this.options.domain? (" domain='"+this.options.domain+"'") : '';
+      var size = this.size = this.options.size || '5';
       this._super({
         template: `
           <div class="BbaseProductPick-wrap bbase-component-poductpick">
@@ -39,7 +46,7 @@ define('BbaseProductPick', [], function (require, exports, module) {
         model: BbaseModel.extend({
           baseId: 'productId',
           baseUrl: CONST.API + '/product/detail',
-          fields: ['productId', 'name', 'picPath']
+          fields: [productIdPath, namePath, picPathPath]
         }),
         collection: BbaseCollection.extend({
           url: this.options.listApi ?
@@ -51,10 +58,10 @@ define('BbaseProductPick', [], function (require, exports, module) {
           template: `
               <div class="plugin-pro-item bui-grid-row-even _item_el_PluginProductList_217882" style="visibility: visible;">
                 <div class="pro-6">
-                  <img bb-src="{{PIC picPath 5}}">
-                  <span class="pro-title"><a bb-watch="productId:href,name:html" href="http://www.jihui88.com/member/index.html#/product/{{id2 productId}}" target="_blank">{{name}}&nbsp;&nbsp;[型号：{{prodtype}}]</a></span>
+                  <img bb-src="{{PIC ${picPathPath} ${size} ${domain} }}">
+                  <span class="pro-title"><a bb-watch="${productIdPath}:href,${namePath}:html" href="http://www.jihui88.com/member/index.html#/product/{{id2 ${productIdPath}}}" target="_blank">{{${namePath}}}&nbsp;&nbsp;[型号：{{${prodtypePath}}}]</a></span>
                 </div>
-                <div class="pro-2"><span bb-watch="addTime:html">{{dateFormat addTime 'yyyy-MM-dd hh:mm:ss'}}</span></div>
+                <div class="pro-2"><span bb-watch="${addTimePath}:html">{{dateFormat ${addTimePath} 'yyyy-MM-dd hh:mm:ss'}}</span></div>
                 <div class="pro-2" style="text-align: right;"><span><input type="button" value="选择" bb-click="add" bb-watch="checked:class" class="{{#if checked}}checked{{/if}}"></span></div>
               </div>
           `,
@@ -64,25 +71,33 @@ define('BbaseProductPick', [], function (require, exports, module) {
             }
           },
           afterShow() {
-            if (BbaseEst.indexOf(curList, this._get('productId')) > -1) {
-              this._set('checked', true);
-              if (BbaseEst.findIndex(productList, { productId: this._get('productId') }) === -1) {
-                productList.push(this.model.toJSON(true));
+            var _this = this;
+            if (BbaseEst.indexOf(curList, _this._get(productIdPath)) > -1) {
+              _this._set('checked', true);
+              var dx = BbaseEst.findIndex(productList, function(item){
+                return item[productIdPath] === _this._get(productIdPath);
+              });
+              if (dx === -1) {
+                productList.push(_this.model.toJSON(true));
               }
             } else {
-              this._set('checked', false);
+              _this._set('checked', false);
             }
           },
           add() {
-            if (this._get('checked')) {
-              this._set('checked', false);
-              curList.splice(BbaseEst.indexOf(curList, this._get('productId')), 1);
-              productList.splice(BbaseEst.findIndex(productList, { productId: this._get('productId') }), 1);
+            var _this = this;
+            if (_this._get('checked')) {
+              _this._set('checked', false);
+              curList.splice(BbaseEst.indexOf(curList, _this._get(productIdPath)), 1);
+               var dx = BbaseEst.findIndex(productList, function(item){
+                return item[productIdPath] === _this._get(productIdPath);
+              });
+              productList.splice(dx, 1);
             } else {
-              this._set('checked', true);
-              if (BbaseEst.indexOf(curList, this._get('productId')) === -1) {
-                curList.push(this._get('productId'));
-                productList.push(this.model.toJSON(true));
+              _this._set('checked', true);
+              if (BbaseEst.indexOf(curList, _this._get(productIdPath)) === -1) {
+                curList.push(_this._get(productIdPath));
+                productList.push(_this.model.toJSON(true));
               }
             }
           }
@@ -95,9 +110,9 @@ define('BbaseProductPick', [], function (require, exports, module) {
       });
     },
     initData() {
+      this._setDefault(this.namePath, '')
       return {
         cur: '',
-        name: '',
         productList: []
       }
     },
@@ -106,17 +121,17 @@ define('BbaseProductPick', [], function (require, exports, module) {
       tempList = BbaseEst.cloneDeep(this._options.items);
       if (BbaseEst.isEmpty(this._get('cur'))) {
         productList = this._get('productList');
-        curList = BbaseEst.pluck(productList, 'productId');
+        curList = BbaseEst.pluck(productList, this.productIdPath);
       } else {
         curList = this._get('cur').split(',');
       }
     },
     search() {
       this._setPage(1);
-      this._setParam('name', this._get('name'));
+      this._setParam(this.namePath, this._get(this.namePath));
       if (this._options.items && this._options.items.length > 0){
         this._options.items = BbaseEst.filter(tempList, (item)=>{
-          return item.name.indexOf(this._get('name'))> -1;
+          return item[this.namePath].indexOf(this._get(this.namePath))> -1;
         });
       }
       this._reload();
@@ -124,7 +139,7 @@ define('BbaseProductPick', [], function (require, exports, module) {
     },
     save() {
       if (this._options.onChange) {
-        this._options.onChange.call(this, curList.join(','), productList);
+        this._options.onChange.call(this, curList.join(',').replace(/,,/img, '').replace(/^,/img, ''), productList);
       }
       this._close();
     }

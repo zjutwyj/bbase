@@ -179,6 +179,9 @@ var BbaseItem = BbaseSuperView.extend({
     _this._onAfterRender();
     // 判断是否存在子元素
     var modelOptions = _this._get('_options');
+    if (modelOptions && modelOptions._subRender){
+      _this.$el.attr('data-cid', this.cid);
+    }
     if (modelOptions && modelOptions._subRender && _this._get('children') &&
 
       _this._get('children').length > 0) {
@@ -204,6 +207,8 @@ var BbaseItem = BbaseSuperView.extend({
         childView._setViewId(ctx._options.viewId);
         //TODO 解决子类下的移序问题
         newmodel.view = childView;
+
+        childView.$el.attr('data-cid', childView.cid);
 
         tree.append(childView.$el);
         if (ctx._options.views) {

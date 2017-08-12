@@ -16,6 +16,12 @@ Bbase.DIRECTIVE['bbasecomponentproductpick'] = {
         cover: true,
         height: object.height || 522,
         items: object.items,
+        productIdPath: object.productIdPath,
+        picPathPath: object.picPathPath,
+        namePath: object.namePath,
+        addTimePath: object.addTimePath,
+        domain:object.domain,
+        size: object.size,
         listApi: object.listApi,
         data: {
           cur: this._get(object.cur) || object.default || '',

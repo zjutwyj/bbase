@@ -2278,8 +2278,11 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
               <div class="hoverBg">
                 <div class="clickToUse">点击使用</div>
               </div>
+              <div class="iconcopy hoverBg">
+                <a href="javascript:;" class="copyBtn bbasefont bbase-copy" bb-bbaseuicopy="{id: 'copy', cur: serverPath}" title="复制图片地址"></a>
+              </div>
               <div class="operationBar">
-                <a href="javascript:;" id="" class="delBtn bbasefont bbase-delete" title="删除"></a>
+                <a href="javascript:;"  class="delBtn bbasefont bbase-delete" title="删除"></a>
               </div>
               <div class="selectBtn" bb-bbaseuicheckbox="{viewId: viewId,cur: cur, items: items,onChange: handleChange}">
               </div>
@@ -2291,7 +2294,8 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
             return {
               cur: '00',
               viewId: 'checkbox' + this.cid,
-              items: [{ text: '', value: '01' }]
+              items: [{ text: '', value: '01' }],
+              copyId: BbaseEst.nextUid()
             }
           },
           handleChange: function (item, init) {

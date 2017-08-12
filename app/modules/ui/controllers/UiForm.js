@@ -21,7 +21,7 @@ define('UiForm', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        curNav: 'UiFormRadio',
+        curNav: 'UiFormCopy',
         navitems: [
           { text: '单选', moduleId: 'UiFormRadio' ,oneRender: false},
           { text: '多选', moduleId: 'UiFormCheckbox' ,oneRender: false},
@@ -32,6 +32,7 @@ define('UiForm', [], function (require, exports, module) {
           { text: '选项卡', moduleId: 'UiFormTab' ,oneRender: false},
           { text: '对话框', moduleId: 'UiFormDialog',oneRender: false},
           { text: '提示框', moduleId: 'UiFormTip',oneRender: false},
+          { text: '复制', moduleId: 'UiFormCopy',oneRender: false},
           { text: '编辑器', moduleId: 'UiFormTextEditor',oneRender: false }
         ],
         tpl: `

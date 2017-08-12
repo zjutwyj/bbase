@@ -652,7 +652,7 @@ bb-bbaseuiradio="{viewId:'radio-form',cur:getCurValue(formId),items:items, onCha
 {{cutByte name 5 end='...'}} // 字符串截取
 {{parseInt 01}} // 转化为数字
 {{CONST 'HOST'}} // 获取常量值(具体内容详见app/scripts/const/const.js)
-{{PIC pic}} // 获取图片地址   {{PIC pic 120}} // 获取宽度为120图片，目前只能取120与640两种尺寸大小的图片
+{{PIC pic 5 domain='img.xxx.com'}} // 获取图片地址   {{PIC pic 120}} // 获取宽度为120图片，目前只能取120与640两种尺寸大小的图片, domain指定图片地址前缘， 默认取CONST.PIC_PATH
 {{encodeUrl url}} // 编码地址
 {{json 'invite.title'}} // parse json对象
 {{version}} // 获取版本号
@@ -680,12 +680,12 @@ new BbaseService().factory({
     data: {},// 表单参数
 
     session: true, // 永久记录，除非软件版本号更新
-    cache: true // 暂时缓存， 浏览器刷新后需重新请求
+    cache: true, // 暂时缓存， 浏览器刷新后需重新请求
 
     select: true, // 是否构建下拉框
     tree: true, // 是否构建树
     extend: true, // 是否全部展开
-    defaults： false, // 是否添加默认选项
+    defaults: false, // 是否添加默认选项
     defaultValue: '/', // 默认为 /
 
     // 如果tree为true时， 表示需要构建树， 则需补充以下字段
@@ -698,8 +698,8 @@ new BbaseService().factory({
 
     // 如果select为true时 ，表示需要构建下拉框， 则下面的text与value必填
     text: 'name', // 下拉框名称
-    value: 'categoryId', // 下拉框值
-}).done(function(result){
+    value: 'categoryId' // 下拉框值
+}).then(function(result){
     console.dir(result);
 });
 ```

@@ -51,7 +51,8 @@ define('ComponentProductPick', [], function(require, exports, module){
                   <td class="argDesc"><span>关联模型类字段</span></td>
                   <td class="argType"><span>any</span></td>
                   <td class="argDefault"><span>-</span></td>
-                </tr> <tr>
+                </tr>
+                <tr>
                   <td class="argName"><span>productList</span></td>
                   <td class="argDesc"><span>已选中的产品列表</span></td>
                   <td class="argType"><span>array</span></td>
@@ -76,6 +77,48 @@ define('ComponentProductPick', [], function(require, exports, module){
                   <td class="argDefault"><span>/product/list</span></td>
                 </tr>
 
+                <tr>
+                  <td class="argName"><span>productIdPath</span></td>
+                  <td class="argDesc"><span>产品ID字段</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>productId</span></td>
+                </tr>
+                 <tr>
+                  <td class="argName"><span>namePath</span></td>
+                  <td class="argDesc"><span>产品名称字段</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>name</span></td>
+                </tr>
+                 <tr>
+                  <td class="argName"><span>picPathPath</span></td>
+                  <td class="argDesc"><span>产品图片字段</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>picPath</span></td>
+                </tr>
+                  <tr>
+                  <td class="argName"><span>prodtypePath</span></td>
+                  <td class="argDesc"><span>产品型号字段</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>prodtypePath</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>addTimePath</span></td>
+                  <td class="argDesc"><span>产品添加时间字段</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>addTimePath</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>domain</span></td>
+                  <td class="argDesc"><span>图片前缀, 前面不要带http://</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>size</span></td>
+                  <td class="argDesc"><span>图片大小</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>5</span></td>
+                </tr>
               </tbody>
             </table>
           </div>

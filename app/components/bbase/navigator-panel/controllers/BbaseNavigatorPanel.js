@@ -67,7 +67,7 @@ define('BbaseNavigatorPanel', [], function(require, exports, module) {
                   </div>
                   <!---->
                   <form blur="submit" class="page-name-form ng-pristine ng-valid" editable-form="" name="renameForm">
-                    <div buttons="no" class="menu-name page-name editable" e-form="renameForm" placeholder="Enter name" tabindex="0">{{name}}</div>
+                    <div buttons="no" class="menu-name page-name editable" e-form="renameForm" bb-watch="name:html" placeholder="Enter name" tabindex="0">{{name}}</div>
                   </form>
                   <div class="icon custom-icon cc-icon-home"></div>
                   <div class="indications">
@@ -77,7 +77,7 @@ define('BbaseNavigatorPanel', [], function(require, exports, module) {
                   </div>
                 </div>
                  <!---->
-                <ul class="menu-list ng-pristine ng-untouched ng-valid angular-ui-tree-nodes ng-not-empty node-tree" ui-tree-nodes="" aria-invalid="false">
+                <ul class="menu-list ng-pristine ng-untouched ng-valid angular-ui-tree-nodes ng-not-empty node-tree" ui-tree-nodes="" aria-invalid="false" bb-bbaseuisortable="{viewId:'bbaseuinavigatorpanelsortablesub',onEnd: onSortEnd,handle:'.drag-area'}">
                   <!---->
                 </ul>
                 <!---->
@@ -103,6 +103,11 @@ define('BbaseNavigatorPanel', [], function(require, exports, module) {
                 this._set(model);
               })
             });
+          },
+          onSortEnd(evt, list){
+            if (this._super('view')._options.onSortEnd){
+              this._super('view')._options.onSortEnd.call(this, evt, list);
+            }
           },
           stop(e) {
             e.stopImmediatePropagation();

@@ -119,7 +119,9 @@ define('ComponentNavigatorPanel', [], function(require, exports, module) {
     { display: "s", enterpriseId: "Enterp_0000000000000000000049090", grade: 0, id: "4150", lanId: 1, layoutId: 97, name: "产品展示", navigatorId: 4150, navigatorId2: null, page: "product", parentId: null, seoDescription: "", seoKeywords: "", seoTitle: "", sort: 2, type: "s", updateTime: "" },
     { display: "s", enterpriseId: "Enterp_0000000000000000000049090", grade: 0, id: "4151", lanId: 1, layoutId: 97, name: "新闻动态", navigatorId: 4151, navigatorId2: null, page: "news", parentId: null, seoDescription: "", seoKeywords: "", seoTitle: "", sort: 3, type: "s", updateTime: "" },
     { display: "s", enterpriseId: "Enterp_0000000000000000000049090", grade: 0, id: "4154", lanId: 1, layoutId: 97, name: "在线留言", navigatorId: 4154, navigatorId2: null, page: "message", parentId: null, sort: 6, type: "s", updateTime: "" },
-    { display: "s", enterpriseId: "Enterp_0000000000000000000049090", grade: 1, id: "4160", lanId: 1, layoutId: 97, name: "API测试", navigatorId: 4160, navigatorId2: 1, page: "col", parentId: '4150', sort: 12, type: "c", updateTime: "" }
+    { display: "s", enterpriseId: "Enterp_0000000000000000000049090", grade: 1, id: "4160", lanId: 1, layoutId: 97, name: "API测试1", navigatorId: 4160, navigatorId2: 1, page: "col", parentId: '4150', sort: 12, type: "c", updateTime: "" },
+    { display: "s", enterpriseId: "Enterp_0000000000000000000049090", grade: 1, id: "4161", lanId: 1, layoutId: 97, name: "API测试2", navigatorId: 4161, navigatorId2: 1, page: "col", parentId: '4150', sort: 13, type: "c", updateTime: "" },
+    { display: "s", enterpriseId: "Enterp_0000000000000000000049090", grade: 1, id: "4162", lanId: 1, layoutId: 97, name: "API测试3", navigatorId: 4162, navigatorId2: 1, page: "col", parentId: '4150', sort: 14, type: "c", updateTime: "" }
   ]
 
   ComponentNavigatorPanel = BbaseView.extend({

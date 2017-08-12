@@ -621,7 +621,6 @@
     if (isEmpty(object)) return null;
     var array, result;
     if (arguments.length < 2 || typeOf(path) !== 'string') {
-      console.error('err30');
       return;
     }
     array = path.split('.');

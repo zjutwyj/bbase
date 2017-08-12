@@ -7,6 +7,8 @@
 define('BbaseAlubmPick', [], function(require, exports, module){
   var BbaseAlubmPick;
 
+  var manageHref = null;
+
   BbaseAlubmPick = BbaseList.extend({
     initialize: function(){
       var size = typeof this.options.size === 'undefined' ? 120 : this.options.size;
@@ -83,7 +85,7 @@ define('BbaseAlubmPick', [], function(require, exports, module){
           `,
           initData(){
             return {
-              manageHref: this._super('view')._get('manageHref')
+              manageHref: manageHref
             }
           },
           selectItem(e){
@@ -99,8 +101,9 @@ define('BbaseAlubmPick', [], function(require, exports, module){
       });
     },
     initData: function(){
+      manageHref = this._options.manageHref;
       return {
-        manageHref: this._options.manageHref
+        manageHref: manageHref
       }
     },
     selectItem(model){

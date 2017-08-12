@@ -514,7 +514,8 @@
      */
     _afterLoad: function(response) {
       var _this = this;
-      _this.list.show();
+        _this.list.show();
+
       if (_this.afterLoad)
         _this.afterLoad.call(_this, response);
     },
