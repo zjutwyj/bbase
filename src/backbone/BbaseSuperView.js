@@ -3,7 +3,7 @@
  * @class BbaseSuperView - 所有BaseXxx模块的超类
  * @author yongjin<zjut_wyj@163.com> 2015/1/24
  */
-(function (BbaseBackbone, BbaseEst, BbaseApp, BbaseUtils, BbaseHandlebars, undefined) {
+(function(BbaseBackbone, BbaseEst, BbaseApp, BbaseUtils, BbaseHandlebars, undefined) {
   var BbaseSuperView = BbaseBackbone.View.extend({
     /**
      * 传递options进来
@@ -13,7 +13,7 @@
      * @param options
      * @author wyj 14.12.16
      */
-    constructor: function (options) {
+    constructor: function(options) {
       var _this = this;
       _this.options = options || {};
       _this._re_dup = {};
@@ -36,7 +36,7 @@
      * @method [构造] - _super
      * @return {[type]} [description]
      */
-    _super: function (type, args) {
+    _super: function(type, args) {
       var _this = this;
       if (BbaseEst.typeOf(type) === 'object') {
         _this._initialize(type);
@@ -66,7 +66,7 @@
                 clearTimeout(BbaseApp.getView(_this.viewId)[type].timer);
               }
               var _arguments = Array.prototype.slice.apply(arguments);
-              BbaseApp.getView(_this.viewId)[type].timer = setTimeout(_this._bind(function () {
+              BbaseApp.getView(_this.viewId)[type].timer = setTimeout(_this._bind(function() {
                 BbaseApp.getView(_this.viewId)[type].apply(BbaseApp.getView(_this.viewId), _arguments.splice(1, _arguments.length - 1));
                 BbaseApp.getView(_this.viewId)[type].timer = null;
               }), 10);
@@ -81,7 +81,7 @@
      * @private
      * @return {[type]} [description]
      */
-    initialize: function () {
+    initialize: function() {
       this._super('_initialize');
     },
 
@@ -93,7 +93,7 @@
      * @param  {[type]} options [description]
      * @return {[type]}         [description]
      */
-    _extend: function (options) {
+    _extend: function(options) {
       BbaseEst.extend(this.options, options);
     },
     /**
@@ -103,7 +103,7 @@
      * @param  {[type]} viewId [description]
      * @return {[type]}        [description]
      */
-    _view: function (viewId) {
+    _view: function(viewId) {
       return BbaseApp.getView(viewId + this.cid);
     },
     /**
@@ -115,7 +115,7 @@
      * @param  {[type]} options  [description]
      * @return {[type]}          [description]
      */
-    _region: function (name, instance, options) {
+    _region: function(name, instance, options) {
       var _this = this;
       if (arguments.length === 1) {
         return _this._view(name);
@@ -129,7 +129,7 @@
      * @method _service
      * @return {[type]} [description]
      */
-    _service: function (type, options) {
+    _service: function(type, options) {
       return Service[type](options);
     },
     /**
@@ -139,7 +139,7 @@
      * @param name
      * @author wyj 15.1.13
      */
-    _navigate: function (name, options) {
+    _navigate: function(name, options) {
       options = options || true;
       typeof Backbone === 'undefined' ? BbaseBackbone.history.navigate(name, options) : Backbone.history.navigate(name, options);
     },
@@ -194,10 +194,10 @@
      * @example
      *    this._singleBind('#model-name', this.model);
      */
-    _singleBind: function (parent, selector, model, changeFn) {
+    _singleBind: function(parent, selector, model, changeFn) {
       var _self = this;
 
-      $(selector, parent || _self.$el).each(function () {
+      $(selector, parent || _self.$el).each(function() {
         var _this = this;
         var bbModels = [];
         var bbModel = $(_this).attr('bb-model');
@@ -207,7 +207,7 @@
           bbModels = bbModel.split(':');
           bindType = bbModels.length > 1 ? bbModels[1] : 'change';
         }
-        $(_this).off(bindType).on(bindType, function (e) {
+        $(_this).off(bindType).on(bindType, function(e) {
           var _this = this;
           var val, pass, modelId, name, bbMod;
 
@@ -253,10 +253,10 @@
      * @example
      *        this._modelBind();
      */
-    _modelBind: function (parent, selector, changeFn) {
+    _modelBind: function(parent, selector, changeFn) {
       var _self = this;
       if (selector) _self._singleBind(parent, selector, _self.model, changeFn);
-      else _self.$("input, textarea, select").each(function () {
+      else _self.$("input, textarea, select").each(function() {
         _self._singleBind(null, $(this), _self.model, changeFn);
       });
     },
@@ -270,7 +270,7 @@
      * @param  {string} ngAttrName 属性名称(针对IE浏览器)
      * @return {Handlebar}         模板
      */
-    _getCompileTemp: function (dirName, node, selector, ngDirName, fieldName) {
+    _getCompileTemp: function(dirName, node, selector, ngDirName, fieldName) {
       var _this = this;
       var hbsStr = null,
         compileStr = '';
@@ -316,7 +316,7 @@
      * @param  {string} selector   选择符
      * @param  {string} ngAttrName 属性名称(针对IE)
      */
-    _replaceNode: function (attrName, node, result, selector, ngAttrName) {
+    _replaceNode: function(attrName, node, result, selector, ngAttrName) {
       var _this = this;
       switch (attrName) {
         case 'value':
@@ -359,7 +359,7 @@
      * @param  {string} attrName   属性名称
      * @param  {string} ngAttrName 属性名称(针对IE)
      */
-    _handleReplace: function (item, model, selector, attrName, ngAttrName, name) {
+    _handleReplace: function(item, model, selector, attrName, ngAttrName, name) {
       var _result = '';
       var _this = this;
       /*if (this.collection && !BbaseEst.equal(model._previousAttributes.models, this.collection.models)) {
@@ -382,10 +382,34 @@
           //console.error("error: call wyj for more info");
         }
       }
-      // 赋值
-      _this._replaceNode(attrName, item.node, _result, selector, ngAttrName);
+      BbaseApp._batch_replace_ready.push({
+        item: item,
+        attrName: attrName,
+        _result: _result,
+        selector: selector,
+        ngAttrName: ngAttrName
+      });
+      // 批量更新
+      if (!BbaseApp._batchReplaceTimer){
+        BbaseApp._batchReplaceTimer = true;
+        BbaseApp._batchReplaceTimer = setTimeout(function(){
+          BbaseApp._batch_replace = BbaseApp._batch_replace_ready.splice(0);
+          BbaseApp._batch_replace_ready = [];
+          _this._batchReplace();
+           BbaseApp._batch_replace = [];
+          BbaseApp._batchReplaceTimer = null;
+        }, 3);
+      }
       // 缓存结果
       item.result = _result;
+
+    },
+    _batchReplace: function() {
+      var _this = this;
+      while(BbaseApp._batch_replace.length > 0){
+        var pop = BbaseApp._batch_replace.pop();
+          _this._replaceNode(pop.attrName, pop.item.node, pop._result, pop.selector,pop.ngAttrName);
+      }
     },
     /**
      * 获取属性列表
@@ -395,7 +419,7 @@
      * @param  {object} item 缓存的模板对象
      * @return {array}       属性列表
      */
-    _getAttrList: function (item, hash) {
+    _getAttrList: function(item, hash) {
       var _this = this;
       var tempList = [],
         list = [],
@@ -405,7 +429,7 @@
 
       if (item.indexOf(']:') > -1) {
         tempList = item.split(']:');
-        list = BbaseEst.map(tempList, function (_item, index) {
+        list = BbaseEst.map(tempList, function(_item, index) {
           if (index !== tempList.length - 1) {
             return _item + ']';
           } else {
@@ -433,7 +457,7 @@
      * @param  {[type]} selector [description]
      * @return {[type]}          [description]
      */
-    _getSelectorSplit: function (selector) {
+    _getSelectorSplit: function(selector) {
       var _this = this;
       var hash = BbaseEst.hash(selector);
       if (hash in _this._re_selector) return _this._re_selector[hash];
@@ -443,7 +467,7 @@
       var temp = '';
 
       if (selector.indexOf('[bb-watch=') > -1) {
-        BbaseEst.each(list, function (item) {
+        BbaseEst.each(list, function(item) {
           if (item.indexOf('[bb-') > -1 && item.indexOf(']') === -1) {
             temp = item;
           } else if (item.indexOf(']') > -1 && item.indexOf('[bb-') === -1) {
@@ -472,11 +496,11 @@
      * @example
      *      this._viewReplace('#model-name', this.model);
      */
-    _viewReplace: function (selector, model, cbs, name) {
+    _viewReplace: function(selector, model, cbs, name) {
       var _this = this;
       try {
         if (!_this._re_dup) _this._re_dup = {};
-        BbaseEst.each(_this._getSelectorSplit(selector), function (item) {
+        BbaseEst.each(_this._getSelectorSplit(selector), function(item) {
           var list = [],
             _$template = '',
             _result = '',
@@ -514,14 +538,14 @@
                     node = _this.$el.find(list[0]);
                   }
 
-                  $.each(node, function (index, node) {
+                  $.each(node, function(index, node) {
                     _this._re_dup[_hash].push(BbaseEst.extend(_this._getCompileTemp(attrName, $(node), list[0], ngAttrName, name), {
                       hash: _hash + '' + index,
                       index: index
                     }));
                   });
                 }
-                BbaseEst.each(_this._re_dup[_hash], function (item) {
+                BbaseEst.each(_this._re_dup[_hash], function(item) {
                   _this._handleReplace(item, model, list[0], attrName, ngAttrName, name);
                 });
               }
@@ -547,7 +571,7 @@
         });
 
         if (cbs) {
-          BbaseEst.each(cbs, function (cb) {
+          BbaseEst.each(cbs, function(cb) {
             cb.call(_this, name);
           });
         }
@@ -573,7 +597,7 @@
      *
      *      });
      */
-    _watch: function (name, selector, callback) {
+    _watch: function(name, selector, callback) {
       var _self = this,
         triggerName,
         cb_hash = null,
@@ -589,7 +613,7 @@
         list.push(name);
       }
 
-      BbaseEst.each(list, function (item) {
+      BbaseEst.each(list, function(item) {
         var modelId = item.replace(/^#?model\d?-(.+)$/g, "$1");
         /* debugger
          if (typeof this._get(modelId) === 'undefined'){
@@ -611,7 +635,7 @@
           }
         }
         if (modelId in _self.watchFields) {
-          BbaseEst.each(_self._getSelectorSplit(selector), function (item) {
+          BbaseEst.each(_self._getSelectorSplit(selector), function(item) {
 
             if (_self.watchFields[modelId].indexOf(item) === -1) {
               _self.watchFields[modelId] = _self.watchFields[modelId] + ',' + item;
@@ -627,14 +651,14 @@
         //if (!_self._options.modelBind || item.indexOf('model-') > -1) _self._modelBind(item);
         if (triggerName in temp_obj) return;
 
-        BbaseEst.off(temp_obj[triggerName] = triggerName).on(triggerName, function (triggerName, name) {
+        BbaseEst.off(temp_obj[triggerName] = triggerName).on(triggerName, function(triggerName, name) {
           _self._viewReplace(selector, _self.model, _self.cbMap[modelId], modelId);
           if (_self.update) _self.update.call(_self, modelId);
         });
 
         _self.model.off('change:' + (temp_obj[modelId] = modelId.split('.')[0]))
           .on('change:' + temp_obj[modelId],
-            function () {
+            function() {
               _self._viewReplace(selector, _self.model, _self.cbMap[modelId], modelId);
               if (_self.update) _self.update.call(_self, modelId);
             });
@@ -645,7 +669,7 @@
      * 绑定模型类
      * @method [绑定] - _watchBind
      */
-    _watchBind: function (template) {
+    _watchBind: function(template) {
       var _this = this;
       var list = [],
         models = [];
@@ -655,7 +679,7 @@
 
       if (BbaseEst.typeOf(template) === 'string') {
         models = template.match(new RegExp('(bb-watch=\\"(.+?)\"(\\s*)|bb-change=\\"(.+?)\"(\\s*)|bb-model=\\"(.+?)\"(\\s*))(bb-render=\\"(.+?)\\"\\s*)?(bb-change=\\"(.+?)\\"\\s*)?', 'img'));
-        BbaseEst.each(models, function (item) {
+        BbaseEst.each(models, function(item) {
           var watch = '',
             model = '',
             change = '',
@@ -699,7 +723,7 @@
           });
         });
       }
-      BbaseEst.each(list, function (item) {
+      BbaseEst.each(list, function(item) {
         _this._watch(item.watch.split(','), item.render, BbaseEst.isEmpty(item.change) ? null : item.change);
       });
       if (_this.onWatch) {
@@ -714,12 +738,12 @@
      * @param  {[type]} render [description]
      * @return {[type]}        [description]
      */
-    _getWatchRender: function (watch, render) {
+    _getWatchRender: function(watch, render) {
       var _watch = '';
       var _render = '';
       var _watchs = watch[1].split(',');
 
-      BbaseEst.each(_watchs, function (item) {
+      BbaseEst.each(_watchs, function(item) {
         var w_list = [];
 
         w_list = item.split(':');
@@ -748,7 +772,7 @@
      * @param  {[type]} parent   [description]
      * @return {[type]}          [description]
      */
-    _bbBind: function (template, parent) {
+    _bbBind: function(template, parent) {
       var _this = this;
       var matchs = [],
         patt,
@@ -766,9 +790,9 @@
             value: result[2]
           });
         }
-        BbaseEst.each(_this.bbList, function (item) {
+        BbaseEst.each(_this.bbList, function(item) {
 
-          if (item.value.indexOf('$dx') > -1){
+          if (item.value.indexOf('$dx') > -1) {
             item.value = item.value.replace(/\$dx/img, _this.model.attributes.dx);
           }
 
@@ -804,7 +828,7 @@
               }
               _this._watch([field], '[bb-checked="' + item.value + '"]:checked');
               _this.$('[bb-checked="' + item.value + '"]').prop('checked', _this._getBoolean(item.value));
-              _this.$('[bb-checked="' + item.value + '"]').change(function (a) {
+              _this.$('[bb-checked="' + item.value + '"]').change(function(a) {
                 if (item.value === 'checked_all') {
                   _this._checkAll && _this._checkAll(a);
                 } else {
@@ -816,7 +840,7 @@
               if (BbaseApp.getDirective(item.name)) {
                 if (BbaseApp.getDirective(item.name).bind) {
                   BbaseEst.extend(BbaseApp.getDirective(item.name), BbaseApp.getDirective(item.name).bind.call(_this,
-                  item.value, '[bb-' + item.name + '="' + item.value + '"]'));
+                    item.value, '[bb-' + item.name + '="' + item.value + '"]'));
                 }
                 if (BbaseApp.getDirective(item.name).show) {
                   _this._directives_show_.push({
@@ -836,11 +860,11 @@
       }
       _this._afterTransition();
     },
-    _handleDirectiveShow: function(){
+    _handleDirectiveShow: function() {
       var _this = this;
-      BbaseEst.each(_this._directives_show_, function(item){
+      BbaseEst.each(_this._directives_show_, function(item) {
         BbaseApp.getDirective(item.name).show.call(_this, item.object,
-                  item.value, '[bb-' + item.name + '="' + item.value + '"]');
+          item.value, '[bb-' + item.name + '="' + item.value + '"]');
       });
     },
     /**
@@ -852,7 +876,7 @@
      * @param  {string} value 字符串
      * @return {void}
      */
-    _handleEvents: function (parent, name, value) {
+    _handleEvents: function(parent, name, value) {
       var _this = this;
       var colonRe = /:([^:\$\s\(\)]*)/img,
         dollarRe = /\$([^:\$\s\(\)]*)/img,
@@ -861,16 +885,16 @@
 
       var args = [],
         fn = nameRe.exec(value)[1],
-        colons = BbaseEst.map(value.match(colonRe) || [], function (str) {
+        colons = BbaseEst.map(value.match(colonRe) || [], function(str) {
           return str.replace(':', '');
         }),
-        dollars = BbaseEst.map(value.match(dollarRe) || [], function (str) {
+        dollars = BbaseEst.map(value.match(dollarRe) || [], function(str) {
           return str.replace('$', '');
         });
 
       var brackets = value.match(bracketRe);
       if (brackets) {
-        BbaseEst.each(brackets[0].split(','), function (item) {
+        BbaseEst.each(brackets[0].split(','), function(item) {
           var name = BbaseEst.trim(item.replace(/[\(|\)]/img, ''));
           if (!BbaseEst.isEmpty(name)) {
             if (name.indexOf('\'') > -1) {
@@ -885,7 +909,7 @@
       }
 
       if (_this[fn]) parent.find('[bb-' + name + '="' + value + '"]').off(name).on(name,
-        function (e) {
+        function(e) {
           if (colons.length > 0) {
             switch (colons[0]) {
               case 'enter':
@@ -914,12 +938,12 @@
      * @example
      *      this._stringify(['invite', 'message']);
      */
-    _stringifyJSON: function (array) {
+    _stringifyJSON: function(array) {
       var _this = this;
       var keys, result;
       if (!JSON.stringify) alert(CONST.LANG.JSON_TIP);
 
-      BbaseEst.each(array, function (item) {
+      BbaseEst.each(array, function(item) {
         keys = item.split('.');
         if (keys.length > 1) {
 
@@ -936,14 +960,14 @@
      * @method [模型] - _parseJSON ( 反序列化字符串 )
      * @param array
      */
-    _parseJSON: function (array) {
+    _parseJSON: function(array) {
       var _this = this;
       var keys, result;
       var parse = JSON.parse || $.parseJSON;
 
       if (!parse) alert(CONST.LANG.JSON_TIP);
 
-      BbaseEst.each(array, function (item) {
+      BbaseEst.each(array, function(item) {
         keys = item.split('.');
         if (keys.length > 1) {
           result = BbaseEst.getValue(_this.model.attributes, item);
@@ -969,7 +993,7 @@
      *          sortField: 'orderList'
      *      })._moveUp(this.model);
      */
-    _setOption: function (obj) {
+    _setOption: function(obj) {
       BbaseEst.extend(this._options, obj);
       return this;
     },
@@ -980,10 +1004,10 @@
      * @private
      * @author wyj 14.12.10
      */
-    _initEnterEvent: function (options) {
+    _initEnterEvent: function(options) {
       var _this = this;
       if (options.speed > 1 && options.enter) {
-        _this.$('input').keyup(function (e) {
+        _this.$('input').keyup(function(e) {
           if (e.keyCode === CONST.ENTER_KEY) {
             _this.$(options.enter).click();
           }
@@ -998,7 +1022,7 @@
      * @return {*}
      * @author wyj 15.1.29
      */
-    _getOption: function (name) {
+    _getOption: function(name) {
       return this._options[name];
     },
     /**
@@ -1007,7 +1031,7 @@
      * @method _getTpl
      * @return {[type]} [description]
      */
-    _getTpl: function () {
+    _getTpl: function() {
       return '<div>' + this._options.template + '</div>';
     },
     /**
@@ -1019,7 +1043,7 @@
      * @example
      *      this._getValue('tip.name');
      */
-    _getValue: function (path) {
+    _getValue: function(path) {
       return BbaseEst.getValue(this.model.attributes, path);
     },
     /**
@@ -1029,7 +1053,7 @@
      * @param  {string} path [description]
      * @return {*}      [description]
      */
-    _get: function (path) {
+    _get: function(path) {
       return this._getValue.call(this, path);
     },
     /**
@@ -1038,7 +1062,7 @@
      * @param  {[type]} path [description]
      * @return {[type]}      [description]
      */
-    _getInt: function (path) {
+    _getInt: function(path) {
       return parseInt(this._get(path), 10);
     },
     /**
@@ -1047,7 +1071,7 @@
      * @param  {[type]} path [description]
      * @return {[type]}      [description]
      */
-    _getFloat: function (path) {
+    _getFloat: function(path) {
       return parseFloat(this._get(path), 10);
     },
     /**
@@ -1059,7 +1083,7 @@
      * @example
      *      this._getDefault('tip.name', 'd');
      */
-    _getDefault: function (path, value) {
+    _getDefault: function(path, value) {
       this._setDefault(path, value);
       return BbaseEst.getValue(this.model.attributes, path);
     },
@@ -1072,7 +1096,7 @@
      * @example
      *      this._setDefault('tip.name', 'd');
      */
-    _setDefault: function (path, value) {
+    _setDefault: function(path, value) {
       var _this = this;
       var result = BbaseEst.getValue(_this.model.attributes, path);
       if (BbaseEst.typeOf(result) === 'undefined' || BbaseEst.typeOf(result) === 'null') {
@@ -1084,17 +1108,17 @@
      * @method [模型] - _initDefault
      * @return {[type]} [description]
      */
-    _initDefault: function () {
+    _initDefault: function() {
       var _this = this;
       if (_this.init && BbaseEst.typeOf(_this.init) === 'function') {
         _this.__def_vals_ = _this.init.call(_this, _this._attributes) || {};
-        BbaseEst.each(_this.__def_vals_, function (value, key) {
+        BbaseEst.each(_this.__def_vals_, function(value, key) {
           _this._setDefault(key, value);
         });
       }
       if (_this.initData && BbaseEst.typeOf(_this.initData) === 'function') {
         _this.__def_vals_ = _this.initData.call(_this, _this._attributes) || {};
-        BbaseEst.each(_this.__def_vals_, function (value, key) {
+        BbaseEst.each(_this.__def_vals_, function(value, key) {
           _this._setDefault(key, value);
         });
       }
@@ -1105,7 +1129,7 @@
      * @method [表单] - _reset ( 重置表单 )
      * @author wyj 14.11.18
      */
-    _reset: function (data) {
+    _reset: function(data) {
       var _this = this;
       _this.model.attributes = {};
       data = BbaseEst.extend(BbaseEst.extend(_this.model.defaults || {}, _this.__def_vals_), data);
@@ -1117,7 +1141,7 @@
      * @method _getPath
      * @return {[type]} [description]
      */
-    _getPath: function (data, pre) {
+    _getPath: function(data, pre) {
       var paths = [];
       var temp = data;
       if (!pre) { pre = ''; }
@@ -1131,9 +1155,9 @@
 
       while (BbaseEst.keys(temp).length > 0) {
         data = temp;
-        BbaseEst.each(data, function (value, key) {
+        BbaseEst.each(data, function(value, key) {
           if (BbaseEst.typeOf(value) === 'object') {
-            BbaseEst.each(value, function (v, k) {
+            BbaseEst.each(value, function(v, k) {
               temp[key + '.' + k] = v;
             });
           } else {
@@ -1145,7 +1169,7 @@
           delete temp[key];
         });
       }
-      BbaseEst.each(paths, function (item) {
+      BbaseEst.each(paths, function(item) {
         temp[pre + item.path] = item.value;
       });
 
@@ -1162,7 +1186,7 @@
      * @param  {string} value [description]
      * @return {string}       [description]
      */
-    _getField: function (value) {
+    _getField: function(value) {
       var str = "",
         list = [],
         result = null;
@@ -1170,7 +1194,7 @@
       str = value.replace(/^[!|(]*(\w+(?:\.\w+)*)(?:[\s|\.|>|<|!|:=])?.*$/img, '$1');
       list = str.split('}}')[0].replace(/({{|}})/img, '').split(/\s/);
 
-      BbaseEst.each(list, this._bind(function (item) {
+      BbaseEst.each(list, this._bind(function(item) {
         result = this._loopField(item);
         if (result !== null) {
           return false;
@@ -1186,7 +1210,7 @@
      * @param  {[type]} value [description]
      * @return {[type]}       [description]
      */
-    _loopField: function (value) {
+    _loopField: function(value) {
       var list = [];
 
       if (BbaseEst.typeOf(this._get(value)) === 'undefined') {
@@ -1207,7 +1231,7 @@
      * @param  {[type]} value [description]
      * @return {[type]}       [description]
      */
-    _getBoolean: function (value) {
+    _getBoolean: function(value) {
       var _this = this;
       if (BbaseEst.isEmpty(value)) {
         return false;
@@ -1236,7 +1260,7 @@
      * @param  {[type]}  str [description]
      * @return {Boolean}     [description]
      */
-    _isBoolean: function (str) {
+    _isBoolean: function(str) {
       return (str === 'true' || str === 'false');
     },
     /**
@@ -1247,7 +1271,7 @@
      * @param  {string} value 字符串
      * @return {object}
      */
-    _getObject: function (str, ignore) {
+    _getObject: function(str, ignore) {
       var _this = this;
 
       if (str.indexOf('{') === -1) return null;
@@ -1257,7 +1281,7 @@
         temp = '',
         items_o = BbaseEst.trim(str).substring(1, str.length - 1).split(',');
 
-      BbaseEst.each(items_o, function (item) {
+      BbaseEst.each(items_o, function(item) {
         if (BbaseEst.typeOf(item) === 'string' && item.indexOf('{') > -1) {
           temp += (item + ',');
         } else if (BbaseEst.typeOf(item) === 'string' && item.indexOf('}') > -1) {
@@ -1271,7 +1295,7 @@
         }
       });
 
-      BbaseEst.each(list, function (item) {
+      BbaseEst.each(list, function(item) {
         var list = item.split(':');
         var r = '';
         var fnInfo = {};
@@ -1279,7 +1303,7 @@
         list[1] = BbaseEst.trim(list[1]);
         if (ignore) {
           if (BbaseEst.typeOf(ignore) === 'array') {
-            var dx = BbaseEst.findIndex(ignore, function (a) {
+            var dx = BbaseEst.findIndex(ignore, function(a) {
               return a === list[0];
             });
             if (dx !== -1) {
@@ -1316,11 +1340,10 @@
         } else if (_this._isBoolean(list[1])) {
           // boolean
           object[list[0]] = _this._getBoolean(list[1]);
-        } else if (BbaseEst.validation(list[1], 'number')){
+        } else if (BbaseEst.validation(list[1], 'number')) {
           // number
           object[list[0]] = parseFloat(list[1], 10);
-        }
-        else {
+        } else {
           object[list[0]] = BbaseEst.trim(BbaseEst.compile('{{' + list[1] + '}}', _this.model.attributes));
         }
       });
@@ -1335,7 +1358,7 @@
      * @param  {object} obj 模型类
      * @return {object}
      */
-    _getFunction: function (str, obj) {
+    _getFunction: function(str, obj) {
       var _this = this;
       var bracketRe = /\(([^:\$]*)\)/img,
         key = null,
@@ -1344,7 +1367,7 @@
 
       var brackets = str.match(bracketRe);
       if (brackets) {
-        BbaseEst.each(brackets[0].split(','), function (item) {
+        BbaseEst.each(brackets[0].split(','), function(item) {
           var arg = BbaseEst.trim(item.split('.')[0].replace(/[\(|\)]/img, ''));
           if (!key) {
             key = arg;
@@ -1379,7 +1402,7 @@
      * @example
      *      this._setValue('tip.name', 'aaa');
      */
-    _setValue: function (path, val) {
+    _setValue: function(path, val) {
       var _this = this;
       // just for trigger
       if (!BbaseEst.equal(BbaseEst.getValue(_this.model.attributes, path), val)) {
@@ -1397,7 +1420,7 @@
      * @param {string/object} path [description]
      * @param {string/object} val  [description]
      */
-    _set: function (path, val) {
+    _set: function(path, val) {
       var _this = this;
       _this._m_change_ = false;
       _this._m_change_list = [];
@@ -1411,9 +1434,9 @@
         if (_this.options.onUpdate) {
           _this.options.onUpdate.call(_this, _this.model.toJSON());
         }
-        BbaseEst.each(_this._m_change_list, function (item) {
+        BbaseEst.each(_this._m_change_list, function(item) {
           if (_this.change && !_this.change.timer) {
-            _this.change.timer = setTimeout(_this._bind(function () {
+            _this.change.timer = setTimeout(_this._bind(function() {
               _this.change.call(_this, item, _this.viewType);
               _this.change.timer = null;
             }), 10);
@@ -1428,8 +1451,8 @@
      * @param  {object} keyVals [description]
      * @return {*}         [description]
      */
-    _baseSetValues: function (keyVals) {
-      BbaseEst.each(keyVals, this._bind(function (value, key) {
+    _baseSetValues: function(keyVals) {
+      BbaseEst.each(keyVals, this._bind(function(value, key) {
         this._setValue(key, value);
       }));
     },
@@ -1441,10 +1464,10 @@
      * @param  {[type]} val  [description]
      * @return {[type]}      [description]
      */
-    _baseSetAttr: function (path, val) {
+    _baseSetAttr: function(path, val) {
       var _this = this;
       if (BbaseEst.typeOf(path) === 'string') BbaseEst.setValue(_this.model.attributes, path, val);
-      else BbaseEst.each(path, function (value, key) {
+      else BbaseEst.each(path, function(value, key) {
         BbaseEst.setValue(_this.model.attributes, key, value);
       });
     },
@@ -1458,7 +1481,7 @@
      *         'args.styles.name.display': 'block'
      *       });
      */
-    _setValues: function (keyVals) {
+    _setValues: function(keyVals) {
       var _this = this;
       _this._baseSetValues(keyVals);
       if (_this._options.onChange) {
@@ -1472,7 +1495,7 @@
      * @method [模型] - _setAttr
      * @param {[type]} keyVals [description]
      */
-    _setAttr: function (path, val) {
+    _setAttr: function(path, val) {
       this._baseSetAttr(path, val);
     },
     /**
@@ -1482,7 +1505,7 @@
      * @method [模型] - _setAttrValues ( 新版将移除 )
      * @param {[type]} keyVals [description]
      */
-    _setAttributes: function (path, val) {
+    _setAttributes: function(path, val) {
       var _this = this;
       _this._baseSetAttr(path, val);
       if (_this._options.onChange) {
@@ -1494,7 +1517,7 @@
      * @param  {[type]} name [description]
      * @return {[type]}      [description]
      */
-    _getParam: function (name) {
+    _getParam: function(name) {
       var _this = this;
       if (_this.collection) {
         return _this.collection.__params[name];
@@ -1507,7 +1530,7 @@
      * @param {[type]} name  [description]
      * @param {[type]} value [description]
      */
-    _setParam: function (name, value) {
+    _setParam: function(name, value) {
       var _this = this;
       if (_this.collection) {
         _this.collection._setParam(name, value);
@@ -1524,7 +1547,7 @@
      *  @example
      *      this._getTarget(e);
      */
-    _getTarget: function (e) {
+    _getTarget: function(e) {
       return e.target ? $(e.target) : $(e.currentTarget);
     },
     /**
@@ -1536,7 +1559,7 @@
      *  @example
      *      this._getEventTarget(e);
      */
-    _getEventTarget: function (e) {
+    _getEventTarget: function(e) {
       return e.currentTarget ? $(e.currentTarget) : $(e.target);
     },
     /**
@@ -1545,7 +1568,7 @@
      * @method _beforeTransition
      * @return {[type]} [description]
      */
-    _beforeTransition: function () {
+    _beforeTransition: function() {
       this.$el.css({ 'visibility': 'hidden' });
     },
     /**
@@ -1554,7 +1577,7 @@
      * @method _afterTransition
      * @return {[type]} [description]
      */
-    _afterTransition: function () {
+    _afterTransition: function() {
       this.$el.css({ 'visibility': 'visible' });
     },
     /**
@@ -1574,7 +1597,7 @@
      *      }));
      *  });
      */
-    _one: function (name, callback) {
+    _one: function(name, callback) {
       var _this = this;
       try {
         var _name, isArray = BbaseEst.typeOf(name) === 'array';
@@ -1587,7 +1610,7 @@
 
         if (_this[_one]) {
           if (isArray) {
-            BbaseEst.each(name, function (item) {
+            BbaseEst.each(name, function(item) {
               _nameList.push(item.replace(/^(.+)-(\d+)?$/g, "$1"));
             });
             _this._require(_nameList, callback);
@@ -1611,7 +1634,7 @@
      *            new Module();
      *        });
      */
-    _require: function (dependent, callback) {
+    _require: function(dependent, callback) {
       seajs.use(dependent, BbaseEst.proxy(callback, this));
     },
     /**
@@ -1623,10 +1646,10 @@
      * @example
      *  this._delay(function(){}, 5000);
      */
-    _delay: function (fn, time) {
+    _delay: function(fn, time) {
       var _this = this;
-      setTimeout(function () {
-        setTimeout(function () {
+      setTimeout(function() {
+        setTimeout(function() {
           if (fn) fn.call(_this);
         }, time);
       }, 0);
@@ -1638,7 +1661,7 @@
      * @param  {Function} fn [description]
      * @return {[type]}      [description]
      */
-    _bind: function (fn) {
+    _bind: function(fn) {
       return BbaseEst.proxy(fn, this);
     },
     /**
@@ -1648,28 +1671,28 @@
      * @param  {[type]} template [description]
      * @return {[type]}          [description]
      */
-    _parseHbs: function (template) {
+    _parseHbs: function(template) {
       if (BbaseEst.isEmpty(template)) {
         return null;
       }
       if (template.indexOf('_quote_') > -1) {
         return template;
       }
-      return template.replace(/{{#If\s+(.*?)}}/mg, function (expression) {
+      return template.replace(/{{#If\s+(.*?)}}/mg, function(expression) {
         return "{{#If '" + (expression + "&& '1'").replace(/{{#If\s+(.*)}}/mg, '$1').replace(/'/mg, '_quote_') + "'}}";
       });
     },
-    _empty: function () {},
+    _empty: function() {},
     /**
      * 销毁系统绑定的事件及其它
      *
      * @method [销毁] - _destroy
      * @return {[type]} [description]
      */
-    _destroy: function () {
+    _destroy: function() {
       var _this = this;
       _this._re_dup = null;
-      BbaseEst.each(_this._directives_, function (item) {
+      BbaseEst.each(_this._directives_, function(item) {
         if (BbaseApp.getDirective(item.name) && BbaseApp.getDirective(item.name).unbind) {
           BbaseApp.getDirective(item.name).unbind.call(_this, item.object);
         }
@@ -1680,13 +1703,13 @@
      *
      * @method _close
      */
-    _close: function () {
+    _close: function() {
       var _this = this;
       if (BbaseApp.getDialog(_this.viewId)) {
         BbaseApp.getDialog(_this.viewId).close().remove();
       }
     },
-    render: function () {
+    render: function() {
       this._render();
     },
     /**
@@ -1732,7 +1755,7 @@
      *                }
      *            }, this);
      */
-    _dialog: function (options, context) {
+    _dialog: function(options, context) {
       var _this = this;
       var ctx = context || this;
       if (BbaseEst.typeOf(options) === 'string') {
@@ -1764,7 +1787,7 @@
         el: '#base_item_dialog' + options.viewId,
         content: options.content || '<div id="' + options.viewId + '"></div>',
         viewId: options.viewId,
-        onshow: function () {
+        onshow: function() {
           try {
             var result = options.onShow && options.onShow.call(_this, options);
             if (typeof result !== 'undefined' && !result)
@@ -1777,7 +1800,7 @@
                   options.viewId + '"></div>'
               }).addView(options.viewId, new options.moduleId(options));
             } else if (BbaseEst.typeOf(options.moduleId) === 'string') {
-              seajs.use([options.moduleId], function (instance) {
+              seajs.use([options.moduleId], function(instance) {
                 try {
                   if (!instance) {
                     console.error(options.moduleId + ' is not defined');
@@ -1795,7 +1818,7 @@
             console.log(e);
           }
         },
-        onclose: function () {
+        onclose: function() {
           if (BbaseApp.getPanel(options.viewId)) BbaseApp.removePanel(options.viewId);
           if (options.onClose) options.onClose.call(ctx, options);
           BbaseApp.getDialogs().pop();
@@ -1812,15 +1835,15 @@
      *      <div class="tool-tip" title="提示内容">content</div>
      *      this._initToolTip();
      */
-    _initToolTip: function ($parent, className) {
+    _initToolTip: function($parent, className) {
       var _className = className || '.tool-tip';
       var $tip = $parent ? $(_className, $parent) : this.$(_className);
 
-      if (this._options.render){
+      if (this._options.render) {
         $tip = $tip.not(this._options.render + ' .tool-tip');
       }
 
-      $tip.hover(function (e) {
+      $tip.hover(function(e) {
         var _this = this;
         var hash = $(_this).attr('data-hash');
         var offset = $(_this).attr('data-offset') || 1;
@@ -1841,12 +1864,15 @@
           return;
         }*/
         BbaseApp.getData('toolTipList').push(hash);
-        $(window).one('click', function () {
+        $(window).one('click', function() {
           var has = false;
-          BbaseEst.each(BbaseApp.getData('toolTipList'), function (item) {
-            if (BbaseApp.getDialog(item)) {BbaseApp.getDialog(item).close().remove();has=true;};
+          BbaseEst.each(BbaseApp.getData('toolTipList'), function(item) {
+            if (BbaseApp.getDialog(item)) {
+              BbaseApp.getDialog(item).close().remove();
+              has = true;
+            };
           });
-          if (!has){$('.tool-tip-dialog').parent().hide();}
+          if (!has) { $('.tool-tip-dialog').parent().hide(); }
         });
 
 
@@ -1863,15 +1889,15 @@
           target: $(_this).get(0)
         });
 
-      }, function () {
+      }, function() {
         var _this = this;
         try {
-          if ($(_this).attr('data-hash')){
-              BbaseApp.getDialog($(_this).attr('data-hash')).close().remove();
+          if ($(_this).attr('data-hash')) {
+            BbaseApp.getDialog($(_this).attr('data-hash')).close().remove();
           }
         } catch (e) {
           debugger
-          BbaseEst.each(BbaseApp.getData('toolTipList'), function (item) {
+          BbaseEst.each(BbaseApp.getData('toolTipList'), function(item) {
             if (BbaseApp.getDialog(item)) BbaseApp.getDialog(item).close().remove();
           });
           BbaseApp.emptyDialog();

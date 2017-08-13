@@ -282,10 +282,10 @@ var BbaseItem = BbaseSuperView.extend({
 
     if (ctx.collapsed) {
       ctx.$(opts._collapse + ':first').removeClass('x-caret-down');
-      ctx.$(opts._subRender + ':first').slideUp(CONST.COLLAPSE_SPEED).addClass('hide');
+      ctx.$(opts._subRender + ':first').slideUp ? ctx.$(opts._subRender + ':first').slideUp(CONST.COLLAPSE_SPEED).addClass('hide') : ctx.$(opts._subRender + ':first').addClass('hide');
     } else {
       ctx.$(opts._collapse + ':first').addClass('x-caret-down');
-      ctx.$(opts._subRender + ':first').slideDown(CONST.COLLAPSE_SPEED).removeClass('hide');
+      ctx.$(opts._subRender + ':first').slideDown ? ctx.$(opts._subRender + ':first').slideDown(CONST.COLLAPSE_SPEED).removeClass('hide') : ctx.$(opts._subRender + ':first').removeClass('hide');
     }
   },
   /**

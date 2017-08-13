@@ -31,6 +31,9 @@
       _this.filters = { navigator: [], form: [] }; // 过滤器
       _this.cache = {}; // 缓存
       _this.directives = {}; // 指令
+      _this._batch_replace_ready = [];
+      _this._batch_replace = [];
+      _this._batchReplaceTimer = null;
     },
     /**
      * 返回当前应用底层使用的是backbone版本

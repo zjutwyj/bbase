@@ -1,5 +1,5 @@
 Bbase.ROUTE['test'] = function () {
-  seajs.use(['BbaseJquery', 'TestCenter'], function (BbaseJquery, TestCenter) {
+  seajs.use(['TestCenter'], function (TestCenter) {
     BbaseApp.addRegion('TestCenter', TestCenter, {
       el: '#app-main'
     });

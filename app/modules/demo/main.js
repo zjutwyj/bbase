@@ -1,6 +1,6 @@
 Bbase.MODULE['DemoCenter'] = 'modules/demo/controllers/DemoCenter.js';
 Bbase.ROUTE['demo'] = function () {
-  seajs.use(['BbaseJquery', 'DemoCenter'], function (BbaseJquery, DemoCenter) {
+  seajs.use(['DemoCenter'], function (DemoCenter) {
     BbaseApp.addRegion('DemoCenter', DemoCenter, {
       el: '#app-main'
     });

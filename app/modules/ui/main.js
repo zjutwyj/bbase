@@ -1,6 +1,6 @@
 Bbase.MODULE['UiTab'] = 'modules/ui/controllers/UiTab.js';
 Bbase.ROUTE['ui_tab'] = function () {
-  seajs.use(['BbaseJquery', 'UiTab'], function (BbaseJquery, UiTab) {
+  seajs.use(['UiTab'], function (UiTab) {
     BbaseApp.addRegion('UiTab', UiTab, {
       el: '#app-main'
     });
@@ -8,7 +8,7 @@ Bbase.ROUTE['ui_tab'] = function () {
 };
 Bbase.MODULE['UiCenter'] = 'modules/ui/controllers/UiCenter.js';
 Bbase.ROUTE['ui'] = function () {
-  seajs.use(['BbaseJquery', 'UiCenter'], function (BbaseJquery, UiCenter) {
+  seajs.use(['UiCenter'], function (UiCenter) {
     BbaseApp.addRegion('UiCenter', UiCenter, {
       el: '#app-main'
     });

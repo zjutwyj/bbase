@@ -8,7 +8,7 @@ define('BbaseScrollfix', [], function(require, exports, module){
   var BbaseScrollfix;
 
   ;(function($) {
-  jQuery.fn.scrollFix = function(height, dir, options) {
+  $.fn.scrollFix = function(height, dir, options) {
     options = options || {};
     height = height || 0;
     height = height == "top" ? 0 : height;
@@ -91,7 +91,7 @@ define('BbaseScrollfix', [], function(require, exports, module){
       }
     });
   };
-})(jQuery);
+})(window.jQuery || window.Zepto);
 
   BbaseScrollfix = function(options){
     this.options = options || {

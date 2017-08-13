@@ -1,6 +1,6 @@
 Bbase.MODULE['ThemeCenter'] = 'modules/theme/controllers/ThemeCenter.js';
 Bbase.ROUTE['theme'] = function () {
-  seajs.use(['BbaseJquery', 'ThemeCenter'], function (BbaseJquery, ThemeCenter) {
+  seajs.use(['ThemeCenter'], function (ThemeCenter) {
     BbaseApp.addRegion('ThemeCenter', ThemeCenter, {
       el: '#app-main'
     });

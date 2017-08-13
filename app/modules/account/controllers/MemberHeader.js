@@ -119,7 +119,7 @@ define('MemberHeader', [], function (require, exports, module) {
       SERVICE.logout();
     },
     login: function () {
-      seajs.use(['BbaseJquery', 'MemberLogin'], function (BbaseJquery, MemberLogin) {
+      seajs.use(['MemberLogin'], function (MemberLogin) {
         BbaseApp.addRegion('MemberLogin', MemberLogin, {
           el: '#app-account'
         });

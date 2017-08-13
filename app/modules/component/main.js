@@ -1,5 +1,5 @@
 Bbase.ROUTE['component'] = function () {
-  seajs.use(['BbaseJquery', 'ComponentCenter'], function (BbaseJquery, ComponentCenter) {
+  seajs.use(['ComponentCenter'], function (ComponentCenter) {
     BbaseApp.addRegion('ComponentCenter', ComponentCenter, {
       el: '#app-main'
     });
