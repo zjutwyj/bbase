@@ -736,7 +736,7 @@
 
       if (_this.viewUpdate) setTimeout(_this._bind(function() {
         _this.viewUpdate.call(_this, _this._options)
-      }), 0);
+      }), 10);
     },
     /**
      * 向视图添加元素

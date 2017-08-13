@@ -19,7 +19,7 @@ Bbase.DIRECTIVE['bbasecomponentshapepick'] = {
         size: object.size,
         quickClose: true,
         onChange: this._bind(function (result) {
-          this._set(object.cur, result[0].svg);
+          this._set(object.cur, result.svg);
           if (object.onChange) object.onChange.call(this, result);
         })
       });

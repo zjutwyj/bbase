@@ -71,9 +71,14 @@ define('BbaseListExpand', [], function (require, exports, module) {
       setTimeout(function () {
         _this.iscroll && _this.iscroll.refresh();
       }, 100);
+    },
+    afterShow:function(){
       if (this._options.cur) {
         this.handleClick(this._options.cur);
       }
+    },
+    viewUpdate: function(){
+      this.iscroll && this.iscroll.refresh();
     },
     handleClick: function (value) {
       var curModel = null;
@@ -103,9 +108,7 @@ define('BbaseListExpand', [], function (require, exports, module) {
       this._set('showMore', !this._get('showMore'));
       this._options.max = this._get('showMore') ? 10000 : this.initMax;
       this._setModels(this.copyList);
-      this.iscroll.refresh();
     }
-
   });
 
   module.exports = BbaseListExpand;
