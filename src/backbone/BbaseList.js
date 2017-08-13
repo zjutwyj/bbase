@@ -730,7 +730,9 @@
           }
         }, 3);
       } else if (len_l < len_c) {
-        _this._remove(len_l, len_c);
+        setTimeout(function() {
+          _this._remove(len_l, len_c);
+        }, 3);
       }
       _this.list.show();
 

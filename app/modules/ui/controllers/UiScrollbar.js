@@ -89,20 +89,20 @@ define('UiScrollbar', [], function (require, exports, module) {
                   <td class="argDefault"><span>-</span></td>
                 </tr>
                 <tr>
-                  <td class="argName"><span>mouseWheel</span></td>
-                  <td class="argDesc"><span>是否支持鼠标滚动</span></td>
-                  <td class="argType"><span>boolean</span></td>
-                  <td class="argDefault"><span>true</span></td>
-                </tr>
-                <tr>
                   <td class="argName"><span>scrollbars</span></td>
                   <td class="argDesc"><span>是否显示滚动条</span></td>
                   <td class="argType"><span>boolean</span></td>
                   <td class="argDefault"><span>true</span></td>
                 </tr>
                 <tr>
+                  <td class="argName"><span>mouseWheel</span></td>
+                  <td class="argDesc"><span>是否支持鼠标滚轮滚动</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>true</span></td>
+                </tr>
+                <tr>
                   <td class="argName"><span>disableMouse</span></td>
-                  <td class="argDesc"><span>禁用鼠标</span></td>
+                  <td class="argDesc"><span>禁用鼠标点击屏幕滚动</span></td>
                   <td class="argType"><span>boolean</span></td>
                   <td class="argDefault"><span>true</span></td>
                 </tr>

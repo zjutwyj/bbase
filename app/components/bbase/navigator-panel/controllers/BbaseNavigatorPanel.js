@@ -33,7 +33,7 @@ define('BbaseNavigatorPanel', [], function(require, exports, module) {
       this._super({
         template: `
           <div class="BbaseNavigatorPanel-wrap bbase-component-navigator-panel" style="width: ${width};height:${wrapHeight};">
-            <div class="navlist" style="width: ${width};height: ${height}" bb-bbaseuiscrollbar="{viewId: 'navigatorpanelscroll'}">
+            <div class="navlist" style="width: ${width};height: ${height}" bb-bbaseuiscrollbar="{viewId: 'navigatorpanelscroll',disableMouse:true}">
                 <ul class="menu-list menu-list-primary ng-pristine ng-untouched ng-valid angular-ui-tree-nodes ng-not-empty" bb-bbaseuisortable="{viewId:'bbaseuinavigatorpanelsortable',onEnd: onSortEnd,handle:'.drag-area'}" ui-tree-nodes="" aria-invalid="false">
               </ul>
             </div>
