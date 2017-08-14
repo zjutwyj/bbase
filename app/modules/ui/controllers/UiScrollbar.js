@@ -102,7 +102,7 @@ define('UiScrollbar', [], function (require, exports, module) {
                 </tr>
                 <tr>
                   <td class="argName"><span>disableMouse</span></td>
-                  <td class="argDesc"><span>禁用鼠标点击屏幕滚动</span></td>
+                  <td class="argDesc"><span>禁用鼠标点击事件及屏幕滚动</span></td>
                   <td class="argType"><span>boolean</span></td>
                   <td class="argDefault"><span>true</span></td>
                 </tr>

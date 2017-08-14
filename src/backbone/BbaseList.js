@@ -732,13 +732,13 @@
       } else if (len_l < len_c) {
         setTimeout(function() {
           _this._remove(len_l, len_c);
-        }, 3);
+        }, 20);
       }
       _this.list.show();
 
       if (_this.viewUpdate) setTimeout(_this._bind(function() {
         _this.viewUpdate.call(_this, _this._options)
-      }), 10);
+      }), 23);
     },
     /**
      * 向视图添加元素

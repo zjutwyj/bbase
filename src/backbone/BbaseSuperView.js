@@ -1865,14 +1865,12 @@
         }*/
         BbaseApp.getData('toolTipList').push(hash);
         $(window).one('click', function() {
-          var has = false;
           BbaseEst.each(BbaseApp.getData('toolTipList'), function(item) {
             if (BbaseApp.getDialog(item)) {
               BbaseApp.getDialog(item).close().remove();
-              has = true;
             };
           });
-          if (!has) { $('.tool-tip-dialog').parent().hide(); }
+          $('.tool-tip-dialog').parent().hide();
         });
 
 
@@ -1896,11 +1894,10 @@
             BbaseApp.getDialog($(_this).attr('data-hash')).close().remove();
           }
         } catch (e) {
-          debugger
           BbaseEst.each(BbaseApp.getData('toolTipList'), function(item) {
             if (BbaseApp.getDialog(item)) BbaseApp.getDialog(item).close().remove();
           });
-          BbaseApp.emptyDialog();
+          setTimeout(function(){$('.tool-tip-dialog').parent().hide();}, 500);
         }
       });
     }
