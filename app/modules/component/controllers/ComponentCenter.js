@@ -21,13 +21,14 @@ define('ComponentCenter', [], function(require, exports, module){
     },
     init: function () {
       return {
-        cur: 'ComponentAlbum',
+        cur: 'ComponentProduct',
         items: [
           { text: '图片', moduleId: 'ComponentPhoto' ,oneRender: false},
           { text: '颜色', moduleId: 'ComponentColor' ,oneRender: false},
           { text: '音乐', moduleId: 'ComponentMusic' ,oneRender: false},
           { text: '图标', moduleId: 'ComponentIcon' ,oneRender: false},
           { text: '产品', moduleId: 'ComponentProduct' ,oneRender: false},
+          { text: '新闻', moduleId: 'ComponentNews' ,oneRender: false},
           { text: '列表', moduleId: 'ComponentList' ,oneRender: false},
           { text: '形状', moduleId: 'ComponentShape' ,oneRender: false},
           { text: '相册', moduleId: 'ComponentAlbum' ,oneRender: false}

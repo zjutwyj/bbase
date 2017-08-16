@@ -6,8 +6,9 @@
  */
 define('BbaseSelect', [], function(require, exports, module) {
   var BbaseSelect, model, item, collection, list;
+
   var listTemp = '';
-  var viewTemp = '<div class="bbase-ui-select bui-select ui-select" aria-disabled="false" tabindex="0" hidefocus="true" style="width: {{width}}px;" aria-pressed="false"> <input type="text" readonly="readonly" class="bui-select-input bui-form-field" style="width: {{minus width 56}}px;border-right:none;" aria-disabled="false" aria-pressed="false"> <span class="x-icon x-icon-normal down" style="margin-left: -4px;"><i class="bbasefont bbase-caretdown" ></i> </span> </div>';
+  var viewTemp = '<div class="bbase-ui-select bui-select ui-select" bb-click="showSelect" aria-disabled="false" tabindex="0" hidefocus="true" style="width: {{width}}px;" aria-pressed="false"> <input type="text" readonly="readonly" class="bui-select-input bui-form-field" style="width: {{minus width 56}}px;border-right:none;" aria-disabled="false" aria-pressed="false"> <span class="x-icon x-icon-normal down" style="margin-left: -4px;"><i class="bbasefont bbase-caretdown" ></i> </span> </div>';
 
   model = BbaseModel.extend({});
 
@@ -195,9 +196,6 @@ define('BbaseSelect', [], function(require, exports, module) {
    *    });
    */
   BbaseSelect = BbaseView.extend({
-    events: {
-      'click .bbase-ui-select': 'showSelect'
-    },
     initialize: function() {
       if (BbaseEst.typeOf(this.options.render) !== 'string') {
         this.$el = $(this.options.el, this.options.render);
@@ -314,6 +312,11 @@ define('BbaseSelect', [], function(require, exports, module) {
       event.stopImmediatePropagation();
       if (!this.selectNode) this.initSelect(this._options.items);
 
+      $('body').css({
+        'height': $(window).height(),
+        'overflow':'hidden'
+      });
+
       this.$('.bui-select').addClass('select-down');
       this.$select.css({
         zIndex: 100000,
@@ -321,6 +324,7 @@ define('BbaseSelect', [], function(require, exports, module) {
         left: this.$('.bui-select input').offset().left,
         top: this.$('.bui-select').offset().top + this.$('.bui-select input:first').outerHeight() -1
       }).show();
+
       $(document).one('click', $.proxy(function() {
         this.hideSelect();
       }, this));
@@ -328,6 +332,10 @@ define('BbaseSelect', [], function(require, exports, module) {
     hideSelect: function() {
       this.$select.hide();
       this.$('.bui-select').removeClass('select-down');
+       $('body').css({
+        'height': 'auto',
+        'overflow':'auto'
+      })
     },
     disable: function() {
       this._options.disabled = true;

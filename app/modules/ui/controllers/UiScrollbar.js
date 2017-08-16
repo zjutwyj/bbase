@@ -112,6 +112,12 @@ define('UiScrollbar', [], function (require, exports, module) {
                   <td class="argType"><span>boolean</span></td>
                   <td class="argDefault"><span>true</span></td>
                 </tr>
+                <tr>
+                  <td class="argName"><span>disableMouseMove</span></td>
+                  <td class="argDesc"><span>PC版禁用鼠标点击滚动，但不禁止事件</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>true</span></td>
+                </tr>
                  <tr>
                   <td class="argName"><span>interactiveScrollbars</span></td>
                   <td class="argDesc"><span>滚动条能拖动</span></td>
@@ -134,6 +140,12 @@ define('UiScrollbar', [], function (require, exports, module) {
                   <td class="argName"><span>maxScroll</span></td>
                   <td class="argDesc"><span>滚动到底部回调</span></td>
                   <td class="argType"><span>function</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>iscroll文档</span></td>
+                  <td class="argDesc"><span>http://wiki.jikexueyuan.com/project/iscroll-5/basicfeatures.html</span></td>
+                  <td class="argType"><span>-</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
 

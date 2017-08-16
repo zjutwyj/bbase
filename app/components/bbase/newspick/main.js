@@ -1,25 +1,25 @@
-Bbase.MODULE['BbaseProductPick'] = 'components/bbase/productpick/controllers/BbaseProductPick.js';
+Bbase.MODULE['BbaseNewsPick'] = 'components/bbase/newspick/controllers/BbaseNewsPick.js';
 
 
-Bbase.DIRECTIVE['bbasecomponentproductpick'] = {
+Bbase.DIRECTIVE['bbasecomponentnewspick'] = {
   bind: function (value, selector) {
-    var object = this._getObject(value, ['cur', 'productList']);
-    var viewId = object.viewId || BbaseEst.nextUid('bbasecomponentproductpick');
+    var object = this._getObject(value, ['cur', 'newsList']);
+    var viewId = object.viewId || BbaseEst.nextUid('bbasecomponentnewspick');
 
     this.$(selector).eq(0).click(this._bind(function (e) {
       e.stopImmediatePropagation();
       this._dialog({
         viewId: viewId,
-        title: '选择产品',
-        moduleId: 'BbaseProductPick',
+        title: '选择新闻',
+        moduleId: 'BbaseNewsPick',
         width: object.width || 876,
         cover: true,
         height: object.height || 522,
         items: object.items,
-        productIdPath: object.productIdPath,
+        newsIdPath: object.newsIdPath,
         picPathPath: object.picPathPath,
-        prodtypePath: object.prodtypePath,
-        namePath: object.namePath,
+        titlePath: object.titlePath,
+        originPath: object.originPath,
         addTimePath: object.addTimePath,
         domain:object.domain,
         size: object.size,

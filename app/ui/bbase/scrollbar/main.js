@@ -28,7 +28,6 @@ Bbase.DIRECTIVE['bbaseuiscrollbar'] = {
         $(_this[object.id].scroller).on('mousedown', function () {
             $(_this[object.id].scroller).off('mousemove').on('mousemove', function (e) {
           e.stopImmediatePropagation();
-          console.log('aaa');
         });
         });
 

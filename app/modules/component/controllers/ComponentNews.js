@@ -1,19 +1,19 @@
 'use strict';
 /**
  * @description 模块功能说明
- * @class ComponentProduct
+ * @class ComponentNews
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('ComponentProduct', [], function (require, exports, module) {
-  var ComponentProduct, template;
+define('ComponentNews', [], function (require, exports, module) {
+  var ComponentNews, template;
 
   template = `
-    <div class="ComponentProduct-wrap">
+    <div class="ComponentNews-wrap">
       <div id="ui-nav" bb-bbaseuitab="{viewId: 'uiComponentNavTab', cur: cur,theme:'tab-ul-line',path: 'moduleId', tpl: tpl, items: items, direction: 'v'}"></div>
     </div>
   `;
 
-  ComponentProduct = BbaseView.extend({
+  ComponentNews = BbaseView.extend({
     initialize: function () {
       this._super({
         template: template
@@ -21,10 +21,9 @@ define('ComponentProduct', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        cur: 'ComponentProductCatePick',
+        cur: 'ComponentNewsPick',
         items: [
-          { text: '产品选择(弹)', moduleId: 'ComponentProductPick',oneRender: false },
-          { text: '产品分类(弹)', moduleId: 'ComponentProductCatePick',oneRender: false }
+          { text: '新闻选择(弹)', moduleId: 'ComponentNewsPick',oneRender: false }
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>
@@ -33,5 +32,5 @@ define('ComponentProduct', [], function (require, exports, module) {
     }
   });
 
-  module.exports = ComponentProduct;
+  module.exports = ComponentNews;
 });

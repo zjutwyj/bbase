@@ -26,7 +26,11 @@ Bbase.MODULE['ComponentIconPick'] = 'modules/component/controllers/ComponentIcon
 
 Bbase.MODULE['ComponentProduct'] = 'modules/component/controllers/ComponentProduct.js';
 Bbase.MODULE['ComponentProductPick'] = 'modules/component/controllers/ComponentProductPick.js';
+Bbase.MODULE['ComponentProductCatePick'] = 'modules/component/controllers/ComponentProductCatePick.js';
 
+
+Bbase.MODULE['ComponentNews'] = 'modules/component/controllers/ComponentNews.js';
+Bbase.MODULE['ComponentNewsPick'] = 'modules/component/controllers/ComponentNewsPick.js';
 
 Bbase.MODULE['ComponentList'] = 'modules/component/controllers/ComponentList.js';
 Bbase.MODULE['ComponentListPick'] = 'modules/component/controllers/ComponentListPick.js';
