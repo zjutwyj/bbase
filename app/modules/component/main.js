@@ -31,6 +31,7 @@ Bbase.MODULE['ComponentProductCatePick'] = 'modules/component/controllers/Compon
 
 Bbase.MODULE['ComponentNews'] = 'modules/component/controllers/ComponentNews.js';
 Bbase.MODULE['ComponentNewsPick'] = 'modules/component/controllers/ComponentNewsPick.js';
+Bbase.MODULE['ComponentNewsCatePick'] = 'modules/component/controllers/ComponentNewsCatePick.js';
 
 Bbase.MODULE['ComponentList'] = 'modules/component/controllers/ComponentList.js';
 Bbase.MODULE['ComponentListPick'] = 'modules/component/controllers/ComponentListPick.js';

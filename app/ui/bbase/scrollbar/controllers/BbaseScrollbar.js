@@ -10,6 +10,7 @@ define('BbaseScrollbar', [], function(require, exports, module){
     return; }
   /*iscroll*/
   (function(g, n, f) {
+    var preventForm = false;
     function p(a, b) {
       this.wrapper = "string" == typeof a ? n.querySelector(a) : a;
       this.scroller = this.wrapper.children[0];
@@ -28,6 +29,7 @@ define('BbaseScrollbar', [], function(require, exports, module){
       this.options.directionLockThreshold = this.options.eventPassthrough ? 0 : this.options.directionLockThreshold;
       this.options.bounceEasing = "string" == typeof this.options.bounceEasing ? d.ease[this.options.bounceEasing] || d.ease.circular : this.options.bounceEasing;
       this.options.resizePolling = void 0 === this.options.resizePolling ? 60 : this.options.resizePolling;
+      preventForm = typeof this.options.preventFormClick === 'undefined' ? true : this.options.preventFormClick;
       !0 === this.options.tap && (this.options.tap = "tap");
       "scale" == this.options.shrinkScrollbars && (this.options.useTransition = !1);
       this.options.invertWheelDirection = this.options.invertWheelDirection ? -1 : 1;
@@ -66,7 +68,7 @@ define('BbaseScrollbar', [], function(require, exports, module){
       this.maxPosY = this.maxPosX = 0;
       this.options.interactive && (this.options.disableTouch || (d.addEvent(this.indicator, "touchstart", this), d.addEvent(g, "touchend", this)), this.options.disablePointer || (d.addEvent(this.indicator, d.prefixPointerEvent("pointerdown"), this), d.addEvent(g, d.prefixPointerEvent("pointerup"), this)), this.options.disableMouse || (d.addEvent(this.indicator, "mousedown", this), d.addEvent(g, "mouseup", this)));
       this.options.fade && (this.wrapperStyle[d.style.transform] =
-        this.scroller.translateZ, this.wrapperStyle[d.style.transitionDuration] = d.isBadAndroid ? "0.001s" : "0ms", this.wrapperStyle.opacity = "0")
+        this.scroller.translateZ, this.wrapperStyle[d.style.transitionDuration] = d.isBadAndroid ? "0.001s" : "0ms", this.wrapperStyle.opacity = "0");
     }
     var u = g.requestAnimationFrame || g.webkitRequestAnimationFrame || g.mozRequestAnimationFrame || g.oRequestAnimationFrame || g.msRequestAnimationFrame || function(a) { g.setTimeout(a, 1E3 / 60) },
       d = function() {
@@ -151,8 +153,13 @@ define('BbaseScrollbar', [], function(require, exports, module){
           a.target.dispatchEvent(c)
         };
         b.click = function(a) {
-          var b = a.target,
-            c; /(SELECT|INPUT|TEXTAREA)/i.test(b.tagName) || (c = n.createEvent("MouseEvents"), c.initMouseEvent("click", !0, !0, a.view, 1, b.screenX, b.screenY, b.clientX, b.clientY, a.ctrlKey, a.altKey, a.shiftKey, a.metaKey, 0, null), c._constructed = !0, b.dispatchEvent(c)) };
+            var b = a.target,
+            c,f = false;
+          if (preventForm){
+            f = /(SELECT|INPUT|TEXTAREA)/i.test(b.tagName);
+          }
+
+           f || (c = n.createEvent("MouseEvents"), c.initMouseEvent("click", !0, !0, a.view, 1, b.screenX, b.screenY, b.clientX, b.clientY, a.ctrlKey, a.altKey, a.shiftKey, a.metaKey, 0, null), c._constructed = !0, b.dispatchEvent(c)) };
         return b
       }();
     p.prototype = {

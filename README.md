@@ -385,6 +385,7 @@ this._getPage(); //获取当前列表第几页
 ### BbaseDetail操作
 ```js
 this._save(function(response){}, function(response){}); // 保存表单
+this._isNew(); // 判断是否是新增模型类
 ```
 
 ### BbaseList列表操作
@@ -708,6 +709,12 @@ new BbaseService().factory({
 兼容所有浏览器(包括IE6789)
 
 ### 更新记录
+>2017.08.18
+BbaseDetail新增 _isNew()方法
+
+>2017.07.10
+优化视图批处理渲染
+
 >2017.05.30
 添加生命周期：afterShow
 添加指令参数：show

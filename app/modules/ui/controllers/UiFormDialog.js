@@ -119,6 +119,12 @@ define('UiFormDialog', [], function (require, exports, module) {
                   <td class="argType"><span>function()</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
+                <tr>
+                  <td class="argName"><span>onClose</span></td>
+                  <td class="argDesc"><span>对话框关闭后回调</span></td>
+                  <td class="argType"><span>function()</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
               </tbody>
             </table>
           </div>

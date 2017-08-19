@@ -1,17 +1,17 @@
 'use strict';
 /**
  * @description 模块功能说明
- * @class BbaseProductCatePick
+ * @class BbaseNewsCatePick
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('BbaseProductCatePick', [], function(require, exports, module) {
-  var BbaseProductCatePick;
+define('BbaseNewsCatePick', [], function(require, exports, module) {
+  var BbaseNewsCatePick;
 
   var curList = [];
   var categoryList = [];
   var tempList = [];
 
-  BbaseProductCatePick = BbaseList.extend({
+  BbaseNewsCatePick = BbaseList.extend({
     initialize: function() {
       var categoryIdPath = this.categoryIdPath = this.options.categoryIdPath || 'id';
       var imagePath = this.imagePath = this.options.imagePath || 'image';
@@ -22,7 +22,7 @@ define('BbaseProductCatePick', [], function(require, exports, module) {
       var height = this.options.height ? (this.options.height - 67) : 455;
       this._super({
         template: `
-          <div class="BbaseProductCatePick-wrap bbase-component-product-cate-pick">
+          <div class="BbaseNewsCatePick-wrap bbase-component-news-cate-pick">
             <div class="theme-black" style="height: ${height}px;overflow:auto;">
               <div class="form" style="background-color: #fff;padding: 10px;">
                 <div id="category-widget" class="jhw-product-category jhw-category-product">
@@ -39,12 +39,12 @@ define('BbaseProductCatePick', [], function(require, exports, module) {
         `,
         model: BbaseModel.extend({
           baseId: categoryIdPath,
-          baseUrl: CONST.API + '/product/detail',
+          baseUrl: CONST.API + '/news/detail',
           fields: [categoryIdPath, namePath, imagePath]
         }),
         collection: BbaseCollection.extend({
           url: this.options.listApi ?
-            this.options.listApi.indexOf('http') > -1 ? this.options.listApi : CONST.API + this.options.listApi : CONST.API + '/category/product/list'
+            this.options.listApi.indexOf('http') > -1 ? this.options.listApi : CONST.API + this.options.listApi : CONST.API + '/category/news/list'
         }),
         item: BbaseItem.extend({
           tagName: 'li',
@@ -168,5 +168,5 @@ define('BbaseProductCatePick', [], function(require, exports, module) {
     }
   });
 
-  module.exports = BbaseProductCatePick;
+  module.exports = BbaseNewsCatePick;
 });

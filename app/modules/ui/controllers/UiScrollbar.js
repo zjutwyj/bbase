@@ -20,27 +20,27 @@ define('UiScrollbar', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main">
-             <div class="demo-item clearfix" bb-bbaseuiscrollbar="{viewId:'bbaseuiscrollbar',id:'iscroll'}" style="height:50px;width:200px;">
+             <div class="demo-item clearfix" bb-bbaseuiscrollbar="{viewId:'bbaseuiscrollbar',id:'iscroll',preventFormClick:false}" style="height:50px;width:200px;">
               <ul class="inner s-ul">
-              <li class="s-li" data-id="s-li-1">鼠标拖动1</li>
-              <li class="s-li" data-id="s-li-2">鼠标拖动2</li>
-              <li class="s-li" data-id="s-li-3">鼠标拖动3</li>
-              <li class="s-li" data-id="s-li-4">鼠标拖动4</li>
-              <li class="s-li" data-id="s-li-5">鼠标拖动5</li>
-              <li class="s-li" data-id="s-li-6">鼠标拖动6</li>
-              <li class="s-li" data-id="s-li-7">鼠标拖动7</li>
-              <li class="s-li" data-id="s-li-8">鼠标拖动8</li>
-              <li class="s-li" data-id="s-li-9">鼠标拖动9</li>
-              <li class="s-li" data-id="s-li-10">鼠标拖动10</li>
-              <li class="s-li" data-id="s-li-11">鼠标拖动11</li>
-              <li class="s-li" data-id="s-li-12">鼠标拖动12</li>
-              <li class="s-li" class="s-li" class="s-li" class="s-li" data-id="s-li-13">鼠标拖动13</li>
-              <li class="s-li" class="s-li" class="s-li" data-id="s-li-14">鼠标拖动14</li>
-              <li class="s-li" class="s-li" data-id="s-li-15">鼠标拖动15</li>
-              <li class="s-li" data-id="s-li-16">鼠标拖动16</li>
-              <li class="s-li" data-id="s-li-17">鼠标拖动17</li>
-              <li class="s-li" data-id="s-li-18">鼠标拖动18</li>
-              <li class="s-li" data-id="s-li-19">鼠标拖动19</li>
+              <li class="s-li" data-id="s-li-1">鼠标拖动1 <input type="text" value="input" data-id="1"/></li>
+              <li class="s-li" data-id="s-li-2">鼠标拖动2<input type="text" value="input" data-id="2"/></li>
+              <li class="s-li" data-id="s-li-3">鼠标拖动3<input type="text" value="input" data-id="3"/></li>
+              <li class="s-li" data-id="s-li-4">鼠标拖动4<input type="text" value="input" data-id="4"/></li>
+              <li class="s-li" data-id="s-li-5">鼠标拖动5<input type="text" value="input" data-id="5"/></li>
+              <li class="s-li" data-id="s-li-6">鼠标拖动6<input type="text" value="input" data-id="6"/></li>
+              <li class="s-li" data-id="s-li-7">鼠标拖动7<input type="text" value="input" data-id="7"/></li>
+              <li class="s-li" data-id="s-li-8">鼠标拖动8<input type="text" value="input" data-id="8"/></li>
+              <li class="s-li" data-id="s-li-9">鼠标拖动9<input type="text" value="input" data-id="9"/></li>
+              <li class="s-li" data-id="s-li-10">鼠标拖动10<input type="text" value="input" data-id="10"/></li>
+              <li class="s-li" data-id="s-li-11">鼠标拖动11<input type="text" value="input" data-id="11"/></li>
+              <li class="s-li" data-id="s-li-12">鼠标拖动12<input type="text" value="input" data-id="12"/></li>
+              <li class="s-li" class="s-li" class="s-li" class="s-li" data-id="s-li-13">鼠标拖动13<input type="text" value="input" data-id="13"/></li>
+              <li class="s-li" class="s-li" class="s-li" data-id="s-li-14">鼠标拖动14<input type="text" value="input" data-id="14"/></li>
+              <li class="s-li" class="s-li" data-id="s-li-15">鼠标拖动15<input type="text" value="input" data-id="15"/></li>
+              <li class="s-li" data-id="s-li-16">鼠标拖动16<input type="text" value="input" data-id="16"/></li>
+              <li class="s-li" data-id="s-li-17">鼠标拖动17<input type="text" value="input" data-id="17"/></li>
+              <li class="s-li" data-id="s-li-18">鼠标拖动18<input type="text" value="input" data-id="18"/></li>
+              <li class="s-li" data-id="s-li-19">鼠标拖动19<input type="text" value="input" data-id="19"/></li>
               </ul>
              </div>
           </div>
@@ -131,6 +131,12 @@ define('UiScrollbar', [], function (require, exports, module) {
                   <td class="argDefault"><span>false</span></td>
                 </tr>
                 <tr>
+                  <td class="argName"><span>preventFormClick</span></td>
+                  <td class="argDesc"><span>阻止表单元素如（INPUT,TEXTAREA,SELECT）点击事件冒泡</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>true</span></td>
+                </tr>
+                <tr>
                   <td class="argName"><span>minScroll</span></td>
                   <td class="argDesc"><span>滚动到顶部回调</span></td>
                   <td class="argType"><span>function</span></td>
@@ -181,7 +187,7 @@ define('UiScrollbar', [], function (require, exports, module) {
       this._set('cur', parseInt(this._get('cur')));
     },
     afterRender: function(){
-      this.$('.s-ul li').click(function(){
+      this.$('.s-ul li input').click(function(){
         alert($(this).attr('data-id'));
       });
     }

@@ -23,7 +23,8 @@ define('ComponentNews', [], function (require, exports, module) {
       return {
         cur: 'ComponentNewsPick',
         items: [
-          { text: '新闻选择(弹)', moduleId: 'ComponentNewsPick',oneRender: false }
+          { text: '新闻选择(弹)', moduleId: 'ComponentNewsPick',oneRender: false },
+          { text: '新闻分类(弹)', moduleId: 'ComponentNewsCatePick',oneRender: false }
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

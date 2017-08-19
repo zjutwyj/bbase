@@ -20,6 +20,7 @@ Bbase.DIRECTIVE['bbaseuiscrollbar'] = {
         fadeScrollbars: BbaseEst.typeOf(object.fadeScrollbars) === 'boolean' ? object.fadeScrollbars : true,
         disableMouse: BbaseEst.typeOf(object.disableMouse) === 'boolean' ? object.disableMouse : isMobile ? true : false,
         disablePointer:  BbaseEst.typeOf(object.disablePointer) === 'boolean' ? object.mouseWheel : true,
+        preventFormClick:  BbaseEst.typeOf(object.preventFormClick) === 'boolean' ? object.preventFormClick : true,
         interactiveScrollbars:  BbaseEst.typeOf(object.interactiveScrollbars) === 'boolean' ? object.mouseWheel : true,
         preventDefault: BbaseEst.typeOf(object.preventDefault) === 'boolean' ? object.preventDefault : false
       });

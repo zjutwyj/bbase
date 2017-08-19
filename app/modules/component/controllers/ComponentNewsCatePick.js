@@ -1,24 +1,24 @@
 'use strict';
 /**
  * @description 模块功能说明
- * @class ComponentProductCatePick
+ * @class ComponentNewsCatePick
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('ComponentProductCatePick', [], function(require, exports, module){
-  var ComponentProductCatePick, template;
+define('ComponentNewsCatePick', [], function(require, exports, module){
+  var ComponentNewsCatePick, template;
 
   template = `
-    <div class="ComponentProductCatePick-wrap" style="padding:20px;">
+    <div class="ComponentNewsCatePick-wrap" style="padding:20px;">
 
 <div class="formPanel form-demo">
         <div class="anything" style="display: block;">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbasecomponentproductcatepick="{viewId: 'productcatepick', cur: cur, listApi: '/product/cate/list'"</span>
+              <span class="name">bbasecomponentnewscatepick="{viewId: 'newscatepick', cur: cur, listApi: '/news/cate/list'"</span>
             </div>
           </div>
           <div class="main">
-          <div  class="demo-item clearfix"><a href="javascript:;" bb-bbasecomponentproductcatepick="{viewId: 'componentproductcate1', items: items, cur: cur, onChange: handleChnage}">选择产品分类</a></div>
+          <div  class="demo-item clearfix"><a href="javascript:;" bb-bbasecomponentnewscatepick="{viewId: 'componentnewscate1', items: items, cur: cur, onChange: handleChnage}">选择新闻分类</a></div>
           </div>
           <div class="footer">
           <div class="item-type-title clearfix left nowrap" bb-watch="cur:html,size:html">输出结果：{{cur}}; 列表长度: {{size}}</div>
@@ -54,7 +54,7 @@ define('ComponentProductCatePick', [], function(require, exports, module){
                 </tr>
                 <tr>
                   <td class="argName"><span>items</span></td>
-                  <td class="argDesc"><span>静态产品分类列表</span></td>
+                  <td class="argDesc"><span>静态新闻分类列表</span></td>
                   <td class="argType"><span>array</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
@@ -149,7 +149,7 @@ define('ComponentProductCatePick', [], function(require, exports, module){
     }
   }
 
-  ComponentProductCatePick = BbaseView.extend({
+  ComponentNewsCatePick = BbaseView.extend({
     initialize: function(){
       this._super({
         template: template
@@ -167,5 +167,5 @@ define('ComponentProductCatePick', [], function(require, exports, module){
     }
   });
 
-  module.exports = ComponentProductCatePick;
+  module.exports = ComponentNewsCatePick;
 });
