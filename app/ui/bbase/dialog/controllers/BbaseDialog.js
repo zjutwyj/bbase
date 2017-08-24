@@ -343,7 +343,11 @@ define('BbaseDialog', function(require, exports, module){
 
       if (elem) {
         this.__follow(elem);
-      } else {
+      }
+      else if (this.options.left){
+        this.__offsetLeftTop(this.options.left, this.options.top);
+      }
+       else {
         this.__center();
       }
 
@@ -515,7 +519,12 @@ define('BbaseDialog', function(require, exports, module){
       style.left = Math.max(parseInt(left), dl) + 'px';
       style.top = Math.max(parseInt(top), dt) + 'px';
     },
-
+    __offsetLeftTop:function(left, top){
+      var popup = this.__popup;
+      var style = popup[0].style;
+      style.left = left + 'px';
+      style.top = top + 'px';
+    },
 
     // 指定位置 @param    {HTMLElement, Event}  anchor
     __follow: function (anchor) {

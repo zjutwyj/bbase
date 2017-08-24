@@ -12,6 +12,8 @@ Bbase.DIRECTIVE['bbaseuidialog'] = {
         target: object.follow ? $(selector).get(0) : object.target ? $(object.target).get(0) : null,
         width: object.width || 'auto',
         height: object.height || 'auto',
+        left: object.mouse ? e.pageX : undefined,
+        top: object.mouse ? e.pageY : undefined,
         cover: object.cover,
         data: BbaseEst.extend({
           id: object.id

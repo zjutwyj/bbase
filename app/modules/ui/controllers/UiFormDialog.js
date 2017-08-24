@@ -20,6 +20,7 @@ define('UiFormDialog', [], function (require, exports, module) {
           <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidialog="{viewId:'bbaseuidialog',content: 'content', quickClose: true, title:'普通对话框'}">普通对话框</div>
            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidialog="{viewId:'bbaseuidialog',moduleId: 'UiListExpand',quickClose: true}">模块对话框</div>
            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidialog="{viewId:'bbaseuidialog',content: 'content',quickClose: true, follow: true}">跟随元素</div>
+           <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidialog="{viewId:'bbaseuidialog',content: 'content',quickClose: true, mouse: true}">跟随鼠标</div>
           </div>
           <div class="footer">
               <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'ddd', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>

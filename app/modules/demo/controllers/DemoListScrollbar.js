@@ -4,23 +4,19 @@
  * @class DemoListScrollbar
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('DemoListScrollbar', [], function (require, exports, module) {
+define('DemoListScrollbar', [], function(require, exports, module) {
   var DemoListScrollbar;
 
   var items = [];
-  for(var i = 0; i< 2000; i++){
+  for (var i = 0; i < 2000; i++) {
     items.push({
       id: i,
-      seoTitle: 'seoTitle' + i,
-      bind: {
-        address: 'www.bbase.com' + i,
-        url: 'http://www.bbase.com/' + i
-      }
+      layoutId: 'seoTitle' + i
     });
   }
 
   DemoListScrollbar = BbaseList.extend({
-    initialize: function () {
+    initialize: function() {
       var theme = BbaseEst.nextUid('DemoListScrollbar');
       this._super({
         template: `
@@ -68,15 +64,19 @@ define('DemoListScrollbar', [], function (require, exports, module) {
         model: BbaseModel.extend({
           baseId: 'id',
           baseUrl: CONST.API + '/baseLayout/detail',
-          fields: ['id', 'seoTitle']
+          fields: ['id', 'layoutId']
         }),
         collection: BbaseCollection.extend({
-          url: CONST.API + '/baseLayout/list'
+          url: 'http://pc.jihui88.com/rest/api/comm/layout/list',
+          sync: function(method, collection, options) {
+            options.dataType = 'jsonp';
+            return BbaseBackbone.sync(method, collection, options);
+          }
         }),
         item: BbaseItem.extend({
           tagName: 'div',
           className: 'ng-isolate-scope overview-item',
-          template : `
+          template: `
                 <div class="row-action">
                   <!---->
                   <div class="item-name ng-binding">
@@ -85,7 +85,7 @@ define('DemoListScrollbar', [], function (require, exports, module) {
                   <!---->
                   <!---->
                   <div class="item-content ng-binding">
-                    <span bb-watch="seoTitle:html">{{seoTitle}}</span>
+                    <span bb-watch="layoutId:html">{{layoutId}}</span>
                   </div>
                   <!---->
                   <div class="item-flag">
@@ -105,29 +105,25 @@ define('DemoListScrollbar', [], function (require, exports, module) {
                   <!---->
                 </div>
           `,
-          initData: function(){
+          initData: function() {
             return {
-              nameEdit: false,
-              bind: {
-                address: '',
-                url: '',
-                state: '00'
-              }
+              layoutId: ''
             }
           }
         }),
-        items: items,
-        pageSize: 16,
+        //items: items,
+        diff:true,
+        pageSize: 8,
         render: '.render-section'
       });
     },
-    initData: function () {
+    initData: function() {
       return {}
     },
-    viewUpdate: function(){
-      this.iscroll &&this.iscroll.refresh();
+    viewUpdate: function() {
+      this.iscroll && this.iscroll.refresh();
     },
-    maxScroll: function(){
+    maxScroll: function() {
       this._loadMore();
     }
   });

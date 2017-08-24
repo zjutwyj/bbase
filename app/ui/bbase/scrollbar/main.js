@@ -43,6 +43,7 @@ Bbase.DIRECTIVE['bbaseuiscrollbar'] = {
   },
   show: function(object, value, selector){
     var _this = this;
+    object.id = object.id || 'iscroll';
     if (_this[object.id]) {
       _this[object.id].refresh();
       _this[object.id].on('scrollEnd', function () {

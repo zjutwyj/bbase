@@ -408,7 +408,11 @@ this._setCount(5);// 设置总个数
 this._getTotalPage();// 获取总页数
 this._getLength(); // 获取列表长度
 
-this._reload();         // 刷新列表
+this._reload({    // 刷新列表
+  afterRender: function(){
+    ...
+  }
+});
 
 this._batch({  // 批量操作
     url: CONST.API + '/message/batch/del',

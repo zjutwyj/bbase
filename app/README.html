@@ -380,7 +380,11 @@ this._setCount(5);// 设置总个数
 this._getTotalPage();// 获取总页数
 this._getLength(); // 获取列表长度
 
-this._reload();         // 刷新列表
+this._reload({    // 刷新列表
+  afterRender: function(){
+    ...
+  }
+});
 
 this._batch({  // 批量操作
     url: CONST.API + &#39;/message/batch/del&#39;,
@@ -636,6 +640,10 @@ BbaseApp.addFilter(&#39;myFilter&#39;,function(arg1,arg2,arg3){
 <p>兼容所有浏览器(包括IE6789)</p>
 <h3 id="-">更新记录</h3>
 <blockquote>
+<p>2017.08.18
+BbaseDetail新增 _isNew()方法</p>
+<p>2017.07.10
+优化视图批处理渲染</p>
 <p>2017.05.30
 添加生命周期：afterShow
 添加指令参数：show</p>

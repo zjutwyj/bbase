@@ -1301,6 +1301,11 @@
         var fnInfo = {};
         list[0] = BbaseEst.trim(list[0]);
         list[1] = BbaseEst.trim(list[1]);
+        if (list.length > 2){
+          for(var j = 2; j < list.length;j++){
+            list[1] = list[1] + ':' + list[j];
+          }
+        }
         if (ignore) {
           if (BbaseEst.typeOf(ignore) === 'array') {
             var dx = BbaseEst.findIndex(ignore, function(a) {
