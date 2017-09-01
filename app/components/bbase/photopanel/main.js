@@ -11,6 +11,7 @@ Bbase.DIRECTIVE['bbasecomponentphotopanel'] = {
         listApi: object.listApi,
         items: object.items,
         width: object.width,
+        size: object.size,
         showCropBtn: object.showCropBtn,
         showSettingBtn: object.showSettingBtn,
         onChange: BbaseEst.proxy(function (item, init) {

@@ -2418,7 +2418,7 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
       } else {
         this.$el.addClass('color-picker-min');
       }
-      this.init = false;
+      //this.init = false;
     },
     onSlideChange: function (values, handle, init) {
       if (!init) {
@@ -2444,6 +2444,10 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
     beforeRender: function () {
       this.model.set('viewId', BbaseEst.nextUid('farbtatic'));
       this.init = true;
+    },
+
+    afterShow:function(){
+      this.init = false;
     },
     initFarbtastic: function () {
       this.$show = this.$('.ui-bg-color-show');

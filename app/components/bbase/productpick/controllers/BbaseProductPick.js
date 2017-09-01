@@ -23,6 +23,7 @@ define('BbaseProductPick', [], function (require, exports, module) {
       this._super({
         template: `
           <div class="BbaseProductPick-wrap bbase-component-poductpick">
+            <div class="cate-nav"><a target="_blank" href="http://www.jihui88.com/member/index.html#/product">&gt;&gt;&nbsp;前往后台管理产品</a></div>
             <div class="plugin-product-header">
             <div class="pro-6"><span class="header-pic">产品图片</span><span>产品名称[型号]</span></div>
               <div class="pro-2"><span>创建时间</span></div>

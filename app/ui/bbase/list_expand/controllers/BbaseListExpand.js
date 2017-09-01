@@ -47,6 +47,8 @@ define('BbaseListExpand', [], function (require, exports, module) {
           }
         }),
         diff: true,
+        catch: this.options.cache,
+        session: this.options.session,
         pageSize: 999999,
         render: '.inner-list'
       });

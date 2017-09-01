@@ -77,6 +77,7 @@ var CONST = {
     DIALOG_TIP: '对话框',
     WIN_TIP: '窗口',
     INFO_TIP: '提示信息：',
+    LOAD_MORE: '正在加载',
     CANCEL: '取消',
     JSON_TIP: '您的浏览器版本过低， 请升级到IE9及以上或下载谷歌浏览器(https://www.google.com/intl/zh-CN/chrome/browser/desktop/index.html)！'
   }

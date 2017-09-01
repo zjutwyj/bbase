@@ -326,7 +326,7 @@ BbaseHandlebars.registerHelper('PIC', function (name, number, options) {
   }
   if (!name || !/[^\s]+\.(?:jpe?g|gif|png|bmp)/i.test(name)) return def.indexOf('http://') > -1 ? def : CONST.DOMAIN + def + version;
 
-  var ignoreDomain = name.indexOf('upaiyun.com') === -1 && name.indexOf('leminchou.com') === -1; // 忽略的域名
+  var ignoreDomain = name.indexOf('upaiyun.com') === -1 && name.indexOf('leshai.cc') === -1; // 忽略的域名
   if (ignoreDomain && BbaseEst.startsWidth(name, 'http') && name.indexOf('upload') > -1) {
     name = name.substring(name.indexOf('upload'), name.length);
   }

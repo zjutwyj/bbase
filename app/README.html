@@ -394,6 +394,9 @@ this._batchDel({
     url: CONST.API + &#39;/message/batch/del&#39;,
     field: &#39;id&#39;
 });
+
+this._loadMore()  // 加载更多
+this._hasMore(); // 是否还有更多
 </code></pre>
 <h3 id="bbasecollection-">BbaseCollection集合操作</h3>
 <pre><code class="lang-js">this.collection._set([{},{}])或this._setModels([{},{}]); // 重置列表(常用于过滤数据，排序等)

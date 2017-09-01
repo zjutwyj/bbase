@@ -643,6 +643,7 @@
       options = _.defaults({}, options, setOptions);
       if (options.parse) models = this.parse(models, options);
       var singular = !(_.typeOf(models) === 'array');
+      var _this = this;
       models = singular ? models ? [ models ] : [] : _.clone(models);
       var i, l, id, model, attrs, existing, sort;
       var at = options.at;
@@ -659,7 +660,9 @@
           attrs = models[i] || {};
           models[i].id = attrs[targetModel.prototype.baseId || "id"];
         }
-        this._super('view')._setModels(models);
+        setTimeout(function(){
+          _this._super('view')._setModels(models);
+        },0);
         return;
       }
       for (i = 0, l = models.length; i < l; i++) {

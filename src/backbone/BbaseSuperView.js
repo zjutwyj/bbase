@@ -362,6 +362,7 @@
     _handleReplace: function(item, model, selector, attrName, ngAttrName, name) {
       var _result = '';
       var _this = this;
+
       /*if (this.collection && !BbaseEst.equal(model._previousAttributes.models, this.collection.models)) {
         model._previousAttributes.models = BbaseEst.clone(this.collection.models);
         BbaseEst.trigger(this.cid + 'models');
@@ -373,12 +374,16 @@
         item.result === _result) {
         return;
       }
+
       // 缓存node
       if (!item.node || (item.node.size && item.node.size() === 0)) {
         item.node = _this.$(selector).eq(item.index);
+
         if (item.node.size() === 0) {
+
           // 针对bb-src
           item.node = _this.$('.directive_' + BbaseEst.hash(selector)).eq(item.index);
+
           //console.error("error: call wyj for more info");
         }
       }
@@ -389,26 +394,31 @@
         selector: selector,
         ngAttrName: ngAttrName
       });
+
       // 批量更新
-      if (!BbaseApp._batchReplaceTimer){
+      if (!BbaseApp._batchReplaceTimer) {
         BbaseApp._batchReplaceTimer = true;
-        BbaseApp._batchReplaceTimer = setTimeout(function(){
+
+        BbaseApp._batchReplaceTimer = setTimeout(function() {
+
           BbaseApp._batch_replace = BbaseApp._batch_replace_ready.splice(0);
           BbaseApp._batch_replace_ready = [];
+
           _this._batchReplace();
-           BbaseApp._batch_replace = [];
+          BbaseApp._batch_replace = [];
           BbaseApp._batchReplaceTimer = null;
+
         }, 3);
       }
+
       // 缓存结果
       item.result = _result;
-
     },
     _batchReplace: function() {
       var _this = this;
-      while(BbaseApp._batch_replace.length > 0){
+      while (BbaseApp._batch_replace.length > 0) {
         var pop = BbaseApp._batch_replace.pop();
-          _this._replaceNode(pop.attrName, pop.item.node, pop._result, pop.selector,pop.ngAttrName);
+        _this._replaceNode(pop.attrName, pop.item.node, pop._result, pop.selector, pop.ngAttrName);
       }
     },
     /**
@@ -520,20 +530,25 @@
               for (var i = 1; i < list.length; i++) {
                 _hash = BbaseEst.hash(list[0] + list[i]);
                 attrName = list[i];
+
                 if (BbaseEst.msie()) {
                   ngAttrName = 'ng-' + list[i];
+
                   if (!_this._re_dup[_hash])
                     _$template = _this._options.template.replace(new RegExp('\\s' + attrName +
                       '=', "img"), ' ' + ngAttrName + '=');
+
                 } else {
                   ngAttrName = attrName;
                   _$template = _this.$template;
                 }
+
                 // 缓存模板
                 if (!_this._re_dup[_hash]) {
 
                   _this._re_dup[_hash] = [];
                   node = $(_$template).find(list[0]);
+
                   if (node.size() === 0) {
                     node = _this.$el.find(list[0]);
                   }
@@ -545,6 +560,7 @@
                     }));
                   });
                 }
+
                 BbaseEst.each(_this._re_dup[_hash], function(item) {
                   _this._handleReplace(item, model, list[0], attrName, ngAttrName, name);
                 });
@@ -1301,8 +1317,8 @@
         var fnInfo = {};
         list[0] = BbaseEst.trim(list[0]);
         list[1] = BbaseEst.trim(list[1]);
-        if (list.length > 2){
-          for(var j = 2; j < list.length;j++){
+        if (list.length > 2) {
+          for (var j = 2; j < list.length; j++) {
             list[1] = list[1] + ':' + list[j];
           }
         }
@@ -1624,7 +1640,7 @@
           }
         }
       } catch (e) {
-        console.log('Error -> BbaseSuperView._one ->' + JSON.stringify(name) + e, { type: 'error' }); //debug__
+        console.log(e); //debug__
       }
     },
     /**
@@ -1902,7 +1918,7 @@
           BbaseEst.each(BbaseApp.getData('toolTipList'), function(item) {
             if (BbaseApp.getDialog(item)) BbaseApp.getDialog(item).close().remove();
           });
-          setTimeout(function(){$('.tool-tip-dialog').parent().hide();}, 500);
+          setTimeout(function() { $('.tool-tip-dialog').parent().hide(); }, 500);
         }
       });
     }

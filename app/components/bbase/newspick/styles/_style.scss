@@ -2,6 +2,14 @@
   padding: 0px;
   height: 441px;
   overflow: hidden;
+   /* 顶部工具栏*/
+  .cate-nav{
+    padding: 8px 5px 8px 13px;
+  }
+  .cate-nav a {
+    color: $mainColor;
+  }
+
   ul,
   li {
     list-style: none;
@@ -47,7 +55,7 @@
   }
   .plugin-news-header,
   .pro-header {
-    background: #efefef;
+    background: rgba(238, 238, 238, 0.45);
     overflow: hidden;
   }
   .pro-6 {
@@ -64,14 +72,14 @@
   }
   .plugin-news-search {
     width: 85px;
-    height: 28px;
-    line-height: 28px;
+   height: 25px;
+    line-height: 26px;
     padding: 1px 8px;
     border: 1px solid #ddd !important;
   }
   .plugin-news-item {
     border-bottom: 1px solid #eee;
-    padding: 10px 0;
+    padding: 7px 0;
     overflow: hidden;
     line-height: 60px;
     height: 60px;
@@ -88,6 +96,7 @@
   .news-title a {
     color: #666;
     text-decoration: none;
+    padding-left:13px;
   }
   .plugin-news-list input[type=button] {
     border: 1px solid #aaa;

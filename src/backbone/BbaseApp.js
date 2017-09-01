@@ -3,15 +3,15 @@
  * @class BbaseApp - 用户后台
  * @author yongjin<zjut_wyj@163.com> 2014/12/28
  */
-(function (BbaseEst, undefined) {
-  var BbaseApplication = function (options) {
+(function(BbaseEst, undefined) {
+  var BbaseApplication = function(options) {
     var _this = this;
     _this.options = options;
     BbaseEst.extend(_this, options);
     _this.initialize.apply(_this, arguments);
   };
   BbaseEst.extend(BbaseApplication.prototype, {
-    initialize: function () {
+    initialize: function() {
       var _this = this;
       _this.data = { itemActiveList: [], sessionId: '' }; // 全局数据
       _this.instance = {}; // 实例对象
@@ -42,7 +42,7 @@
      * @return {string}
      * @author wyj 15.5.20
      */
-    getAppType: function () {
+    getAppType: function() {
       return 'backbone';
     },
     /**
@@ -59,7 +59,7 @@
      *        args: args
      *      });
      */
-    addRegion: function (name, instance, options) {
+    addRegion: function(name, instance, options) {
       var _this = this;
       var panel = BbaseEst.nextUid('region');
 
@@ -102,7 +102,7 @@
      *          viewId: 'alipayView'
      *        }));
      */
-    addPanel: function (name, panel, options) {
+    addPanel: function(name, panel, options) {
       var _this = this;
       var isObject = BbaseEst.typeOf(panel.cid) === 'string' ? false : true;
       options = options || {};
@@ -126,7 +126,7 @@
      * @param name
      * @author wyj 14.12.29
      */
-    removePanel: function (name, panel) {
+    removePanel: function(name, panel) {
       try {
         var _this = this;
         var views = [];
@@ -134,11 +134,11 @@
         if (!panel) return;
         if (panel.append) return;
         if (panel.el !== 'body') {
-          $('.region', $(panel.el)).each(function () {
+          $('.region', $(panel.el)).each(function() {
             views.push($(this).attr('data-view'));
           });
           views.reverse();
-          BbaseEst.each(views, function (name) {
+          BbaseEst.each(views, function(name) {
             _this.removeView(name);
           });
         }
@@ -158,7 +158,7 @@
      * @example
      *      BbaseApp.addView('productList', new ProductList());
      */
-    addView: function (name, instance) {
+    addView: function(name, instance) {
       var _this = this;
       if (name in _this.instance) _this.removeView(name);
       _this.instance[name] = instance;
@@ -180,7 +180,7 @@
      * @example
      *        BbaseApp.removeView('productList');
      */
-    removeView: function (name) {
+    removeView: function(name) {
       var _this = this;
       try {
         if (_this.getView(name)) {
@@ -197,7 +197,7 @@
       return _this;
     },
 
-    panel: function (name, panel) {
+    panel: function(name, panel) {
       return this.addPanel(name, panel);
     },
     /**
@@ -207,7 +207,7 @@
      * @param view
      * @author wyj 14.12.29
      */
-    show: function (view) {
+    show: function(view) {
       this.addView(this.currentView, view);
     },
 
@@ -221,11 +221,11 @@
      * @example
      *      BbaseApp.getPanelf('panel');
      */
-    getPanel: function (name) {
+    getPanel: function(name) {
       return this.panels[name];
     },
 
-    add: function (name, instance) {
+    add: function(name, instance) {
       return this.addView(name, instance);
     },
 
@@ -236,7 +236,7 @@
      * @example
      *      BbaseApp.setCurrentView('list', new List());
      */
-    setCurrentView: function (name) {
+    setCurrentView: function(name) {
       this.currentView = name;
     },
     /**
@@ -247,7 +247,7 @@
      * @example
      *        BbaseApp.getCurrentView('list');
      */
-    getCurrentView: function () {
+    getCurrentView: function() {
       return this.currentView;
     },
     /**
@@ -260,7 +260,7 @@
      * @example
      *        BbaseApp.getView('productList');
      */
-    getView: function (name) {
+    getView: function(name) {
       return this.instance[name];
     },
     /**
@@ -272,7 +272,7 @@
      * @example
      *      BbaseApp.addDialog(dialog, id);
      */
-    addDialog: function (dialog, id) {
+    addDialog: function(dialog, id) {
       var _this = this;
       _this.dialog.push(dialog);
       if (id) {
@@ -287,7 +287,7 @@
      * @return {*}
      * @author wyj 15.1.23
      */
-    getDialogs: function () {
+    getDialogs: function() {
       return this.dialog;
     },
     /**
@@ -296,7 +296,7 @@
      * @author wyj 15.03.20
      *
      */
-    getDialog: function (id) {
+    getDialog: function(id) {
       var _this = this;
       if (BbaseEst.isEmpty(id)) {
         return _this.dialogs;
@@ -309,7 +309,7 @@
      * @return {*}
      * @author wyj 15.10.25
      */
-    getCurrentDialog: function () {
+    getCurrentDialog: function() {
       var _this = this;
       if (_this.getData('_curDialog')) {
         return _this.dialogs[_this.getData('_curDialog')];
@@ -324,9 +324,9 @@
      * @example
      *      BbaseApp.emptyDialog();
      */
-    emptyDialog: function () {
+    emptyDialog: function() {
       var _this = this;
-      BbaseEst.each(_this.dialog, function (item) {
+      BbaseEst.each(_this.dialog, function(item) {
         if (item && item.close) {
           item.close().remove();
         }
@@ -340,7 +340,7 @@
      * @method [模型] - addModel ( 添加模型类 )
      * @author wyj 15.1.23
      */
-    addModel: function (model) {
+    addModel: function(model) {
       this.models.push(model);
       return model;
     },
@@ -349,7 +349,7 @@
      * @method [模型] - getModels ( 获取所有模型类 )
      * @author wyj 15.1.23
      */
-    getModels: function () {
+    getModels: function() {
       return this.models;
     },
 
@@ -363,7 +363,7 @@
      * @example
      *      BbaseApp.addData('productList', productList);
      */
-    addData: function (name, data) {
+    addData: function(name, data) {
       this.data[name] = data;
     },
     /**
@@ -376,7 +376,7 @@
      * @example
      *        BbaseApp.getData('productList');
      */
-    getData: function (name) {
+    getData: function(name) {
       return this.data[name];
     },
     /**
@@ -390,7 +390,7 @@
      * @example
      *        BbaseApp.addModule('ProductList', '/modules/product/controllers/ProductList.js');
      */
-    addModule: function (name, val) {
+    addModule: function(name, val) {
       var _this = this;
       if (name in _this['modules']) {
         console.log('module:' + name + ' isExisted');
@@ -406,7 +406,7 @@
      * @example
      *
      */
-    getModules: function () {
+    getModules: function() {
       return this.modules;
     },
     /**
@@ -422,7 +422,7 @@
      *          });
      *      });
      */
-    addRoute: function (name, fn) {
+    addRoute: function(name, fn) {
       var _this = this;
       if (name in _this['routes']) {
         console.log('route:' + name + ' isExisted');
@@ -437,7 +437,7 @@
      * @author wyj 14.12.28
      *
      */
-    getRoutes: function () {
+    getRoutes: function() {
       return this.routes;
     },
     /**
@@ -452,7 +452,7 @@
                 module.exports = require('modules/album/views/photo_item.html');
               });
      */
-    addTemplate: function (name, fn) {
+    addTemplate: function(name, fn) {
       this.templates[name] = fn;
     },
     /**
@@ -464,7 +464,7 @@
      * @example
      *        BbaseApp.getTemplates();
      */
-    getTemplates: function () {
+    getTemplates: function() {
       return this.templates;
     },
     /**
@@ -479,12 +479,12 @@
      * @example
      *      App.addSession('__USER__', {username: 'ggggfj'});
      */
-    addSession: function (name, value, isSession) {
+    addSession: function(name, value, isSession) {
       try {
         var sessionId = BbaseEst.typeOf(isSession) === 'undefined' ? '' : isSession ? this.data.sessionId : '';
         localStorage['___JHW_BACKBONE__' + BbaseEst.hash(sessionId + name)] = JSON.stringify(value);
       } catch (e) {
-        console.log('Error9 -> addSession -> ' + e); //debug__
+        console.log(e); //debug__
       }
       return value;
     },
@@ -497,15 +497,27 @@
      * @example
      *      App.getSession('__USER__'); => {username: 'ggggfj'}
      */
-    getSession: function (name, isSession) {
+    getSession: function(name, isSession) {
       try {
         var sessionId = BbaseEst.typeOf(isSession) === 'undefined' ? '' : isSession ? this.data.sessionId : '';
+        var version = localStorage['___JHW_BACKBONE__' + BbaseEst.hash(sessionId + 'app_version')];
+        if (CONST.APP_VERSION && (!version || version !== CONST.APP_VERSION)) {
+          this.removeSession();
+          localStorage['___JHW_BACKBONE__' + BbaseEst.hash(sessionId + 'app_version')] = CONST.APP_VERSION;
+        }
         return JSON.parse(localStorage['___JHW_BACKBONE__' + BbaseEst.hash(sessionId + name)]);
       } catch (e) {
-        this.addSession(name, '');
         return '';
       }
 
+    },
+    removeSession: function() {
+      var storage = window.localStorage;
+      for (var i = 0; i < storage.length; i++) {
+        if (storage.key(i).indexOf('___JHW_BACKBONE__') > -1) {
+          storage.removeItem(storage.key(i));
+        }
+      }
     },
     /**
      * 添加编译模板
@@ -513,7 +525,7 @@
      * @param name
      * @param compile
      */
-    addCompileTemp: function (name, compile) {
+    addCompileTemp: function(name, compile) {
       this.compileTemps[name] = compile;
     },
     /**
@@ -522,7 +534,7 @@
      * @param name
      * @return {*}
      */
-    getCompileTemp: function (name) {
+    getCompileTemp: function(name) {
       return this.compileTemps[name];
     },
     /**
@@ -533,7 +545,7 @@
      * @param value
      * @author wyj 15.1.7
      */
-    addStatus: function (name, value) {
+    addStatus: function(name, value) {
       this.status[name] = value;
     },
     /**
@@ -544,7 +556,7 @@
      * @param value
      * @author wyj 15.1.7
      */
-    getStatus: function (name) {
+    getStatus: function(name) {
       return this.status[name];
     },
     /**
@@ -554,7 +566,7 @@
      * @return {{}|*|BbaseApp.status}
      * @author wyj 15.1.9
      */
-    getAllStatus: function () {
+    getAllStatus: function() {
       return this.status;
     },
     /**
@@ -563,7 +575,7 @@
      * @method [配置] - addOption ( 添加配置对象 )
      * @author wyj 15.9.19
      */
-    addOption: function (name, value) {
+    addOption: function(name, value) {
       this.options[name] = value;
     },
     /**
@@ -574,7 +586,7 @@
      * @return {*}
      * @author wyj 15.9.19
      */
-    getOption: function (name) {
+    getOption: function(name) {
       return BbaseEst.cloneDeep(this.options[name]);
     },
     /**
@@ -587,7 +599,7 @@
      * @example
      *
      */
-    addFilter: function (name, fn) {
+    addFilter: function(name, fn) {
       var _this = this;
       if (name === 'navigator') {
         _this.filters[name].push(fn);
@@ -605,7 +617,7 @@
      * @example
      *      App.getFilter('navigator');
      */
-    getFilter: function (name) {
+    getFilter: function(name) {
       return this.filters[name];
     },
     /**
@@ -618,7 +630,7 @@
      * @example
      *      App.getFilters('navigator');
      */
-    getFilters: function (name) {
+    getFilters: function(name) {
       return this.filters[name];
     },
     /**
@@ -628,7 +640,7 @@
      * @param options
      * @author wyj 15.10.25
      */
-    getParamsHash: function (options) {
+    getParamsHash: function(options) {
       var params = '',
         cacheId = '';
 
@@ -645,7 +657,7 @@
      * @param options
      * @author wyj 15.10.25
      */
-    addCache: function (options, result) {
+    addCache: function(options, result) {
       try {
         var _this = this;
         var cacheId = '';
@@ -670,7 +682,7 @@
      * @author wyj 15.10.25
      * @return {*}
      */
-    getCache: function (options) {
+    getCache: function(options) {
       var _this = this;
       var result = null;
       var cacheId = _this.getParamsHash(options);
@@ -691,7 +703,7 @@
      *      BbaseApp.removeCache();
      *      BbaseApp.removeCache(options);
      */
-    removeCache: function (options) {
+    removeCache: function(options) {
       var _this = this;
       var cacheId = null;
       if (options) {
@@ -707,7 +719,7 @@
      * @method [cookie] - addCookie ( 添加cookie )
      * @author wyj 15.1.13
      */
-    addCookie: function (name) {
+    addCookie: function(name) {
       var _this = this;
       if (BbaseEst.findIndex(_this.cookies, name) !== -1) {
         return;
@@ -721,7 +733,7 @@
      * @return {Array}
      * @author wyj 15.1.13
      */
-    getCookies: function () {
+    getCookies: function() {
       return this.cookies;
     },
     /**
@@ -731,7 +743,7 @@
      * @param {[type]} name [description]
      * @param {[type]} obj  [description]
      */
-    addDirective: function (name, obj) {
+    addDirective: function(name, obj) {
       this.directives[name] = obj;
     },
     /**
@@ -740,7 +752,7 @@
      * @method getDirective
      * @return {[type]} [description]
      */
-    getDirective: function (name) {
+    getDirective: function(name) {
       return this.directives[name];
     }
   });

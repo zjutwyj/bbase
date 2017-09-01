@@ -23,6 +23,7 @@ define('BbaseNewsPick', [], function (require, exports, module) {
       this._super({
         template: `
           <div class="BbaseNewsPick-wrap bbase-component-newspick">
+          <div class="cate-nav"><a target="_blank" href="http://www.jihui88.com/member/index.html#/news">&gt;&gt;&nbsp;前往后台管理新闻</a></div>
             <div class="plugin-news-header">
             <div class="pro-6"><span class="header-pic">新闻图片</span><span>新闻标题[来源]</span></div>
               <div class="pro-2"><span>创建时间</span></div>

@@ -15,9 +15,11 @@ Bbase.DIRECTIVE['bbasecomponentcolorpick'] = {
         target: object.target ? this.$(object.target).get(0) : null,
         quickClose: true,
         color: this._get(object.cur) || object.default || object.cur || '#ffffff',
-        onChange: this._bind(function (result) {
-          this._set(object.cur, result);
-          if (object.onChange) object.onChange.call(this, result);
+        onChange: this._bind(function (result, init) {
+          if (!init){
+            this._set(object.cur, result);
+          }
+          if (object.onChange) object.onChange.call(this, result,init);
         })
       });
       return false;

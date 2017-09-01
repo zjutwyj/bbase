@@ -422,6 +422,9 @@ this._batchDel({
     url: CONST.API + '/message/batch/del',
     field: 'id'
 });
+
+this._loadMore()  // 加载更多
+this._hasMore(); // 是否还有更多
 ```
 
 ### BbaseCollection集合操作

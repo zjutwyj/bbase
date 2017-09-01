@@ -19,10 +19,11 @@ define('BbaseNewsCatePick', [], function(require, exports, module) {
       var parentIdPath = this.parentIdPath = this.options.parentIdPath || 'parentId';
       var domain = this.domain = this.options.domain? (" domain='"+this.options.domain+"'") : '';
       var size = this.size = this.options.size || '5';
-      var height = this.options.height ? (this.options.height - 67) : 455;
+      var height = this.options.height ? (this.options.height - 87) : 455;
       this._super({
         template: `
           <div class="BbaseNewsCatePick-wrap bbase-component-news-cate-pick">
+            <div class="cate-nav"><a target="_blank" href="http://www.jihui88.com/member/index.html#/category/news">&gt;&gt;&nbsp;前往后台管理分类</a></div>
             <div class="theme-black" style="height: ${height}px;overflow:auto;">
               <div class="form" style="background-color: #fff;padding: 10px;">
                 <div id="category-widget" class="jhw-product-category jhw-category-product">

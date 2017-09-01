@@ -1,4 +1,13 @@
 .bbase-component-news-cate-pick {
+  /* 顶部工具栏*/
+  .cate-nav{
+    padding: 8px 5px 0 13px;
+  }
+  .cate-nav a {
+    color: $mainColor;
+  }
+
+  /*底部按钮*/
   #icon-btns {
     position: absolute;
     bottom: 18px;

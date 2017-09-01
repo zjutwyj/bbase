@@ -333,7 +333,7 @@
         //TODO 移除BbaseList默认的page 与pageSize使每页显示条数生效
         options.page = options.pageSize = null;
       }
-      if (!ctx._options.diff) { ctx.list.hide(); }
+      if (!ctx._options.diff&& !ctx._options.append) { ctx.list.hide(); }
       //TODO 若存在items且有page与pageSize  处理静态分页
       if (ctx._options.items) {
         if (!ctx._options.diff && !ctx._options.append) ctx._empty();
@@ -710,46 +710,49 @@
           return model.attributes;
         });
       }
-      _this.list.hide();
-      if (_this._options.append){
-        for(var i = 0,len = list.length; i< len; i++){
+      if (_this._options.append) {
+        for (var i = 0, len = list.length; i < len; i++) {
           _this.collection.push(list[i]);
         }
-      }else{
+      } else {
         _this.collection.each(_this._bind(function(model, i) {
-        if (i > len_l - 1) {} else {
-          if (list[i]) {
-            list[i]['dx'] = dx;
-            dx++;
-            model.view && model.view._set(_this._getPath(list[i]));
-            model.view && (model.id = list[i]['id']);
-            model.view && model.view._onAfterShow();
+          if (i > len_l - 1) {} else {
+            if (list[i]) {
+              list[i]['dx'] = dx;
+              dx++;
+              model.view && (model.id = list[i]['id']);
+              model.view && model.view._set(_this._getPath(list[i]));
+              model.view && model.view._onAfterShow();
+            }
           }
+        }));
+        if (len_l > len_c) { // 添加
+          //setTimeout(function() {
+            for (var j = len_c + 1; j <= len_l; j++) {
+              list[j - 1]['dx'] = dx;
+              dx++;
+              _this.collection.add(new _this._options.model(list[j - 1]));
+              //_this._push(new _this._options.model(list[j - 1]));
+            }
+          //}, 0);
+        } else if (len_l < len_c) {
+          setTimeout(function() {
+            _this._remove(len_l, len_c);
+          }, 20);
         }
-      }));
-      if (len_l > len_c) { // 添加
-        setTimeout(function() {
-          for (var j = len_c + 1; j <= len_l; j++) {
-            list[j - 1]['dx'] = dx;
-            dx++;
-            _this._push(new _this._options.model(list[j - 1]));
-          }
-        }, 3);
-      } else if (len_l < len_c) {
-        setTimeout(function() {
-          _this._remove(len_l, len_c);
-        }, 20);
-      }
       }
 
       _this.list.show();
 
-      if (_this.viewUpdate) setTimeout(_this._bind(function() {
-        if (BbaseEst.typeOf(_this.___append) === 'boolean'){
+      setTimeout(function() {
+        if (BbaseEst.typeOf(_this.___append) === 'boolean') {
           _this._options.append = _this.___append;
         }
-        _this.viewUpdate.call(_this, _this._options)
-      }), 23);
+      }, 25);
+
+      if (_this.viewUpdate) setTimeout(function() {
+        _this.viewUpdate.call(_this, _this._options);
+      }, 25);
     },
     /**
      * 向视图添加元素
@@ -1622,11 +1625,18 @@
     _getLength: function() {
       return this.collection.models.length;
     },
+    _hasMore: function(){
+      var _this = this;
+      if (_this._getTotalPage() === 0 ||
+        _this._getPage('page') === _this._getTotalPage()) {
+        return false;
+      }
+      return true;
+    },
     _loadMore: function() {
       var _this = this;
       _this.___append = BbaseEst.typeOf(_this._options.append) === 'boolean' ? _this._options.append : false;
-      if (_this._getTotalPage() === 0 ||
-        _this._getPage('page') === _this._getTotalPage()) {
+      if (!_this._hasMore()) {
         return false;
       }
       _this._options.append = true;

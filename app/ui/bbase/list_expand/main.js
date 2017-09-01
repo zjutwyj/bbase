@@ -14,6 +14,8 @@ Bbase.DIRECTIVE['bbaseuilistexpand'] = {
         items: object.items,
         listApi: object.listApi,
         max: object.max,
+        cache: object.cache,
+        session: object.session,
         height:object.height,
         onChange: this._bind(function (item, init, b, c) {
           if (typeof this.model.attributes[object.cur] !== 'undefined' && !BbaseEst.isEmpty(object.cur) && !init) {

@@ -82,6 +82,18 @@ define('UiListExpand', [], function(require, exports, module){
                   <td class="argDefault"><span>id</span></td>
                 </tr>
                 <tr>
+                  <td class="argName"><span>cache</span></td>
+                  <td class="argDesc"><span>是否缓存到内容中</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>flase</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>session</span></td>
+                  <td class="argDesc"><span>是否缓存到localStorage中</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>false</span></td>
+                </tr>
+                <tr>
                   <td class="argName"><span>onChange</span></td>
                   <td class="argDesc"><span>回调函数</span></td>
                   <td class="argType"><span>function(item)</span></td>
