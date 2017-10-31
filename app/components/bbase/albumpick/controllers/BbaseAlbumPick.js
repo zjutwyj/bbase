@@ -33,7 +33,7 @@ define('BbaseAlubmPick', [], function(require, exports, module){
             </ul>
             <div id="photo-main">
               <div class="photo-tool">
-              <a href="{{manageHref}}" bb-click="_close" class="album-add" target="_blank">新增相册</a>
+              <a href="{{manageHref}}" bb-click="_close" class="album-add" target="_blank">新增相册</a>&nbsp;&nbsp;&nbsp;(提示：图片标题、图片描述、链接设置请点击编辑按钮进行设置)
               </div>
               <ul class="photo-list js-album-list-ul">
               </ul>

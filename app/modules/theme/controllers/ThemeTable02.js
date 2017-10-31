@@ -22,6 +22,7 @@ define('ThemeTable02', [], function (require, exports, module) {
         template: `
           <div class="${theme}-wrap" style="padding:10px; width: 994px;">
             <style>
+            .${theme}-wrap *{-webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;}
               .${theme}-wrap{    font-size: 12px;}
               .${theme}-wrap .formPanel{border: none!important;}
               .${theme}-wrap .cube_link_header {height: 24px; background: ${CONST.LIGHTEN_COLOR}; border: 1px solid ${CONST.LIGHT_COLOR}; position: relative; margin-top: 5px }

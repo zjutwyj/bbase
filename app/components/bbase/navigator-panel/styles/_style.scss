@@ -1,4 +1,9 @@
 .bbase-component-navigator-panel {
+  * {
+    -webkit-box-sizing: initial;
+    -moz-box-sizing: initial;
+    box-sizing: initial;
+  }
   ._md-nav-bar-list,
   .angular-ui-tree-nodes,
   .c02-small-list,
@@ -41,7 +46,7 @@
     cursor: pointer;
   }
   .tree-node:hover {
-    background: rgba($mainColor,0.1);
+    background: rgba($mainColor, 0.1);
     color: $mainColor;
   }
   .tree-node.selected-page {
@@ -59,10 +64,10 @@
   .tree-node .custom-icon,
   .tree-node .drag-area,
   .tree-node .page-name-form,
-  .tree-node .settings-button {
+  .tree-node .settings-button,
+  .tree-node .delete-button {
     display: none;
     line-height: 34px;
-    height: 34px;
     margin-right: 8px;
   }
   .angular-ui-tree-drag .cc-icon-subpage,
@@ -107,6 +112,9 @@
     max-width: 135px;
     margin-left: 31px;
   }
+  .sub-page .page-name-form {
+    max-width: 80px;
+  }
   .tree-node.selected-page .page-name-form,
   .tree-node:hover .page-name-form {
     margin-left: 0;
@@ -129,9 +137,13 @@
   .tree-node:hover .drag-area,
   .tree-node:hover .settings-button {
     display: inline-block;
-    -webkit-transform: translateY(-3px) rotate(0);
-    -ms-transform: translateY(-3px) rotate(0);
-    transform: translateY(-3px) rotate(0);
+    -webkit-transform: translateY(-3px) translateX(1px) rotate(0);
+    -ms-transform: translateY(-3px) translateX(1px) rotate(0);
+    transform: translateY(-3px) translateX(1px) rotate(0);
+  }
+  .tree-node.selected-page .delete-button,
+  .tree-node:hover .delete-button {
+    display: inline-block;
   }
   .tree-node.selected-page .icon {
     color: rgba(255, 255, 255, .96);
@@ -171,7 +183,8 @@
   .angular-ui-tree-drag .indications,
   .tree-node .indications {
     margin-left: auto;
-    padding-right: 4px;
+    padding-right: 0px;
+    width: 76px;
   }
   .angular-ui-tree-drag .cc-icon-hide-eye,
   .tree-node .cc-icon-hide-eye {
@@ -197,6 +210,14 @@
   }
   .indications .bbase-setting {
     font-size: 28px;
+    margin-right: 4px;
+  }
+  .indications .bbase-delete {
+    font-size: 24px;
+    vertical-align: top;
+    -webkit-transform: translateX(-3px);
+    -ms-transform: translateX(-3px);
+    transform: translateX(-3px) translateY(1px)
   }
   .settings-button {
     -webkit-transform: translateY(-3px) rotate(45deg);
@@ -213,6 +234,11 @@
     -webkit-transform: translateY(-3px) rotate(-45deg);
     -ms-transform: translateY(-3px) rotate(-45deg);
     transform: translateY(-3px) rotate(-45deg);
+  }
+  .tree-node .delete-button:hover {
+    -webkit-transform: translateX(-3px) translateY(-1px);
+    -ms-transform: translateX(-3px) translateY(-1px);
+    transform: translateX(-3px) translateY(-1px);
   }
   .p18-panel-footer,
   cc-panel-footer {
@@ -299,7 +325,7 @@
     cursor: pointer;
   }
   .p9a-secondary {
-    background: rgba($mainColor,0.1);
+    background: rgba($mainColor, 0.1);
     color: $mainColor;
   }
   .p9-primary,
@@ -309,6 +335,9 @@
     padding: 0;
   }
   .-inverse.p9a-secondary:hover:not([disabled=disabled]) {
-    background: rgba($mainColor,0.1);
+    background: rgba($mainColor, 0.1);
+  }
+  .line-through {
+    text-decoration: line-through;
   }
 }

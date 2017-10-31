@@ -13,13 +13,20 @@ Bbase.DIRECTIVE['bbasecomponentphotopanel'] = {
         width: object.width,
         size: object.size,
         showCropBtn: object.showCropBtn,
+        onCrop: this._bind(function(pic){
+          if (object.onCrop) object.onCrop.call(this, pic);
+        }),
         showSettingBtn: object.showSettingBtn,
-        onChange: BbaseEst.proxy(function (item, init) {
+        onChange: BbaseEst.proxy(function (item, init, obj) {
           this._set(object.cur, item);
-          if (object.onChange) object.onChange.call(this, item, init);
+          if (object.onChange) object.onChange.call(this, item, init, obj);
         }, this)
       });
     });
-
+    if (typeof this.model.attributes[object.cur] !== 'undefined' && !BbaseEst.isEmpty(object.cur)) {
+      this._watch([object.cur], '', function () {
+        this._view(viewId).setValue(this._get(object.cur));
+      });
+    }
   }
 }

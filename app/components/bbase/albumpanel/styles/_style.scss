@@ -1,4 +1,7 @@
 .bbase-component-albumpanel {
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   .c4-overlay.preview {
     display: none;
   }
@@ -98,7 +101,7 @@
   .-icon-only.-medium.p9a-secondary,
   .-icon-only.p9c-primary {
     width: 36px;
-    padding: 5px;
+    padding: 0px;
     font-size: 32px;
   }
   .p9c-primary:hover:not([disabled=disabled]) {

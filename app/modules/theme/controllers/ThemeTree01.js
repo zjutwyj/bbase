@@ -44,6 +44,7 @@ define('ThemeTree01', [], function (require, exports, module) {
         template: `
           <div class="${theme}-wrap">
             <style>
+                .${theme}-wrap *{-webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;}
                .${theme}-wrap .tree-list-ul,.${theme}-wrap .tree-list-ul li {list-style:none;}
                .${theme}-wrap .tree-list-ul .bui-grid-row-even {background-color: #FAFAFA; }
                .${theme}-wrap .tree-list-ul .cate-grid {float: left; }

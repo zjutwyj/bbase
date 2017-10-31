@@ -1,4 +1,7 @@
 .bbase-component-photopick {
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   body,
   button,
   input,

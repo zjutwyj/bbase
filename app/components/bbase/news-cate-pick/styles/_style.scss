@@ -1,4 +1,7 @@
 .bbase-component-news-cate-pick {
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   /* 顶部工具栏*/
   .cate-nav{
     padding: 8px 5px 0 13px;
@@ -166,7 +169,9 @@
       border: 1px solid #aaa;
       margin-top: 0px;
       border-radius: 2px;
-      padding: 5px 21px;
+      padding: 0px 21px;
+      height:27px;
+      line-height:27px;
       background: #ffffff;
       cursor: pointer;
     }

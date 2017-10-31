@@ -1,5 +1,11 @@
 /*tab基础样式*/
 
+.bbase-ui-tab:before{-webkit-box-sizing: initial;
+    -moz-box-sizing:  initial;
+    box-sizing:  initial;}
+.bbase-ui-tab:after{-webkit-box-sizing: initial;
+    -moz-box-sizing:  initial;
+    box-sizing:  initial;}
 .bbase-ui-tab {
   .tab-cont-div {
     position: relative;
@@ -68,6 +74,7 @@
       padding-left: 0px;
       padding-right: 0px;
       border-left: 1px solid #fff;
+      width:auto;
     }
     .tab-li a {
       padding: 6px 0px 6px 0px;
@@ -137,6 +144,7 @@
       color: #000;
       cursor: pointer;
       height: 25px;
+      width:auto;
       line-height: 20px;
     }
     .tab-li a {
@@ -164,6 +172,7 @@
     padding: 0 4px;
     height: 31px;
     line-height: 31px;
+    width:auto;
     float: left;
   }
   .tab-ul-text .tab-li a {
@@ -178,6 +187,7 @@
       cursor: pointer;
       text-align: center;
       position: relative;
+      width:auto;
       line-height: normal;
       .toggle {
         display: inline-block;
@@ -188,9 +198,9 @@
         background: #f8f8f8;
         min-width: 80px;
         text-align: center;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
+        -webkit-box-sizing: border-box !important;
+        -moz-box-sizing: border-box!important;
+        box-sizing: border-box!important;
         a {
           text-decoration: none;
         }
@@ -210,6 +220,7 @@
       position: relative;
       min-width: 40px;
       height: 40px;
+      width:auto;
       line-height: 40px;
       color: #333;
       font-size: 14px;

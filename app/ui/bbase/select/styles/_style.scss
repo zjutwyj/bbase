@@ -5,6 +5,10 @@
   display: inline-block;
   margin-right: 5px;
   line-height:100%;
+  -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   button,
   input,
   optgroup,
@@ -97,12 +101,18 @@
 
 .bbase-ui-select .bui-picker {
   z-index: 2050;
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
 }
 
 .bbase-ui-select .bui-overlay {
   position: absolute;
   left: -9999px;
   top: -9999px;
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
 }
 
 .bbase-ui-select .bui-select-list {
@@ -114,6 +124,9 @@
   overflow: auto;
   overflow-x: hidden;
   max-height: 200px;
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   ul {
     margin: 0;
   }
@@ -148,6 +161,9 @@
   }
 }
 .bbase-ui-select.select-down{
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   .bbase-caretdown{
     transform:rotate(180deg);
     -webkit-transform:rotate(180deg);

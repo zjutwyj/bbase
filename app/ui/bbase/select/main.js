@@ -17,6 +17,7 @@ Bbase.DIRECTIVE['bbaseuiselect'] = {
         cur: typeof(this._get(object.cur)) !== 'undefined' ? this._get(object.cur) : object.default,
         items: this._get(object.items) || object.items,
         width: object.width,
+        fix: object.fix,
         onChange: this._bind(function (item, init, b, c) {
           if (typeof this.model.attributes[object.cur] !== 'undefined' && !BbaseEst.isEmpty(object.cur) && !init) {
             this._set(object.cur, item.value);

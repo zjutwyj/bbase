@@ -10,6 +10,8 @@ Bbase.DIRECTIVE['bbasecomponentnavigatorpanel'] = {
         el: this.$(selector),
         cur: this._get(object.cur) || object.default || '',
         listApi: object.listApi,
+        detailApi: object.detailApi,
+        baseId: object.baseId,
         items: object.items,
         width: object.width,
         path: object.path || 'id',

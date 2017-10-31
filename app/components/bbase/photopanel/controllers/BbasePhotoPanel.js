@@ -39,9 +39,9 @@ define('BbasePhotoPanel', [], function (require, exports, module) {
     <div class="c4-overlay preview"  aria-hidden="true" style="">
       <div class="c4-overlay-default-buttons" >
       <!---->
-      <button class="p9c-primary cc-x-height" data-hook="replace-menu" bb-bbasecomponentphotopick="{viewId: 'photoPanelPick', cur: cur, items: items, listApi: listApi, onChange: handlePickChange}"><span class="cc-x-height font-t2" >替换</span></button>
+      <button class="p9c-primary cc-x-height" data-hook="replace-menu" bb-bbasecomponentphotopick="{viewId: 'photoPanelPick', cur: cur, items: items, listApi: listApi, onChange: handlePickChange}"><span class="cc-x-height font-t2 photo-panel-replace-btn" >替换</span></button>
       <!---->
-      <button bb-show="showCropBtn" class="p9c-primary -icon-only" data-hook="crop-menu" ><i cc-tooltip-position="top" cc-tooltip="crop" class="cc-icon-circle cc-icon-crop tooltipstered bbasefont bbase-crop"></i></button>
+      <button bb-show="showCropBtn" class="p9c-primary -icon-only" bb-click="handleCrop" data-hook="crop-menu" style="width:auto;padding: 0px 10px;line-height:14px;"><i cc-tooltip-position="top" cc-tooltip="crop" class="cc-icon-circle cc-icon-crop tooltipstered bbasefont bbase-crop"></i><span class="font-t2" style="font-size:14px;vertical-align:middle;">裁剪</span></button>
       <!---->
       <button bb-show="showSettingBtn" class="p9c-primary -icon-only" data-hook="info-menu" ><i cc-tooltip-position="top" cc-tooltip="settings" class="cc-icon-circle cc-icon-settings tooltipstered bbasefont bbase-setting"></i></button></div>
 
@@ -64,9 +64,17 @@ define('BbasePhotoPanel', [], function (require, exports, module) {
       if (!init) {
         this._set('cur', items[0].serverPath);
         if (this._options.onChange) {
-          this._options.onChange.call(this, items[0].serverPath, init);
+          this._options.onChange.call(this, items[0].serverPath, init, items[0]);
         }
       }
+    },
+    handleCrop: function () {
+      if (this._options.onCrop){
+        this._options.onCrop.call(this, this._get('cur'));
+      }
+    },
+    setValue: function (val) {
+      this._set('cur', val);
     }
   });
 

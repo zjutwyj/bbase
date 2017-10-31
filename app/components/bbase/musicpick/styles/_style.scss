@@ -1,7 +1,16 @@
 .bbase-component-musicpick {
-        body, button, input, select, textarea {
+  * {
+    -webkit-box-sizing: initial;
+    -moz-box-sizing: initial;
+    box-sizing: initial;
+  }
+  body,
+  button,
+  input,
+  select,
+  textarea {
     font-size: 12px;
-}
+  }
   .materialLeftPanel {
     width: 138px;
     height: 542px;
@@ -80,7 +89,7 @@
     -moz-transform: rotate(0deg);
     -ms-transform: rotate(0deg);
     transform: rotate(0deg);
-    line-height:1;
+    line-height: 1;
   }
   .closeBtn:hover {
     -webkit-transform: rotate(90deg);
@@ -94,7 +103,7 @@
     width: 695px;
   }
   .photo-tool {
-        width: 100%;
+    width: 100%;
     height: 43px;
     line-height: 34px;
     padding-top: 11px;
@@ -242,13 +251,13 @@
   #photo-btns .cancel {
     border: none;
     background: transparent;
-    cursor:pointer;
+    cursor: pointer;
   }
   #photo-btns .submit {
     border: none;
     background: $mainColor;
     color: #fff;
-    cursor:pointer;
+    cursor: pointer;
   }
   #photo-btns .submit:hover {
     background-color: lighten($mainColor, 10%);
@@ -261,25 +270,57 @@
     font-size: 16px;
     cursor: pointer;
     margin-left: 8px;
-    span{
-      margin-left:2px;
-          font-size: 12px;
-    vertical-align: bottom;
+    span {
+      margin-left: 2px;
+      font-size: 12px;
+      vertical-align: bottom;
     }
-}
+  }
 
-.images-content{height:310px;clear:both;}
-  .images-content .bui-grid-row-even{background:#f7f7f7}
-  .images-content .music-name{overflow:hidden;cursor:pointer;white-space:nowrap;text-overflow:ellipsis;color:#666;padding-right:10px;width: 535px;float:left}
-  .images-content .music-size{float:right;color:#ccc;display:block}
-  .images-content .music-li{clear:both;padding:0 10px;font-size:12px;color:#666;height:30px;line-height:30px;list-style:none;}
-  .images-content .item-active{background-color: $mainColor;color: #fff;}
-  .images-content .item-active .music-name,.images-content .item-active .music-play, .images-content .item-active .music-size{;color: #fff;}
-.bbase-ui-tab .tab-ul-line{
-  margin-top:6px;
-}
-
-
+  .images-content {
+    height: 310px;
+    clear: both;
+  }
+  .images-content .bui-grid-row-even {
+    background: #f7f7f7
+  }
+  .images-content .music-name {
+    overflow: hidden;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #666;
+    padding-right: 10px;
+    width: 535px;
+    float: left
+  }
+  .images-content .music-size {
+    float: right;
+    color: #ccc;
+    display: block
+  }
+  .images-content .music-li {
+    clear: both;
+    padding: 0 10px;
+    font-size: 12px;
+    color: #666;
+    height: 30px;
+    line-height: 30px;
+    list-style: none;
+  }
+  .images-content .item-active {
+    background-color: $mainColor;
+    color: #fff;
+  }
+  .images-content .item-active .music-name,
+  .images-content .item-active .music-play,
+  .images-content .item-active .music-size {
+    ;
+    color: #fff;
+  }
+  .bbase-ui-tab .tab-ul-line {
+    margin-top: 6px;
+  }
 }
 
 .bbase-component-musicpick-uploading {
@@ -300,4 +341,4 @@
   border: 1px solid #929191;
   line-height: 50px;
   padding: 0 10px;
-  }
+}

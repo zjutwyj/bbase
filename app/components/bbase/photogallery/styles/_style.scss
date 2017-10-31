@@ -1,4 +1,9 @@
 .bbase-component-photogallery {
+  * {
+    -webkit-box-sizing: initial;
+    -moz-box-sizing: initial;
+    box-sizing: initial;
+  }
   .om-main-container,
   .om-main-container-gallery {
     display: -webkit-flex;

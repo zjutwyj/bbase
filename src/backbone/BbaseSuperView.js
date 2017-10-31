@@ -297,7 +297,7 @@
             hbsStr = _this._parseHbs(node.attr(ngDirName));
             // 默认其它表单元素都经过特殊符号过滤， 当node为textarea元素时，取html代码，若html代码中存在{{{}}}符号，则不过滤符号
             if (!hbsStr && node.is('textarea')) hbsStr = _this._parseHbs(node.html());
-            compileStr = (BbaseEst.isEmpty(hbsStr) || hbsStr.indexOf('{{') === -1) ? '{{' + fieldName + '}}' : hbsStr;
+            compileStr = (BbaseEst.isEmpty(hbsStr) || hbsStr.indexOf('{{') === -1) ? node.is('textarea')? '{{{' + fieldName + '}}}' : '{{' + fieldName + '}}' : hbsStr;
             return {
               compile: BbaseHandlebars.compile(compileStr),
               compileStr: compileStr,
@@ -1295,9 +1295,21 @@
         object = { fields: {} },
         list = [],
         temp = '',
-        items_o = BbaseEst.trim(str).substring(1, str.length - 1).split(',');
+        items_o = BbaseEst.trim(str).substring(1, str.length - 1).split(','),
+        items_p = [];
 
-      BbaseEst.each(items_o, function(item) {
+      // 处理逗号问题
+      var ipt = '', optp=0;
+      for(var p = 0; p < items_o.length; p++){
+        if (items_o[p].indexOf(':') > -1){
+          items_p.push(items_o[p]);
+          optp++;
+        }else{
+          items_p[optp-1] = items_p[optp-1] + ',' + items_o[p];
+        }
+      }
+
+      BbaseEst.each(items_p, function(item) {
         if (BbaseEst.typeOf(item) === 'string' && item.indexOf('{') > -1) {
           temp += (item + ',');
         } else if (BbaseEst.typeOf(item) === 'string' && item.indexOf('}') > -1) {
@@ -1869,6 +1881,11 @@
         var hash = $(_this).attr('data-hash');
         var offset = $(_this).attr('data-offset') || 1;
         var title = $(_this).attr('data-title') || $(_this).attr('title') || '';
+        var stopPropagation = $(_this).attr('data-stop');
+
+        if (stopPropagation === 'true'){
+          e.stopImmediatePropagation();
+        }
 
         if (!hash) {
           $(_this).attr('data-title', title);

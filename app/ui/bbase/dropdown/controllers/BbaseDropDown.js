@@ -91,7 +91,7 @@ define('BbaseDropDown', [], function (require, exports, module) {
             if (!_this.stopHide) {
               _this.hide();
             }
-          }, 200);
+          }, 100);
         });
         _this.$target.click(function (e) {
           e.stopImmediatePropagation();
@@ -107,7 +107,7 @@ define('BbaseDropDown', [], function (require, exports, module) {
             if (!_this.stopHide) {
               _this.hide();
             }
-          }, 200);
+          }, 100);
         });
         if (_this._options.mouseFollow) {
           _this.$target.mousemove(_this._bind(_this.show));

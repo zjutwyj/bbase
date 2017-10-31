@@ -1,4 +1,7 @@
 .bbase-component-listpick {
+    *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
     .el-bd-main {
         height: 100%;
         overflow-y: auto;

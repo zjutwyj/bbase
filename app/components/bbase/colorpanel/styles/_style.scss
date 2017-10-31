@@ -4,6 +4,9 @@
     overflow: hidden;
     padding-left: 6px;
     padding-right: 0;
+    *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   .ui-bg-color-wrap {
     width: 46px;
     height: 25px;

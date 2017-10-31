@@ -1,4 +1,7 @@
 .bbase-component-photocrop {
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   .jcrop-content .jcrop-holder {
     background-color: rgba(204, 204, 204, 0.15)!important;
     margin: 0 auto;

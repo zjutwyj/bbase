@@ -83,6 +83,12 @@ define('ComponentPhotoPanel', [], function(require, exports, module){
                   <td class="argDefault"><span>false</span></td>
                 </tr>
                 <tr>
+                  <td class="argName"><span>onCrop</span></td>
+                  <td class="argDesc"><span>点击裁剪按钮回调</span></td>
+                  <td class="argType"><span>function(pic)</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
+                <tr>
                   <td class="argName"><span>showSettingBtn</span></td>
                   <td class="argDesc"><span>显示设置按钮</span></td>
                   <td class="argType"><span>boolean</span></td>
@@ -94,6 +100,7 @@ define('ComponentPhotoPanel', [], function(require, exports, module){
                   <td class="argType"><span>function(item, init)</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
+
               </tbody>
             </table>
           </div>

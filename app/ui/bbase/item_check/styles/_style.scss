@@ -1,5 +1,8 @@
 //全局样式
 .bbase-ui-itemcheck.ui-itemcheck {
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   .ui-item-check {
     float: left;
     margin-right: 2px;
@@ -45,6 +48,9 @@
 }
 // 选择样式
 .bbase-ui-itemcheck.ui-item-check-normal{
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   .ui-item-check{
        margin-right: 10px;
     border: 1px solid #b9babb;
@@ -75,6 +81,9 @@
 }
 // 文字样式
 .bbase-ui-itemcheck.ui-item-check-text{
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   .ui-item-check{
     margin-right:10px;
   }
@@ -87,6 +96,9 @@
 }
 // 按钮样式
 .bbase-ui-itemcheck.ui-item-check-btn {
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   .ui-item-check {
     padding: 2px 4px;
     border: 1px solid transparent;
@@ -104,6 +116,9 @@
 
 // 单选项
 .bbase-ui-itemcheck.ui-item-check-radio {
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   .item-check-text {
     vertical-align: middle;
   }
@@ -161,6 +176,9 @@
 
 // 多选项
 .bbase-ui-itemcheck.ui-item-check-checkbox {
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   .item-check-text {
     vertical-align: middle;
   }
@@ -220,6 +238,9 @@
 .bbase-ui-itemcheck.ui-item-check-tab {
   zoom: 1;
   margin-left: 1px;
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
   .ui-item-check {
     float: left;
     margin-left: -1px;

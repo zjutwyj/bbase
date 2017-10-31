@@ -72,6 +72,12 @@ define('UiFormSelect', [], function(require, exports, module){
                   <td class="argType"><span>string</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
+                <tr>
+                  <td class="argName"><span>fix</span></td>
+                  <td class="argDesc"><span>下拉时window容器高度固定，防止屏幕滚动，某些场景用到</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
               </tbody>
             </table>
           </div>

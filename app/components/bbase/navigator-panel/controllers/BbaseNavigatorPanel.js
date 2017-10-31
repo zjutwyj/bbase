@@ -47,7 +47,8 @@ define('BbaseNavigatorPanel', [], function(require, exports, module) {
           </div>
         `,
         model: BbaseModel.extend({
-
+          baseId: this.options.baseId || 'navigatorId',
+          baseUrl: CONST.API + (this.options.detailApi || '/navigator/detail')
         }),
         collection: BbaseCollection.extend({
           url: this.options.listApi ?
@@ -67,12 +68,15 @@ define('BbaseNavigatorPanel', [], function(require, exports, module) {
                   </div>
                   <!---->
                   <form blur="submit" class="page-name-form ng-pristine ng-valid" editable-form="" name="renameForm">
-                    <div buttons="no" class="menu-name page-name editable" e-form="renameForm" bb-watch="name:html" placeholder="Enter name" tabindex="0">{{name}}</div>
+                    <div buttons="no" class="menu-name page-name editable {{#If display!=='s'}}line-through{{/If}}" e-form="renameForm" bb-watch="name:html,display:class,display:html" placeholder="Enter name" tabindex="0">{{name}} {{#If display!=='s'}}[已隐藏]{{/If}}</div>
                   </form>
                   <div class="icon custom-icon cc-icon-home"></div>
                   <div class="indications">
                     <!---->
                     <div bb-click="openDetailDialog" class="icon settings-button cc-icon-settings tooltipstered bbasefont bbase-setting" data-hook="page-settings" role="button" tabindex="0"></div>
+                    <!---->
+                    <!---->
+                    <div bb-click="_del" class="icon delete-button cc-icon-settings tooltipstered bbasefont bbase-delete" data-hook="page-delete" role="button" tabindex="0"></div>
                     <!---->
                   </div>
                 </div>
@@ -84,7 +88,8 @@ define('BbaseNavigatorPanel', [], function(require, exports, module) {
           `,
           initData() {
             return {
-              selected: false
+              selected: false,
+              display: "s"
             }
           },
           openDetailDialog(e) {

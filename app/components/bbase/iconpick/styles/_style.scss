@@ -1,4 +1,13 @@
 .bbase-component-iconpick {
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
+  .checkbox, .radio {
+    position: relative;
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
   .addSystemIconDiv {
     padding: 16px 12px;
   }

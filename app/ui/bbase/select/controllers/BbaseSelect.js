@@ -312,10 +312,12 @@ define('BbaseSelect', [], function(require, exports, module) {
       event.stopImmediatePropagation();
       if (!this.selectNode) this.initSelect(this._options.items);
 
-      $('body').css({
+      if (this._options.fix){
+        $('body').css({
         'height': $(window).height(),
         'overflow':'hidden'
-      });
+        });
+      }
 
       this.$('.bui-select').addClass('select-down');
       this.$select.css({

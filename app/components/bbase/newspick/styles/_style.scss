@@ -2,6 +2,9 @@
   padding: 0px;
   height: 441px;
   overflow: hidden;
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
    /* 顶部工具栏*/
   .cate-nav{
     padding: 8px 5px 8px 13px;
@@ -102,7 +105,9 @@
     border: 1px solid #aaa;
     margin-top: 5px;
     border-radius: 2px;
-    padding: 8px 21px;
+    padding: 0px 21px;
+    height:27px;
+    line-height:27px;
     background: #ffffff;
     cursor: pointer;
   }
@@ -116,7 +121,8 @@
   }
   .search-btn {
     width: 40px;
-    height: 30px;
+    height: 27px;
+    line-height:27px;
     vertical-align: middle;
     background: #fff;
     border: 1px solid #cfcfcf;

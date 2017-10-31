@@ -27,7 +27,7 @@ define('BbaseProductPick', [], function (require, exports, module) {
             <div class="plugin-product-header">
             <div class="pro-6"><span class="header-pic">产品图片</span><span>产品名称[型号]</span></div>
               <div class="pro-2"><span>创建时间</span></div>
-              <div class="pro-2"><span><input type="text" class="plugin-product-search" placeholder="搜索" bb-model="name" >
+              <div class="pro-2"><span><input type="text" class="plugin-product-search" placeholder="产品或型号" bb-model="name" >
               <input type="button" class="search-btn" value="搜索" style="" bb-click="search">
               </span></div>
             </div>

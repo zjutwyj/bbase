@@ -1,24 +1,30 @@
-.bbase-ui-pagination{
-    .pagination {
+.bbase-ui-pagination {
+  * {
+    -webkit-box-sizing: initial;
+    -moz-box-sizing: initial;
+    box-sizing: initial;
+  }
+  .pagination {
     display: inline-block;
     padding-left: 0;
     margin: 5px 0;
     border-radius: 4px;
     height: 32px
-}
+  }
 
-.pagination li {
+  .pagination li {
     display: inline;
     height: 32px;
     line-height: 32px
-}
+  }
 
-.pagination .bui-bar-item {
+  .pagination .bui-bar-item {
     float: left;
     margin: 0 0 5px
-}
+  }
 
-.pagination li>a,.pagination li>span {
+  .pagination li>a,
+  .pagination li>span {
     position: relative;
     float: left;
     padding: 4px 12px;
@@ -28,50 +34,65 @@
     background-color: #fff;
     border: 1px solid #ddd;
     margin-left: -1px
-}
+  }
 
-.pagination .disabled>a,.pagination .disabled>a:focus,.pagination .disabled>a:hover,.pagination .disabled>span,.pagination .disabled>span:focus,.pagination .disabled>span:hover {
+  .pagination .disabled>a,
+  .pagination .disabled>a:focus,
+  .pagination .disabled>a:hover,
+  .pagination .disabled>span,
+  .pagination .disabled>span:focus,
+  .pagination .disabled>span:hover {
     color: #999;
     background-color: #fff;
     border-color: #ddd;
     cursor: not-allowed
-}
+  }
 
-.pagination li:first-child>a,.pagination li:first-child>span {
+  .pagination li:first-child>a,
+  .pagination li:first-child>span {
     margin-left: 0
-}
+  }
 
-.pagination .active>a,.pagination .active>a:focus,.pagination .active>a:hover,.pagination .active>span,.pagination .active>span:focus,.pagination .active>span:hover {
+  .pagination .active>a,
+  .pagination .active>a:focus,
+  .pagination .active>a:hover,
+  .pagination .active>span,
+  .pagination .active>span:focus,
+  .pagination .active>span:hover {
     z-index: 2;
     color: #fff;
     background-color: $mainColor;
     border-color: $mainColor;
     cursor: default
-}
+  }
 
-.pagination .input-pageTo, .pagination .per_page_show{
+  .pagination .input-pageTo,
+  .pagination .per_page_show {
     color: #999;
     background-color: #fff;
     border: 1px solid #ddd;
     padding: 6px;
     text-align: center;
-        width: 30px;
+    width: 30px;
     height: 20px;
     vertical-align: bottom;
-}
- .pagination .per_page_show{
+  }
+  .pagination .per_page_show {
     width: 50px;
     height: 32px;
-    line-height:32px;
+    line-height: 32px;
     vertical-align: bottom;
-}
-.pagination .input-pageTo{
-    padding:4px 0;float:left;margin-right:4px;text-indent:0px;
-}
-.pagination .pageTo{
-    float:left;
-}
-.pagination .button {
+  }
+  .pagination .input-pageTo {
+    padding: 4px 0;
+    float: left;
+    margin-right: 4px;
+    text-indent: 0px;
+  }
+  .pagination .pageTo {
+    float: left;
+  }
+  .pagination .button {
     display: inline-block;
     margin-bottom: 0;
     font-weight: 400;
@@ -80,7 +101,7 @@
     background-image: none;
     border: 1px solid #E0EEFF;
     white-space: nowrap;
-    height:30px;
+    height: 30px;
     line-height: 30px;
     padding: 0px 12px;
     font-size: 14px;
@@ -90,15 +111,15 @@
     user-select: none;
     color: #5390CC;
     background-color: #fff
-}
+  }
 
-.pagination .button-info {
+  .pagination .button-info {
     color: #fff;
     background-color: $mainColor;
     border-color: $mainColor
-}
+  }
 
-.pagination .button-info:hover {
+  .pagination .button-info:hover {
     background-color: lighten($mainColor, 10%)
-}
+  }
 }

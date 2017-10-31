@@ -51,9 +51,74 @@ define('ComponentPhotoCrop', [], function(require, exports, module){
                   <td class="argType"><span>any</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
+                <tr>
+                  <td class="argName"><span>width</span></td>
+                  <td class="argDesc"><span>对话框宽度</span></td>
+                  <td class="argType"><span>number</span></td>
+                  <td class="argDefault"><span>350</span></td>
+                </tr>
+                 <tr>
+                  <td class="argName"><span>height</span></td>
+                  <td class="argDesc"><span>对话框高度</span></td>
+                  <td class="argType"><span>number</span></td>
+                  <td class="argDefault"><span>425</span></td>
+                </tr>
+                 <tr>
+                  <td class="argName"><span>height</span></td>
+                  <td class="argDesc"><span>对话框高度</span></td>
+                  <td class="argType"><span>number</span></td>
+                  <td class="argDefault"><span>425</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>picWidth</span><span class="red">&nbsp;(必填)</span></td>
+                  <td class="argDesc"><span>图片实际宽度</span></td>
+                  <td class="argType"><span>number</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr><tr>
+                  <td class="argName"><span>picHeight</span><span class="red">&nbsp;(必填)</span></td>
+                  <td class="argDesc"><span>图片实际高度</span></td>
+                  <td class="argType"><span>number</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr><tr>
+                  <td class="argName"><span>cropWidth</span><span class="red">&nbsp;(必填)</span></td>
+                  <td class="argDesc"><span>裁剪图片宽度</span></td>
+                  <td class="argType"><span>number</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr><tr>
+                  <td class="argName"><span>cropHeight</span><span class="red">&nbsp;(必填)</span></td>
+                  <td class="argDesc"><span>裁剪图片高度</span></td>
+                  <td class="argType"><span>number</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr><tr>
+                  <td class="argName"><span>pos</span><span class="red">&nbsp;(必填)</span></td>
+                  <td class="argDesc"><span>裁剪保留信息</span></td>
+                  <td class="argType"><span>json</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr><tr>
+                  <td class="argName"><span>prefix</span></td>
+                  <td class="argDesc"><span>用于解决同一张图片不同裁切的重复性问题， 此参数传递到后端</span></td>
+                  <td class="argType"><span>String</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr><tr>
+                  <td class="argName"><span>cutApi</span><span class="red">&nbsp;(必填)</span></td>
+                  <td class="argDesc"><span>裁剪API</span></td>
+                  <td class="argType"><span>String</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr><tr>
+                  <td class="argName"><span>image</span><span class="red">&nbsp;(必填)</span></td>
+                  <td class="argDesc"><span>原图片地址</span></td>
+                  <td class="argType"><span>String</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
+                <tr>
                   <td class="argName"><span>onChange</span></td>
                   <td class="argDesc"><span>回调函数</span></td>
                   <td class="argType"><span>function(item, init)</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr><tr>
+                  <td class="argName"><span>onCancel</span></td>
+                  <td class="argDesc"><span>点击取消按钮回调函数</span></td>
+                  <td class="argType"><span>function()</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
               </tbody>

@@ -23,6 +23,7 @@ define('ThemeTable01', [], function (require, exports, module) {
         template: `
           <div class="${theme}-wrap" style="padding:10px; width: 994px;">
             <style>
+            .${theme}-wrap *{-webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;}
               .${theme}-wrap .formPanel {font-size: 13px; box-sizing: border-box; overflow: hidden; border: 1px solid #dfdfdf; position: relative; margin-bottom:10px; }
               /* header */
               .${theme}-wrap .formPanel .header {position: relative; height: 50px; line-height: 50px; padding-left: 14px; background-color: ${CONST.LIGHTEN_COLOR}; border-bottom: 1px solid #dfdfdf; font-size: 0; }
