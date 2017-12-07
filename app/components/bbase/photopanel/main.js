@@ -9,10 +9,12 @@ Bbase.DIRECTIVE['bbasecomponentphotopanel'] = {
         el: this.$(selector),
         cur: this._get(object.cur) || object.default || '',
         listApi: object.listApi,
+        systemAlbumApi: object.systemAlbumApi,
         items: object.items,
         width: object.width,
         size: object.size,
         showCropBtn: object.showCropBtn,
+        showSystem: object.showSystem,
         onCrop: this._bind(function(pic){
           if (object.onCrop) object.onCrop.call(this, pic);
         }),

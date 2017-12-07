@@ -215,14 +215,14 @@
   .indications .bbase-delete {
     font-size: 24px;
     vertical-align: top;
-    -webkit-transform: translateX(-3px);
-    -ms-transform: translateX(-3px);
-    transform: translateX(-3px) translateY(1px)
+    -webkit-transform: translateX(-1px);
+    -ms-transform: translateX(-1px);
+    transform: translateX(-1px) translateY(1px)
   }
   .settings-button {
-    -webkit-transform: translateY(-3px) rotate(45deg);
-    -ms-transform: translateY(-3px) rotate(45deg);
-    transform: translateY(-3px) rotate(45deg);
+    -webkit-transform: translateY(-2px) rotate(45deg);
+    -ms-transform: translateY(-2px) rotate(45deg);
+    transform: translateY(-2px) rotate(45deg);
     transition: -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.2s linear 50ms;
     transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.2s linear 50ms;
     height: 30px;
@@ -236,9 +236,9 @@
     transform: translateY(-3px) rotate(-45deg);
   }
   .tree-node .delete-button:hover {
-    -webkit-transform: translateX(-3px) translateY(-1px);
-    -ms-transform: translateX(-3px) translateY(-1px);
-    transform: translateX(-3px) translateY(-1px);
+    -webkit-transform: translateX(-1px) translateY(-1px);
+    -ms-transform: translateX(-1px) translateY(-1px);
+    transform: translateX(-1px) translateY(-1px);
   }
   .p18-panel-footer,
   cc-panel-footer {

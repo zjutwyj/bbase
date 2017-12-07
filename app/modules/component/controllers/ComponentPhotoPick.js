@@ -18,7 +18,7 @@ define('ComponentPhotoPick', [], function(require, exports, module){
             </div>
           </div>
           <div class="main">
-          <div  class="demo-item clearfix"><a href="javascript:;" bb-bbasecomponentphotopick="{viewId: 'componentPhoto1', items: items, cur: cur,uploadApi:'/att/upload'}">选择图片</a></div>
+          <div  class="demo-item clearfix"><a href="javascript:;" bb-bbasecomponentphotopick="{viewId: 'componentPhoto1', items: items, cur: cur,uploadApi:'/att/upload',showSystem:true}">选择图片</a></div>
           </div>
           <div class="footer">
           <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}};</div>
@@ -80,6 +80,18 @@ define('ComponentPhotoPick', [], function(require, exports, module){
                   <td class="argDesc"><span>图片大小</span></td>
                   <td class="argType"><span>string</span></td>
                   <td class="argDefault"><span>120</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>showSystem</span></td>
+                  <td class="argDesc"><span>是否显示系统图片</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>false</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>systemAlbumApi</span></td>
+                  <td class="argDesc"><span>系统相册分类</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>-</span></td>
                 </tr>
               </tbody>
             </table>

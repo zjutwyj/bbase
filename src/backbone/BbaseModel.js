@@ -34,7 +34,7 @@ var BbaseModel = BbaseBackbone.Model.extend({
     _this.params = _this.params ? _this.params + _this._getParams() : _this._getParams();
     var sep = BbaseEst.isEmpty(_this.params) ? '' : '?';
     if (_this.isNew() && BbaseEst.isEmpty(_this.id)) return base + sep + _this.params;
-    _url = base + (base.charAt(base.length - 1) == '/' ? '' : '/') + _this.id + sep + _this.params;
+    _url = base + (base.charAt(base.length - 1) == '/' ? '' : '/') + (_this.attributes[_this.baseId] || _this.attributes.id) + sep + _this.params;
     return _url;
   },
   /**

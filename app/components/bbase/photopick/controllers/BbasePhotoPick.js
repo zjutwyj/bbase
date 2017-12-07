@@ -4,7 +4,7 @@
  * @class ModuleName
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module) {
+define('BbasePhotoPick', ['BbaseItemCheck'], function(require, exports, module) {
   var BbasePhotoPick, template, BbaseItemCheck;
 
   /*! jQuery UI - v1.11.4+CommonJS - 2015-08-28
@@ -27,8 +27,8 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
   var widget_uuid = 0,
     widget_slice = Array.prototype.slice;
 
-  $.cleanData = (function (orig) {
-    return function (elems) {
+  $.cleanData = (function(orig) {
+    return function(elems) {
       var events, elem, i;
       for (i = 0;
         (elem = elems[i]) != null; i++) {
@@ -47,7 +47,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     };
   })($.cleanData);
 
-  $.widget = function (name, base, prototype) {
+  $.widget = function(name, base, prototype) {
     var fullName, existingConstructor, constructor, basePrototype,
       // proxiedPrototype allows the provided prototype to remain unmodified
       // so that it can be used as a mixin for multiple widgets (#8876)
@@ -63,13 +63,13 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     }
 
     // create selector for plugin
-    $.expr[":"][fullName.toLowerCase()] = function (elem) {
+    $.expr[":"][fullName.toLowerCase()] = function(elem) {
       return !!$.data(elem, fullName);
     };
 
     $[namespace] = $[namespace] || {};
     existingConstructor = $[namespace][name];
-    constructor = $[namespace][name] = function (options, element) {
+    constructor = $[namespace][name] = function(options, element) {
       // allow instantiation without "new" keyword
       if (!this._createWidget) {
         return new constructor(options, element);
@@ -97,19 +97,19 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     // otherwise we'll modify the options hash on the prototype that we're
     // inheriting from
     basePrototype.options = $.widget.extend({}, basePrototype.options);
-    $.each(prototype, function (prop, value) {
+    $.each(prototype, function(prop, value) {
       if (!$.isFunction(value)) {
         proxiedPrototype[prop] = value;
         return;
       }
-      proxiedPrototype[prop] = (function () {
-        var _super = function () {
+      proxiedPrototype[prop] = (function() {
+        var _super = function() {
             return base.prototype[prop].apply(this, arguments);
           },
-          _superApply = function (args) {
+          _superApply = function(args) {
             return base.prototype[prop].apply(this, args);
           };
-        return function () {
+        return function() {
           var __super = this._super,
             __superApply = this._superApply,
             returnValue;
@@ -143,7 +143,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     // the new version of this widget. We're essentially trying to replace one
     // level in the prototype chain.
     if (existingConstructor) {
-      $.each(existingConstructor._childConstructors, function (i, child) {
+      $.each(existingConstructor._childConstructors, function(i, child) {
         var childPrototype = child.prototype;
 
         // redefine the child widget using the same prototype that was
@@ -162,7 +162,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     return constructor;
   };
 
-  $.widget.extend = function (target) {
+  $.widget.extend = function(target) {
     var input = widget_slice.call(arguments, 1),
       inputIndex = 0,
       inputLength = input.length,
@@ -188,15 +188,15 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     return target;
   };
 
-  $.widget.bridge = function (name, object) {
+  $.widget.bridge = function(name, object) {
     var fullName = object.prototype.widgetFullName || name;
-    $.fn[name] = function (options) {
+    $.fn[name] = function(options) {
       var isMethodCall = typeof options === "string",
         args = widget_slice.call(arguments, 1),
         returnValue = this;
 
       if (isMethodCall) {
-        this.each(function () {
+        this.each(function() {
           var methodValue,
             instance = $.data(this, fullName);
           if (options === "instance") {
@@ -225,7 +225,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
           options = $.widget.extend.apply(null, [options].concat(args));
         }
 
-        this.each(function () {
+        this.each(function() {
           var instance = $.data(this, fullName);
           if (instance) {
             instance.option(options || {});
@@ -242,7 +242,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     };
   };
 
-  $.Widget = function ( /* options, element */ ) {};
+  $.Widget = function( /* options, element */ ) {};
   $.Widget._childConstructors = [];
 
   $.Widget.prototype = {
@@ -255,7 +255,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       // callbacks
       create: null
     },
-    _createWidget: function (options, element) {
+    _createWidget: function(options, element) {
       element = $(element || this.defaultElement || this)[0];
       this.element = $(element);
       this.uuid = widget_uuid++;
@@ -268,7 +268,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       if (element !== this) {
         $.data(element, this.widgetFullName, this);
         this._on(true, this.element, {
-          remove: function (event) {
+          remove: function(event) {
             if (event.target === element) {
               this.destroy();
             }
@@ -296,7 +296,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     _create: $.noop,
     _init: $.noop,
 
-    destroy: function () {
+    destroy: function() {
       this._destroy();
       // we can probably remove the unbind calls in 2.0
       // all event bindings should go through this._on()
@@ -320,11 +320,11 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     },
     _destroy: $.noop,
 
-    widget: function () {
+    widget: function() {
       return this.element;
     },
 
-    option: function (key, value) {
+    option: function(key, value) {
       var options = key,
         parts,
         curOption,
@@ -363,7 +363,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
 
       return this;
     },
-    _setOptions: function (options) {
+    _setOptions: function(options) {
       var key;
 
       for (key in options) {
@@ -372,7 +372,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
 
       return this;
     },
-    _setOption: function (key, value) {
+    _setOption: function(key, value) {
       this.options[key] = value;
 
       if (key === "disabled") {
@@ -389,14 +389,14 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       return this;
     },
 
-    enable: function () {
+    enable: function() {
       return this._setOptions({ disabled: false });
     },
-    disable: function () {
+    disable: function() {
       return this._setOptions({ disabled: true });
     },
 
-    _on: function (suppressDisabledCheck, element, handlers) {
+    _on: function(suppressDisabledCheck, element, handlers) {
       var delegateElement,
         instance = this;
 
@@ -417,7 +417,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
         this.bindings = this.bindings.add(element);
       }
 
-      $.each(handlers, function (event, handler) {
+      $.each(handlers, function(event, handler) {
         function handlerProxy() {
           // allow widgets to customize the disabled handling
           // - disabled as an array instead of boolean
@@ -448,7 +448,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       });
     },
 
-    _off: function (element, eventName) {
+    _off: function(element, eventName) {
       eventName = (eventName || "").split(" ").join(this.eventNamespace + " ") +
         this.eventNamespace;
       element.unbind(eventName).undelegate(eventName);
@@ -459,7 +459,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       this.hoverable = $(this.hoverable.not(element).get());
     },
 
-    _delay: function (handler, delay) {
+    _delay: function(handler, delay) {
       function handlerProxy() {
         return (typeof handler === "string" ? instance[handler] : handler)
           .apply(instance, arguments);
@@ -468,31 +468,31 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       return setTimeout(handlerProxy, delay || 0);
     },
 
-    _hoverable: function (element) {
+    _hoverable: function(element) {
       this.hoverable = this.hoverable.add(element);
       this._on(element, {
-        mouseenter: function (event) {
+        mouseenter: function(event) {
           $(event.currentTarget).addClass("ui-state-hover");
         },
-        mouseleave: function (event) {
+        mouseleave: function(event) {
           $(event.currentTarget).removeClass("ui-state-hover");
         }
       });
     },
 
-    _focusable: function (element) {
+    _focusable: function(element) {
       this.focusable = this.focusable.add(element);
       this._on(element, {
-        focusin: function (event) {
+        focusin: function(event) {
           $(event.currentTarget).addClass("ui-state-focus");
         },
-        focusout: function (event) {
+        focusout: function(event) {
           $(event.currentTarget).removeClass("ui-state-focus");
         }
       });
     },
 
-    _trigger: function (type, event, data) {
+    _trigger: function(type, event, data) {
       var prop, orig,
         callback = this.options[type];
 
@@ -522,8 +522,8 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     }
   };
 
-  $.each({ show: "fadeIn", hide: "fadeOut" }, function (method, defaultEffect) {
-    $.Widget.prototype["_" + method] = function (element, options, callback) {
+  $.each({ show: "fadeIn", hide: "fadeOut" }, function(method, defaultEffect) {
+    $.Widget.prototype["_" + method] = function(element, options, callback) {
       if (typeof options === "string") {
         options = { effect: options };
       }
@@ -547,7 +547,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       } else if (effectName !== method && element[effectName]) {
         element[effectName](options.duration, options.easing, callback);
       } else {
-        element.queue(function (next) {
+        element.queue(function(next) {
           $(this)[method]();
           if (callback) {
             callback.call(element[0]);
@@ -590,7 +590,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
   //  [{name: 'a', value: 1}, {name: 'b', value: 2}]
   // options.initialIframeSrc: the URL of the initial iframe src,
   //  by default set to "javascript:false;"
-  $.ajaxTransport('iframe', function (options) {
+  $.ajaxTransport('iframe', function(options) {
     if (options.async) {
       // javascript:false as initial iframe src
       // prevents warning popups on HTTPS in IE6:
@@ -601,7 +601,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
         iframe,
         addParamChar;
       return {
-        send: function (_, completeCallback) {
+        send: function(_, completeCallback) {
           form = $('<form style="display:none;"></form>');
           form.attr('accept-charset', options.formAcceptCharset);
           addParamChar = /\?/.test(options.url) ? '&' : '?';
@@ -623,13 +623,13 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
           iframe = $(
             '<iframe src="' + initialIframeSrc +
             '" name="iframe-transport-' + counter + '"></iframe>'
-          ).bind('load', function () {
+          ).bind('load', function() {
             var fileInputClones,
               paramNames = $.isArray(options.paramName) ?
               options.paramName : [options.paramName];
             iframe
               .unbind('load')
-              .bind('load', function () {
+              .bind('load', function() {
                 var response;
                 // Wrap in a try/catch block to catch exceptions thrown
                 // when trying to access cross-domain iframe contents:
@@ -654,7 +654,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
                 // (happens on form submits to iframe targets):
                 $('<iframe src="' + initialIframeSrc + '"></iframe>')
                   .appendTo(form);
-                window.setTimeout(function () {
+                window.setTimeout(function() {
                   // Removing the form in a setTimeout call
                   // allows Chrome's developer tools to display
                   // the response result
@@ -666,7 +666,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
               .prop('action', options.url)
               .prop('method', options.type);
             if (options.formData) {
-              $.each(options.formData, function (index, field) {
+              $.each(options.formData, function(index, field) {
                 $('<input type="hidden"/>')
                   .prop('name', field.name)
                   .val(field.value)
@@ -677,11 +677,11 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
               options.type === 'POST') {
               fileInputClones = options.fileInput.clone();
               // Insert a clone for each file input field:
-              options.fileInput.after(function (index) {
+              options.fileInput.after(function(index) {
                 return fileInputClones[index];
               });
               if (options.paramName) {
-                options.fileInput.each(function (index) {
+                options.fileInput.each(function(index) {
                   $(this).prop(
                     'name',
                     paramNames[index] || options.paramName
@@ -702,7 +702,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
             // Insert the file input fields at their original location
             // by replacing the clones with the originals:
             if (fileInputClones && fileInputClones.length) {
-              options.fileInput.each(function (index, input) {
+              options.fileInput.each(function(index, input) {
                 var clone = $(fileInputClones[index]);
                 // Restore the original name and form properties:
                 $(input)
@@ -714,7 +714,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
           });
           form.append(iframe).appendTo(document.body);
         },
-        abort: function () {
+        abort: function() {
           if (iframe) {
             // javascript:false as iframe src aborts the request
             // and prevents warning popups on HTTPS in IE6.
@@ -743,22 +743,22 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
   // https://github.com/blueimp/jQuery-File-Upload/wiki/Setup#content-type-negotiation
   $.ajaxSetup({
     converters: {
-      'iframe text': function (iframe) {
+      'iframe text': function(iframe) {
         return iframe && $(iframe[0].body).text();
       },
-      'iframe json': function (iframe) {
+      'iframe json': function(iframe) {
         return iframe && $.parseJSON($(iframe[0].body).text());
       },
-      'iframe html': function (iframe) {
+      'iframe html': function(iframe) {
         return iframe && $(iframe[0].body).html();
       },
-      'iframe xml': function (iframe) {
+      'iframe xml': function(iframe) {
         var xmlDoc = iframe && iframe[0];
         return xmlDoc && $.isXMLDoc(xmlDoc) ? xmlDoc :
           $.parseXML((xmlDoc.XMLDocument && xmlDoc.XMLDocument.xml) ||
             $(xmlDoc.body).html());
       },
-      'iframe script': function (iframe) {
+      'iframe script': function(iframe) {
         return iframe && $.globalEval($(iframe[0].body).text());
       }
     }
@@ -809,7 +809,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
   // Helper function to create drag handlers for dragover/dragenter/dragleave:
   function getDragHandler(type) {
     var isDragOver = type === 'dragover';
-    return function (e) {
+    return function(e) {
       e.dataTransfer = e.originalEvent && e.originalEvent.dataTransfer;
       var dataTransfer = e.dataTransfer;
       if (dataTransfer && $.inArray('Files', dataTransfer.types) !== -1 &&
@@ -922,10 +922,10 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
 
       // Translation function, gets the message key to be translated
       // and an object with context specific data as arguments:
-      i18n: function (message, context) {
+      i18n: function(message, context) {
         message = this.messages[message] || message.toString();
         if (context) {
-          $.each(context, function (key, value) {
+          $.each(context, function(key, value) {
             message = message.replace('{' + key + '}', value);
           });
         }
@@ -937,7 +937,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       // value properties, a function returning such an array, a FormData
       // object (for XHR file uploads), or a simple object.
       // The form of the first fileInput is given as parameter to the function:
-      formData: function (form) {
+      formData: function(form) {
         return form.serializeArray();
       },
 
@@ -957,13 +957,13 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       // data.submit() returns a Promise object and allows to attach additional
       // handlers using jQuery's Deferred callbacks:
       // data.submit().done(func).fail(func).always(func);
-      add: function (e, data) {
+      add: function(e, data) {
         if (e.isDefaultPrevented()) {
           return false;
         }
         if (data.autoUpload || (data.autoUpload !== false &&
             $(this).fileupload('option', 'autoUpload'))) {
-          data.process().done(function () {
+          data.process().done(function() {
             data.submit();
           });
         }
@@ -1040,16 +1040,16 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       'forceIframeTransport'
     ],
 
-    _blobSlice: $.support.blobSlice && function () {
+    _blobSlice: $.support.blobSlice && function() {
       var slice = this.slice || this.webkitSlice || this.mozSlice;
       return slice.apply(this, arguments);
     },
 
-    _BitrateTimer: function () {
+    _BitrateTimer: function() {
       this.timestamp = ((Date.now) ? Date.now() : (new Date()).getTime());
       this.loaded = 0;
       this.bitrate = 0;
-      this.getBitrate = function (now, loaded, interval) {
+      this.getBitrate = function(now, loaded, interval) {
         var timeDiff = now - this.timestamp;
         if (!this.bitrate || !interval || timeDiff > interval) {
           this.bitrate = (loaded - this.loaded) * (1000 / timeDiff) * 8;
@@ -1060,13 +1060,13 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       };
     },
 
-    _isXHRUpload: function (options) {
+    _isXHRUpload: function(options) {
       return !options.forceIframeTransport &&
         ((!options.multipart && $.support.xhrFileUpload) ||
           $.support.xhrFormDataFileUpload);
     },
 
-    _getFormData: function (options) {
+    _getFormData: function(options) {
       var formData;
       if ($.type(options.formData) === 'function') {
         return options.formData(options.form);
@@ -1076,7 +1076,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       }
       if ($.type(options.formData) === 'object') {
         formData = [];
-        $.each(options.formData, function (name, value) {
+        $.each(options.formData, function(name, value) {
           formData.push({ name: name, value: value });
         });
         return formData;
@@ -1084,15 +1084,15 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       return [];
     },
 
-    _getTotal: function (files) {
+    _getTotal: function(files) {
       var total = 0;
-      $.each(files, function (index, file) {
+      $.each(files, function(index, file) {
         total += file.size || 1;
       });
       return total;
     },
 
-    _initProgressObject: function (obj) {
+    _initProgressObject: function(obj) {
       var progress = {
         loaded: 0,
         total: 0,
@@ -1105,7 +1105,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       }
     },
 
-    _initResponseObject: function (obj) {
+    _initResponseObject: function(obj) {
       var prop;
       if (obj._response) {
         for (prop in obj._response) {
@@ -1118,7 +1118,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       }
     },
 
-    _onProgress: function (e, data) {
+    _onProgress: function(e, data) {
       if (e.lengthComputable) {
         var now = ((Date.now) ? Date.now() : (new Date()).getTime()),
           loaded;
@@ -1163,13 +1163,13 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       }
     },
 
-    _initProgressListener: function (options) {
+    _initProgressListener: function(options) {
       var that = this,
         xhr = options.xhr ? options.xhr() : $.ajaxSettings.xhr();
       // Accesss to the native XHR object is required to add event listeners
       // for the upload progress event:
       if (xhr.upload) {
-        $(xhr.upload).bind('progress', function (e) {
+        $(xhr.upload).bind('progress', function(e) {
           var oe = e.originalEvent;
           // Make sure the progress event properties get copied over:
           e.lengthComputable = oe.lengthComputable;
@@ -1177,18 +1177,18 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
           e.total = oe.total;
           that._onProgress(e, options);
         });
-        options.xhr = function () {
+        options.xhr = function() {
           return xhr;
         };
       }
     },
 
-    _isInstanceOf: function (type, obj) {
+    _isInstanceOf: function(type, obj) {
       // Cross-frame instanceof check
       return Object.prototype.toString.call(obj) === '[object ' + type + ']';
     },
 
-    _initXHRData: function (options) {
+    _initXHRData: function(options) {
       var that = this,
         formData,
         file = options.files[0],
@@ -1220,7 +1220,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
               value: options.blob
             });
           } else {
-            $.each(options.files, function (index, file) {
+            $.each(options.files, function(index, file) {
               formData.push({
                 name: ($.type(options.paramName) === 'array' &&
                   options.paramName[index]) || paramName,
@@ -1233,14 +1233,14 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
             formData = options.formData;
           } else {
             formData = new FormData();
-            $.each(this._getFormData(options), function (index, field) {
+            $.each(this._getFormData(options), function(index, field) {
               formData.append(field.name, field.value);
             });
           }
           if (options.blob) {
             formData.append(paramName, options.blob, file.name);
           } else {
-            $.each(options.files, function (index, file) {
+            $.each(options.files, function(index, file) {
               // This check allows the tests to run with
               // dummy objects:
               if (that._isInstanceOf('File', file) ||
@@ -1261,7 +1261,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       options.blob = null;
     },
 
-    _initIframeSettings: function (options) {
+    _initIframeSettings: function(options) {
       var targetHost = $('<a></a>').prop('href', options.url).prop('host');
       // Setting the dataType to iframe enables the iframe transport:
       options.dataType = 'iframe ' + (options.dataType || '');
@@ -1276,7 +1276,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       }
     },
 
-    _initDataSettings: function (options) {
+    _initDataSettings: function(options) {
       if (this._isXHRUpload(options)) {
         if (!this._chunkedUpload(options, true)) {
           if (!options.data) {
@@ -1294,12 +1294,12 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       }
     },
 
-    _getParamName: function (options) {
+    _getParamName: function(options) {
       var fileInput = $(options.fileInput),
         paramName = options.paramName;
       if (!paramName) {
         paramName = [];
-        fileInput.each(function () {
+        fileInput.each(function() {
           var input = $(this),
             name = input.prop('name') || 'files[]',
             i = (input.prop('files') || [1]).length;
@@ -1317,7 +1317,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       return paramName;
     },
 
-    _initFormSettings: function (options) {
+    _initFormSettings: function(options) {
       // Retrieve missing options from the input field and the
       // associated form, if available:
       if (!options.form || !options.form.length) {
@@ -1346,7 +1346,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       }
     },
 
-    _getAJAXSettings: function (data) {
+    _getAJAXSettings: function(data) {
       var options = $.extend({}, this.options, data);
       this._initFormSettings(options);
       this._initDataSettings(options);
@@ -1355,7 +1355,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
 
     // jQuery 1.6 doesn't provide .state(),
     // while jQuery 1.8+ removed .isRejected() and .isResolved():
-    _getDeferredState: function (deferred) {
+    _getDeferredState: function(deferred) {
       if (deferred.state) {
         return deferred.state();
       }
@@ -1370,7 +1370,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
 
     // Maps jqXHR callbacks to the equivalent
     // methods of the given Promise object:
-    _enhancePromise: function (promise) {
+    _enhancePromise: function(promise) {
       promise.success = promise.done;
       promise.error = promise.fail;
       promise.complete = promise.always;
@@ -1379,7 +1379,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
 
     // Creates and returns a Promise object enhanced with
     // the jqXHR methods abort, success, error and complete:
-    _getXHRPromise: function (resolveOrReject, context, args) {
+    _getXHRPromise: function(resolveOrReject, context, args) {
       var dfd = $.Deferred(),
         promise = dfd.promise();
       context = context || this.options.context || promise;
@@ -1393,16 +1393,16 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     },
 
     // Adds convenience methods to the data callback argument:
-    _addConvenienceMethods: function (e, data) {
+    _addConvenienceMethods: function(e, data) {
       var that = this,
-        getPromise = function (args) {
+        getPromise = function(args) {
           return $.Deferred().resolveWith(that, args).promise();
         };
-      data.process = function (resolveFunc, rejectFunc) {
+      data.process = function(resolveFunc, rejectFunc) {
         if (resolveFunc || rejectFunc) {
           data._processQueue = this._processQueue =
             (this._processQueue || getPromise([this])).pipe(
-              function () {
+              function() {
                 if (data.errorThrown) {
                   return $.Deferred()
                     .rejectWith(that, [data]).promise();
@@ -1413,7 +1413,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
         }
         return this._processQueue || getPromise([this]);
       };
-      data.submit = function () {
+      data.submit = function() {
         if (this.state() !== 'pending') {
           data.jqXHR = this.jqXHR =
             (that._trigger(
@@ -1424,7 +1424,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
         }
         return this.jqXHR || that._getXHRPromise();
       };
-      data.abort = function () {
+      data.abort = function() {
         if (this.jqXHR) {
           return this.jqXHR.abort();
         }
@@ -1432,7 +1432,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
         that._trigger('fail', null, this);
         return that._getXHRPromise(false);
       };
-      data.state = function () {
+      data.state = function() {
         if (this.jqXHR) {
           return that._getDeferredState(this.jqXHR);
         }
@@ -1440,21 +1440,21 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
           return that._getDeferredState(this._processQueue);
         }
       };
-      data.processing = function () {
+      data.processing = function() {
         return !this.jqXHR && this._processQueue && that
           ._getDeferredState(this._processQueue) === 'pending';
       };
-      data.progress = function () {
+      data.progress = function() {
         return this._progress;
       };
-      data.response = function () {
+      data.response = function() {
         return this._response;
       };
     },
 
     // Parses the Range header from the server response
     // and returns the uploaded bytes:
-    _getUploadedBytes: function (jqXHR) {
+    _getUploadedBytes: function(jqXHR) {
       var range = jqXHR.getResponseHeader('Range'),
         parts = range && range.split('-'),
         upperBytesPos = parts && parts.length > 1 &&
@@ -1467,7 +1467,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     // If the second parameter is true, only tests if the file
     // should be uploaded in chunks, but does not invoke any
     // upload requests:
-    _chunkedUpload: function (options, testOnly) {
+    _chunkedUpload: function(options, testOnly) {
       options.uploadedBytes = options.uploadedBytes || 0;
       var that = this,
         file = options.files[0],
@@ -1494,7 +1494,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
         );
       }
       // The chunk upload method:
-      upload = function () {
+      upload = function() {
         // Clone the options object for each chunk upload:
         var o = $.extend({}, options),
           currentLoaded = o._progress.loaded;
@@ -1516,7 +1516,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
         that._initProgressListener(o);
         jqXHR = ((that._trigger('chunksend', null, o) !== false && $.ajax(o)) ||
             that._getXHRPromise(false, o.context))
-          .done(function (result, textStatus, jqXHR) {
+          .done(function(result, textStatus, jqXHR) {
             ub = that._getUploadedBytes(jqXHR) ||
               (ub + o.chunkSize);
             // Create a progress event if no final progress event
@@ -1545,7 +1545,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
               );
             }
           })
-          .fail(function (jqXHR, textStatus, errorThrown) {
+          .fail(function(jqXHR, textStatus, errorThrown) {
             o.jqXHR = jqXHR;
             o.textStatus = textStatus;
             o.errorThrown = errorThrown;
@@ -1557,14 +1557,14 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
           });
       };
       this._enhancePromise(promise);
-      promise.abort = function () {
+      promise.abort = function() {
         return jqXHR.abort();
       };
       upload();
       return promise;
     },
 
-    _beforeSend: function (e, data) {
+    _beforeSend: function(e, data) {
       if (this._active === 0) {
         // the start callback is triggered when an upload starts
         // and no other uploads are currently running,
@@ -1590,7 +1590,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       this._progress.total += data.total;
     },
 
-    _onDone: function (result, textStatus, jqXHR, options) {
+    _onDone: function(result, textStatus, jqXHR, options) {
       var total = options._progress.total,
         response = options._response;
       if (options._progress.loaded < total) {
@@ -1608,7 +1608,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       this._trigger('done', null, options);
     },
 
-    _onFail: function (jqXHR, textStatus, errorThrown, options) {
+    _onFail: function(jqXHR, textStatus, errorThrown, options) {
       var response = options._response;
       if (options.recalculateProgress) {
         // Remove the failed (error or abort) file upload from
@@ -1622,13 +1622,13 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       this._trigger('fail', null, options);
     },
 
-    _onAlways: function (jqXHRorResult, textStatus, jqXHRorError, options) {
+    _onAlways: function(jqXHRorResult, textStatus, jqXHRorError, options) {
       // jqXHRorResult, textStatus and jqXHRorError are added to the
       // options object via done and fail callbacks
       this._trigger('always', null, options);
     },
 
-    _onSend: function (e, data) {
+    _onSend: function(e, data) {
       if (!data.submit) {
         this._addConvenienceMethods(e, data);
       }
@@ -1638,7 +1638,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
         slot,
         pipe,
         options = that._getAJAXSettings(data),
-        send = function () {
+        send = function() {
           that._sending += 1;
           // Set timer for bitrate progress calculation:
           options._bitrateTimer = new that._BitrateTimer();
@@ -1650,11 +1650,11 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
               ) === false) &&
               that._getXHRPromise(false, options.context, aborted)) ||
             that._chunkedUpload(options) || $.ajax(options)
-          ).done(function (result, textStatus, jqXHR) {
+          ).done(function(result, textStatus, jqXHR) {
             that._onDone(result, textStatus, jqXHR, options);
-          }).fail(function (jqXHR, textStatus, errorThrown) {
+          }).fail(function(jqXHR, textStatus, errorThrown) {
             that._onFail(jqXHR, textStatus, errorThrown, options);
-          }).always(function (jqXHRorResult, textStatus, jqXHRorError) {
+          }).always(function(jqXHRorResult, textStatus, jqXHRorError) {
             that._onAlways(
               jqXHRorResult,
               textStatus,
@@ -1699,7 +1699,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
         // Return the piped Promise object, enhanced with an abort method,
         // which is delegated to the jqXHR object of the current upload,
         // and jqXHR callbacks mapped to the equivalent Promise methods:
-        pipe.abort = function () {
+        pipe.abort = function() {
           aborted = [undefined, 'abort', 'abort'];
           if (!jqXHR) {
             if (slot) {
@@ -1714,7 +1714,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       return send();
     },
 
-    _onAdd: function (e, data) {
+    _onAdd: function(e, data) {
       var that = this,
         result = true,
         options = $.extend({}, this.options, data),
@@ -1773,7 +1773,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
         paramNameSet = paramName;
       }
       data.originalFiles = files;
-      $.each(fileSet || files, function (index, element) {
+      $.each(fileSet || files, function(index, element) {
         var newData = $.extend({}, data);
         newData.files = fileSet ? element : [element];
         newData.paramName = paramNameSet[index];
@@ -1790,7 +1790,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       return result;
     },
 
-    _replaceFileInput: function (data) {
+    _replaceFileInput: function(data) {
       var input = data.fileInput,
         inputClone = input.clone(true),
         restoreFocus = input.is(document.activeElement);
@@ -1810,7 +1810,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       // Replace the original file input element in the fileInput
       // elements set with the clone, which has been copied including
       // event handlers:
-      this.options.fileInput = this.options.fileInput.map(function (i, el) {
+      this.options.fileInput = this.options.fileInput.map(function(i, el) {
         if (el === input[0]) {
           return inputClone[0];
         }
@@ -1823,10 +1823,10 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       }
     },
 
-    _handleFileTreeEntry: function (entry, path) {
+    _handleFileTreeEntry: function(entry, path) {
       var that = this,
         dfd = $.Deferred(),
-        errorHandler = function (e) {
+        errorHandler = function(e) {
           if (e && !e.entry) {
             e.entry = entry;
           }
@@ -1836,16 +1836,16 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
           // to be returned together in one set:
           dfd.resolve([e]);
         },
-        successHandler = function (entries) {
+        successHandler = function(entries) {
           that._handleFileTreeEntries(
             entries,
             path + entry.name + '/'
-          ).done(function (files) {
+          ).done(function(files) {
             dfd.resolve(files);
           }).fail(errorHandler);
         },
-        readEntries = function () {
-          dirReader.readEntries(function (results) {
+        readEntries = function() {
+          dirReader.readEntries(function(results) {
             if (!results.length) {
               successHandler(entries);
             } else {
@@ -1862,7 +1862,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
           entry._file.relativePath = path;
           dfd.resolve(entry._file);
         } else {
-          entry.file(function (file) {
+          entry.file(function(file) {
             file.relativePath = path;
             dfd.resolve(file);
           }, errorHandler);
@@ -1878,14 +1878,14 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       return dfd.promise();
     },
 
-    _handleFileTreeEntries: function (entries, path) {
+    _handleFileTreeEntries: function(entries, path) {
       var that = this;
       return $.when.apply(
         $,
-        $.map(entries, function (entry) {
+        $.map(entries, function(entry) {
           return that._handleFileTreeEntry(entry, path);
         })
-      ).pipe(function () {
+      ).pipe(function() {
         return Array.prototype.concat.apply(
           [],
           arguments
@@ -1893,13 +1893,13 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       });
     },
 
-    _getDroppedFiles: function (dataTransfer) {
+    _getDroppedFiles: function(dataTransfer) {
       dataTransfer = dataTransfer || {};
       var items = dataTransfer.items;
       if (items && items.length && (items[0].webkitGetAsEntry ||
           items[0].getAsEntry)) {
         return this._handleFileTreeEntries(
-          $.map(items, function (item) {
+          $.map(items, function(item) {
             var entry;
             if (item.webkitGetAsEntry) {
               entry = item.webkitGetAsEntry();
@@ -1918,7 +1918,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       ).promise();
     },
 
-    _getSingleFileInputFiles: function (fileInput) {
+    _getSingleFileInputFiles: function(fileInput) {
       fileInput = $(fileInput);
       var entries = fileInput.prop('webkitEntries') ||
         fileInput.prop('entries'),
@@ -1939,7 +1939,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
         files = [{ name: value.replace(/^.*\\/, '') }];
       } else if (files[0].name === undefined && files[0].fileName) {
         // File normalization for Safari 4 and Firefox 3:
-        $.each(files, function (index, file) {
+        $.each(files, function(index, file) {
           file.name = file.fileName;
           file.size = file.fileSize;
         });
@@ -1947,14 +1947,14 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       return $.Deferred().resolve(files).promise();
     },
 
-    _getFileInputFiles: function (fileInput) {
+    _getFileInputFiles: function(fileInput) {
       if (!(fileInput instanceof $) || fileInput.length === 1) {
         return this._getSingleFileInputFiles(fileInput);
       }
       return $.when.apply(
         $,
         $.map(fileInput, this._getSingleFileInputFiles)
-      ).pipe(function () {
+      ).pipe(function() {
         return Array.prototype.concat.apply(
           [],
           arguments
@@ -1962,13 +1962,13 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       });
     },
 
-    _onChange: function (e) {
+    _onChange: function(e) {
       var that = this,
         data = {
           fileInput: $(e.target),
           form: $(e.target.form)
         };
-      this._getFileInputFiles(data.fileInput).always(function (files) {
+      this._getFileInputFiles(data.fileInput).always(function(files) {
         data.files = files;
         if (that.options.replaceFileInput) {
           that._replaceFileInput(data);
@@ -1983,12 +1983,12 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       });
     },
 
-    _onPaste: function (e) {
+    _onPaste: function(e) {
       var items = e.originalEvent && e.originalEvent.clipboardData &&
         e.originalEvent.clipboardData.items,
         data = { files: [] };
       if (items && items.length) {
-        $.each(items, function (index, item) {
+        $.each(items, function(index, item) {
           var file = item.getAsFile && item.getAsFile();
           if (file) {
             data.files.push(file);
@@ -2004,14 +2004,14 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       }
     },
 
-    _onDrop: function (e) {
+    _onDrop: function(e) {
       e.dataTransfer = e.originalEvent && e.originalEvent.dataTransfer;
       var that = this,
         dataTransfer = e.dataTransfer,
         data = {};
       if (dataTransfer && dataTransfer.files && dataTransfer.files.length) {
         e.preventDefault();
-        this._getDroppedFiles(dataTransfer).always(function (files) {
+        this._getDroppedFiles(dataTransfer).always(function(files) {
           data.files = files;
           if (that._trigger(
               'drop',
@@ -2030,7 +2030,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
 
     _onDragLeave: getDragHandler('dragleave'),
 
-    _initEventHandlers: function () {
+    _initEventHandlers: function() {
       if (this._isXHRUpload(this.options)) {
         this._on(this.options.dropZone, {
           dragover: this._onDragOver,
@@ -2051,13 +2051,13 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       }
     },
 
-    _destroyEventHandlers: function () {
+    _destroyEventHandlers: function() {
       this._off(this.options.dropZone, 'dragenter dragleave dragover drop');
       this._off(this.options.pasteZone, 'paste');
       this._off(this.options.fileInput, 'change');
     },
 
-    _setOption: function (key, value) {
+    _setOption: function(key, value) {
       var reinit = $.inArray(key, this._specialOptions) !== -1;
       if (reinit) {
         this._destroyEventHandlers();
@@ -2069,7 +2069,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       }
     },
 
-    _initSpecialOptions: function () {
+    _initSpecialOptions: function() {
       var options = this.options;
       if (options.fileInput === undefined) {
         options.fileInput = this.element.is('input[type="file"]') ?
@@ -2085,31 +2085,31 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       }
     },
 
-    _getRegExp: function (str) {
+    _getRegExp: function(str) {
       var parts = str.split('/'),
         modifiers = parts.pop();
       parts.shift();
       return new RegExp(parts.join('/'), modifiers);
     },
 
-    _isRegExpOption: function (key, value) {
+    _isRegExpOption: function(key, value) {
       return key !== 'url' && $.type(value) === 'string' &&
         /^\/.*\/[igm]{0,3}$/.test(value);
     },
 
-    _initDataAttributes: function () {
+    _initDataAttributes: function() {
       var that = this,
         options = this.options,
         data = this.element.data();
       // Initialize options set via HTML5 data-attributes:
       $.each(
         this.element[0].attributes,
-        function (index, attr) {
+        function(index, attr) {
           var key = attr.name.toLowerCase(),
             value;
           if (/^data-/.test(key)) {
             // Convert hyphen-ated key to camelCase:
-            key = key.slice(5).replace(/-[a-z]/g, function (str) {
+            key = key.slice(5).replace(/-[a-z]/g, function(str) {
               return str.charAt(1).toUpperCase();
             });
             value = data[key];
@@ -2122,7 +2122,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       );
     },
 
-    _create: function () {
+    _create: function() {
       this._initDataAttributes();
       this._initSpecialOptions();
       this._slots = [];
@@ -2134,7 +2134,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
 
     // This method is exposed to the widget API and allows to query
     // the number of active uploads:
-    active: function () {
+    active: function() {
       return this._active;
     },
 
@@ -2142,7 +2142,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     // the widget upload progress.
     // It returns an object with loaded, total and bitrate properties
     // for the running uploads:
-    progress: function () {
+    progress: function() {
       return this._progress;
     },
 
@@ -2150,13 +2150,13 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     // using the fileupload API. The data parameter accepts an object which
     // must have a files property and can contain additional options:
     // .fileupload('add', {files: filesList});
-    add: function (data) {
+    add: function(data) {
       var that = this;
       if (!data || this.options.disabled) {
         return;
       }
       if (data.fileInput && !data.files) {
-        this._getFileInputFiles(data.fileInput).always(function (files) {
+        this._getFileInputFiles(data.fileInput).always(function(files) {
           data.files = files;
           that._onAdd(null, data);
         });
@@ -2171,7 +2171,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     // must have a files or fileInput property and can contain additional options:
     // .fileupload('send', {files: filesList});
     // The method returns a Promise object for the file upload call.
-    send: function (data) {
+    send: function(data) {
       if (data && !this.options.disabled) {
         if (data.fileInput && !data.files) {
           var that = this,
@@ -2179,7 +2179,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
             promise = dfd.promise(),
             jqXHR,
             aborted;
-          promise.abort = function () {
+          promise.abort = function() {
             aborted = true;
             if (jqXHR) {
               return jqXHR.abort();
@@ -2188,7 +2188,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
             return promise;
           };
           this._getFileInputFiles(data.fileInput).always(
-            function (files) {
+            function(files) {
               if (aborted) {
                 return;
               }
@@ -2199,10 +2199,10 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
               data.files = files;
               jqXHR = that._onSend(null, data);
               jqXHR.then(
-                function (result, textStatus, jqXHR) {
+                function(result, textStatus, jqXHR) {
                   dfd.resolve(result, textStatus, jqXHR);
                 },
-                function (jqXHR, textStatus, errorThrown) {
+                function(jqXHR, textStatus, errorThrown) {
                   dfd.reject(jqXHR, textStatus, errorThrown);
                 }
               );
@@ -2225,13 +2225,13 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
     <div class="theme-black bbase-component-photopick">
       <div id="popupWindowClose_8484" class="closeBtn bbasefont bbase-x" bb-click="_close" style="top: 16px; right: 16px;"></div>
       <ul class="materialLeftPanel ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
-        <li id="materialCookie" class="ui-state-default ui-corner-top" style="display:none;">
+        <li id="materialCookie" bb-show="showSystem" bb-watch="curNav:class" bb-click="changeNav('system')" class="ui-state-default ui-corner-top  {{#If curNav === 'system'}}ui-state-active{{/If}}">
           <a id="material_select" href="javascript:;" class="ui-tabs-anchor">系统图片</a>
         </li>
-        <li id="myPhotoCookie" class="ui-state-default ui-corner-top ui-tabs-active ui-state-active">
+        <li id="myPhotoCookie" bb-watch="curNav:class" bb-click="changeNav('my')" class="ui-state-default ui-corner-top ui-tabs-active {{#If curNav === 'my'}}ui-state-active{{/If}}">
           <a id="myPhoto_select" href="javascript:;" class="ui-tabs-anchor">我的图片</a>
         </li>
-        <li class="uploadPhoto">
+        <li class="uploadPhoto" bb-show="curNav!== 'system'">
           <span id="uploadButton" class="uploadify" style="cursor: pointer;">上传图片
         <a id="file_upload_1-button" href="javascript:void(0)" class="uploadify-button"></a>
         </span>
@@ -2239,6 +2239,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
       </ul>
       <div id="photo-main">
         <div class="photo-tool">
+          <div bb-show="curNav==='system'" bb-bbaseuitabunderline="{viewId:'itemcheckpiccate',cur:curCate,items:systemCateItems,path:'value', require: false,onChange: handleCateChange }"></div>
         </div>
         <ul class="photo-list">
         </ul>
@@ -2253,13 +2254,13 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
   `;
 
   BbasePhotoPick = BbaseList.extend({
-    initialize: function () {
+    initialize: function() {
       var size = typeof this.options.size === 'undefined' ? 120 : this.options.size;
       this._super({
         model: BbaseModel.extend({
           defaults: BbaseEst.extend({}, BbaseModel.prototype.defaults),
           baseId: 'attId',
-          baseUrl: CONST.API + (this.options.detailApi || '/att/detail')
+          baseUrl: this.options.detailApi ? this.options.detailApi.indexOf('http') > -1 ? this.options.detailApi : CONST.API + '/' + this.options.detailApi : (CONST.API + '/att/detail')
         }),
         collection: BbaseCollection.extend({
           url: this.options.listApi ?
@@ -2290,7 +2291,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
             <div class="picTitle" style=""><span bb-watch="filename:html">{{filename}}</span></div>
           </div>
           `,
-          init: function () {
+          init: function() {
             return {
               cur: '00',
               viewId: 'checkbox' + this.cid,
@@ -2298,16 +2299,16 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
               copyId: BbaseEst.nextUid()
             }
           },
-          handleChange: function (item, init) {
+          handleChange: function(item, init) {
             if (!init) {
               this._check();
             }
           },
-          clickToUse: function (e) {
+          clickToUse: function(e) {
             e.stopImmediatePropagation();
             BbaseApp.getView(this._options.viewId).onChange(this.model.toJSON());
           },
-          afterRender: function () {}
+          afterRender: function() {}
         }),
         render: '.photo-list',
         template: template,
@@ -2318,12 +2319,19 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
         checkToggle: true
       });
     },
-    onWatch: function () {},
-    afterRender: function () {
+    initData: function() {
+      return {
+        curNav: 'my',
+        systemCateItems: [],
+        curCate: '',
+        showSystem: this._options.showSystem
+      }
+    },
+    afterRender: function() {
       this.initFileUpload({
         target: this.$('#file_upload_1-button'),
         data: this._options.data,
-        success: this._bind(function (options) {
+        success: this._bind(function(options) {
           this._reload({
             pageSize: 15,
             page: 1
@@ -2331,25 +2339,79 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
         })
       });
     },
-    onChange: function (model) {
+    changeNav: function(type) {
+      this._set('curNav', type);
+      if (this._get('curNav') === 'system') {
+        this.showSystemCate();
+      }else if (this._get('curNav') === 'my'){
+        this._setParam('belongId', '');
+        this._setPage(1);
+        this._setParam('type', 'user');
+        this._reload();
+      }
+    },
+    showSystemCate: function() {
+      var _this = this;
+      if (this._get('systemCateItems').length === 0) {
+        if (CONST.API.indexOf('bbase') > -1) {
+          _this._set('systemCateItems', [
+            { text: '图标', value: 'all' },
+            { text: '人物', value: '8' },
+            { text: '风景', value: '7' },
+            { text: '城市', value: '6' },
+            { text: '企业', value: '5' },
+            { text: '节日', value: '4' },
+            { text: '纯色', value: '3' },
+            { text: '旅游', value: '2' }
+          ]);
+          _this._set('curCate', 'all');
+        } else {
+          new BbaseService().factory({
+            session: false,
+            cache: false,
+            defaults: false,
+            defaultValue: '',
+            select: true,
+            text: 'name', // 下拉框名称
+            value: 'albumId', // 下拉框值
+            url: _this.options.systemAlbumApi || (CONST.API + '/album/system')
+          }).then(function(list) {
+            _this._set('systemCateItems', list);
+            _this._set('curCate', list[0].value);
+          });
+        }
+
+      }else{
+        _this.handleCateChange({
+          value:this._get('systemCateItems')[0].value
+        });
+      }
+    },
+    handleCateChange: function(item, init) {
+      this._setParam('belongId', item.value);
+      this._setParam('type', 'system');
+      this._setPage(1);
+      this._reload();
+    },
+    onChange: function(model) {
       var list = this._getCheckedItems();
       if (this._options.onChange) {
         this._options.onChange.call(this, list.length > 1 ? BbaseEst.map(list, 'attributes') : [model]);
       }
       this._close();
     },
-    initFileUpload: function (options) {
+    initFileUpload: function(options) {
       options = options || {};
 
       var viewId = BbaseEst.nextUid('fileupload');
       $(options.target).css({ 'position': 'absolute', 'overflow': 'hidden' });
-      $(options.target).each(function () {
+      $(options.target).each(function() {
         $(this).append('<input id="' + viewId + '" style="height:' + ($(this).height() + parseFloat($(this).css('padding-top')) + parseFloat($(this).css('padding-bottom'))) +
           'px;" class="file-upload" type="file" name="Filedata" value="从我的电脑里选择上传" multiple>');
       });
 
       $('#' + viewId, options.target).fileupload({
-        url: CONST.API + (this.options.uploadApi || '/upload/todo'),
+        url: this.options.uploadApi ? this.options.uploadApi.indexOf('http') > -1 ? this.options.uploadApi : CONST.API + '/' + this.options.uploadApi : (CONST.API + '/upload/todo'),
         dataType: 'json',
         formData: BbaseEst.extend(options.data || {}, {
           "username": CONST.USER && CONST.USER.username, // 用户名
@@ -2358,10 +2420,10 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
           "attId": '', // 图片ID
           "width": options.width || 640
         }),
-        submit: function (e, data) {
+        submit: function(e, data) {
           if (options.submit) options.submit.call(this, data);
         },
-        start: function (e) {
+        start: function(e) {
           if (!window.$uploading) {
             window.$uploading = $('<div class="bbase-component-photopick-uploading"></div>');
             $('body').append(window.$uploading);
@@ -2369,14 +2431,14 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
           window.$uploading.html('0%');
           window.$uploading.show();
         },
-        progressall: function (e, data) {
+        progressall: function(e, data) {
           var per = parseInt(data.loaded / data.total * 100, 10) + '%';
           if (per === '100%') {
             per = per + ',正在加载图片...';
           }
           window.$uploading.html(per);
         },
-        done: function (e, data) {
+        done: function(e, data) {
           var response = data.result;
           window.$uploading.hide();
           if (!response.success && response.msg === '请先登陆') {
@@ -2397,7 +2459,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function (require, exports, module)
             });
           }
         },
-        error: function (e) {
+        error: function(e) {
           BbaseUtils.tip('上传失败');
           window.$uploading.hide();
         }

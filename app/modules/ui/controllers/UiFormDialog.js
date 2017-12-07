@@ -17,6 +17,7 @@ define('UiFormDialog', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main">
+          <div class="red">注意：BbaseItem中如果开启diff:true慎用， 数据不能同步</div>
           <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidialog="{viewId:'bbaseuidialog',content: 'content', quickClose: true, title:'普通对话框'}">普通对话框</div>
            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidialog="{viewId:'bbaseuidialog',moduleId: 'UiListExpand',quickClose: true}">模块对话框</div>
            <div style="padding:10px;margin: 0;cursor: pointer;" class="demo-item clearfix left" bb-bbaseuidialog="{viewId:'bbaseuidialog',content: 'content',quickClose: true, follow: true}">跟随元素</div>

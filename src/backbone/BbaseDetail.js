@@ -137,7 +137,7 @@
     _initModel: function (model, ctx) {
       var _this = this;
       _this._options.id = BbaseEst.typeOf(_this._options.id) === 'number' ? _this._options.id + '' : _this._options.id;
-      _this._options.data.id = BbaseEst.typeOf(_this._options.data.id) === 'number' ? _this._options.data.id + '' : _this._options.data.id;
+      _this._options.data.id = BbaseEst.typeOf(_this._options.data.id) === 'number' ? _this._options.data.id + '' : _this._options.data.id? _this._options.data.id : _this._options.id;
       ctx.passId = _this.options.id || _this._options.data.id || BbaseEst.getUrlParam('id', window.location.href);
 
       if (!BbaseEst.isEmpty(_this.passId)) {
@@ -363,7 +363,7 @@
         if (_this.afterSave) {
           _this.afterSave.call(_this, resp);
         }
-        if (callback) callback.call(_this, resp);
+        if (callback &&  BbaseEst.typeOf(callback) === 'function') callback.call(_this, resp);
       }, function () {
         if (_this.errorSave) {
           _this.errorSave.call(_this, resp);

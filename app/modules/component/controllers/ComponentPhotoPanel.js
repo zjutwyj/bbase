@@ -18,7 +18,7 @@ define('ComponentPhotoPanel', [], function(require, exports, module){
             </div>
           </div>
           <div class="main">
-          <div  class="demo-item clearfix" bb-bbasecomponentphotopanel="{viewId: 'componentPhoto1', cur: cur, showCropBtn: true,showSettingBtn: true}"></div>
+          <div  class="demo-item clearfix" bb-bbasecomponentphotopanel="{viewId: 'componentPhoto1', cur: cur, showCropBtn: true,showSettingBtn: true,showSystem:true}"></div>
           </div>
           <div class="footer">
           <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}};</div>
@@ -98,6 +98,17 @@ define('ComponentPhotoPanel', [], function(require, exports, module){
                   <td class="argName"><span>onChange</span></td>
                   <td class="argDesc"><span>回调函数</span></td>
                   <td class="argType"><span>function(item, init)</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
+                 <tr>
+                  <td class="argName"><span>showSystem</span></td>
+                  <td class="argDesc"><span>输出的图片管理界面是否显示系统图片</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>false</span></td>
+                </tr><tr>
+                  <td class="argName"><span>systemAlbumApi</span></td>
+                  <td class="argDesc"><span>系统相册分类</span></td>
+                  <td class="argType"><span>string</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
 

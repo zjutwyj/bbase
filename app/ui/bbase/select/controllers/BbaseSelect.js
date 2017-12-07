@@ -387,12 +387,18 @@ define('BbaseSelect', [], function(require, exports, module) {
 
     },
     setList: function(items){
+      var _items = BbaseEst.cloneDeep(items,true);
+      // 修复 id相同是无法添加问题
+      BbaseEst.each(_items, function(item){
+        delete item.id;
+      });
+
       if (!this.selectNode){
-        this._options.items = items;
+        this._options.items = _items;
       }else{
-        this.selectNode._setModels(items);
+        this.selectNode._setModels(_items);
       }
-      this.initInputValue(items);
+      this.initInputValue(_items);
     },
     afterRender: function() {
       if (this._options.target) {

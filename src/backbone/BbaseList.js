@@ -731,7 +731,16 @@
             for (var j = len_c + 1; j <= len_l; j++) {
               list[j - 1]['dx'] = dx;
               dx++;
+
+              // 修复 新添加项已存在于collection中，导致添加不成功
+              var id = list[j-1].id;
+              delete list[j - 1].dx;
+              delete list[j - 1].id;
+
               _this.collection.add(new _this._options.model(list[j - 1]));
+              if (!_this.collection.models[j-1].attributes.id){
+                _this.collection.models[j-1].attributes.id = id;
+              }
               //_this._push(new _this._options.model(list[j - 1]));
             }
           //}, 0);

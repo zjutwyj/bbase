@@ -716,6 +716,9 @@ new BbaseService().factory({
 兼容所有浏览器(包括IE6789)
 
 ### 更新记录
+>2017.11.10
+修复BbaseList中的setModels问题
+
 >2017.08.18
 BbaseDetail新增 _isNew()方法
 

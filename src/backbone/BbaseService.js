@@ -32,7 +32,7 @@ BbaseService.prototype = {
       data = options.data;
     }
     return $.ajax({
-      type: options.type || 'post',
+      type: options.type || 'get',
       url: options.url,
       cache: options.cache,
       data: data,

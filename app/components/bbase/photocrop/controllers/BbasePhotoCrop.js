@@ -137,7 +137,7 @@ define('BbasePhotoCrop', ['Jcrop'], function(require, exports, module) {
               image: ctx._get('image'),
               cropImage: result.attributes.picpath
             }
-            ctx._options.onChange && ctx._options.onChange.call(this, decodeURIComponent(result.attributes.picpath) + '?v=' + new Date().getTime(), result.attributes.width, result.attributes.height, JSON.stringify(pos));
+            ctx._options.onChange && ctx._options.onChange.call(this, decodeURIComponent(result.attributes.picpath), result.attributes.width, result.attributes.height, JSON.stringify(pos));
             BbaseApp.getCurrentDialog().close().remove();
             BbaseUtils.removeLoading();
           }, 1000);

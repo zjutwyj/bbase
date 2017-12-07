@@ -39,7 +39,7 @@ define('BbasePhotoPanel', [], function (require, exports, module) {
     <div class="c4-overlay preview"  aria-hidden="true" style="">
       <div class="c4-overlay-default-buttons" >
       <!---->
-      <button class="p9c-primary cc-x-height" data-hook="replace-menu" bb-bbasecomponentphotopick="{viewId: 'photoPanelPick', cur: cur, items: items, listApi: listApi, onChange: handlePickChange}"><span class="cc-x-height font-t2 photo-panel-replace-btn" >替换</span></button>
+      <button class="p9c-primary cc-x-height" data-hook="replace-menu" bb-bbasecomponentphotopick="{viewId: 'photoPanelPick', cur: cur, items: items, listApi: listApi, onChange: handlePickChange,showSystem: showSystem,systemAlbumApi:systemAlbumApi}"><span class="cc-x-height font-t2 photo-panel-replace-btn" >替换</span></button>
       <!---->
       <button bb-show="showCropBtn" class="p9c-primary -icon-only" bb-click="handleCrop" data-hook="crop-menu" style="width:auto;padding: 0px 10px;line-height:14px;"><i cc-tooltip-position="top" cc-tooltip="crop" class="cc-icon-circle cc-icon-crop tooltipstered bbasefont bbase-crop"></i><span class="font-t2" style="font-size:14px;vertical-align:middle;">裁剪</span></button>
       <!---->
@@ -55,7 +55,9 @@ define('BbasePhotoPanel', [], function (require, exports, module) {
       return {
         showSettingBtn: BbaseEst.typeOf(this.options.showSettingBtn) === 'boolean' ? this.options.showSettingBtn : false,
         showCropBtn: BbaseEst.typeOf(this.options.showCropBtn) === 'boolean' ? this.options.showCropBtn : false,
+        showSystem: this.options.showSystem,
         listApi: this._options.listApi,
+        systemAlbumApi: this._options.systemAlbumApi,
         cur: this._options.cur || 'upload/j/j2/jihui88/picture/2017/04/28/8e7867ee-3a84-4c5f-a97b-14cf455161c7.jpg!120?v=115305748',
         items: this._options.listApi ? null : items // 测试数据， 真实需请求api
       }

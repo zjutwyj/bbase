@@ -64,7 +64,7 @@ define('BbaseAlubmPick', [], function(require, exports, module){
                 <span class="pic-num-wrap"><span class="pic-num" bb-watch="attCount:html">{{attCount}}</span></span>    <span class="album-status js-album-new"></span>   </a>
                  <div class="i-templateLayer">
               <div class="i-templateBtnContainer">
-                <a href="{{manageHref}}?albumId={{albumId}}" hidefocus="true" target="_blank" class="i-templateBtn i-lookTemplateBtn">
+                <a href="javascript:;" bb-click="editAlbum" hidefocus="true" target="_blank" class="i-templateBtn i-lookTemplateBtn">
                   <span class="i-icon bbasefont bbase-edit"></span>
                   <span class="i-text">编辑</span>
                 </a>
@@ -87,6 +87,17 @@ define('BbaseAlubmPick', [], function(require, exports, module){
             return {
               manageHref: manageHref
             }
+          },
+          editAlbum(){
+            var href = this._get('manageHref') + "?albumId=" + this._get('albumId');
+            this._dialog({
+              title: '编辑相册',
+              content: `<iframe src="${href}" style="width:1280px;height:800px;"></iframe>`,
+              width: 1280,
+              height: 800,
+              cover: true,
+              quickClose: true
+            })
           },
           selectItem(e){
             this._super('view').selectItem(this.model.toJSON(true));

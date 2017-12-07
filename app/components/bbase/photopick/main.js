@@ -16,6 +16,8 @@ Bbase.DIRECTIVE['bbasecomponentphotopick'] = {
         listApi: object.listApi,
         detailApi: object.detailApi,
         uploadApi: object.uploadApi,
+        systemAlbumApi: object.systemAlbumApi,
+        showSystem: object.showSystem,
         size: object.size,
         quickClose: true,
         onChange: this._bind(function (result) {

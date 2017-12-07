@@ -13,6 +13,7 @@ Bbase.DIRECTIVE['bbasecomponentalbumpanel'] = {
         width: object.width,
         size: object.size,
         mainPic: object.mainPic,
+        manageHref:object.manageHref,
         domain: object.domain,
         showSettingBtn: object.showSettingBtn,
         onChange: BbaseEst.proxy(function (item, init) {

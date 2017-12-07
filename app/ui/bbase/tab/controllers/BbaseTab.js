@@ -216,6 +216,7 @@ define('BbaseTab', [], function (require, exports, module) {
       return this._options.theme;
     },
     setList: function (items) {
+      this.$('.no-result').remove();
       this._setModels(items);
       this.$tabList = [];
       BbaseEst.each(items, this._bind(this.addTab, this));

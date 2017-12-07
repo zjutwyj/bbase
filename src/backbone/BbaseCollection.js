@@ -153,7 +153,7 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
     if (typeof _this.url !== 'function') {
       var end = '';
       if (!BbaseEst.isEmpty(_this._itemId)) end = '/' + _this._itemId;
-      _this.url = _this._baseUrl + end + '?page=' + page + '&pageSize=' + pageSize + _this._getParams();
+      _this.url = _this._baseUrl + end + (_this._baseUrl.indexOf('?') > -1 ? '&' : '?') + 'page=' + page + '&pageSize=' + pageSize + _this._getParams();
     }
   },
   /**
