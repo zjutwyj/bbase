@@ -29,85 +29,96 @@ define('BbasePhotoCrop', ['Jcrop'], function(require, exports, module) {
       });
     },
     getOption: function() {
+      var _this = this;
+      var scale = _this.picWidth > _this.boxWidth ? _this.picWidth / _this.boxWidth : 1;
       return {
-        image: this.model.get('image'),
-        picWidth: this.model.get('picWidth'),
-        picHeight: this.model.get('picHeight'),
-        cropWidth: this.model.get('cropWidth'),
-        cropHeight: this.model.get('cropHeight'),
-        prefix: this.model.get('prefix'),
-        cropImage: this.cropImage,
-        x: parseInt(this.x), // x轴坐标(相对于原图)
-        y: parseInt(this.y, 10), // y轴坐标(相对于原图)
-        x2: parseInt(this.x2, 10), // x轴结束坐标(相对于原图)
-        y2: parseInt(this.y2, 10), // y轴结束坐标(相对于原图)
-        w: parseInt(this.w, 10), // 截取的宽度(相对于原图)
-        h: parseInt(this.h, 10) // 截取的高度(相对于原图)
+        image: _this.model.get('image'),
+        picWidth: _this.model.get('picWidth'),
+        picHeight: _this.model.get('picHeight'),
+        cropWidth: _this.model.get('cropWidth'),
+        cropHeight: _this.model.get('cropHeight'),
+        prefix: _this.model.get('prefix'),
+        cropImage: _this.cropImage,
+        x: parseInt(_this.x * scale), // x轴坐标(相对于原图)
+        y: parseInt(_this.y* scale, 10), // y轴坐标(相对于原图)
+        x2: parseInt(_this.x2* scale, 10), // x轴结束坐标(相对于原图)
+        y2: parseInt(_this.y2* scale, 10), // y轴结束坐标(相对于原图)
+        w: parseInt(_this.w* scale, 10), // 截取的宽度(相对于原图)
+        h: parseInt(_this.h* scale, 10) // 截取的高度(相对于原图)
       }
     },
     afterRender: function() {
-      this.jcrop = null;
+      var _this = this;
+      _this.jcrop = null;
+      _this.initcrop = true;
 
-      this.cropWidth = parseInt(this.model.get('cropWidth')); // 裁剪宽度
-      this.cropHeight = parseInt(this.model.get('cropHeight')); // 裁剪高度
+      _this.cropWidth = parseInt(_this.model.get('cropWidth')); // 裁剪宽度
+      _this.cropHeight = parseInt(_this.model.get('cropHeight')); // 裁剪高度
 
-      this.boxWidth = parseInt(this.model.get('boxWidth') || 350); // 展示框宽度
-      this.boxHeight = parseInt(this.model.get('boxHeight') || 350); // 展示框高度
+      _this.boxWidth = parseInt(_this.model.get('boxWidth') || 350); // 展示框宽度
+      _this.boxHeight = parseInt(_this.model.get('boxHeight') || 350); // 展示框高度
 
-      this.picWidth = parseInt(this.model.get('picWidth')); // 原图片宽度
-      this.picHeight = parseInt(this.model.get('picHeight')); // 原图片高度
+      _this.picWidth = parseInt(_this.model.get('picWidth')); // 原图片宽度
+      _this.picHeight = parseInt(_this.model.get('picHeight')); // 原图片高度
 
-      this.x = 0; // x轴坐标(相对于原图)
-      this.y = 0; // y轴坐标(相对于原图)
-      this.x2 = this.cropWidth / this.boxWidth * this.picWidth; // x轴结束坐标(相对于原图)
-      this.y2 = this.cropHeight / this.boxHeight * this.picHeight; // y轴结束坐标(相对于原图)
-      this.w = this.x2; // 截取的宽度(相对于原图)
-      this.h = this.y2; // 截取的高度(相对于原图)
+      _this.x = 0; // x轴坐标(相对于对话框)
+      _this.y = 0; // y轴坐标(相对于对话框)
+      _this.x2 = _this.cropWidth / _this.boxWidth * _this.picWidth; // x轴结束坐标(相对于对话框)
+      _this.y2 = _this.cropHeight / _this.boxHeight * _this.picHeight; // y轴结束坐标(相对于对话框)
+      _this.w = _this.x2; // 截取的宽度(相对于对话框)
+      _this.h = _this.y2; // 截取的高度(相对于对话框)
 
-      this.pos = this.model.get('pos');
-      if (!BbaseEst.isEmpty(this.pos)){
-        var pos = JSON.parse(this.pos);
-        this.x = pos.x;
-        this.y = pos.y;
-        this.x2 = pos.x2;
-        this.y2 = pos.y2;
-        this.w = this.x2;
-        this.h = this.y2;
-        this.cropImage = pos.cropImage;
+      _this.pos = _this.model.get('pos');
+
+      if (!BbaseEst.isEmpty(_this.pos)) {
+        var pos = JSON.parse(_this.pos);
+        _this.x = pos.x;
+        _this.y = pos.y;
+        _this.x2 = pos.x2;
+        _this.y2 = pos.y2;
+        _this.w = _this.x2;
+        _this.h = _this.y2;
+        _this.cropImage = pos.cropImage;
       }
 
+      _this.radio = _this.cropWidth / _this.cropHeight;
 
-      this.radio = this.cropWidth / this.cropHeight;
       try {
-        this.$('#jcrop-target').Jcrop({
-          bgFade: false,
-          boxWidth: this.boxWidth,
-          boxHeight: this.boxHeight,
-          aspectRatio: this.radio,
-          allowSelect: false,
-          bgOpacity: .6,
-          setSelect: [this.x, this.y, this.x2, this.y2],
-          onSelect: BbaseEst.proxy(function(result) {
-            this.x = result.x;
-            this.x2 = result.x2;
-            this.y = result.y;
-            this.y2 = result.y2;
-            this.w = result.w;
-            this.h = result.h;
-            /*console.log('x:' + parseInt(this.x) + ", y:" + parseInt(this.y) + ", x2:" + parseInt(this.x2) + ",y2:" + parseInt(this.y2) + ",w:" + parseInt(this.w) + ", h:" + parseInt(this.h));*/
-          }, this),
-          onRelease: function() {
+        setTimeout(function() {
+          _this.$('#jcrop-target').Jcrop({
+            bgFade: false,
+            boxWidth: _this.boxWidth,
+            boxHeight: _this.boxHeight,
+            aspectRatio: _this.radio,
+            allowSelect: false,
+            bgOpacity: .6,
+            setSelect: [_this.x, _this.y, _this.x2, _this.y2],
+            onSelect: function(result) {
+              var ctx = this;
+              _this.x = result.x;
+              _this.y = result.y;
+              _this.x2 = result.x2;
+              _this.y2 = result.y2;
+              _this.w = result.w;
+              _this.h = result.h;
 
-          }
-        }, BbaseEst.proxy(function() {
-          this.jcrop = this;
-        }, this));
+              console.log('x:' + parseInt(_this.x) + ", y:" + parseInt(_this.y) + ", x2:" + parseInt(_this.x2) + ",y2:" + parseInt(_this.y2) + ",w:" + parseInt(_this.w) + ", h:" + parseInt(_this.h));
+            },
+            onRelease: function() {
+
+            }
+          }, function() {
+            _this.jcrop = this;
+          });
+        }, 100)
+
+
       } catch (e) {
         console.log(e);
       }
     },
-    closeCrop: function () {
-      if (this._options.onCancel){
+    closeCrop: function() {
+      if (this._options.onCancel) {
         this._options.onCancel.call(this);
       }
       this._close();
@@ -115,10 +126,12 @@ define('BbasePhotoCrop', ['Jcrop'], function(require, exports, module) {
     cropImageUpload: function() {
       var ctx = this;
       BbaseUtils.addLoading();
+      var cropArgs = this.getOption();
+      console.log("裁切参数：x轴坐标：" + cropArgs.x + ", y轴坐标：" + cropArgs.y + ",x距离：" + cropArgs.x2 + ",y距离：" + cropArgs.y2 + ",裁切宽度：" + cropArgs.w + ",裁切高度：" + cropArgs.h + ", 原图片宽度:" + cropArgs.picWidth + ",原图片高度：" + cropArgs.picHeight);
       $.ajax({
         type: 'post',
         url: CONST.API + (this._get('cutApi') || '/upload/toCut'),
-        data: this.getOption(),
+        data: cropArgs,
         success: function(result) {
           if (!result.success) {
             BbaseUtils.tip(result.msg);
