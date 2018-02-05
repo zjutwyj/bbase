@@ -59,24 +59,24 @@ define('BbaseNavigatorPanel', [], function(require, exports, module) {
           className: 'menu-item angular-ui-tree-node',
           template: `
             <div bb-click="handleChange" bb-watch="selected:class,parentId:class" class="tree-node {{#If selected}}selected-page{{/If}} " role="button" tabindex="0">
-                  <div class="icon cc-icon-subpage" disabled="disabled"></div>
+                  <div class="bbaseicon cc-icon-subpage" disabled="disabled"></div>
                   <!---->
                   <div class="drag-area angular-ui-tree-handle" ui-tree-handle="">
                     <!---->
-                    <div class="icon cc-icon-drag-small bbasefont bbase-drag" bb-click="stop"></div>
+                    <div class="bbaseicon cc-icon-drag-small bbasefont bbase-drag" bb-click="stop"></div>
                     <!---->
                   </div>
                   <!---->
                   <form blur="submit" class="page-name-form ng-pristine ng-valid" editable-form="" name="renameForm">
                     <div buttons="no" class="menu-name page-name editable {{#If display!=='s'}}line-through{{/If}}" e-form="renameForm" bb-watch="name:html,display:class,display:html" placeholder="Enter name" tabindex="0">{{name}} {{#If display!=='s'}}[已隐藏]{{/If}}</div>
                   </form>
-                  <div class="icon custom-icon cc-icon-home"></div>
+                  <div class="bbaseicon custom-icon cc-icon-home"></div>
                   <div class="indications">
                     <!---->
-                    <div bb-click="openDetailDialog" class="icon settings-button cc-icon-settings tooltipstered bbasefont bbase-setting" data-hook="page-settings" role="button" tabindex="0"></div>
+                    <div bb-click="openDetailDialog" class="bbaseicon settings-button cc-icon-settings tooltipstered bbasefont bbase-setting" data-hook="page-settings" role="button" tabindex="0"></div>
                     <!---->
                     <!---->
-                    <div bb-click="_del" class="icon delete-button cc-icon-settings tooltipstered bbasefont bbase-delete" data-hook="page-delete" role="button" tabindex="0"></div>
+                    <div bb-click="_del" class="bbaseicon delete-button cc-icon-settings tooltipstered bbasefont bbase-delete" data-hook="page-delete" role="button" tabindex="0"></div>
                     <!---->
                   </div>
                 </div>

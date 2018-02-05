@@ -37,7 +37,7 @@ define('BbaseListExpand', [], function (require, exports, module) {
           className: 'section-button-container',
           template: `
             <div bb-watch="checked:class" class="section-button already-used {{#If checked}}selected{{/If}}" bb-click="handleClick" data-hook="section-button" role="button" tabindex="0">
-              <span bb-watch="name:html">{{name}}</span>
+              <span bb-watch="name:html">{{{name}}}</span>
               <div class="bbasefont bbase-correct already-used-check" bb-show="checked"></div>
             </div>
           `,

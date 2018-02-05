@@ -96,7 +96,7 @@
   .cc-icon-drag-small {
     vertical-align: text-bottom;
   }
-  .tree-node.selected-page .icon {
+  .tree-node.selected-page .bbaseicon {
     color: rgba(255, 255, 255, .96);
   }
   .angular-ui-tree-drag .cc-icon-hide-eye,
@@ -124,7 +124,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
   }
-  .tree-node.selected-page .icon {
+  .tree-node.selected-page .bbaseicon {
     color: rgba(255, 255, 255, .96);
   }
   .angular-ui-tree-drag .indications,
@@ -145,7 +145,7 @@
   .tree-node:hover .delete-button {
     display: inline-block;
   }
-  .tree-node.selected-page .icon {
+  .tree-node.selected-page .bbaseicon {
     color: rgba(255, 255, 255, .96);
   }
   .menu-item>.menu-list {

@@ -30,7 +30,17 @@ define('BbasePhotoCrop', ['Jcrop'], function(require, exports, module) {
     },
     getOption: function() {
       var _this = this;
-      var scale = _this.picWidth > _this.boxWidth ? _this.picWidth / _this.boxWidth : 1;
+      var scale = 1;
+      var picWidth = _this.model.get('picWidth');
+      var picHeight = _this.model.get('picHeight');
+
+      var x = parseInt(_this.x * scale, 10);
+      var y = parseInt(_this.y * scale, 10);
+      var x2 = parseInt(_this.x2 * scale, 10);
+      var y2 = parseInt(_this.y2 * scale, 10);
+      var w = parseInt(_this.w * scale, 10);
+      var h = parseInt(_this.h * scale, 10);
+
       return {
         image: _this.model.get('image'),
         picWidth: _this.model.get('picWidth'),
@@ -39,12 +49,12 @@ define('BbasePhotoCrop', ['Jcrop'], function(require, exports, module) {
         cropHeight: _this.model.get('cropHeight'),
         prefix: _this.model.get('prefix'),
         cropImage: _this.cropImage,
-        x: parseInt(_this.x * scale), // x轴坐标(相对于原图)
-        y: parseInt(_this.y* scale, 10), // y轴坐标(相对于原图)
-        x2: parseInt(_this.x2* scale, 10), // x轴结束坐标(相对于原图)
-        y2: parseInt(_this.y2* scale, 10), // y轴结束坐标(相对于原图)
-        w: parseInt(_this.w* scale, 10), // 截取的宽度(相对于原图)
-        h: parseInt(_this.h* scale, 10) // 截取的高度(相对于原图)
+        x: x, // x轴坐标(相对于原图)
+        y: y, // y轴坐标(相对于原图)
+        x2: x2, // x轴结束坐标(相对于原图)
+        y2: y2, // y轴结束坐标(相对于原图)
+        w: w, // 截取的宽度(相对于原图)
+        h: h // 截取的高度(相对于原图)
       }
     },
     afterRender: function() {
@@ -72,13 +82,19 @@ define('BbasePhotoCrop', ['Jcrop'], function(require, exports, module) {
 
       if (!BbaseEst.isEmpty(_this.pos)) {
         var pos = JSON.parse(_this.pos);
-        _this.x = pos.x;
-        _this.y = pos.y;
-        _this.x2 = pos.x2;
-        _this.y2 = pos.y2;
-        _this.w = _this.x2;
-        _this.h = _this.y2;
         _this.cropImage = pos.cropImage;
+        // 修复从上一个图片位置坐标太大会出现选择框消失的问题
+        if (pos.x > _this.picWidth || pos.y > _this.picHeight) {
+          _this.x = 0;
+          _this.y = 0;
+        } else {
+          _this.x = pos.x;
+          _this.y = pos.y;
+          _this.x2 = pos.x2;
+          _this.y2 = pos.y2;
+          _this.w = _this.x2;
+          _this.h = _this.y2;
+        }
       }
 
       _this.radio = _this.cropWidth / _this.cropHeight;
