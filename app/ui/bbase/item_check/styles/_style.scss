@@ -105,8 +105,8 @@
   }
   .item-active{
         visibility: visible;
-    border-color: #5289db;
-    background-color: #5289db;
+    border-color: $mainColor;
+    background-color: $mainColor;
     color: #fff;
   }
   .ui-item-check .bbase-yuandian:before {

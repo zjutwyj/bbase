@@ -35,7 +35,10 @@ Bbase.MODULE['ComponentNewsCatePick'] = 'modules/component/controllers/Component
 
 Bbase.MODULE['ComponentList'] = 'modules/component/controllers/ComponentList.js';
 Bbase.MODULE['ComponentListPick'] = 'modules/component/controllers/ComponentListPick.js';
+
+Bbase.MODULE['ComponentNavigator'] = 'modules/component/controllers/ComponentNavigator.js';
 Bbase.MODULE['ComponentNavigatorPanel'] = 'modules/component/controllers/ComponentNavigatorPanel.js';
+Bbase.MODULE['ComponentNavigatorPick'] = 'modules/component/controllers/ComponentNavigatorPick.js';
 
 
 Bbase.MODULE['ComponentShape'] = 'modules/component/controllers/ComponentShape.js';

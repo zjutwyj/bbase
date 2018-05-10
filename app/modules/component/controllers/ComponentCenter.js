@@ -29,6 +29,7 @@ define('ComponentCenter', [], function(require, exports, module){
           { text: '图标', moduleId: 'ComponentIcon' ,oneRender: false},
           { text: '产品', moduleId: 'ComponentProduct' ,oneRender: false},
           { text: '新闻', moduleId: 'ComponentNews' ,oneRender: false},
+          { text: '导航', moduleId: 'ComponentNavigator' ,oneRender: false},
           { text: '列表', moduleId: 'ComponentList' ,oneRender: false},
           { text: '形状', moduleId: 'ComponentShape' ,oneRender: false},
           { text: '相册', moduleId: 'ComponentAlbum' ,oneRender: false}

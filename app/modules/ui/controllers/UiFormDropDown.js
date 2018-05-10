@@ -13,7 +13,7 @@ define('UiFormDropDown', [], function (require, exports, module) {
         <div class="anything">
           <div class="header">
             <div class="formIdArea">
-              <span class="name">指令用法：bbaseuidropdown="{viewId:'bbaseuidropdownmodule',moduleId: 'DemoListTable'}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main clearfix">
@@ -32,8 +32,7 @@ define('UiFormDropDown', [], function (require, exports, module) {
       <div class="formPanel form-demo">
         <div class="anything">
           <div class="header">
-            <div class="formIdArea">
-              <span class="name">指令用法：bbaseuidropdownwin="{viewId:'bbaseuidropdownwin',moduleId: 'ThemeTable01'}"</span>
+            <div class="formIdArea"><span class="name pointer" id="viewCode02" bb-click="viewCode('viewCode02')">点击查看代码</span>
             </div>
           </div>
           <div class="main clearfix">
@@ -50,7 +49,7 @@ define('UiFormDropDown', [], function (require, exports, module) {
         <div class="anything">
           <div class="header">
             <div class="formIdArea">
-              <span class="name">指令用法：bbaseuidropdownwix="{viewId:'bbaseuidropdownwix',moduleId: 'DemoListTodo',mouseHover: true}"</span>
+              <span class="name pointer" id="viewCode03" bb-click="viewCode('viewCode03')">点击查看代码</span>
             </div>
           </div>
           <div class="main clearfix">
@@ -144,6 +143,12 @@ define('UiFormDropDown', [], function (require, exports, module) {
                   <td class="argType"><span>function</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
+                <tr>
+                  <td class="argName"><span>className</span></td>
+                  <td class="argDesc"><span>自定义样式</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -179,6 +184,9 @@ define('UiFormDropDown', [], function (require, exports, module) {
         this._set('cur', '' + values[0]);
       }
 
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

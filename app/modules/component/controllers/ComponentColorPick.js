@@ -13,7 +13,7 @@ define('ComponentColorPick', [], function (require, exports, module) {
         <div class="anything" style="display: block;">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbasecomponentcolorpick="{viewId: 'bbasecomponentcolorpick', cur: cur}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -101,6 +101,9 @@ define('ComponentColorPick', [], function (require, exports, module) {
           { text: '红色', value: 'red' }
         ]
       }
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

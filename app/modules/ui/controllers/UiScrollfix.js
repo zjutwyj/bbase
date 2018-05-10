@@ -16,7 +16,7 @@ define('UiScrollfix', [], function (require, exports, module) {
         <div class="anything">
           <div class="header">
             <div class="formIdArea">
-              <span class="name">bbaseuiscrollfix="{viewId: 'viewId', id: 'scrollfix'}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main" style="height: 1500px;padding: 10px;">
@@ -106,6 +106,9 @@ define('UiScrollfix', [], function (require, exports, module) {
       this.$('.s-ul li').click(function(){
         alert($(this).attr('data-id'));
       });
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

@@ -8,7 +8,8 @@
   //filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='$start', endColorstr='$end');
 }
 
-$mainColor:#5289db;  // 主题颜色
+$mainColor:#08bf42;  // 主题颜色
+$host:/manage;
 @import '../../ui/bbase/dialog/styles/style';
 @import '../../ui/bbase/tab/styles/style';
 @import '../../ui/bbase/select/styles/style';
@@ -18,3 +19,6 @@ $mainColor:#5289db;  // 主题颜色
 @import '../../ui/bbase/dropdown/styles/style';
 @import '../../ui/bbase/list_expand/styles/style';
 @import '../../ui/bbase/copy/styles/style';
+@import '../../ui/bbase/text_editor/styles/style';
+@import '../../ui/bbase/date_picker/styles/style';
+@import '../../ui/bbase/time_picker/styles/style';

@@ -24,3 +24,5 @@ Bbase.MODULE['ThemeTree01'] = 'modules/theme/controllers/ThemeTree01.js';
 Bbase.MODULE['ThemeForm'] = 'modules/theme/controllers/ThemeForm.js';
 Bbase.MODULE['ThemeFormButton01'] = 'modules/theme/controllers/ThemeFormButton01.js';
 Bbase.MODULE['ThemeFormInput01'] = 'modules/theme/controllers/ThemeFormInput01.js';
+
+Bbase.MODULE['ThemeCode'] = 'modules/theme/controllers/ThemeCode.js';

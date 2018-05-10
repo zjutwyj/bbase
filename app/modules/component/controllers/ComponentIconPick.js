@@ -13,7 +13,7 @@ define('ComponentIconPick', [], function (require, exports, module) {
         <div class="anything" style="display: block;">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbasecomponenticonpick="{viewId:'bbasecomponenticonpick',cur:cur, items: items}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -128,6 +128,9 @@ define('ComponentIconPick', [], function (require, exports, module) {
     },
     handleIconPickChange: function(item){
       this._set('fontcontent', item.content);
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

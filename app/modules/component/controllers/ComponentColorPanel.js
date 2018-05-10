@@ -13,7 +13,7 @@ define('ComponentColorPanel', [], function (require, exports, module) {
         <div class="anything" style="display: block;">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbasecomponentcolorpanel="{viewId: 'bbasecomponentcolorpanel', cur: cur}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -89,6 +89,9 @@ define('ComponentColorPanel', [], function (require, exports, module) {
       return {
         cur: '#ffffff'
       }
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

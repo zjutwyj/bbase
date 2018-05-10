@@ -14,7 +14,7 @@ define('ComponentPhotoPanel', [], function(require, exports, module){
         <div class="anything" style="display: block;">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbasecomponentphotopanel="{viewId: 'bbasecomponentphotopanel', cur: cur, items: items}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -151,6 +151,9 @@ define('ComponentPhotoPanel', [], function(require, exports, module){
         cur: 'upload//j//j2//jihui88//picture//2016//08//31/05c50890-35d4-4867-8d7d-1bb6710362aa.png?v=115305748&amp;v=115305748',
         items: items   // 测试数据， 真实需请求api
       }
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

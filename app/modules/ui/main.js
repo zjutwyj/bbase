@@ -1,19 +1,33 @@
 Bbase.MODULE['UiTab'] = 'modules/ui/controllers/UiTab.js';
-Bbase.ROUTE['ui_tab'] = function () {
-  seajs.use(['UiTab'], function (UiTab) {
+Bbase.ROUTE['ui_tab'] = function() {
+  seajs.use(['UiTab'], function(UiTab) {
     BbaseApp.addRegion('UiTab', UiTab, {
       el: '#app-main'
     });
   });
 };
 Bbase.MODULE['UiCenter'] = 'modules/ui/controllers/UiCenter.js';
-Bbase.ROUTE['ui'] = function () {
-  seajs.use(['UiCenter'], function (UiCenter) {
+Bbase.ROUTE['ui'] = function() {
+  seajs.use(['UiCenter'], function(UiCenter) {
     BbaseApp.addRegion('UiCenter', UiCenter, {
       el: '#app-main'
     });
   });
 };
+
+window.viewCode = function(selector, data, evt) {
+  var code = $(this.$template).find('#' + selector).parents('.anything').find('.main').html();
+  this._dialog({
+    moduleId: 'ThemeCode',
+    data: {
+      code: code,
+      data: data
+    },
+    width: $(window).width(),
+    cover: true,
+    quickClose: true
+  })
+}
 
 Bbase.MODULE['UiForm'] = 'modules/ui/controllers/UiForm.js';
 Bbase.MODULE['UiFormRadio'] = 'modules/ui/controllers/UiFormRadio.js';
@@ -27,6 +41,8 @@ Bbase.MODULE['UiFormTab'] = 'modules/ui/controllers/UiFormTab.js';
 Bbase.MODULE['UiFormDialog'] = 'modules/ui/controllers/UiFormDialog.js';
 Bbase.MODULE['UiFormTip'] = 'modules/ui/controllers/UiFormTip.js';
 Bbase.MODULE['UiFormCopy'] = 'modules/ui/controllers/UiFormCopy.js';
+Bbase.MODULE['UiFormDatePicker'] = 'modules/ui/controllers/UiFormDatePicker.js';
+Bbase.MODULE['UiFormTimePicker'] = 'modules/ui/controllers/UiFormTimePicker.js';
 
 Bbase.MODULE['UiScroll'] = 'modules/ui/controllers/UiScroll.js';
 Bbase.MODULE['UiScrollbar'] = 'modules/ui/controllers/UiScrollbar.js';
@@ -35,5 +51,3 @@ Bbase.MODULE['UiScrollfix'] = 'modules/ui/controllers/UiScrollfix.js';
 
 Bbase.MODULE['UiList'] = 'modules/ui/controllers/UiList.js';
 Bbase.MODULE['UiListExpand'] = 'modules/ui/controllers/UiListExpand.js';
-
-

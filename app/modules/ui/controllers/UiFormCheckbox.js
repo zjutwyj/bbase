@@ -4,7 +4,7 @@
  * @class UiFormCheckbox
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('UiFormCheckbox', [], function(require, exports, module){
+define('UiFormCheckbox', [], function(require, exports, module) {
   var UiFormCheckbox, template;
 
   template = `
@@ -13,7 +13,7 @@ define('UiFormCheckbox', [], function(require, exports, module){
         <div class="anything">
           <div class="header">
             <div class="formIdArea">
-              <span class="name">bbaseuicheckbox="{viewId: 'viewId', cur: cur, items: items, onChange: handleChange}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -82,12 +82,12 @@ define('UiFormCheckbox', [], function(require, exports, module){
   `;
 
   UiFormCheckbox = BbaseView.extend({
-    initialize: function(){
+    initialize: function() {
       this._super({
         template: template
       });
     },
-    initData: function () {
+    initData: function() {
       return {
         cur: 'all,complete',
         items: [
@@ -98,13 +98,16 @@ define('UiFormCheckbox', [], function(require, exports, module){
         ]
       }
     },
-     addOne: function () {
+    addOne: function() {
       var list = BbaseEst.cloneDeep(this._get('items'));
       list.push({
         text: BbaseEst.nextUid('新增选项'),
         value: BbaseEst.nextUid('option')
       });
       this._set('items', list);
+    },
+    viewCode(selector, evt) {
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

@@ -8,7 +8,7 @@ define('BbaseDropDown', [], function (require, exports, module) {
   var BbaseDropDown, template;
 
   template = `
-    <div class="bbase-ui-dropdown bui-list-picker bui-picker bui-overlay bui-ext-position x-align-bl-tl bui-select-custom" aria-disabled="false" aria-pressed="false"style="visibility: visible;width:{{width}}; display: none;">
+    <div class="bbase-ui-dropdown bui-list-picker bui-picker bui-overlay bui-ext-position x-align-bl-tl bui-select-custom {{className}}" aria-disabled="false" aria-pressed="false"style="visibility: visible;width:{{width}}; display: none;">
       <div class="bui-simple-list bui-select-list" aria-disabled="false" aria-pressed="false" style="height: {{height}};overflow-x: {{overflowX}};width: {{width}};max-height: none;">
       </div>
       <div bb-show="showClose" class="popupWindowClose closeBtn bbasefont bbase-close_thin" bb-click="close"></div>
@@ -16,7 +16,7 @@ define('BbaseDropDown', [], function (require, exports, module) {
   `;
 
   var template2 = `
-    <div class=" bbase-ui-dropdown-wix-dialog dialog-align-right bui-list-picker header-account-dialog dialog-load-complete" style="width:{{width}};display:none;">
+    <div class=" bbase-ui-dropdown-wix-dialog dialog-align-right bui-list-picker header-account-dialog dialog-load-complete {{className}}" style="width:{{width}};display:none;">
       <div class="wix-header-dialog-chupchik" bb-watch="targetOffsetCenter:style" style="left: {{targetOffsetCenter}}px;"></div>
       <div class="header-dialog-content-wrapper">
         <div class="header-dialog-content bui-select-list" aria-hidden="false" style="height: {{height}};overflow-x: {{overflowX}};width: {{width}};max-height: none;">
@@ -44,7 +44,8 @@ define('BbaseDropDown', [], function (require, exports, module) {
     initData: function () {
       return {
         showClose: false,
-        targetOffsetCenter: 0
+        targetOffsetCenter: 0,
+        className: ''
       }
     },
     beforeRender: function () {
@@ -56,9 +57,9 @@ define('BbaseDropDown', [], function (require, exports, module) {
 
       _this._options.align = _this._options.align || 'center';
 
-      _this.model.set('width', _this._options.data.width ?
-        (BbaseEst.typeOf(_this._options.data.width) === 'string' ?
-          _this._options.data.width : (_this._options.data.width + 'px')) : 'auto');
+      _this.model.set('width', _this._options.width ?
+        (BbaseEst.typeOf(_this._options.width) === 'string' ?
+          _this._options.width : (_this._options.width + 'px')) : 'auto');
 
       _this._set('showClose', _this._options.showClose);
       if (_this._options.theme === 'win') {
@@ -75,6 +76,8 @@ define('BbaseDropDown', [], function (require, exports, module) {
 
       _this.model.set('overflowY', _this._options.data.overflowY ?
         _this._options.data.overflowY : 'hidden');
+
+      _this._set('className', _this._options.className || '');
 
     },
     afterRender: function () {
@@ -282,6 +285,10 @@ define('BbaseDropDown', [], function (require, exports, module) {
           _this._options.onShow && _this._options.onShow.call(_this);
         }
       })));
+    },
+    reload: function(){
+      var _this = this;
+      BbaseApp.getView(_this.viewId)._reload && BbaseApp.getView(_this.viewId)._reload();
     },
     empty: function () {
       this.$el.off().remove();

@@ -13,7 +13,7 @@ define('UiFormGroup', [], function(require, exports, module){
         <div class="anything">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbaseuiitemtab="{viewId: 'bbaseitemtab', cur: cur, items: items, onChange: handleChange}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -31,7 +31,7 @@ define('UiFormGroup', [], function(require, exports, module){
         <div class="anything">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbaseuiitembtn="{viewId: 'bbaseitembtn', cur: cur, items: items, onChange: handleChange}"</span>
+              <span class="name pointer" id="viewCode02" bb-click="viewCode('viewCode02')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -49,7 +49,7 @@ define('UiFormGroup', [], function(require, exports, module){
         <div class="anything">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbaseuiitemtext="{viewId: 'bbaseitemtext', cur: cur, items: items, onChange: handleChange}"</span>
+              <span class="name pointer" id="viewCode03" bb-click="viewCode('viewCode03')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -67,7 +67,7 @@ define('UiFormGroup', [], function(require, exports, module){
         <div class="anything">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbaseuiitemcheck="{viewId: 'bbaseitemcheck', cur: cur, items: items, onChange: handleChange}"</span>
+              <span class="name pointer" id="viewCode04" bb-click="viewCode('viewCode04')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -157,6 +157,9 @@ define('UiFormGroup', [], function(require, exports, module){
         value: BbaseEst.nextUid('option')
       });
       this._set('items', list);
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

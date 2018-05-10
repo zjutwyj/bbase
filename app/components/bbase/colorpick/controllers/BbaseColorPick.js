@@ -2447,7 +2447,7 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
     },
 
     afterShow:function(){
-      this.init = false;
+
     },
     initFarbtastic: function () {
       this.$show = this.$('.ui-bg-color-show');
@@ -2529,13 +2529,16 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
           { text: '黑体', value: '#dfdfdf', rgb: 'rgb(223, 223, 223)' ,borderColor: '#dfdfdf'}
         ],
         onChange: BbaseEst.proxy(function (item, init) {
-          if (init) return;
+          if (init) {
+            this.init = false;
+            return;};
           this.isTransparent = item['value'] === 'transparent' ? true : false;
           var color = this.isTransparent ? '#ffffff' : item['value'];
           var opacity = this.isTransparent ? 0 : 1;
           this.parseRgb(color, opacity);
           this.updateFarbtasticColor();
           this.updateSlider();
+          this.init = false;
         }, this)
       }));
     },

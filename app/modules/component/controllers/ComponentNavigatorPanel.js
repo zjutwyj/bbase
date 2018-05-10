@@ -14,7 +14,7 @@ define('ComponentNavigatorPanel', [], function(require, exports, module) {
         <div class="anything" style="display: block;">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbasecomponentnavigatorpanel="{viewId: 'bbasecomponentnavigatorpanel', cur: cur, items: items,path:'id'}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -153,6 +153,9 @@ define('ComponentNavigatorPanel', [], function(require, exports, module) {
     },
     selectTwo() {
       this._set('cur', '4150');
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

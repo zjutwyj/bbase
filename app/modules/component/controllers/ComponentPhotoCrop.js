@@ -13,7 +13,7 @@ define('ComponentPhotoCrop', [], function(require, exports, module){
         <div class="anything" style="display: block;">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbasecomponentphotocrop="{viewId: 'bbasecomponentphotocrop', cur: cur, onChange: handleChange}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -143,6 +143,9 @@ define('ComponentPhotoCrop', [], function(require, exports, module){
     },
     handleChange: function (result) {
       console.log(result);
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

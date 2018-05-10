@@ -1060,7 +1060,6 @@ button{
 }
 
 .bbase-center .bbase-ui-tab .slideBar .slideBarTip {
-  background: #4e67ee;
   left: -164px;
 }
 
@@ -1107,10 +1106,6 @@ button{
   padding: 0;
 }
 
-.bbase-center .tab-ul-line .tab-li.item-active a {
-  color: #4a68ec;
-  cursor: pointer;
-}
 
 .bbase-center .tab-ul-line .tab-li.item-active a {
   cursor: default;
@@ -1124,9 +1119,6 @@ button{
   vertical-align: middle;
 }
 
-.bbase-center .tab-ul-line .tab-li.hover .ui-tabs-anchor span {
-  color: #4a68ec;
-}
 
 .bbase-center .tab-ul-line .tab-li .dataTabUiList {
   background-position: 0 0;

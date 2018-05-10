@@ -16,7 +16,7 @@ define('UiSortable', [], function(require, exports, module){
         <div class="anything">
           <div class="header">
             <div class="formIdArea">
-              <span class="name">bbaseuisortable="{viewId:'bbaseuisortable'}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -93,6 +93,9 @@ define('UiSortable', [], function(require, exports, module){
     },
     onSortEnd: function(list){
       console.log(list);
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

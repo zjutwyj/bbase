@@ -446,6 +446,7 @@ BbaseUtils.dialog({
    title: '复制图片',
    target: '.btn-email-bind',
    width: 800,
+   skin: '',                                            // 自定义样式
    quickClose: true,                                    // 点击空白处关闭对话框
    hideCloseBtn: false,                                 // 是否隐藏关闭按钮
    content: this.copyDetail({

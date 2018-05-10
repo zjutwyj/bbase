@@ -110,9 +110,9 @@ define('BbaseItemCheck', [], function(require, exports, module) {
       BbaseEst.each(this.views, this._bind(function(view) {
         var isBoolean = BbaseEst.typeOf(value) === 'boolean';
         if (value !== '-' && this._super('view')._options.checkAppend ? isBoolean ? value === view._get(this.options.data.path):value.indexOf(view._get(this.options.data.path)) !== -1:value === view._get(this.options.data.path) && !view._get('checked')) {
-          view.toggleChecked(true, true);
+          view.toggleChecked(true, false);
         } else if ((value === '-' || this._super('view')._options.checkAppend ? isBoolean ? value !== view._get(this.options.data.path) : value.indexOf(view._get(this.options.data.path)) ===-1:value !== view._get(this.options.data.path)) && view._get('checked')) {
-          view.toggleChecked(false, true);
+          view.toggleChecked(false, false);
         }
       }));
     },

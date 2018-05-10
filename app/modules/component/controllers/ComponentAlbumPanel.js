@@ -14,7 +14,7 @@ define('ComponentAlbumPanel', [], function(require, exports, module){
         <div class="anything" style="display: block;">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbasecomponentalbumpanel="{viewId: 'bbasecomponentalbumpanel', cur: cur, items: items}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -126,6 +126,9 @@ define('ComponentAlbumPanel', [], function(require, exports, module){
         cur: '1',
         items: items   // 测试数据， 真实需请求api
       }
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

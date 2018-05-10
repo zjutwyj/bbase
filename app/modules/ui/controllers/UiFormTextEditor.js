@@ -13,14 +13,14 @@ define('UiFormTextEditor', [], function (require, exports, module) {
         <div class="anything">
           <div class="header">
             <div class="formIdArea">
-              <span class="name">指令用法：bbaseuitexteditor="{viewId: 'viewId', cur: cur, onChange: handleChange}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
-            <div class="demo-item clearfix" bb-bbaseuitexteditor="{viewId: 'viewId', cur: cur, onChange: handleChange}"></div>
+            <div class="demo-item clearfix" bb-bbaseuitexteditor="{viewId: 'viewId', onChange: handleChange}"></div>
           </div>
           <div class="footer">
-            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left" bb-bbaseuiselect="{viewId: 'ddd', cur:cur,items: items}"></div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
+            <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}}; 动态赋值：</div><div class="left"><input type="text" class="text" bb-model="cur:keyup" value="{{cur}}" /></div>
           </div>
         </div>
       </div>
@@ -46,15 +46,9 @@ define('UiFormTextEditor', [], function (require, exports, module) {
                   <td class="argDefault"><span>-</span></td>
                 </tr>
                 <tr>
-                  <td class="argName"><span>cur</span><span class="red">&nbsp;(必填)</span></td>
-                  <td class="argDesc"><span>关联模型类字段</span></td>
-                  <td class="argType"><span>any</span></td>
-                  <td class="argDefault"><span>-</span></td>
-                </tr>
-                <tr>
                   <td class="argName"><span>onChange</span></td>
                   <td class="argDesc"><span>回调函数</span></td>
-                  <td class="argType"><span>function(item, init)</span></td>
+                  <td class="argType"><span>function(text)</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
               </tbody>
@@ -84,8 +78,11 @@ define('UiFormTextEditor', [], function (require, exports, module) {
         ]
       }
     },
-    handleChange: function(text, init){
-
+    handleChange: function(text){
+      this._set('cur', text);
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

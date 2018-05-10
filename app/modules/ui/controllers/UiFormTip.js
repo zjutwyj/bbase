@@ -16,7 +16,7 @@ define('UiFormTip', [], function(require, exports, module){
         <div class="anything">
           <div class="header">
             <div class="formIdArea">
-              <span class="name"></span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -88,6 +88,9 @@ define('UiFormTip', [], function(require, exports, module){
     initData: function () {
       return {
       }
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

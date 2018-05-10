@@ -21,7 +21,7 @@ define('UiForm', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        curNav: 'UiFormCopy',
+        curNav: 'UiFormDatePicker',
         navitems: [
           { text: '单选', moduleId: 'UiFormRadio' ,oneRender: false},
           { text: '多选', moduleId: 'UiFormCheckbox' ,oneRender: false},
@@ -33,7 +33,9 @@ define('UiForm', [], function (require, exports, module) {
           { text: '对话框', moduleId: 'UiFormDialog',oneRender: false},
           { text: '提示框', moduleId: 'UiFormTip',oneRender: false},
           { text: '复制', moduleId: 'UiFormCopy',oneRender: false},
-          { text: '编辑器', moduleId: 'UiFormTextEditor',oneRender: false }
+          { text: '编辑器', moduleId: 'UiFormTextEditor',oneRender: false },
+          { text: '日期选择器', moduleId: 'UiFormDatePicker',oneRender: false },
+          { text: '时间选择器', moduleId: 'UiFormTimePicker',oneRender: false }
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

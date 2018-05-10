@@ -14,7 +14,7 @@ define('UiFormTab', [], function (require, exports, module) {
         <div class="anything">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbaseuitabnormal="{viewId: 'bbaseuitabnormal', cur: cur, items: items,onChange: handleChange}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -38,7 +38,7 @@ define('UiFormTab', [], function (require, exports, module) {
         <div class="anything">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbaseuitabtext="{viewId: 'bbaseuitabtext', cur: cur, items: items,onChange: handleChange}"</span>
+              <span class="name pointer" id="viewCode02" bb-click="viewCode('viewCode02')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -62,7 +62,7 @@ define('UiFormTab', [], function (require, exports, module) {
         <div class="anything">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbaseuitabbtn="{viewId: 'bbaseuitabbtn', cur: cur, items: items,onChange: handleChange}"</span>
+              <span class="name pointer" id="viewCode03" bb-click="viewCode('viewCode03')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -86,7 +86,7 @@ define('UiFormTab', [], function (require, exports, module) {
         <div class="anything">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbaseuitabblock="{viewId: 'bbaseuitabblock', cur: cur, items: items,onChange: handleChange}"</span>
+              <span class="name pointer" id="viewCode04" bb-click="viewCode('viewCode04')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -110,7 +110,7 @@ define('UiFormTab', [], function (require, exports, module) {
         <div class="anything">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbaseuitabunderline="{viewId: 'bbaseuitabunderline', cur: cur, items: items,onChange: handleChange}"</span>
+             <span class="name pointer" id="viewCode05" bb-click="viewCode('viewCode05')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -227,6 +227,9 @@ define('UiFormTab', [], function (require, exports, module) {
     },
     handleChange: function (item, init) {
       console.log(item);
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

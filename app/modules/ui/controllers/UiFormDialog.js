@@ -13,7 +13,7 @@ define('UiFormDialog', [], function (require, exports, module) {
         <div class="anything">
           <div class="header">
             <div class="formIdArea">
-              <span class="name">bbaseuidialog="{viewId: 'viewId', moduleId: 'moduleId',onChange: onChange, onReady: onReady}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -152,6 +152,9 @@ define('UiFormDialog', [], function (require, exports, module) {
           { text: '部分完成', value: 'part' }
         ]
       }
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

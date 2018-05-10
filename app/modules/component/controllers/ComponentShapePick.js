@@ -14,7 +14,7 @@ define('ComponentShapePick', [], function(require, exports, module){
         <div class="anything" style="display: block;">
           <div class="header">
             <div id="formIdArea" class="formIdArea">
-              <span class="name">bbasecomponentshapepick="{viewId: 'picshapepick'}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -99,6 +99,9 @@ define('ComponentShapePick', [], function(require, exports, module){
       return {
         cur: ''
       }
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 

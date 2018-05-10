@@ -12,7 +12,7 @@
 
 
 
-$mainColor:#5289db;  // 主题颜色.[;;;;]
+$mainColor:#08bf42;  // 主题颜色.[;;;;]
 $host:/manage;
 
 @import '../../components/bbase/photopick/styles/style';
@@ -29,6 +29,7 @@ $host:/manage;
 @import '../../components/bbase/listpick/styles/style';
 @import '../../components/bbase/shapepick/styles/style';
 @import '../../components/bbase/navigator-panel/styles/style';
+@import '../../components/bbase/navigator-pick/styles/style';
 @import '../../components/bbase/albumpick/styles/style';
 @import '../../components/bbase/albumpanel/styles/style';
 @import '../../components/bbase/product-cate-pick/styles/style';

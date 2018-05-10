@@ -16,7 +16,7 @@ define('UiScrollbar', [], function (require, exports, module) {
         <div class="anything">
           <div class="header">
             <div class="formIdArea">
-              <span class="name">bbaseuiscrollbar="{viewId: 'viewId', id: 'iscroll'}"</span>
+              <span class="name pointer" id="viewCode01" bb-click="viewCode('viewCode01')">点击查看代码</span>
             </div>
           </div>
           <div class="main">
@@ -190,6 +190,9 @@ define('UiScrollbar', [], function (require, exports, module) {
       this.$('.s-ul li input').click(function(){
         alert($(this).attr('data-id'));
       });
+    },
+    viewCode(selector, evt){
+      window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 
