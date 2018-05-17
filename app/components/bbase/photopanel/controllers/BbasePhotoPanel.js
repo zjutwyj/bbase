@@ -58,7 +58,7 @@ define('BbasePhotoPanel', [], function (require, exports, module) {
         showSystem: this.options.showSystem,
         listApi: this._options.listApi,
         systemAlbumApi: this._options.systemAlbumApi,
-        cur: this._options.cur || 'upload/j/j2/jihui88/picture/2017/04/28/8e7867ee-3a84-4c5f-a97b-14cf455161c7.jpg!120?v=115305748',
+        cur: this._options.cur || CONST.PIC_NONE,
         items: this._options.listApi ? null : items // 测试数据， 真实需请求api
       }
     },
