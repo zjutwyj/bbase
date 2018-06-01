@@ -2622,6 +2622,7 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
     handleInput: function () {
       var val = this.$input.val();
       if (val.length === 7) {
+        this.init=false;
         this.parseColor(val);
         this.updateFarbtasticColor();
         this.handleChange();
