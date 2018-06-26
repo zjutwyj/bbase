@@ -2425,6 +2425,7 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
         if (handle == 0) { // 第一个滑动按钮
           this.color.a = values[handle] / 100;
           this.handleChange();
+          this.init = false;
         }
       } else {
         this.initSlider();
@@ -2592,6 +2593,7 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
           this.parseColor(item['value']);
           this.updateFarbtasticColor();
           this.updateSlider();
+          this.init = false;
         }, this)
       }));
     },
@@ -2605,6 +2607,7 @@ define('BbaseColorPick', ['BbaseItemCheck'], function (require, exports, module)
       if (this.$slider) {
         this.$noUiBase = this.$noUiBase || this.$slider.find('.noUi-base');
         this.$noUiBase.css('background', 'linear-gradient(to right, rgba(77, 118, 129, 0), ' + color + ')');
+        this.init = false;
       }
     },
     updateSlider: function () {
