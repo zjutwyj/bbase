@@ -1,14 +1,14 @@
 'use strict';
 /**
  * @description 模块功能说明
- * @class ComponentIconPick
+ * @class ComponentIconPanel
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('ComponentIconPick', [], function (require, exports, module) {
-  var ComponentIconPick, template;
+define('ComponentIconPanel', [], function (require, exports, module) {
+  var ComponentIconPanel, template;
 
   template = `
-    <div class="ComponentIconPick-wrap" style="padding:10px;">
+    <div class="ComponentIconPanel-wrap" style="padding:10px;">
       <div class="formPanel form-demo">
         <div class="anything" style="display: block;">
           <div class="header">
@@ -17,10 +17,10 @@ define('ComponentIconPick', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main">
-            <div class="demo-item pointer clearfix" bb-bbasecomponenticonpick="{viewId:'bbasecomponenticonpick',cur:cur, font: 'bbasefont',iconColor: iconColor,iconColorState: iconColorState,iconType: iconType,iconTypeItems: iconTypeItems,items: items, showTypeSelect: true,onChange: handleIconPickChange}">点我打开图标选择框</div>
+            <div  class="demo-item clearfix" bb-bbasecomponenticonpanel="{viewId:'bbasecomponenticonpanel',cur:cur, font: font,iconColor: iconColor,iconColorState: iconColorState,iconType: iconType,iconTypeItems: iconTypeItems,items: items, showTypeSelect: true,onChange: handleIconPickChange}"></div>
           </div>
           <div class="footer">
-          <div class="item-type-title clearfix left">输出结果：<i bb-watch="cur:class,iconColor:style" class="bbasefont {{cur}}" style="color: {{iconColor}}"></i>字体名称：<span bb-watch="cur:html">{{cur}}</span>, 字体内容：<span bb-watch="fontcontent:html">{{fontcontent}}</span>字体颜色是否默认：<span  bb-watch="iconColorState:html">{{#If iconColorState==='d'}}是{{else}}否{{/If}}</span><span bb-watch="iconType:html">主题：{{iconType}}</span></div></div>
+          <div class="item-type-title clearfix left">输出结果：<i bb-watch="cur:class,iconColor:style" class="bbasefont {{cur}}" style="color: {{iconColor}}"></i>字体名称：<span bb-watch="cur:html">{{cur}}</span>, 字体内容：<span bb-watch="fontcontent:html">{{fontcontent}}</span>字体颜色是否默认：<span  bb-watch="iconColorState:html">{{#If iconColorState==='d'}}是{{else}}否{{/If}}</span><span bb-watch="iconType:html">, 主题：{{iconType}}</span></div></div>
           </div>
         </div>
       </div>
@@ -63,18 +63,6 @@ define('ComponentIconPick', [], function (require, exports, module) {
                   <td class="argType"><span>string</span></td>
                   <td class="argDefault"><span>d</span></td>
                 </tr>
-                <tr>
-                  <td class="argName"><span>iconType</span></td>
-                  <td class="argDesc"><span>图标风格</span></td>
-                  <td class="argType"><span>string</span></td>
-                  <td class="argDefault"><span>-</span></td>
-                </tr>
-                <tr>
-                  <td class="argName"><span>iconTypeItems</span></td>
-                  <td class="argDesc"><span>风格列表</span></td>
-                  <td class="argType"><span>string</span></td>
-                  <td class="argDefault"><span>-</span></td>
-                </tr>
                  <tr>
                   <td class="argName"><span>items</span><span class="red">&nbsp;(必填)</span></td>
                   <td class="argDesc"><span>图标列表[{ text: '', value: 'bbase-x1', content: '"\\e611"' }]</span></td>
@@ -103,15 +91,14 @@ define('ComponentIconPick', [], function (require, exports, module) {
   `;
 
 
-  ComponentIconPick = BbaseView.extend({
+  ComponentIconPanel = BbaseView.extend({
     initialize: function () {
       this._super({
         template: template
       });
     },
     init: function () {
-      var items = [
-          { text: '默认', value: 'iconDefault', content: '' },
+      var items = [{ text: '默认', value: 'iconDefault', content: '' },
           { text: '', value: 'bbase-setting', content: '"\\e756"' },
           { text: '', value: 'bbase-crop', content: '"\\e62d"' },
           { text: '', value: 'bbase-arrowleft', content: '"\\e721"' },
@@ -129,15 +116,14 @@ define('ComponentIconPick', [], function (require, exports, module) {
           { text: '', value: 'bbase-delete', content: '"\\e64c"' },
           { text: '', value: 'bbase-yihen', content: '"\\e62f"' },
           { text: '', value: 'bbase-search', content: '"\\e62a"' },
-          { text: '', value: 'bbase-copy', content: '"\\e75d"' }
-        ];
+          { text: '', value: 'bbase-copy', content: '"\\e75d"' }];
+
       return {
         cur: 'bbase-x1',
+        font: 'bbasefont',
         iconColor: '#dfdfdf',
         iconColorState: 'd',
-        fontcontent: '',
         iconType: 'pc',
-        items: items,
         iconTypeItems:  [
           { text: '风格1', value: 'pc', url: '', iconItems: items},
           {
@@ -156,11 +142,14 @@ define('ComponentIconPick', [], function (require, exports, module) {
               { text: '', value: 'bbase-copy', content: '"\\e75d"' }
             ]
           }
-        ]
+        ],
+        showTypeSelect: true,
+        items: items
+        //listApi: 'http://cdn.jihuinet.com/icon/ionicons.js'
       }
     },
     handleIconPickChange: function(item){
-      console.log(item);
+      this._set(item);
       this._set('fontcontent', item.content);
     },
     viewCode(selector, evt){
@@ -168,5 +157,5 @@ define('ComponentIconPick', [], function (require, exports, module) {
     }
   });
 
-  module.exports = ComponentIconPick;
+  module.exports = ComponentIconPanel;
 });

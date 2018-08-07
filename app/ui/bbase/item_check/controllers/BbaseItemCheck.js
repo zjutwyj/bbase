@@ -38,8 +38,10 @@ define('BbaseItemCheck', [], function(require, exports, module) {
       if (init) {
         if (this._options.data.target) $(this._options.data.target).val(this.options.data.cur);
       } else {
-        if (this._options.data.target) $(this._options.data.target).val(this._checkAppend && this._super('view') ?
-          this._super('view').getAppendValue() : this._get('value'));
+        var v = this._checkAppend && this._super('view') ?
+          this._super('view').getAppendValue() : this._get('value');
+        if (this._options.data.target) $(this._options.data.target).val(v);
+          this._super('view').options.data.cur = v;
       }
       this.result = this.options.data.onChange.call(this, this.model.attributes, init, e, (init ? this._super('options').cur : this._super('view').getValue()));
       if (BbaseEst.typeOf(this.result) === 'boolean' && !this.result) return false;
@@ -83,7 +85,7 @@ define('BbaseItemCheck', [], function(require, exports, module) {
     initialize: function() {
       this.targetVal = $(this.options.target).val();
       this.options.data = BbaseEst.extend(this.options.data || {}, {
-        template: this.options.tpl || '<span class="item-check-text">{{text}}</span>',
+        template: this.options.tpl || '<span class="item-check-text" bb-watch="text:html">{{text}}</span>',
         onChange: this.options.onChange || function() {},
         cur: this.options.cur || (BbaseEst.isEmpty(this.targetVal) ? '-' : this.targetVal),
         compare: this.options.compare,

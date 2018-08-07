@@ -181,6 +181,8 @@
         }
         _this.template = BbaseHandlebars.compile(BbaseEst.isEmpty(options.itemTemp) ? options.template :
           _this.$template.html());
+        //_this.$clone = _this.$el.clone();
+        //_this.$el.parent().append(_this.$clone);
         _this.$el.hide();
         if (_this._options.append) {
           _this.$el.empty();
@@ -447,6 +449,7 @@
       if (_this._options.toolTip) _this._initToolTip();
       _this._ready_component_ = true;
       setTimeout(function() {
+        //_this.$clone&&_this.$clone.remove();
         _this.$el.show();
         _this._handleDirectiveShow();
         if (_this._options.afterShow) _this._options.afterShow.call(_this);
@@ -733,13 +736,20 @@
               list[i]['dx'] = dx;
               dx++;
               model.view && (model.id = list[i]['id']);
-              model.view && model.view._set(_this._getPath(list[i]));
+              setTimeout(function(){
+                 model.view && model.view._set(_this._getPath(list[i]));
               model.view && model.view._onAfterShow();
+              }, 0);
+
             }
           }
         }));
         if (len_l > len_c) { // 添加
           //setTimeout(function() {
+            BbaseUtils.addLoading();
+            var $clone = _this.$el.clone();
+            _this.$el.parent().append($clone);
+            _this.$el.hide();
             for (var j = len_c + 1; j <= len_l; j++) {
               list[j - 1]['dx'] = dx;
               dx++;
@@ -755,6 +765,12 @@
               }
               //_this._push(new _this._options.model(list[j - 1]));
             }
+            setTimeout(function(){
+            $clone.remove();
+            _this.$el.show();
+            BbaseUtils.removeLoading();
+          }, 10);
+
           //}, 0);
         } else if (len_l < len_c) {
           setTimeout(function() {

@@ -62,6 +62,8 @@
       if (options.template) {
         _this.template = BbaseHandlebars.compile(_this._parseHbs(options.template));
         _this.$template = '<div>' + options.template + '</div>';
+        //_this.$clone = _this.$el.clone();
+        //_this.$el.parent().append(_this.$clone);
         _this.$el.hide();
         //this.$el.append(this.template(options.data));
       }
@@ -113,6 +115,7 @@
       _this._ready_component_ = true;
 
       setTimeout(function () {
+        //_this.$clone && _this.$clone.remove();
         _this.$el.show();
         _this._handleDirectiveShow();
         if (_this._options.afterShow) _this._options.afterShow.call(_this);

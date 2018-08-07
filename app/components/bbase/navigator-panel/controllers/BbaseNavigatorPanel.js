@@ -150,6 +150,16 @@ define('BbaseNavigatorPanel', [], function(require, exports, module) {
     destroy: function() {
       this.iscroll && this.iscroll.destroy();
     },
+    beforeLoad(){
+      if (this.loading){
+        return false;
+      }
+      this.loading = true;
+    },
+    afterLoad(){
+      this.loading = false;
+    },
+
     afterRender() {
     },
     handleSelect() {

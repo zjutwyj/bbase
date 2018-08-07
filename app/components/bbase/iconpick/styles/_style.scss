@@ -12,14 +12,13 @@
     padding: 16px 12px;
   }
   .showSystemIconDiv {
-    height: 145px;
+    height: 195px;
     margin-left: auto;
     margin-right: auto;
     overflow-x: hidden;
     background: #9b9b9b;
     overflow-y: auto;
-    width: 436px;
-    border-radius: 5px;
+    width: 492px;
     text-align: left;
     font-size: 35px;
     color: #fff;
@@ -62,7 +61,7 @@
   }
   .colorChoiceDiv {
     margin-top: 10px;
-    margin-left: 8px;
+    margin-left: 2px;
   }
   .iconThumbnail {
     display: inline-block;
@@ -123,7 +122,7 @@
   #icon-btns {
     position: absolute;
     bottom: 18px;
-    right: 18px;
+    right: 10px;
   }
   #icon-btns .cancel,
   #icon-btns .submit {
@@ -152,4 +151,6 @@
     display:none;
   }
   #showSystemIconDiv .bbase-yuandian{display:block;}
+  .iconTypeSelect {margin-bottom:5px;}
+  .pcfont{font-size:24px;}
 }

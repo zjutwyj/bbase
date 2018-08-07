@@ -23,7 +23,8 @@ define('ComponentIcon', [], function (require, exports, module) {
       return {
         cur: 'ComponentIconPick',
         items: [
-          { text: '图标选择(弹)', moduleId: 'ComponentIconPick' ,oneRender: false}
+          { text: '图标选择(弹)', moduleId: 'ComponentIconPick' ,oneRender: false},
+          { text: '图标面板', moduleId: 'ComponentIconPanel' ,oneRender: false}
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>
