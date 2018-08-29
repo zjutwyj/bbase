@@ -109,7 +109,7 @@ define('BbaseListExpand', [], function (require, exports, module) {
     showMoreCate: function () {
       this._set('showMore', !this._get('showMore'));
       this._options.max = this._get('showMore') ? 10000 : this.initMax;
-      this._setModels(this.copyList);
+      this._setModels(BbaseEst.cloneDeep(this.copyList));
     }
   });
 

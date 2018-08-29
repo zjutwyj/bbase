@@ -208,7 +208,7 @@ var BbaseCollection = BbaseBackbone.Collection.extend({
     if (_this.paginationModel) {
       _this.paginationModel.set('page', resp.attributes.page || 1);
       _this.paginationModel.set('pageSize', resp.attributes.per_page || 16);
-      _this.paginationModel.set('count', resp.attributes.count || 1);
+      _this.paginationModel.set('count', resp.attributes.count || 0);
     }
   },
   /**

@@ -71,6 +71,12 @@
         _this.getView(options.viewId || name)._reset(options.data);
         return;
       }
+
+     /* if (options.viewId){
+          window['$clone' + options.viewId] = $(options.el).clone();
+          $(options.el).parent().append(window['$clone' + options.viewId]);
+      }*/
+
       _this.addPanel(name, {
         el: options.__panelId,
         template: '<div class="region ' + panel + '"></div>',
@@ -497,11 +503,11 @@
      * @example
      *      App.getSession('__USER__'); => {username: 'ggggfj'}
      */
-    getSession: function(name, isSession) {
+    getSession: function(name, isSession, ignoreVersion) {
       try {
         var sessionId = BbaseEst.typeOf(isSession) === 'undefined' ? '' : isSession ? this.data.sessionId : '';
         var version = localStorage['___JHW_BACKBONE__' + BbaseEst.hash(sessionId + 'app_version')];
-        if (CONST.APP_VERSION && (!version || version !== CONST.APP_VERSION)) {
+        if (!ignoreVersion && CONST.APP_VERSION && (!version || version !== CONST.APP_VERSION)) {
           this.removeSession();
           localStorage['___JHW_BACKBONE__' + BbaseEst.hash(sessionId + 'app_version')] = CONST.APP_VERSION;
         }

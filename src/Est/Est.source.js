@@ -720,7 +720,9 @@
   function isEmpty(value) {
     var result = true;
     if (typeOf(value) === 'number') return false;
+    if (typeOf(value) === 'boolean') return false;
     if (!value) return result;
+
     var className = toString.call(value),
       length = value.length;
     if ((className == '[object Array]' || className == '[object String]' || className == '[object Arguments]') ||

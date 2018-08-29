@@ -825,8 +825,10 @@
               break;
             case 'show':
               var sep = item.value.split(':');
-              var field = _this._getField(item.value);
-              _this._watch([sep.length > 1 ? sep[0] : field], '[bb-show="' + item.value + '"]:show');
+
+              var fields = _this._getFields(item.value);
+              var watchList = sep.length > 1 ? [sep[0]] : fields;
+              _this._watch(watchList, '[bb-show="' + item.value + '"]:show');
               if (!_this._getBoolean(item.value)) {
                 _this.$('[bb-show="' + item.value + '"]').hide();
               }
@@ -1218,6 +1220,19 @@
       }));
 
       return result ? result : list[0];
+    },
+    _loopGetField: function(fields, value){
+      var result = this._getField(value);
+      if (!result){
+        return fields;
+      }
+      fields.push(result);
+      value = value.replace(result, '').replace('||' , '').replace('&&', '');
+      return this._loopGetField(fields, value);
+    },
+    _getFields:function(value){
+      var fields = [];
+      return this._loopGetField(fields, value);;
     },
     /**
      * 递归获取模型类可用字段

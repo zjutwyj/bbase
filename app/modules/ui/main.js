@@ -51,3 +51,6 @@ Bbase.MODULE['UiScrollfix'] = 'modules/ui/controllers/UiScrollfix.js';
 
 Bbase.MODULE['UiList'] = 'modules/ui/controllers/UiList.js';
 Bbase.MODULE['UiListExpand'] = 'modules/ui/controllers/UiListExpand.js';
+
+Bbase.MODULE['UiMore'] = 'modules/ui/controllers/UiMore.js';
+Bbase.MODULE['UiNewcomerTip'] = 'modules/ui/controllers/UiNewcomerTip.js';

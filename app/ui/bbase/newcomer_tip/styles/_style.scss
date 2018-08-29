@@ -1,0 +1,131 @@
+.NewcomerTip-wrap {
+  .y_panel_0 {
+    left: 190px;
+    top: 12px;
+    .ytip1 {
+      height: 2px;
+      width: 55px;
+      left: -55px;
+      top: 8px;
+    }
+    .ytip2{
+      height: 10px;
+      width: 10px;
+      left: -65px;
+      top: 4px;
+    }
+  }
+  .y_panel_1,
+  .y_panel_2 {
+    left: -125px;
+    top: 110px;
+    .ytip1 {
+      height: 55px;
+      width: 2px;
+      left: 154px;
+      top: -55px;
+    }
+    .ytip2{
+      height: 10px;
+      width: 10px;
+      left: 150px;
+      top: -65px;
+    }
+  }
+
+  // 基本内容
+  .j_yindao {
+    .counter {
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 99999;
+      transition: all 0.2s ease-in-out;
+    }
+    .box {
+      border: 2.5px solid #feea3d;
+      position:fixed;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  .j_yindao_mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0);
+    height: 100%;
+    z-index: 99998;
+    .box {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 0 solid #000;
+    opacity: .5;
+    filter: alpha(opacity=75);
+    -webkit-transition: all .25s;
+    box-shadow: 0 0 0 10000px #fff;
+    overflow: hidden;
+}
+  }
+  .y_panel {
+    width: 318px;
+    height: 181px;
+    background: #fef49b;
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+    .y_header {
+      height: 19px;
+      line-height: 20px;
+      background: #feea3d;
+      color: #b9a100;
+
+      span {
+        padding: 0 12px;
+      }
+      .close {
+        cursor: pointer;
+    width: 55px;
+    float: right;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #b9a100;
+    opacity: 1;
+    font-weight: normal;
+    text-shadow: none;
+      }
+    }
+    p {
+      height: 128px;
+      color: #000;
+      padding: 20px 12px;
+      line-height: 2;
+    }
+    .next {
+      cursor: pointer;
+      float: right;
+      text-decoration: underline;
+      color: #b8a103;
+      margin-right: 15px;
+    }
+  }
+  .y_panel_line{
+    .ytip1 {
+      content: '';
+      position: absolute;
+      background: #feea3d;
+      transition: all 0.2s ease-in-out;
+    }
+    .ytip2 {
+      content: '';
+      position: absolute;
+      border-radius: 10px;
+      background: #feea3d;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  .page{padding-left:12px;    color: #b8a103;}
+}

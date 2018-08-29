@@ -6,7 +6,7 @@
 Bbase.MODULE['BbaseTab'] = 'ui/bbase/tab/controllers/BbaseTab.js';
 
 function bbasetab(value, selector, theme){
-  var object = this._getObject(value, ['cur', 'items']);
+    var object = this._getObject(value, ['cur', 'items']);
 
     this._require(['BbaseTab'], function (BbaseTab) {
       var viewId = object.viewId;

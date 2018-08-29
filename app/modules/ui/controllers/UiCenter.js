@@ -21,11 +21,12 @@ define('UiCenter', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        cur: 'UiForm',
+        cur: 'UiMore',
         items: [
           { text: '表单', moduleId: 'UiForm', oneRender: false },
           { text: '拖动滚动', moduleId: 'UiScroll', oneRender: false },
-          { text: '列表', moduleId: 'UiList', oneRender: false }
+          { text: '列表', moduleId: 'UiList', oneRender: false },
+          { text: '其它', moduleId: 'UiMore', oneRender: false }
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabPlus dataTab{{moduleId}} tabImgComm"></div><span>{{text}}</span></a>

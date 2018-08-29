@@ -543,29 +543,99 @@ bb-src=&quot;&quot;
 <pre><code class="lang-js">// js
 Bbase.DIRECTIVE[&#39;bbaseuiradio&#39;] = {
   bind: function(value, selector) {
-    // 获取表达式对象
-    var object = this._getObject(value);
-    // 获取boolean
-    var boolean = this._getBoolean(value)
+    // 引用上下文
+    var _this = this;
 
-    // 获取字段并添加监视
-    this._watch([this._getField(value)], selector + &#39;:disabled&#39;);
-    this.$(selector).prop(&#39;disabled&#39;, boolean);
+    // 获取表达式对象, 第二个参数表示忽略取值，多个以数组形式表示
+    var object = _this._getObject(value, [&#39;cur&#39;, &#39;items&#39;]);
+    object.id = object.id || BbaseEst.nextUid(&#39;bbaseUid&#39;);
+    object.viewId = object.viewId || BbaseEst.nextUid(&#39;BbaseViewUid&#39;);
 
+    // 可选
+    _this._require([&#39;BbaseItemCheck&#39;], function(ItemCheck) {
+      var viewId = object.viewId;
+
+      // 可选, 视图形式
+      _this._region(viewId, ItemCheck, {
+        el: _this.$(selector),
+        tpl: object.tpl || &#39;&lt;span&gt;{{text}}&lt;/span&gt;&#39;,
+        theme: &#39;ui-item-check-&#39; + (object.theme || type),
+        target: object.target || &#39;&#39;,
+        cur: _this._get(object.cur) || object.default || object.cur,
+        items: _this._get(object.items) || [],
+        onChange: _this._bind(function(item, init, event, values) {
+          // 用于实时更新值
+          if (typeof _this._get(object.cur) !== &#39;undefined&#39; &amp;&amp; !BbaseEst.isEmpty(object.cur) &amp;&amp; !init) {
+            _this._set(object.cur, type === &#39;checkbox&#39; ? values : item.value);
+          }
+          // 回调
+          if (object.onChange) {
+            return object.onChange.apply(_this, [item, init, event, values]);
+          }
+        })
+      });
+      // 可选
+      if (typeof _this.model.attributes[object.cur] !== &#39;undefined&#39; &amp;&amp; !BbaseEst.isEmpty(object.cur)) {
+        _this._watch([object.cur], &#39;&#39;, function() {
+          _this._view(viewId).setValue(_this._get(object.cur));
+        });
+      }
+      // 可选
+      _this._watch([object.items], &#39;&#39;, function() {
+        _this._view(viewId).setList(_this._get(object.items));
+      });
+
+      // 可选， 点击形式
+      _this.$(selector).eq(0).click(_this._bind(function(e) {
+        e.stopImmediatePropagation();
+        _this._dialog({
+          viewId: viewId,
+          title: &#39;选择导航&#39;,
+          moduleId: &#39;BbaseNavigatorPick&#39;,
+          width: object.width || 876,
+          cover: true,
+          height: object.height || 522,
+          items: object.items,
+          navigatorIdPath: object.navigatorIdPath,
+          namePath: object.namePath,
+          parentIdPath: object.parentIdPath,
+          domain: object.domain,
+          size: object.size,
+          listApi: object.listApi,
+          data: {
+            cur: _this._get(object.cur) || object.default || &#39;&#39;,
+            navigatorList: _this._get(object.navigatorList) || [],
+          },
+          quickClose: true,
+          onChange: _this._bind(function(result, items) {
+            _this._set(object.cur, result);
+            if (object.onChange) object.onChange.call(_this, result, items);
+          })
+        });
+        return false;
+      }));
+
+    });
+
+    // 可选，编译形式， 获取字段并添加监视
+    _this._watch([_this._getField(value)], selector + &#39;:disabled&#39;);
+    _this.$(selector).prop(&#39;disabled&#39;, boolean);
+    // 可选
     return {
-      id: id,         //  返回指令唯一ID
+      id: object.id, //  返回指令唯一ID
       compile: BbaseEst.compile(&#39;{{&#39; + value + &#39;}}&#39;) // 返回编译后的模板
     }
+
   },
-  show: function(object, value, selector){
+  show: function(object, value, selector) {
     // 视图显示后执行
   },
   update: function(name, node, selector, result) {
+    // 更新操作
     node.prop(&#39;disabled&#39;, this._getBoolean(result));
   },
-  unbind: function(object){
+  unbind: function(object) {
     // object里的参数为bind方法里返回的数据
-    ...
   }
 }
 // html
