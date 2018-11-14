@@ -17,7 +17,7 @@ define('ComponentIconPanel', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main">
-            <div  class="demo-item clearfix" bb-bbasecomponenticonpanel="{viewId:'bbasecomponenticonpanel',cur:cur, font: font,iconColor: iconColor,iconColorState: iconColorState,iconType: iconType,iconTypeItems: iconTypeItems,items: items, showTypeSelect: true,onChange: handleIconPickChange}"></div>
+            <div  class="demo-item clearfix" bb-bbasecomponenticonpanel="{viewId:'bbasecomponenticonpanel',cur:cur, font: font,iconColor: iconColor,iconColorState: iconColorState,iconType: iconType,iconTypeItems: iconTypeItems,items: items, showTypeSelect: true,onChange: handleIconPickChange,picItems: picItems}"></div>
           </div>
           <div class="footer">
           <div class="item-type-title clearfix left">输出结果：<i bb-watch="cur:class,iconColor:style" class="bbasefont {{cur}}" style="color: {{iconColor}}"></i>字体名称：<span bb-watch="cur:html">{{cur}}</span>, 字体内容：<span bb-watch="fontcontent:html">{{fontcontent}}</span>字体颜色是否默认：<span  bb-watch="iconColorState:html">{{#If iconColorState==='d'}}是{{else}}否{{/If}}</span><span bb-watch="iconType:html">, 主题：{{iconType}}</span></div></div>
@@ -76,6 +76,18 @@ define('ComponentIconPanel', [], function (require, exports, module) {
                   <td class="argDefault"><span>iconfont</span></td>
                 </tr>
                 <tr>
+                  <td class="argName"><span>showTypeSelect</span></td>
+                  <td class="argDesc"><span>显示风格下拉菜单</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>false</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>showSearch</span></td>
+                  <td class="argDesc"><span>显示搜索框</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>false</span></td>
+                </tr>
+                <tr>
                   <td class="argName"><span>onChange</span></td>
                   <td class="argDesc"><span>回调函数</span></td>
                   <td class="argType"><span>function(item, init)</span></td>
@@ -90,6 +102,25 @@ define('ComponentIconPanel', [], function (require, exports, module) {
 
   `;
 
+var pics = [
+    'http://img.leshai.cc/wcd/upload/029/2017/07/26/c2f0fe48-4061-4713-a4cd-c2dc6abf3866.jpg?v=3783305377',
+    'http://img.leshai.cc/wcd/upload/029/2017/07/25/a78f0f86-0327-443a-a6cb-4ef8d26ee4ab.jpg?v=3744100224',
+    'http://img.leshai.cc/wcd/upload/029/2017/07/15/08af373a-8e2c-41ec-9103-d8abbf3e536c.png?v=116420884',
+    'http://img.leshai.cc/wcd/upload/029/2017/07/13/7adea40c-820a-4336-b833-995cdff61123.png?v=3706144612',
+    'http://img.leshai.cc/wcd/upload/029/2017/07/12/7463464c-cd1e-4489-8a08-47835afb07a0.png?v=3706144612',
+    'http://img.leshai.cc/wcd/upload/029/2017/07/11/1f6b6da0-b633-4cf7-b8dc-b73a9886b06f.png?v=3706144612',
+    'http://img.leshai.cc/wcd/upload/029/2017/07/11/da830860-c7f1-4a7a-9718-34561f162447.png?v=3706144612',
+    'http://img.leshai.cc/wcd/upload/029/2017/07/01/dc2a3332-3415-40e6-9384-49afa427273b.jpg?v=3738521475',
+    'http://img.leshai.cc/wcd/upload/029/2017/06/24/636cf652-4dc1-4990-8c40-61d3ad5c2783.png?v=4058835084'
+    ];
+
+  for (var j = 0; j < 10; j++) {
+      pics = pics.concat(pics);
+  }
+  var picItems = [];
+  for(var i = 0; i< 200; i++){
+    picItems.push({filename:'图片名称' + i, serverPath: pics[i] + i});
+  }
 
   ComponentIconPanel = BbaseView.extend({
     initialize: function () {
@@ -144,7 +175,8 @@ define('ComponentIconPanel', [], function (require, exports, module) {
           }
         ],
         showTypeSelect: true,
-        items: items
+        items: items,
+        picItems: picItems
         //listApi: 'http://cdn.jihuinet.com/icon/ionicons.js'
       }
     },

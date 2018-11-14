@@ -1,17 +1,17 @@
 'use strict';
 /**
  * @description 模块功能说明
- * @class BbaseNewsCatePick
+ * @class BbaseAlbumTree
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('BbaseNewsCatePick', [], function(require, exports, module) {
-  var BbaseNewsCatePick;
+define('BbaseAlbumTree', [], function(require, exports, module) {
+  var BbaseAlbumTree;
 
   var curList = [];
   var categoryList = [];
   var tempList = [];
 
-  BbaseNewsCatePick = BbaseList.extend({
+  BbaseAlbumTree = BbaseList.extend({
     initialize: function() {
       var categoryIdPath = this.categoryIdPath = this.options.categoryIdPath || 'id';
       var imagePath = this.imagePath = this.options.imagePath || 'image';
@@ -20,11 +20,12 @@ define('BbaseNewsCatePick', [], function(require, exports, module) {
       var domain = this.domain = this.options.domain? (" domain='"+this.options.domain+"'") : '';
       var size = this.size = this.options.size || '5';
       var height = this.options.height ? (this.options.height - 87) : 455;
-      var adminUrl = CONST.ADMIN_URL;
+      var manageHref= this.options.manageHref;
+      var domain =CONST.ADMIN_URL;
       this._super({
         template: `
-          <div class="BbaseNewsCatePick-wrap bbase-component-news-cate-pick">
-            <div class="cate-nav" style="text-align:right;padding-right:18px;"><a target="_blank" href="${adminUrl}/manage_v4/index.html#/category/news">&gt;&gt;&nbsp;前往后台管理分类</a></div>
+          <div class="BbaseAlbumTree-wrap bbase-component-album-tree">
+            <div class="cate-nav" style="text-align:right;padding-right:18px;"><a target="_blank" href="${domain}/manage_v4/index.html#/album">&gt;&gt;&nbsp;前往后台管理相册分类</a></div>
             <div class="theme-black" style="height: ${height}px;overflow:auto;">
               <div class="form" style="background-color: #fff;padding: 10px;">
                 <div id="category-widget" class="jhw-product-category jhw-category-product">
@@ -41,12 +42,12 @@ define('BbaseNewsCatePick', [], function(require, exports, module) {
         `,
         model: BbaseModel.extend({
           baseId: categoryIdPath,
-          baseUrl: CONST.API + '/news/detail',
+          baseUrl: CONST.API + '/product/detail',
           fields: [categoryIdPath, namePath, imagePath]
         }),
         collection: BbaseCollection.extend({
           url: this.options.listApi ?
-            this.options.listApi.indexOf('http') > -1 ? this.options.listApi : CONST.API + this.options.listApi : CONST.API + '/category/news/list'
+            this.options.listApi.indexOf('http') > -1 ? this.options.listApi : CONST.API + this.options.listApi : CONST.API + '/category/product/list'
         }),
         item: BbaseItem.extend({
           tagName: 'li',
@@ -81,6 +82,7 @@ define('BbaseNewsCatePick', [], function(require, exports, module) {
             <div class="cate-grid" style="float:right;padding-right:5px;">
                <div class="cate-grid-cell-inner">
                   <input type="button" value="选择" bb-click="add" bb-watch="checked:class" class="{{#if checked}}checked{{/if}}"></span>
+                  <input type="button" value="管理图片" bb-click="edit" ></span>
                </div>
             </div>
             <!---->
@@ -113,12 +115,27 @@ define('BbaseNewsCatePick', [], function(require, exports, module) {
               });
               categoryList.splice(dx, 1);
             } else {
+              curList = [];
+              categoryList = [];
+              _this._super('view').$el.find('.checked').click();
               _this._set('checked', true);
               if (BbaseEst.indexOf(curList, _this._get(categoryIdPath)) === -1) {
                 curList.push(_this._get(categoryIdPath));
                 categoryList.push(_this.model.toJSON(true));
               }
             }
+          },
+          edit(){
+            var albumId = this._get(categoryIdPath);
+            this._dialog({
+        title: '相册图片管理',
+        content: `<iframe src="${domain}/manage_v4/index.html?win=small&class=pic&albumId=${albumId}#/album" style="width:1080px;height:650px;"></iframe>`,
+        width: 1080,
+        height: 650,
+        cover: true,
+        quickClose: false,
+        onClose: this.refreshModule
+      })
           },
           handleChange: function() {
             console.log(this._get('cur'));
@@ -127,6 +144,7 @@ define('BbaseNewsCatePick', [], function(require, exports, module) {
         render: '.tree-list-ul',
         subRender: '.node-tree',
         collapse: '.node-collapse',
+        checkAppend: false,
         parentId: this.parentIdPath,
         categoryId: this.categoryIdPath,
         rootId: this.parentIdPath, // 一级分类字段名称
@@ -170,5 +188,5 @@ define('BbaseNewsCatePick', [], function(require, exports, module) {
     }
   });
 
-  module.exports = BbaseNewsCatePick;
+  module.exports = BbaseAlbumTree;
 });

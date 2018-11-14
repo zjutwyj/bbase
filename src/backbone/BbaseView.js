@@ -129,7 +129,7 @@
 
       setTimeout(function () {
         //_this.$clone&&_this.$clone.remove();
-        window['$clone' + _this.options.viewId] && window['$clone' + _this.options.viewId].remove();
+        //window['$clone' + _this.options.viewId] && window['$clone' + _this.options.viewId].remove();
         _this.$el.show();
         _this._handleDirectiveShow();
         if (_this._options.afterShow) _this._options.afterShow.call(_this);

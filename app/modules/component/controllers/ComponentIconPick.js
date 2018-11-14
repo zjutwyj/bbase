@@ -17,7 +17,7 @@ define('ComponentIconPick', [], function (require, exports, module) {
             </div>
           </div>
           <div class="main">
-            <div class="demo-item pointer clearfix" bb-bbasecomponenticonpick="{viewId:'bbasecomponenticonpick',cur:cur, font: 'bbasefont',iconColor: iconColor,iconColorState: iconColorState,iconType: iconType,iconTypeItems: iconTypeItems,items: items, showTypeSelect: true,onChange: handleIconPickChange}">点我打开图标选择框</div>
+            <div class="demo-item pointer clearfix" bb-bbasecomponenticonpick="{viewId:'bbasecomponenticonpick',cur:cur, font: 'bbasefont',iconColor: iconColor,iconColorState: iconColorState,iconType: iconType,iconTypeItems: iconTypeItems,items: items, showTypeSelect: true,onChange: handleIconPickChange,showSearch: true}">点我打开图标选择框</div>
           </div>
           <div class="footer">
           <div class="item-type-title clearfix left">输出结果：<i bb-watch="cur:class,iconColor:style" class="bbasefont {{cur}}" style="color: {{iconColor}}"></i>字体名称：<span bb-watch="cur:html">{{cur}}</span>, 字体内容：<span bb-watch="fontcontent:html">{{fontcontent}}</span>字体颜色是否默认：<span  bb-watch="iconColorState:html">{{#If iconColorState==='d'}}是{{else}}否{{/If}}</span><span bb-watch="iconType:html">主题：{{iconType}}</span></div></div>
@@ -70,10 +70,22 @@ define('ComponentIconPick', [], function (require, exports, module) {
                   <td class="argDefault"><span>-</span></td>
                 </tr>
                 <tr>
+                  <td class="argName"><span>showTypeSelect</span></td>
+                  <td class="argDesc"><span>是否显示风格列表下拉菜单</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>false</span></td>
+                </tr>
+                 <tr>
                   <td class="argName"><span>iconTypeItems</span></td>
                   <td class="argDesc"><span>风格列表</span></td>
                   <td class="argType"><span>string</span></td>
                   <td class="argDefault"><span>-</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>showSearch</span></td>
+                  <td class="argDesc"><span>显示搜索框(相应的数组中添加字段label)</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>false</span></td>
                 </tr>
                  <tr>
                   <td class="argName"><span>items</span><span class="red">&nbsp;(必填)</span></td>
@@ -111,25 +123,25 @@ define('ComponentIconPick', [], function (require, exports, module) {
     },
     init: function () {
       var items = [
-          { text: '默认', value: 'iconDefault', content: '' },
-          { text: '', value: 'bbase-setting', content: '"\\e756"' },
-          { text: '', value: 'bbase-crop', content: '"\\e62d"' },
-          { text: '', value: 'bbase-arrowleft', content: '"\\e721"' },
-          { text: '', value: 'bbase-arrowrigt', content: '"\\e612"' },
-          { text: '', value: 'bbase-x', content: '"\\e659"' },
-          { text: '', value: 'bbase-close', content: '"\\e611"' },
-          { text: '', value: 'bbase-close_thin', content: '"\\e62c"' },
-          { text: '', value: 'bbase-correct', content: '"\\e63d"' },
-          { text: '', value: 'bbase-ok', content: '"\\e6ac"' },
-          { text: '', value: 'bbase-caretdown', content: '"\\e627"' },
-          { text: '', value: 'bbase-play', content: '"\\e720"' },
-          { text: '', value: 'bbase-pause', content: '"\\e604"' },
-          { text: '', value: 'bbase-yuandian', content: '"\\e601"' },
-          { text: '', value: 'bbase-xialasanjiao', content: '"\\e63a"' },
-          { text: '', value: 'bbase-delete', content: '"\\e64c"' },
-          { text: '', value: 'bbase-yihen', content: '"\\e62f"' },
-          { text: '', value: 'bbase-search', content: '"\\e62a"' },
-          { text: '', value: 'bbase-copy', content: '"\\e75d"' }
+          { text: '默认', value: 'iconDefault', content: '' ,label: ''},
+          { text: '', value: 'bbase-setting', content: '"\\e756"' ,label: '设置,齿轮'},
+          { text: '', value: 'bbase-crop', content: '"\\e62d"',label: '剪切' },
+          { text: '', value: 'bbase-arrowleft', content: '"\\e721"' ,label: '左箭头'},
+          { text: '', value: 'bbase-arrowrigt', content: '"\\e612"' ,label: '右箭头'},
+          { text: '', value: 'bbase-x', content: '"\\e659"',label: '关闭' },
+          { text: '', value: 'bbase-close', content: '"\\e611"',label: '关闭' },
+          { text: '', value: 'bbase-close_thin', content: '"\\e62c"',label: '关闭'},
+          { text: '', value: 'bbase-correct', content: '"\\e63d"' ,label: '正确'},
+          { text: '', value: 'bbase-ok', content: '"\\e6ac"' ,label: '确定'},
+          { text: '', value: 'bbase-caretdown', content: '"\\e627"' ,label: '下拉箭头'},
+          { text: '', value: 'bbase-play', content: '"\\e720"' ,label: '播放，开始'},
+          { text: '', value: 'bbase-pause', content: '"\\e604"' ,label: '暂停'},
+          { text: '', value: 'bbase-yuandian', content: '"\\e601"' ,label: '圆点，录像'},
+          { text: '', value: 'bbase-xialasanjiao', content: '"\\e63a"' ,label: '三角'},
+          { text: '', value: 'bbase-delete', content: '"\\e64c"' ,label: '删除'},
+          { text: '', value: 'bbase-yihen', content: '"\\e62f"' ,label: ''},
+          { text: '', value: 'bbase-search', content: '"\\e62a"' ,label: '搜索'},
+          { text: '', value: 'bbase-copy', content: '"\\e75d"',label: '复制' }
         ];
       return {
         cur: 'bbase-x1',

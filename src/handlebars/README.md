@@ -69,7 +69,7 @@ BbaseHandlebars.registerHelper('select', function(options) {
  * @param  {string} name       图片地址
  * @param  {int} number     压缩尺寸
  * @param  {object} options
- * @return {string}     => background-image: url(http://img.jihui88.com/upload/u/u2/.......png);
+ * @return {string}     => background-image: url(http://img.xxx.com/upload/u/u2/.......png);
  */
 BbaseHandlebars.registerHelper('BackgroundImage', function(name, number, options) {
   return ('background-image: url(' + BbaseHandlebars.helpers['PIC'].apply(this, Array.prototype.slice.call(arguments)) + ');');

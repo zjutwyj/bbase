@@ -20,10 +20,11 @@ define('BbaseNewsPick', [], function (require, exports, module) {
       var addTimePath = this.addTimePath = this.options.addTimePath || 'addTime';
       var domain = this.domain = this.options.domain? (" domain='"+this.options.domain+"'") : '';
       var size = this.size = this.options.size || '5';
+      var adminUrl = CONST.ADMIN_URL;
       this._super({
         template: `
           <div class="BbaseNewsPick-wrap bbase-component-newspick">
-          <div class="cate-nav"><a target="_blank" href="http://www.jihui88.com/member/index.html#/news">&gt;&gt;&nbsp;前往后台管理新闻</a></div>
+          <div class="cate-nav" style="text-align:right;padding-right:18px;"><a target="_blank" href="${adminUrl}/manage_v4/index.html#/news">&gt;&gt;&nbsp;前往后台管理新闻</a></div>
             <div class="plugin-news-header">
             <div class="pro-6"><span class="header-pic">新闻图片</span><span>新闻标题[来源]</span></div>
               <div class="pro-2"><span>创建时间</span></div>
@@ -60,7 +61,7 @@ define('BbaseNewsPick', [], function (require, exports, module) {
               <div class="plugin-news-item bui-grid-row-even _item_el_PluginProductList_217882" style="visibility: visible;">
                 <div class="pro-6">
                 <div class="img-wrap"><img bb-src="{{PIC ${picPathPath} ${size} ${domain} }}"/>&nbsp;</div>
-                  <span class="news-title"><a bb-watch="${newsIdPath}:href,${titlePath}:html" href="http://www.jihui88.com/member/index.html#/news/{{id2 ${newsIdPath}}}" target="_blank">{{${titlePath}}}&nbsp;&nbsp;[来源：{{${originPath}}}]</a></span>
+                  <span class="news-title"><a bb-watch="${newsIdPath}:href,${titlePath}:html" href="${adminUrl}/manage_v4/index.html#/news/{{id2 ${newsIdPath}}}" target="_blank">{{${titlePath}}}&nbsp;&nbsp;[来源：{{${originPath}}}]</a></span>
                 </div>
                 <div class="pro-2"><span bb-watch="${addTimePath}:html">{{dateFormat ${addTimePath} 'yyyy-MM-dd hh:mm:ss'}}</span></div>
                 <div class="pro-2" style="text-align: right;"><span><input type="button" value="选择" bb-click="add" bb-watch="checked:class" class="{{#if checked}}checked{{/if}}"></span></div>

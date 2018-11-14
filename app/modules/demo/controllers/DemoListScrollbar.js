@@ -67,7 +67,7 @@ define('DemoListScrollbar', [], function(require, exports, module) {
           fields: ['id', 'layoutId']
         }),
         collection: BbaseCollection.extend({
-          url: 'http://pc.jihui88.com/rest/api/comm/layout/list',
+          url: 'http://pc.xxx.com/rest/api/comm/layout/list',
           sync: function(method, collection, options) {
             options.dataType = 'jsonp';
             return BbaseBackbone.sync(method, collection, options);

@@ -12,6 +12,10 @@ define('BbaseIconPick', [], function(require, exports, module) {
       <div class="theme-black form">
         <div class="addSystemIconDiv" id="showSystemIconNew">
           <div class="iconTypeSelect" bb-show="showTypeSelect" bb-bbaseuiselect="{viewId:'bbaseuiselecticontype',cur:iconType,items:iconTypeItems, onChange: handleIconTypeChange}"></div>
+          <div class="iconSearch" bb-show="showSearch" >
+            <input type="text" name="search" bb-model="searchKey" placeholder="请输入关键词"/>
+            <i class="bbasefont bbase-search" bb-click="handleSearch"></i>
+          </div>
           <div bb-bbaseuiitemcheck="{viewId: 'iconcheck',cur: icon, items: items,tpl: iconchecktpl, onChange: handleIconcheckChange}" id="showSystemIconDiv" class="showSystemIconDiv">
           </div>
           <div class="colorChoiceDiv">
@@ -45,15 +49,15 @@ define('BbaseIconPick', [], function(require, exports, module) {
     initData: function() {
       var font = this._options.font || 'iconfont';
       var items = this._options.items || [
-              { text: '', value: 'bbase-caretdown', content: '"\\e627"' },
-              { text: '', value: 'bbase-play', content: '"\\e720"' },
-              { text: '', value: 'bbase-pause', content: '"\\e604"' },
-              { text: '', value: 'bbase-yuandian', content: '"\\e601"' },
-              { text: '', value: 'bbase-xialasanjiao', content: '"\\e63a"' },
-              { text: '', value: 'bbase-delete', content: '"\\e64c"' },
-              { text: '', value: 'bbase-yihen', content: '"\\e62f"' },
-              { text: '', value: 'bbase-search', content: '"\\e62a"' },
-              { text: '', value: 'bbase-copy', content: '"\\e75d"' }
+              { text: '', value: 'bbase-caretdown', content: '"\\e627"',label: '' },
+              { text: '', value: 'bbase-play', content: '"\\e720"',label: '' },
+              { text: '', value: 'bbase-pause', content: '"\\e604"',label: '' },
+              { text: '', value: 'bbase-yuandian', content: '"\\e601"',label: '' },
+              { text: '', value: 'bbase-xialasanjiao', content: '"\\e63a"',label: '' },
+              { text: '', value: 'bbase-delete', content: '"\\e64c"',label: '' },
+              { text: '', value: 'bbase-yihen', content: '"\\e62f"',label: '' },
+              { text: '', value: 'bbase-search', content: '"\\e62a"',label: '' },
+              { text: '', value: 'bbase-copy', content: '"\\e75d"',label: '' }
             ];
       return {
         font: font,
@@ -70,6 +74,8 @@ define('BbaseIconPick', [], function(require, exports, module) {
           { text: '自定义 ', value: 'c' }
         ],
         showTypeSelect: this._options.showTypeSelect,
+        showSearch : this._options.showSearch,
+        searchKey: '',
         iconType: this._options.iconType || 'ionicons',
         iconTypeItems: this._options.iconTypeItems || [
           { text: '默认风格', value: 'default', url: '', iconItems: BbaseEst.cloneDeep(items)},
@@ -78,19 +84,31 @@ define('BbaseIconPick', [], function(require, exports, module) {
             value: 'ssss',
             url: '',
             iconItems: [
-              { text: '', value: 'bbase-caretdown', content: '"\\e627"' },
-              { text: '', value: 'bbase-play', content: '"\\e720"' },
-              { text: '', value: 'bbase-pause', content: '"\\e604"' },
-              { text: '', value: 'bbase-yuandian', content: '"\\e601"' },
-              { text: '', value: 'bbase-xialasanjiao', content: '"\\e63a"' },
-              { text: '', value: 'bbase-delete', content: '"\\e64c"' },
-              { text: '', value: 'bbase-yihen', content: '"\\e62f"' },
-              { text: '', value: 'bbase-search', content: '"\\e62a"' },
-              { text: '', value: 'bbase-copy', content: '"\\e75d"' }
+              { text: '', value: 'bbase-caretdown', content: '"\\e627"', label: '' },
+              { text: '', value: 'bbase-play', content: '"\\e720"', label: '' },
+              { text: '', value: 'bbase-pause', content: '"\\e604"',label: ''},
+              { text: '', value: 'bbase-yuandian', content: '"\\e601"', label: '' },
+              { text: '', value: 'bbase-xialasanjiao', content: '"\\e63a"',label: '' },
+              { text: '', value: 'bbase-delete', content: '"\\e64c"', label: '' },
+              { text: '', value: 'bbase-yihen', content: '"\\e62f"', label: '' },
+              { text: '', value: 'bbase-search', content: '"\\e62a"',label: '' },
+              { text: '', value: 'bbase-copy', content: '"\\e75d"',label: '' }
             ]
           }
         ]
       }
+    },
+    handleSearch(){
+      var keywords = this._get('searchKey');
+      var result = [];
+      BbaseEst.each(this._get('iconTypeItems'), function (item) {
+        BbaseEst.each(item.iconItems, function (icon) {
+            if (icon.label && icon.label.indexOf(keywords) > -1){
+              result.push(icon);
+            }
+        });
+      });
+      this._set('items', BbaseEst.cloneDeep(result));
     },
     handleIconcheckChange: function(item, init) {
       this._set({

@@ -20,10 +20,11 @@ define('BbaseProductPick', [], function (require, exports, module) {
       var addTimePath = this.addTimePath = this.options.addTimePath || 'addTime';
       var domain = this.domain = this.options.domain? (" domain='"+this.options.domain+"'") : '';
       var size = this.size = this.options.size || '5';
+      var adminUrl = CONST.ADMIN_URL;
       this._super({
         template: `
           <div class="BbaseProductPick-wrap bbase-component-poductpick">
-            <div class="cate-nav"><a target="_blank" href="http://www.jihui88.com/member/index.html#/product">&gt;&gt;&nbsp;前往后台管理产品</a></div>
+            <div class="cate-nav" style="text-align:right;padding-right:18px;"><a target="_blank" href="${adminUrl}/manage_v4/index.html#/product">&gt;&gt;&nbsp;前往后台管理产品</a></div>
             <div class="plugin-product-header">
             <div class="pro-6"><span class="header-pic">产品图片</span><span>产品名称[型号]</span></div>
               <div class="pro-2"><span>创建时间</span></div>
@@ -60,7 +61,7 @@ define('BbaseProductPick', [], function (require, exports, module) {
               <div class="plugin-pro-item bui-grid-row-even _item_el_PluginProductList_217882" style="visibility: visible;">
                 <div class="pro-6">
                 <div class="img-wrap"><img bb-src="{{PIC ${picPathPath} ${size} ${domain} }}"/>&nbsp;</div>
-                  <span class="pro-title"><a bb-watch="${productIdPath}:href,${namePath}:html" href="http://www.jihui88.com/member/index.html#/product/{{id2 ${productIdPath}}}" target="_blank">{{${namePath}}}&nbsp;&nbsp;[型号：{{${prodtypePath}}}]</a></span>
+                  <span class="pro-title"><a bb-watch="${productIdPath}:href,${namePath}:html" href="${adminUrl}/manage_v4/index.html#/product/{{id2 ${productIdPath}}}" target="_blank">{{${namePath}}}&nbsp;&nbsp;[型号：{{${prodtypePath}}}]</a></span>
                 </div>
                 <div class="pro-2"><span bb-watch="${addTimePath}:html">{{dateFormat ${addTimePath} 'yyyy-MM-dd hh:mm:ss'}}</span></div>
                 <div class="pro-2" style="text-align: right;"><span><input type="button" value="选择" bb-click="add" bb-watch="checked:class" class="{{#if checked}}checked{{/if}}"></span></div>

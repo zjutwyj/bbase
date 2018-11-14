@@ -295,8 +295,8 @@ BbaseHandlebars.registerHelper('_picUrl', function (src, number, options) {
  * @method [常量] - PIC
  * @author wyj 14.12.17
  * @example
- *        {{PIC pic}}   ==> http://img.jihui88.com/upload/a/a1/picture/2015/12/20/pic.jpg?v=2015-12-20_12:30
- *        {{PIC pic 5}} ==> http://img.jihui88.com/upload/a/a1/picture/2015/12/20/pic_5.jpg?v=2015-12-20_12:30
+ *        {{PIC pic}}   ==> http://img.xxx.com/upload/a/a1/picture/2015/12/20/pic.jpg?v=2015-12-20_12:30
+ *        {{PIC pic 5}} ==> http://img.xxx.com/upload/a/a1/picture/2015/12/20/pic_5.jpg?v=2015-12-20_12:30
  */
 BbaseHandlebars.registerHelper('PIC', function (name, number, options) {
   var _this = this;
@@ -375,7 +375,7 @@ BbaseHandlebars.registerHelper('json', function (path, options) {
  * 打版本号
  * @method [版本] - version
  * @example
- *      http://www.jihui88.com?v={{version}}
+ *      http://www.xxx.com?v={{version}}
  */
 BbaseHandlebars.registerHelper('version', function (type, options) {
   switch (type) {

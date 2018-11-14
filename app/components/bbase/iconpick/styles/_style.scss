@@ -67,7 +67,7 @@
     display: inline-block;
     width: 38px;
     height: 38px;
-    border-radius: 5px;
+    border-radius: 0px;
     color: white;
     font-size: 35px;
     line-height: 38px;
@@ -122,7 +122,7 @@
   #icon-btns {
     position: absolute;
     bottom: 18px;
-    right: 10px;
+    right: 13px;
   }
   #icon-btns .cancel,
   #icon-btns .submit {
@@ -151,6 +151,12 @@
     display:none;
   }
   #showSystemIconDiv .bbase-yuandian{display:block;}
-  .iconTypeSelect {margin-bottom:5px;}
+  .iconTypeSelect {margin-bottom:5px;height:40px;}
   .pcfont{font-size:24px;}
+  .iconSearch{position: absolute;right:13px;top:16px;}
+  .iconSearch input{height: 28px;line-height:28px;text-indent: 5px;}
+  .bbase-search{    position: absolute;
+    right: 5px;
+    top: 6px;
+    cursor: pointer;}
 }

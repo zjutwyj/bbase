@@ -92,6 +92,11 @@ define('UiListExpand', [], function(require, exports, module){
                   <td class="argDesc"><span>是否缓存到localStorage中</span></td>
                   <td class="argType"><span>boolean</span></td>
                   <td class="argDefault"><span>false</span></td>
+                </tr><tr>
+                  <td class="argName"><span>fadeScrollbars</span></td>
+                  <td class="argDesc"><span>隐藏滚动条</span></td>
+                  <td class="argType"><span>boolean</span></td>
+                  <td class="argDefault"><span>true</span></td>
                 </tr>
                 <tr>
                   <td class="argName"><span>onChange</span></td>

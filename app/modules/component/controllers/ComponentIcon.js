@@ -21,7 +21,7 @@ define('ComponentIcon', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        cur: 'ComponentIconPick',
+        cur: 'ComponentIconPanel',
         items: [
           { text: '图标选择(弹)', moduleId: 'ComponentIconPick' ,oneRender: false},
           { text: '图标面板', moduleId: 'ComponentIconPanel' ,oneRender: false}

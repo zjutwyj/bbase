@@ -767,6 +767,7 @@
             }
             setTimeout(function(){
             $clone.remove();
+            $clone = null;
             _this.$el.show();
             BbaseUtils.removeLoading();
           }, 10);

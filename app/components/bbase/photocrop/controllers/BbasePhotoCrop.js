@@ -73,10 +73,25 @@ define('BbasePhotoCrop', ['Jcrop'], function(require, exports, module) {
 
       _this.x = 0; // x轴坐标(相对于原图)
       _this.y = 0; // y轴坐标(相对于原图)
-      _this.x2 = _this.cropWidth; // x轴结束坐标(相对于原图)
-      _this.y2 = _this.cropHeight; // y轴结束坐标(相对于原图)
+
+      _this.radio = _this.cropWidth / _this.cropHeight;
+
+      if (_this.picWidth > _this.picHeight && _this.picWidth / _this.picHeight > _this.cropWidth/_this.cropHeight){
+        // x2 / cropWidth = picHeight / cropHeight => x2 = picHeight / cropHeight * cropWidth;
+        _this.x2 = _this.picHeight / _this.cropHeight * _this.cropWidth; // x轴结束坐标(相对于原图)
+        _this.y2 = _this.picHeight; // y轴结束坐标(相对于原图)
+        _this.x = Math.abs((_this.picWidth -_this.x2) /2);
+        _this.x2 = _this.x2 + _this.x;
+      } else{
+        // y2 / width = cropHeight / cropWidth => y2 = cropHeight / cropWidth * width
+        _this.x2 = _this.picWidth; // x轴结束坐标(相对于原图)
+        _this.y2 = _this.cropHeight / _this.cropWidth * _this.picWidth; // y轴结束坐标(相对于原图)
+        _this.y = Math.abs((_this.picHeight - _this.y2) /2);
+        _this.y2 = _this.y2 + _this.y;
+      }
       _this.w = _this.x2; // 截取的宽度(相对于原图)
       _this.h = _this.y2; // 截取的高度(相对于原图)
+
 
       _this.pos = _this.model.get('pos');
 
@@ -84,7 +99,7 @@ define('BbasePhotoCrop', ['Jcrop'], function(require, exports, module) {
         var pos = JSON.parse(_this.pos);
         _this.cropImage = pos.cropImage;
         // 修复从上一个图片位置坐标太大会出现选择框消失的问题
-        if (pos.x > _this.picWidth || pos.y > _this.picHeight) {} else {
+        if (pos.x > _this.picWidth || pos.y > _this.picHeight || pos.image.replace(/\/\//img, '/') !== _this._get('image').replace(/\/\//img, '/')) {} else {
           _this.x = pos.x;
           _this.y = pos.y;
           _this.x2 = pos.x2;
@@ -93,7 +108,7 @@ define('BbasePhotoCrop', ['Jcrop'], function(require, exports, module) {
           _this.h = _this.y2 - _this.y;
         }
       }
-      _this.radio = _this.cropWidth / _this.cropHeight;
+
       try {
         var loadImage = new Image();
         loadImage.onload = function() {

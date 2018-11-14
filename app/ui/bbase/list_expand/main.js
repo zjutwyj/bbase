@@ -15,6 +15,7 @@ Bbase.DIRECTIVE['bbaseuilistexpand'] = {
         listApi: object.listApi,
         max: object.max,
         cache: object.cache,
+        fadeScrollbars: object.fadeScrollbars,
         session: object.session,
         height:object.height,
         onChange: this._bind(function (item, init, b, c) {

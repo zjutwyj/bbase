@@ -371,7 +371,7 @@
    * @return {String} 不存在返回NULL
    * @author wyj on 14-04-26
    * @example
-   *      var url = 'http://www.jihui88.com/index.html?name=jhon';
+   *      var url = 'http://www.xxx.com/index.html?name=jhon';
    *      BbaseEst.getUrlParam('name', url);
    *      ==> 'jhon'
    */

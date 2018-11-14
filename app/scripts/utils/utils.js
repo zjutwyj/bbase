@@ -8,7 +8,12 @@ var UTIL = {
   // 添加加载动画
   addLoading: function (options) {
     try {
-      if (window.$loading) window.$loading.remove();
+      if (window.$loading) {
+         clearTimeout(window.$loading_timer);
+        window.$loading_timer = setTimeout(function(){
+        BbaseUtils.removeLoading();
+      }, 30000);
+      }
       window.$loading = $('<div id="loading" class="loading"><div class="object" id="object_one">' +
         '</div><div class="object" id="object_two"></div><div class="object" id="object_three"></div></div>');
       $('body').append(window.$loading);
@@ -24,8 +29,10 @@ var UTIL = {
 
   // 移除加载动画
   removeLoading: function (options) {
-    if (window.$loading) window.$loading.remove();
-    else $('.loading').remove();
+    if (window.$loading) {
+      window.$loading.remove();
+      window.$loading = null;
+    }else $('.loading').remove();
   },
 
   createCallback: function (func, context, argCount) {

@@ -10,7 +10,7 @@ define('BbaseListExpand', [], function (require, exports, module) {
     initialize: function () {
       this._super({
         template: `
-          <div bb-bbaseuiscrollbar="{viewId: 'viewId'}" class="bbase-ui-listexpand section-list cc-scrollbar ps-container ps-theme-default" style="height: {{height}}px;" >
+          <div bb-bbaseuiscrollbar="{viewId: 'viewId', fadeScrollbars: fadeScrollbars}" class="bbase-ui-listexpand section-list cc-scrollbar ps-container ps-theme-default" style="height: {{height}}px;" >
             <div class="inner">
               <div class="inner-list">
 
@@ -54,12 +54,16 @@ define('BbaseListExpand', [], function (require, exports, module) {
       });
     },
     initData: function () {
-      this.initMax = this._options.max || 99999;
-      this.initView = true;
-      if (!this._options.path) { this._options.path = 'id'; }
+      var _this = this;
+      var fadeScrollbars = true;
+      _this.initMax = _this._options.max || 99999;
+      _this.initView = true;
+      if (!_this._options.path) { _this._options.path = 'id'; }
+      if (BbaseEst.typeOf(_this._options.fadeScrollbars) === 'boolean'){fadeScrollbars = _this._options.fadeScrollbars;}
       return {
         showMore: false,
         hasMore: false,
+        fadeScrollbars: fadeScrollbars,
         height: this._options.height || 200
       }
     },

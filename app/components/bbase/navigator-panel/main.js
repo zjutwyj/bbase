@@ -17,6 +17,7 @@ Bbase.DIRECTIVE['bbasecomponentnavigatorpanel'] = {
         path: object.path || 'id',
         height: object.height,
         detailModule: object.detailModule,
+        fadeScrollbars: object.fadeScrollbars,
         onChange: BbaseEst.proxy(function (item, init) {
           if (!item) return;
           this._set(object.cur, item[object.path||'id']);

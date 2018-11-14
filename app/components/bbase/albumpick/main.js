@@ -19,7 +19,7 @@ Bbase.DIRECTIVE['bbasecomponentalbumpick'] = {
         size: object.size,
         domain: object.domain,
         quickClose: true,
-        manageHref: object.manageHref || 'http://www.jihui88.com/member/index.html#/album',
+        manageHref: object.manageHref || CONST.ADMIN_URL + '/manage_v4/index.html#/album',
         onChange: this._bind(function (result, init) {
           this._set(object.cur, result.album_id);
           if (object.onChange) object.onChange.call(this, result, init);

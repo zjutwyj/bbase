@@ -1,14 +1,14 @@
 'use strict';
 /**
  * @description 模块功能说明
- * @class ComponentAlbumPick
+ * @class ComponentAlbumTree
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('ComponentAlbumPick', [], function(require, exports, module){
-  var ComponentAlbumPick, template;
+define('ComponentAlbumTree', [], function(require, exports, module){
+  var ComponentAlbumTree, template;
 
   template = `
-    <div class="ComponentAlbumPick-wrap" style="padding:20px;">
+    <div class="ComponentAlbumTree-wrap" style="padding:20px;">
 
 <div class="formPanel form-demo">
         <div class="anything" style="display: block;">
@@ -18,10 +18,10 @@ define('ComponentAlbumPick', [], function(require, exports, module){
             </div>
           </div>
           <div class="main">
-          <div  class="demo-item clearfix"><a href="javascript:;" bb-bbasecomponentalbumpick="{viewId: 'componentAlbum1', items: items, cur: cur,onChange: handleChange}">选择相册</a></div>
+          <div  class="demo-item clearfix"><a href="javascript:;" bb-bbasecomponentalbumtree="{viewId: 'componentalbumtree', items: items, cur: cur, onChange: handleChnage}">选择相册</a></div>
           </div>
           <div class="footer">
-          <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}};</div>
+          <div class="item-type-title clearfix left nowrap" bb-watch="cur:html,size:html">输出结果：{{cur}}; 列表长度: {{size}}</div>
           </div>
         </div>
       </div>
@@ -53,35 +53,48 @@ define('ComponentAlbumPick', [], function(require, exports, module){
                   <td class="argDefault"><span>-</span></td>
                 </tr>
                 <tr>
+                  <td class="argName"><span>items</span></td>
+                  <td class="argDesc"><span>静态相册分类列表</span></td>
+                  <td class="argType"><span>array</span></td>
+                  <td class="argDefault"><span>-</span></td>
+                </tr>
+                <tr>
                   <td class="argName"><span>onChange</span></td>
                   <td class="argDesc"><span>回调函数</span></td>
-                  <td class="argType"><span>function(item){console.log(item.mainPic + item.albumId + item.attCount);}</span></td>
+                  <td class="argType"><span>function(value, items)</span></td>
                   <td class="argDefault"><span>-</span></td>
                 </tr>
                  <tr>
                   <td class="argName"><span>listApi</span></td>
                   <td class="argDesc"><span>列表API</span></td>
                   <td class="argType"><span>string</span></td>
-                  <td class="argDefault"><span>/att/list</span></td>
-                </tr>
-                 <tr>
-                  <td class="argName"><span>detailApi</span></td>
-                  <td class="argDesc"><span>详细API</span></td>
-                  <td class="argType"><span>string</span></td>
-                  <td class="argDefault"><span>/att/detail</span></td>
-                </tr><tr>
-                  <td class="argName"><span>manageHref</span></td>
-                  <td class="argDesc"><span>管理列表网址</span></td>
-                  <td class="argType"><span>string</span></td>
-                  <td class="argDefault"><span>http://www.xxx.com/manage_v4/index.html#/album</span></td>
+                  <td class="argDefault"><span>/product/list</span></td>
                 </tr>
 
+
                 <tr>
-                  <td class="argName"><span>size</span></td>
-                  <td class="argDesc"><span>图片大小</span></td>
+                  <td class="argName"><span>categoryIdPath</span></td>
+                  <td class="argDesc"><span>分类ID</span></td>
                   <td class="argType"><span>string</span></td>
-                  <td class="argDefault"><span>120</span></td>
+                  <td class="argDefault"><span>id</span></td>
                 </tr>
+                <tr>
+                  <td class="argName"><span>parentIdPath</span></td>
+                  <td class="argDesc"><span>上级分类ID字段</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>id</span></td>
+                </tr>
+                <tr>
+                  <td class="argName"><span>namePath</span></td>
+                  <td class="argDesc"><span>分类名称</span></td>
+                  <td class="argType"><span>string</span></td>
+                  <td class="argDefault"><span>name</span></td>
+                </tr>
+
+
+
+
+
               </tbody>
             </table>
           </div>
@@ -90,28 +103,37 @@ define('ComponentAlbumPick', [], function(require, exports, module){
     </div>
   `;
 
-
-  var pics = [
-    'http://img.leshai.cc/wcd/upload/029/2017/07/26/c2f0fe48-4061-4713-a4cd-c2dc6abf3866.jpg',
-    'http://img.leshai.cc/wcd/upload/029/2017/07/25/a78f0f86-0327-443a-a6cb-4ef8d26ee4ab.jpg',
-    'http://img.leshai.cc/wcd/upload/029/2017/07/15/08af373a-8e2c-41ec-9103-d8abbf3e536c.png',
-    'http://img.leshai.cc/wcd/upload/029/2017/07/13/7adea40c-820a-4336-b833-995cdff61123.png',
-    'http://img.leshai.cc/wcd/upload/029/2017/07/12/7463464c-cd1e-4489-8a08-47835afb07a0.png',
-    'http://img.leshai.cc/wcd/upload/029/2017/07/11/1f6b6da0-b633-4cf7-b8dc-b73a9886b06f.png',
-    'http://img.leshai.cc/wcd/upload/029/2017/07/11/da830860-c7f1-4a7a-9718-34561f162447.png',
-    'http://img.leshai.cc/wcd/upload/029/2017/07/01/dc2a3332-3415-40e6-9384-49afa427273b.jpg',
-    'http://img.leshai.cc/wcd/upload/029/2017/06/24/636cf652-4dc1-4990-8c40-61d3ad5c2783.png'
-    ];
-
-  for (var j = 0; j < 10; j++) {
-      pics = pics.concat(pics);
-  }
   var items = [];
-  for(var i = 0; i< 200; i++){
-    items.push({albumId: i,name:'相册名称' + i, mainPic: pics[i], attCount: i});
+
+  for (var i = 0; i < 100; i++) {
+    if (0 <= i && i < 10) {
+      items.push({
+        id: i,
+        parentId: null,
+        name: 'name' + i,
+        type: 'type' + i,
+        sort: i
+      });
+    } else if (10 <= i && i < 80) {
+      items.push({
+        id: i,
+        parentId: i % 10,
+        name: 'name' + i,
+        type: 'type' + i,
+        sort: i
+      });
+    } else if (80 <= i && i < 100) {
+      items.push({
+        id: i,
+        parentId: 2 * 10 + i % 10,
+        name: 'name' + i,
+        type: 'type' + i,
+        sort: i
+      });
+    }
   }
 
-  ComponentAlbumPick = BbaseView.extend({
+  ComponentAlbumTree = BbaseView.extend({
     initialize: function(){
       this._super({
         template: template
@@ -120,16 +142,17 @@ define('ComponentAlbumPick', [], function(require, exports, module){
     init: function(){
       return {
         cur: '1',
+        size: 0,
         items: items   // 测试数据， 真实需请求api
       }
     },
-    handleChange(result){
-      this._set('cur', result.albumId);
+    handleChnage: function(value, items){
+      this._set('size', items.length);
     },
     viewCode(selector, evt){
       window.viewCode.call(this, selector, JSON.stringify(this.model.toJSON()), evt);
     }
   });
 
-  module.exports = ComponentAlbumPick;
+  module.exports = ComponentAlbumTree;
 });

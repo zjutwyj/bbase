@@ -51,14 +51,14 @@ QUnit.test('cookie -> 4ms*1', function(assert) {
 });
 
 QUnit.test('setUrlParam -> 1ms*3', function(assert) {
-  var url = "http://www.jihui88.com/wcd/html/78.html";
+  var url = "http://www.xxx.com/wcd/html/78.html";
   url = BbaseEst.setUrlParam('belongId', '008', url);
-  assert.equal(url, 'http://www.jihui88.com/wcd/html/78.html?belongId=008', 'passed');
+  assert.equal(url, 'http://www.xxx.com/wcd/html/78.html?belongId=008', 'passed');
 
   url = BbaseEst.setUrlParam('code', 'DFEWFGEWFWEF', url);
-  assert.equal(url, 'http://www.jihui88.com/wcd/html/78.html?belongId=008&code=DFEWFGEWFWEF', 'passed');
+  assert.equal(url, 'http://www.xxx.com/wcd/html/78.html?belongId=008&code=DFEWFGEWFWEF', 'passed');
 
   url = BbaseEst.setUrlParam('belongId', '009', url);
-  assert.equal(url, 'http://www.jihui88.com/wcd/html/78.html?belongId=009&code=DFEWFGEWFWEF', 'passed');
+  assert.equal(url, 'http://www.xxx.com/wcd/html/78.html?belongId=009&code=DFEWFGEWFWEF', 'passed');
 
 });

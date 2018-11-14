@@ -13,6 +13,7 @@ Bbase.DIRECTIVE['bbasecomponenticonpanel'] = {
         width: object.width,
         height: object.height || 272,
         size: object.size,
+        picSize: object.picSize,
 
         icon: this._get(object.cur) || object.default || object.cur,
         iconColorState: object.iconColorState,
@@ -22,6 +23,10 @@ Bbase.DIRECTIVE['bbasecomponenticonpanel'] = {
         showTypeSelect: object.showTypeSelect,
         iconType: object.iconType,
         iconTypeItems: object.iconTypeItems,
+        showSearch: object.showSearch,
+        picItems: object.picItems,
+        picListApi: object.picListApi,
+        type: object.type,
 
         onChange: BbaseEst.proxy(function(result) {
           this._set(object.cur, result.icon);

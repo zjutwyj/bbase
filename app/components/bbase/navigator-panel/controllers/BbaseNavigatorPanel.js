@@ -33,7 +33,7 @@ define('BbaseNavigatorPanel', [], function(require, exports, module) {
       this._super({
         template: `
           <div class="BbaseNavigatorPanel-wrap bbase-component-navigator-panel" style="width: ${width};height:${wrapHeight};">
-            <div class="navlist" style="width: ${width};height: ${height}" bb-bbaseuiscrollbar="{viewId: 'navigatorpanelscroll',disableMouseMove:true}">
+            <div class="navlist" style="width: ${width};height: ${height}" bb-bbaseuiscrollbar="{viewId: 'navigatorpanelscroll',disableMouseMove:true,fadeScrollbars: fadeScrollbars}">
                 <ul class="menu-list menu-list-primary ng-pristine ng-untouched ng-valid angular-ui-tree-nodes ng-not-empty" bb-bbaseuisortable="{viewId:'bbaseuinavigatorpanelsortable',onEnd: onSortEnd,handle:'.drag-area'}" ui-tree-nodes="" aria-invalid="false">
               </ul>
             </div>
@@ -105,7 +105,12 @@ define('BbaseNavigatorPanel', [], function(require, exports, module) {
                 saveBtnName: '保存'
               },
               onChange: this._bind(function(model) {
+                var parentId =this._get('parentId');
+
                 this._set(model);
+                if (parentId !== model.parentId){
+                  this._super('view')._reload();
+                }
               })
             });
           },
@@ -138,7 +143,8 @@ define('BbaseNavigatorPanel', [], function(require, exports, module) {
     },
     initData: function() {
       return {
-        curModel: null
+        curModel: null,
+        fadeScrollbars: this._options.fadeScrollbars
       }
     },
     viewUpdate() {

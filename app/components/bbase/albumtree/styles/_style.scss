@@ -1,0 +1,191 @@
+.bbase-component-album-tree {
+  *{
+    -webkit-box-sizing: initial; -moz-box-sizing:initial;box-sizing: initial;
+  }
+   /* 顶部工具栏*/
+  .cate-nav{
+    padding: 8px 5px 0 13px;
+  }
+  .cate-nav a {
+    color: $mainColor;
+  }
+
+  /*底部按钮*/
+  #icon-btns {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+  }
+  #icon-btns .cancel,
+  #icon-btns .submit {
+    width: 90px;
+    height: 36px;
+  }
+  #icon-btns .cancel {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  #icon-btns .submit {
+    border: none;
+    background: $mainColor;
+    color: #fff;
+    cursor: pointer;
+  }
+  #icon-btns .submit:hover {
+    background-color: lighten($mainColor, 10%);
+  }
+  .tree-list-ul,
+  .tree-list-ul li {
+    list-style: none;
+  }
+  .tree-list-ul .bui-grid-row-even {
+    background-color: #FAFAFA;
+  }
+  .tree-list-ul .cate-grid {
+    float: left;
+  }
+  .tree-list-ul .gird-checkbox {
+    width: 32px;
+  }
+  .tree-list-ul .grid-td-tree {
+    width: 500px;
+    float: left;
+    padding-left: 10px;
+  }
+  .tree-list-ul .cate-grid-cell-inner {
+    padding: 10px 0px;
+    position: relative;
+    overflow: hidden;
+    height: 28px;
+    line-height: 28px;
+  }
+  .tree-list-ul .bui-grid-checkBox-container {
+    text-align: center;
+  }
+  .tree-list-ul .x-grid-checkbox {
+    width: 13px;
+    height: 20px;
+    display: inline-block;
+  }
+  .tree-list-ul input[type=checkbox] {
+    box-sizing: border-box;
+    padding: 0;
+    vertical-align: middle;
+  }
+  .tree-list-ul .gird-1 {
+    width: 30px;
+  }
+  .tree-list-ul .x-grid-caret {
+    vertical-align: middle;
+  }
+  .tree-list-ul .x-caret,
+  .tree-list-ul .x-caret-middle {
+    display: inline-block;
+    height: 0;
+    width: 0;
+    line-height: 0;
+  }
+  .tree-list-ul .x-caret-middle {
+    border: 6px solid transparent;
+  }
+  .tree-list-ul .x-caret-left-middle {
+    border-left: 6px solid #000;
+    border-right: 0;
+  }
+  .tree-list-ul .x-caret-left-gray {
+    border-left-color: #CBCBCB;
+  }
+  .tree-list-ul .grid-td-cate-name {
+    width: 400px;
+  }
+  input[type=password],
+  input[type=text],
+  select,
+  textarea {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    padding: 4px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  }
+  .tree-list-ul {
+    .category-div-1 input.input-middle.pro-cate-name {
+      width: 172px;
+    }
+    .gird-2 {
+      width: 32px;
+      height: 28px;
+    }
+    .tree-arrow {
+      width: 20px;
+      margin-left: -5px;
+      display: inline-block;
+    }
+    .gird-3 {
+      width: 60px;
+    }
+    .gird-4{
+          width: 87px;
+    }
+    .gird-5{
+          width: 100px;
+    }
+    .node-tree .category-div-3 {
+      width: auto;
+    }
+    .node-tree .category-div-3 input.input-middle.pro-cate-name {
+      width: 122px;
+    }
+    .x-caret-sub {
+      border: none;
+      width: 24px;
+      height: 40px;
+      background: url(img/cate-sub.jpg)-1px -6px no-repeat;
+      transform: rotate(-46deg);
+      text-indent: 0px;
+      font-size: 30px;
+      color: #d1cece;
+      padding-top: 10px;
+    }
+    .x-caret-sub:hover {
+      text-decoration: none;
+    }
+    .pro-cate-name {}
+    .x-caret-down {
+      transform: rotate(90deg);
+      margin-left: 3px;
+    }
+  }
+  #category-widget {
+    input[type=button] {
+      border: 1px solid #aaa;
+      margin-top: 0px;
+      border-radius: 2px;
+      padding: 0px 21px;
+      height:27px;
+      line-height:27px;
+      background: #ffffff;
+      cursor: pointer;
+    }
+    input[type=button]:hover {
+      background: #f5f5f5;
+    }
+    input[type=button].checked {
+      border: 1px solid $mainColor !important;
+      background: $mainColor;
+      color: #fff !important;
+    }
+  }
+  .cate-grid-row.hover {
+    background-color: rgba($mainColor, 0.1);
+  }
+
+}

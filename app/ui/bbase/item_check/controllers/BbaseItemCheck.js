@@ -26,7 +26,7 @@ define('BbaseItemCheck', [], function(require, exports, module) {
     afterRender: function() {
       if (this._super('view')) this.options.data.cur = this._super('view').getCurValue();
       if ((this.options.data.compare && this.options.data.compare.call(this, this.model.toJSON(), this.options.data.cur)) ||
-        (this.options.data.cur !== '-' && this._super('view')._options.checkAppend ? this.options.data.cur.indexOf(this._getValue(this.options.data.path)) > -1 :this.options.data.cur === this._getValue(this.options.data.path))) {
+        (this.options.data.cur !== '-' && this._super('view')._options.checkAppend ? (this.options.data.cur + '').indexOf(this._getValue(this.options.data.path)) > -1 :this.options.data.cur === this._getValue(this.options.data.path))) {
         this.toggleChecked(undefined, true);
       }
     },
@@ -44,6 +44,9 @@ define('BbaseItemCheck', [], function(require, exports, module) {
           this._super('view').options.data.cur = v;
       }
       this.result = this.options.data.onChange.call(this, this.model.attributes, init, e, (init ? this._super('options').cur : this._super('view').getValue()));
+      if (this.options.data.onClick && this._super('view')){
+        this.options.data.onClick.call(this, this.model.attributes, init, e, (init ? this._super('options').cur : this._super('view').getValue()));
+      }
       if (BbaseEst.typeOf(this.result) === 'boolean' && !this.result) return false;
     }
   });
@@ -91,7 +94,8 @@ define('BbaseItemCheck', [], function(require, exports, module) {
         compare: this.options.compare,
         path: this.options.path || 'value',
         target: this.options.target,
-        mouseEnter: this.options.mouseEnter
+        mouseEnter: this.options.mouseEnter,
+        onClick: this.options.onClick
       });
       this._super({
         template: '<div class="bbase-ui-itemcheck item-check-wrap ui-itemcheck ' + (this.options.theme || 'ui-item-check-normal') +
@@ -117,6 +121,9 @@ define('BbaseItemCheck', [], function(require, exports, module) {
           view.toggleChecked(false, false);
         }
       }));
+    },
+    afterRender: function(){
+      this._removeNoResult();
     },
     getCurValue: function() {
       return this.options.data.cur;

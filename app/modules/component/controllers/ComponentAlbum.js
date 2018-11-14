@@ -21,10 +21,11 @@ define('ComponentAlbum', [], function (require, exports, module) {
     },
     init: function () {
       return {
-        cur: 'ComponentAlbumPick',
+        cur: 'ComponentAlbumTree',
         items: [
           { text: '相册选择(弹)', moduleId: 'ComponentAlbumPick' ,oneRender: false},
-          { text: '相册选择', moduleId: 'ComponentAlbumPanel' ,oneRender: false}
+          { text: '相册选择', moduleId: 'ComponentAlbumPanel' ,oneRender: false},
+          { text: '相册选择(tree)', moduleId: 'ComponentAlbumTree' ,oneRender: false}
         ],
         tpl: `
           <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><div class="dataTabNav tabImgComm"></div><span>{{text}}</span></a>

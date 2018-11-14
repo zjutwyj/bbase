@@ -380,7 +380,7 @@ else {
 
     if (typeof __dirname !== 'undefined'){
       var fs = require('fs');
-      var _url = url.replace('http://sj.jihui88.com/mobile/scripts/core/', '')
+      var _url = url.replace('http://sj.xxx.com/mobile/scripts/core/', '')
       fs.readFile(_url.replace(/\?.*$/img, ''), function(err, data){
         if (err) throw err;
         node.innerHTML = data.toString();

@@ -17,7 +17,7 @@ function bbaseItemCheck(value, selector, type) {
     }
     this._region(viewId, ItemCheck, {
       el: this.$(selector),
-      tpl: object.tpl || '<span>{{text}}</span>',
+      tpl: object.tpl || '<span bb-watch="text:html">{{text}}</span>',
       theme: 'ui-item-check-' + (object.theme || type),
       target: object.target || '',
       path: object.path || 'value',
@@ -26,12 +26,18 @@ function bbaseItemCheck(value, selector, type) {
       checkToggle: BbaseEst.typeOf(object.toggle) === 'boolean' ? object.toggle : checkToggle,
       items: this._get(object.items) || [],
       compare: object.compare, // 自定义比较器
+      onShow: object.onShow,
       onChange: this._bind(function (item, init, event, values) {
         if (typeof this._get(object.cur) !== 'undefined' && !BbaseEst.isEmpty(object.cur) && !init) {
           this._set(object.cur, type === 'checkbox' ? values : item.value);
         }
         if (object.onChange) {
           return object.onChange.apply(this, [item, init, event, values]);
+        }
+      }),
+      onClick: this._bind(function(item, init, event, values){
+        if (object.onClick){
+          object.onClick.apply(this, [item, init, event, values]);
         }
       })
     });

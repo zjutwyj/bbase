@@ -6,14 +6,18 @@
 /**
  * 全局常量
  * */
+ var _DOMAIN = window.location.href.replace('http://', '');
+_DOMAIN = "http://" + _DOMAIN.substring(0, window.location.href.indexOf('/'));
+console.log(_DOMAIN);
 var CONST = {
   APP_VERSION: '1.5.5_1', // 版本号
-  HOST: 'http://www.bbase.com/manage', // HOST
-  API: 'http://www.bbase.com/api', // 后端API地址，需登录验证
-  PUBLIC_API: 'http://www.bbase.com', // 无登录验证
-  DOMAIN: 'http://www.bbase.com', // 域名
-  STATIC_URL: 'http://www.bbase.com/html/', // 静态页面存放地址
-  DOMAIN_TAIL: 'bbase.com', // 去http://
+  HOST: _DOMAIN + '/manage', // HOST
+  API: _DOMAIN + '/api', // 后端API地址，需登录验证
+  PUBLIC_API: _DOMAIN, // 无登录验证
+  DOMAIN: _DOMAIN, // 域名
+  STATIC_URL: _DOMAIN + '/html/', // 静态页面存放地址
+  DOMAIN_TAIL: _DOMAIN.replace('http://', '').replace('pc.', ''), // 去http://
+  ADMIN_URL : CONST.DOMAIN_TAIL.indexOf('jihui88.com') > -1 ? 'http://www.jihui88.com' : 'http://admin.' + CONST.DOMAIN,
   PIC_URL: 'http://img.jihui88.com/wcd', // 图片服务器地址
   CDN: 'http://img.jihui88.com/wcd/cnd/manage', // 修改后记得改gulpfile里的cdn_root
   MUSIC_URL: 'http://f.bbase.com', // 音乐服务器地址
