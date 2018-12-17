@@ -38,6 +38,11 @@ function bbasetab(value, selector, theme){
             return object.onChange.apply(this, [item, init, b, c]);
           }
         }, this),
+        handleClick: this._bind(function(type, item){
+          if (object.handleClick){
+            object.handleClick.call(this, type, item);
+          }
+        }),
         postData: object.postData
       });
       if (typeof this.model.attributes[object.cur] !== 'undefined' && !BbaseEst.isEmpty(object.cur)) {

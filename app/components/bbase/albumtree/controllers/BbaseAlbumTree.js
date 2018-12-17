@@ -21,11 +21,11 @@ define('BbaseAlbumTree', [], function(require, exports, module) {
       var size = this.size = this.options.size || '5';
       var height = this.options.height ? (this.options.height - 87) : 455;
       var manageHref= this.options.manageHref;
-      var domain =CONST.ADMIN_URL;
+      var adminUrl =CONST.ADMIN_URL;
       this._super({
         template: `
           <div class="BbaseAlbumTree-wrap bbase-component-album-tree">
-            <div class="cate-nav" style="text-align:right;padding-right:18px;"><a target="_blank" href="${domain}/manage_v4/index.html#/album">&gt;&gt;&nbsp;前往后台管理相册分类</a></div>
+            <div class="cate-nav" style="text-align:right;padding-right:18px;"><a target="_blank" href="${adminUrl}/manage_v4/index.html#/album">&gt;&gt;&nbsp;前往后台管理相册分类</a></div>
             <div class="theme-black" style="height: ${height}px;overflow:auto;">
               <div class="form" style="background-color: #fff;padding: 10px;">
                 <div id="category-widget" class="jhw-product-category jhw-category-product">
@@ -129,7 +129,7 @@ define('BbaseAlbumTree', [], function(require, exports, module) {
             var albumId = this._get(categoryIdPath);
             this._dialog({
         title: '相册图片管理',
-        content: `<iframe src="${domain}/manage_v4/index.html?win=small&class=pic&albumId=${albumId}#/album" style="width:1080px;height:650px;"></iframe>`,
+        content: `<iframe src="${adminUrl}/manage_v4/index.html?win=small&class=pic&albumId=${albumId}#/album" style="width:1080px;height:650px;"></iframe>`,
         width: 1080,
         height: 650,
         cover: true,

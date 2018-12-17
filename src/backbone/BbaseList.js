@@ -730,6 +730,11 @@
           _this.collection.push(list[i]);
         }
       } else {
+        if (list.length > 0){
+          _this.$('.no-result').hide();
+        }else{
+          _this.$('.no-result').show();
+        }
         _this.collection.each(_this._bind(function(model, i) {
           if (i > len_l - 1) {} else {
             if (list[i]) {

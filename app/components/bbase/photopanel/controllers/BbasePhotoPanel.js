@@ -39,7 +39,7 @@ define('BbasePhotoPanel', [], function (require, exports, module) {
     <div class="c4-overlay preview"  aria-hidden="true" style="">
       <div class="c4-overlay-default-buttons" >
       <!---->
-      <button class="p9c-primary cc-x-height" data-hook="replace-menu" bb-bbasecomponentphotopick="{viewId: 'photoPanelPick', cur: cur, items: items, listApi: listApi, onChange: handlePickChange,showSystem: showSystem,systemAlbumApi:systemAlbumApi}"><span class="cc-x-height font-t2 photo-panel-replace-btn" >替换</span></button>
+      <button class="p9c-primary cc-x-height" data-hook="replace-menu" bb-bbasecomponentphotopick="{viewId: 'photoPanelPick', cur: cur, items: items, listApi: listApi, onChange: handlePickChange,showSystem: showSystem,systemAlbumApi:systemAlbumApi,showGroup:showGroup,albumAddApi:albumAddApi,albumListApi:albumListApi,albumAddName:albumAddName,albumEditApi:albumEditApi,albumDelApi:albumDelApi}"><span class="cc-x-height font-t2 photo-panel-replace-btn" >替换</span></button>
       <!---->
       <button bb-show="showCropBtn" class="p9c-primary -icon-only" bb-click="handleCrop" data-hook="crop-menu" style="width:auto;padding: 0px 10px;line-height:14px;"><i cc-tooltip-position="top" cc-tooltip="crop" class="cc-icon-circle cc-icon-crop tooltipstered bbasefont bbase-crop"></i><span class="font-t2" style="font-size:14px;vertical-align:middle;">裁剪</span></button>
       <!---->
@@ -58,6 +58,12 @@ define('BbasePhotoPanel', [], function (require, exports, module) {
         showSystem: this.options.showSystem,
         listApi: this._options.listApi,
         systemAlbumApi: this._options.systemAlbumApi,
+        showGroup: this._options.showGroup,
+        albumListApi: this._options.albumListApi,
+        albumAddApi: this._options.albumAddApi,
+        albumDelApi: this._options.albumDelApi,
+        albumEditApi: this._options.albumEditApi,
+        albumAddName: this._options.albumAddName||'name',
         cur: this._options.cur || CONST.PIC_NONE,
         items: this._options.listApi ? null : items // 测试数据， 真实需请求api
       }

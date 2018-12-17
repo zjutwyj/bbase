@@ -18,7 +18,7 @@ define('ComponentPhotoPick', [], function(require, exports, module){
             </div>
           </div>
           <div class="main">
-          <div  class="demo-item clearfix"><a href="javascript:;" bb-bbasecomponentphotopick="{viewId: 'componentPhoto1', items: items, cur: cur,uploadApi:'/att/upload',showSystem:true}">选择图片</a></div>
+          <div  class="demo-item clearfix"><a href="javascript:;" bb-bbasecomponentphotopick="{viewId: 'componentPhoto1', items: items, cur: cur,uploadApi:'/att/upload',showSystem:true,showGroup: true}">选择图片</a></div>
           </div>
           <div class="footer">
           <div class="item-type-title clearfix left" bb-watch="cur:html">输出结果：{{cur}};</div>

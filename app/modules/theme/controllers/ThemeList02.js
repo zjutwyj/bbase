@@ -33,7 +33,7 @@ define('ThemeList02', [], function (require, exports, module) {
         template: `
           <div class="theme-black ${theme}-wrap" style="padding:20px;width: 1016px; padding-right: 0;">
           <style>
-              .${theme}-wrap .i-template {display: block; width: 322px; height: 218px; outline: 0; cursor: default; text-decoration: none; float: left; margin-right: 16px; margin-bottom: 16px; position: relative; background: url(http://dfwjjingtai.b0.upaiyun.com/upload//a//a1//admin//picture//2017//05//23/9c42cdda-6592-441f-a508-e4f9abe50c3f.png) no-repeat 0 0; }
+              .${theme}-wrap .i-template {display: block; width: 322px; height: 218px; outline: 0; cursor: default; text-decoration: none; float: left; margin-right: 16px; margin-bottom: 16px; position: relative; background: url(http://cdn.jihui88.com/upload//a//a1//admin//picture//2017//05//23/9c42cdda-6592-441f-a508-e4f9abe50c3f.png) no-repeat 0 0; }
               .${theme}-wrap .i-templateImg, .${theme}-wrap .i-template .i-templateLayer, .${theme}-wrap .i-template .i-templateCover {width: 320px; height: 200px; position: absolute; top: 17px; left: 1px; }
               .${theme}-wrap .i-templateImg {overflow: hidden; }
               .${theme}-wrap .i-template .i-templateLayer {visibility: hidden; z-index: 2; }

@@ -681,6 +681,15 @@ BbaseApp.addFilter(&#39;myFilter&#39;,function(arg1,arg2,arg3){
 // html
 {{pipe &#39;myFilter(name, age, weight)&#39;}}
 </code></pre>
+<h3 id="-">模板标签</h3>
+<pre><code class="lang-js">BbaseApp.addHelper(&#39;tagName&#39;, [
+  {text: &#39;未审核&#39;, value: &#39;00&#39;},
+  {text: &#39;审核通过&#39;, value: &#39;01&#39;},
+]);
+
+
+{{tagName value}}
+</code></pre>
 <h3 id="bbaseservice-app-scripts-service-service-js-">BbaseService数据请求服务(具体使用详见/app/scripts/service/Service.js)</h3>
 <pre><code class="lang-js">new BbaseService().factory({
     url: &#39;&#39;, // 请求地址

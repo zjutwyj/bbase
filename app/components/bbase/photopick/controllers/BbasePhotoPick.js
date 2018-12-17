@@ -5,7 +5,7 @@
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
 define('BbasePhotoPick', ['BbaseItemCheck'], function(require, exports, module) {
-  var BbasePhotoPick, template, BbaseItemCheck;
+  var BbasePhotoPick, BbaseItemCheck, GroupCategory, GroupEdit;
 
   /*! jQuery UI - v1.11.4+CommonJS - 2015-08-28
    * http://jqueryui.com
@@ -2221,42 +2221,49 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function(require, exports, module) 
   });
 
   BbaseItemCheck = require('BbaseItemCheck');
-  template = `
-    <div class="theme-black bbase-component-photopick">
-      <div id="popupWindowClose_8484" class="closeBtn bbasefont bbase-x" bb-click="_close" style="top: 16px; right: 16px;"></div>
-      <ul class="materialLeftPanel ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
-        <li id="materialCookie" bb-show="showSystem" bb-watch="curNav:class" bb-click="changeNav('system')" class="ui-state-default ui-corner-top  {{#If curNav === 'system'}}ui-state-active{{/If}}">
-          <a id="material_select" href="javascript:;" class="ui-tabs-anchor">系统图片</a>
-        </li>
-        <li id="myPhotoCookie" bb-watch="curNav:class" bb-click="changeNav('my')" class="ui-state-default ui-corner-top ui-tabs-active {{#If curNav === 'my'}}ui-state-active{{/If}}">
-          <a id="myPhoto_select" href="javascript:;" class="ui-tabs-anchor">我的图片</a>
-        </li>
-        <li class="uploadPhoto" bb-show="curNav!== 'system'">
-          <span id="uploadButton" class="uploadify" style="cursor: pointer;">上传图片
-        <a id="file_upload_1-button" href="javascript:void(0)" class="uploadify-button"></a>
-        </span>
-        </li>
-      </ul>
-      <div id="photo-main">
-        <div class="photo-tool">
-          <div bb-show="curNav==='system'" bb-bbaseuitabunderline="{viewId:'itemcheckpiccate',cur:curCate,items:systemCateItems,path:'value', require: false,onChange: handleCateChange }"></div>
-        </div>
-        <ul class="photo-list">
-        </ul>
-      </div>
-      <div id="photo-pagination">
-      </div>
-      <div id="photo-btns">
-        <input type="button" bb-click="_close" value="取消" class="cancel abutton faiButton faiButton-hover" />
-        <input type="button" bb-click="onChange" value="确定" class="submit abutton faiButton faiButton-hover" />
-      </div>
-    </div>
-  `;
 
   BbasePhotoPick = BbaseList.extend({
     initialize: function() {
       var size = typeof this.options.size === 'undefined' ? 120 : this.options.size;
       this._super({
+        template: `
+            <div class="theme-black bbase-component-photopick">
+              <div id="popupWindowClose_8484" class="closeBtn bbasefont bbase-x" bb-click="_close" style="top: 16px; right: 16px;"></div>
+              <ul class="materialLeftPanel ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+                <li id="materialCookie" bb-show="showSystem" bb-watch="curNav:class" bb-click="changeNav('system')" class="ui-state-default ui-corner-top  {{#If curNav === 'system'}}ui-state-active{{/If}}">
+                  <a id="material_select" href="javascript:;" class="ui-tabs-anchor">系统图片</a>
+                </li>
+                <li id="myPhotoCookie" bb-watch="curNav:class" bb-click="changeNav('my')" class="ui-state-default ui-corner-top ui-tabs-active {{#If curNav === 'my'}}ui-state-active{{/If}}">
+                  <a id="myPhoto_select" href="javascript:;" class="ui-tabs-anchor">我的图片</a>
+                </li>
+                <li id="customGroup" bb-show="curNav!== 'system' && showGroup" bb-bbaseuitab="{viewId: 'uiComponentColorTabGroup', cur: albumId,theme:'tab-ul-line',path: 'albumId', tpl: grouptpl, items: groupitems, direction: 'v',handleClick: handleGroupClick,onChange: handleGroupChange}">
+                </li>
+                <li class="uploadPhoto" bb-show="curNav!== 'system'">
+                  <span id="uploadButton" class="uploadify" style="cursor: pointer;">上传图片
+                <a id="file_upload_1-button" href="javascript:void(0)" class="uploadify-button"></a>
+                </span>
+                </li>
+              </ul>
+              <div id="photo-main">
+                <div class="photo-tool">
+                  <div bb-show="curNav==='system'" bb-bbaseuitabunderline="{viewId:'itemcheckpiccate',cur:curCate,items:systemCateItems,path:'value', require: false,onChange: handleCateChange }"></div>
+                  <div bb-show="curNav!== 'system' && showGroup">
+                    <div class="groupBtn addGroupBtn" bb-click="handleGroupAdd"><i class="bbasefont bbase-addfolder"></i>添加分组</div>
+                    <div class="groupBtn editGroupBtn" bb-click="handleGroupEdit" bb-show="albumId!==''"><i class="bbasefont bbase-edit"></i>重命名分组</div>
+                    <div class="groupBtn deleteGroupBtn" bb-click="handleGroupDelete" bb-show="albumId!==''"><i class="bbasefont bbase-delete"></i>删除分组</div>
+                  </div>
+                </div>
+                <ul class="photo-list">
+                </ul>
+              </div>
+              <div id="photo-pagination">
+              </div>
+              <div id="photo-btns">
+                <input type="button" bb-click="_close" value="取消" class="cancel abutton faiButton faiButton-hover" />
+                <input type="button" bb-click="onChange" value="确定" class="submit abutton faiButton faiButton-hover" />
+              </div>
+            </div>
+          `,
         model: BbaseModel.extend({
           defaults: BbaseEst.extend({}, BbaseModel.prototype.defaults),
           baseId: 'attId',
@@ -2311,7 +2318,6 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function(require, exports, module) 
           afterRender: function() {}
         }),
         render: '.photo-list',
-        template: template,
         pagination: '#photo-pagination',
         pageSize: 15,
         diff: true,
@@ -2324,7 +2330,35 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function(require, exports, module) 
         curNav: 'my',
         systemCateItems: [],
         curCate: '',
-        showSystem: this._options.showSystem
+        albumId: '',
+        showSystem: this._options.showSystem,
+        showGroup: this._options.showGroup,
+        groupitems: [],
+        grouptpl: `
+        <a href="javacript:;" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-{{dx}}"><span class="g-tab-span" bb-watch="text:html">{{text}}</span><i class="bbasefont bbase-edit" bb-click="handleClick('edit')"></i></a>
+        `
+      }
+    },
+    beforeRender(){
+      var _this=  this;
+      if (this._options.showGroup && this._options.albumListApi){
+        $.ajax({
+        url: this._options.albumListApi,
+        success: function (result) {
+          var list = result.attributes.data;
+          var groupitems = [];
+          BbaseEst.each(list, function (item) {
+            groupitems.push({
+              albumId: item.albumId,
+              text: item.name,
+              moduleId: item.albumId,
+              value: item.allbumId,
+              id: item.albumId
+            });
+          });
+          _this._set('groupitems', groupitems);
+        }
+      })
       }
     },
     afterRender: function() {
@@ -2339,16 +2373,123 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function(require, exports, module) 
         })
       });
     },
+    destroy(){
+      BbaseEst.off('handleGroupEdit');
+    },
+    handleGroupChange(item,init){
+      if (!init){
+        this._set('albumId', item.albumId);
+        this.refreshList();
+      }
+    },
+    handleGroupAdd(){
+      var _this = this;
+      $.ajax({
+        url: this._options.albumAddApi,
+        type: 'post',
+        data: {
+          name: '新建分组'
+        },
+        success: function (result) {
+          if(result.success){
+            var model = result.attributes.data;
+            var list = [];
+            list.push({
+              id: model.albumId,
+              albumId: model.albumId,
+              text: model.name,
+              value: model.albumId,
+              moduleId: model.albumId
+            });
+            _this._set('groupitems', BbaseEst.cloneDeep(_this._get('groupitems')).concat(list));
+          }else{
+            BbaseUtils.tip(result.msg);
+          }
+        }
+      });
+    },
+    handleGroupEdit(){
+      var _this = this;
+      BbaseEst.off('handleGroupEdit').on('handleGroupEdit', function (type, album) {
+        var list = BbaseEst.cloneDeep(_this._get('groupitems'));
+        BbaseEst.each(list, function (item) {
+          if (item.albumId === album.albumId){
+            item.text = album.name;
+          }
+        });
+        _this._set('groupitems', list);
+      })
+      this._dialog({
+        moduleId: GroupEdit,
+        width: 300,
+        height: 100,
+        cover: true,
+        quickClose: true,
+        data:{
+          albumId: this._get('albumId')
+        }
+      })
+    },
+    handleGroupDelete(){
+      var _this = this;
+      BbaseUtils.confirm({
+        title: '提示',
+        content: '删除分组将删除所有该分组下的所有图片，是否删除？',
+        success: function () {
+          $.ajax({
+        url: _this._options.albumDelApi,
+        type: 'post',
+        data: {
+          albumId: _this._get('albumId')
+        },
+        success: function (result) {
+          if(result.success){
+            var list = [];
+            BbaseEst.each(_this._get('groupitems'), function (item) {
+              if (item.albumId !== _this._get('albumId')){
+                list.push({
+              id: item.albumId,
+              albumId: item.albumId,
+              text: item.name,
+              value: item.albumId,
+              moduleId: item.albumId
+            });
+              }
+            })
+            _this._set('groupitems', list);
+            _this._set('albumId', '');
+            _this.refreshList();
+          }else{
+            BbaseUtils.tip(result.msg);
+          }
+        }
+      });
+        }
+      });
+
+    },
+    handleGroupClick(type, item){
+      if ('edit' === type){
+        this.handleGroupEdit();
+      }
+    },
     changeNav: function(type) {
       this._set('curNav', type);
       if (this._get('curNav') === 'system') {
         this.showSystemCate();
       }else if (this._get('curNav') === 'my'){
         this._setParam('belongId', '');
+        this._set('albumId', '');
         this._setPage(1);
-        this._setParam('type', 'user');
+        this._setParam('type', 'pc');
         this._reload();
       }
+    },
+    refreshList(){
+      this._setParam('belongId', this._get('albumId'));
+      this._setPage(1);
+      this._setParam('type', 'pc');
+      this._reload();
     },
     showSystemCate: function() {
       var _this = this;
@@ -2401,6 +2542,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function(require, exports, module) 
       this._close();
     },
     initFileUpload: function(options) {
+      var _this = this;
       options = options || {};
 
       var viewId = BbaseEst.nextUid('fileupload');
@@ -2418,7 +2560,8 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function(require, exports, module) 
           "id": 'all', // 相册ID
           "replace": false, // 是否替换操作
           "attId": '', // 图片ID
-          "width": options.width || 640
+          "width": options.width || 640,
+          "albumId": this._get('albumId')
         }),
         submit: function(e, data) {
           if (options.submit) options.submit.call(this, data);
@@ -2462,6 +2605,83 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function(require, exports, module) 
         error: function(e) {
           BbaseUtils.tip('上传失败');
           window.$uploading.hide();
+        }
+      });
+
+    $('#' + viewId, options.target).bind('fileuploadsubmit', function (e, data) {
+      data.formData = {
+        albumId : _this._get('albumId')
+      };
+    })
+
+
+    }
+  });
+
+GroupEdit = BbaseView.extend({
+    initialize: function() {
+      this._super({
+        template: `
+          <div class="detail-wrap">
+            <style>
+              .detail-wrap{padding:10px;}
+              .detail-wrap .mobiSettingBtns {text-align: center; position: absolute; width: 94%; bottom: 1px; background: #fff; height: 44px; line-height: 44px; z-index: 1999; }
+              .detail-wrap .faiButton {display: inline-block; font-family: 微软雅黑, "microsoft yahei", 宋体, 新宋体, sans-serif; cursor: pointer; text-align: center; font-size: 12px; height: 24px; line-height: 22px; color: rgb(102, 102, 102); border-radius: 2px; outline: 0px; text-decoration: none; margin: 0px 2px 0px 0px; border-width: 1px; border-style: solid; border-color: rgb(143, 143, 143); border-image: initial; background: rgb(245, 245, 245); padding: 0px 10px !important; }
+              .detail-wrap .mobiSettingBtns .abutton {margin: 0 10px; height: 25px; padding: 0 3px; cursor: pointer; }
+              .detail-wrap input.saveButton {border: 1px solid #FF5241; background: #FF5241; color: #fff; }
+              .detail-wrap input.saveButton:hover {background-color: #f85a4a; }
+              .detail-wrap .faiButton:hover {background: #fff; }
+              .detail-wrap textarea{width: 957px; height: 518px; margin: 10px; padding: 10px; }
+            </style>
+          <input type="text" bb-model="name" class="group-input" placeholder="请输入分类名称"></input>
+          <div class="mobiSettingBtns">
+              <input bb-click="saveGroup" type="button" value="确定" class="faiButton saveButton sh">
+              <input bb-click="_close" type="button" value="取消" class="faiButton cancelButton faiButton-hover">
+            </div>
+          </div>
+
+        `
+      });
+    },
+    initData: function() {
+      return {
+        name: ''
+      }
+    },
+    beforeRender(){
+      var _this = this;
+      $.ajax({
+        url: CONST.API + "/album/detail/" + this._get('albumId'),
+        success: function (result) {
+          if (result.success){
+            _this._set('name', result.attributes.data.name);
+          }
+          else{
+            BbaseUtils.tip(result.msg);
+          }
+        }
+      });
+    },
+    saveGroup: function() {
+      var _this = this;
+      $.ajax({
+        url: CONST.API + "/album/albumEdit",
+        type: 'post',
+        data:{
+          albumId: _this._get('albumId'),
+          name: _this._get('name')
+        },
+        success: function (result) {
+          if (result.success){
+            BbaseEst.trigger('handleGroupEdit', {
+               'albumId':_this._get('albumId'),
+               'name':  _this._get('name')
+            });
+            BbaseUtils.tip("修改成功");
+            _this._close();
+          }else{
+            BbaseUtils.tip(result.msg);
+          }
         }
       });
     }

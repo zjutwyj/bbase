@@ -752,6 +752,18 @@ BbaseApp.addFilter('myFilter',function(arg1,arg2,arg3){
 {{pipe 'myFilter(name, age, weight)'}}
 ```
 
+### 模板标签
+
+```js
+BbaseApp.addHelper('tagName', [
+  {text: '未审核', value: '00'},
+  {text: '审核通过', value: '01'},
+]);
+
+
+{{tagName value}}
+```
+
 ### BbaseService数据请求服务(具体使用详见/app/scripts/service/Service.js)
 ```js
 new BbaseService().factory({

@@ -24,7 +24,7 @@ define('BbaseProductCatePick', [], function(require, exports, module) {
       this._super({
         template: `
           <div class="BbaseProductCatePick-wrap bbase-component-product-cate-pick">
-            <div class="cate-nav" style="text-align:right;padding-right:18px;"><a target="_blank" href="${adminUrl}/manage_v4/index.html#/category/product">&gt;&gt;&nbsp;前往后台管理分类</a></div>
+            <div class="cate-nav" style="text-align:right;padding-right:18px;"><a target="_blank" href="${adminUrl}/manage_v4/index.html#/product_category">&gt;&gt;&nbsp;前往后台管理分类</a></div>
             <div class="theme-black" style="height: ${height}px;overflow:auto;">
               <div class="form" style="background-color: #fff;padding: 10px;">
                 <div id="category-widget" class="jhw-product-category jhw-category-product">

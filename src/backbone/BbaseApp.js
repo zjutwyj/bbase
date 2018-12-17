@@ -547,12 +547,32 @@
      * 添加状态数据
      *
      * @method [状态] - SSaatus ( 添加状态数据 )
-     * @param name
+     * @param key
      * @param value
      * @author wyj 15.1.7
      */
-    addStatus: function(name, value) {
-      this.status[name] = value;
+    addStatus: function(key, value) {
+      this.status[key] = value;
+    },
+    /**
+     * 添加模板指令
+     * @param {[type]} key [description]
+     * @param {[type]} val [description]
+     */
+    addHelper: function(key, val) {
+      BbaseHandlebars.registerHelper(key, function (str, options) {
+        var result = '';
+        if (BbaseEst.isEmpty(options)) {
+          return this[key];
+        }
+        BbaseEst.each(val, function (item) {
+          if (item.value === str) {
+            result = BbaseEst.isEmpty(item.html) ? item.text : item.html;
+            return false;
+          }
+        });
+        return result;
+      });
     },
     /**
      * 获取状态数据

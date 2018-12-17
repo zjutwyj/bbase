@@ -15,6 +15,14 @@ Bbase.DIRECTIVE['bbasecomponentphotopanel'] = {
         size: object.size,
         showCropBtn: object.showCropBtn,
         showSystem: object.showSystem,
+
+        showGroup: object.showGroup,
+        albumListApi: object.albumListApi,
+        albumAddApi: object.albumAddApi,
+        albumDelApi: object.albumDelApi,
+        albumEditApi: object.albumEditApi,
+        albumAddName: object.albumAddName||'name',
+
         onCrop: this._bind(function(pic){
           if (object.onCrop) object.onCrop.call(this, pic);
         }),

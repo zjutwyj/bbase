@@ -106,7 +106,7 @@
     height: 47px;
     line-height: 34px;
     padding-top: 7px;
-    padding-left: 7px;
+    padding-left: 8px;
   }
   .pictureFrame {
     float: left;
@@ -316,16 +316,60 @@
     width: 4px;
     height: 54px;
     background-color: $mainColor;
-}
-li.ui-state-active .ui-tabs-anchor{
-  color: $mainColor;
-}
+
+  }
+  li.ui-state-active .ui-tabs-anchor{
+    color: $mainColor;
+  }
   #photo-btns .submit:hover {
     background-color: lighten($mainColor, 10%);
   }
   .bbase-ui-tab .tab-ul-underline .tab-li::before{
     height: 1px;
   }
+  .groupBtn{
+    width: 94px;
+    height: 33px;
+    line-height: 33px;
+    border: 1px solid #ececec;
+    border-radius: 2px;
+    font-size: 13px;
+    padding-left: 20px;
+    cursor: pointer;
+    margin-top:2px;
+    float:left;
+    margin-right:10px;
+  }
+  .groupBtn:hover{
+    background-color: $mainColor;
+    border-color: $mainColor;
+    color:#fff;
+  }
+  .groupBtn .bbase-addfolder,.groupBtn .bbase-edit,.groupBtn .bbase-delete{
+    margin-right:5px;
+  }
+
+.bbase-ui-tab.v>.tab-head .tab-ul-line .tab-li{
+  padding-left:0;
+}
+.bbase-ui-tab .tab-ul-line .tab-li a, .bbase-ui-tab .tab-ul-line.h .tab-li a{
+  padding:0;
+}
+.bbase-ui-tab .tab-ul-line, .bbase-ui-tab .tab-ul-line.h{
+  height:auto;
+  max-height: 380px;
+    overflow-y: auto;
+}
+.g-tab-span{
+  padding-left:38px!important;
+}
+.bbase-ui-tab.v>.tab-head .tab-ul-line .tab-li.item-active{
+  background-color:#fff;
+}
+.bbase-ui-tab.v>.tab-head .tab-ul-line .tab-li .bbase-edit{display:none;}
+.bbase-ui-tab.v>.tab-head .tab-ul-line .tab-li.item-active .bbase-edit{display:inline-block;}
+
+
 }
 
 .bbase-component-photopick-uploading {

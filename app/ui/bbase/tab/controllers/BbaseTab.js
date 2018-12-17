@@ -67,6 +67,9 @@ define('BbaseTab', [], function (require, exports, module) {
       this.showCurModule(this._get('moduleId'), this._get('nodeId'));
       $(this._options.data.target).val(this._get(this.options.data.path));
       this.options.data.onChange.call(this, this.model.attributes);
+    },
+    handleClick(type){
+      this._super('view').handleClick(type, this.model.toJSON(true));
     }
   });
 
@@ -127,6 +130,11 @@ define('BbaseTab', [], function (require, exports, module) {
         item: item,
         checkAppend: false
       });
+    },
+    handleClick(type, item){
+      if (this._options.handleClick){
+        this._options.handleClick.call(this, type, item);
+      }
     },
     addTab: function (item, index) {
       if (item.moduleId) {
@@ -205,6 +213,9 @@ define('BbaseTab', [], function (require, exports, module) {
       var checkModel = this._getCheckedItems();
       if (checkModel.length > 0 && checkModel[0]._get(this._options.path || 'value') === value) {
         return;
+      }
+      if(value === '' && checkModel.length>0){
+        checkModel[0].view.$el.removeClass('item-active');
       }
       this.collection.each(this._bind(function (model) {
         if (model._get(this._options.path || 'value') === value) {

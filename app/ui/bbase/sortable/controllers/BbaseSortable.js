@@ -855,6 +855,10 @@ define('BbaseSortable', [], function(require, exports, module){
     destroy: function () {
       var el = this.el;
 
+      if (!el){
+        return;
+      }
+
       el[expando] = null;
 
       _off(el, 'mousedown', this._onTapStart);

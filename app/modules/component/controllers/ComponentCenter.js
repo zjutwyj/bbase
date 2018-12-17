@@ -21,7 +21,7 @@ define('ComponentCenter', [], function(require, exports, module){
     },
     init: function () {
       return {
-        cur: 'ComponentIcon',
+        cur: 'ComponentPhoto',
         items: [
           { text: '图片', moduleId: 'ComponentPhoto' ,oneRender: false},
           { text: '颜色', moduleId: 'ComponentColor' ,oneRender: false},
