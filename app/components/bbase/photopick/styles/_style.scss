@@ -362,12 +362,18 @@
 }
 .g-tab-span{
   padding-left:38px!important;
+  display:inline-block;
+  width: 75px;
+  white-space: nowrap;
+  float: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .bbase-ui-tab.v>.tab-head .tab-ul-line .tab-li.item-active{
   background-color:#fff;
 }
 .bbase-ui-tab.v>.tab-head .tab-ul-line .tab-li .bbase-edit{display:none;}
-.bbase-ui-tab.v>.tab-head .tab-ul-line .tab-li.item-active .bbase-edit{display:inline-block;}
+.bbase-ui-tab.v>.tab-head .tab-ul-line .tab-li.item-active .bbase-edit{display:inline-block;float:left;}
 
 
 }

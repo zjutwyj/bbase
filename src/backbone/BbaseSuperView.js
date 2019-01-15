@@ -1305,6 +1305,26 @@
     _getObject: function(str, ignore) {
       var _this = this;
 
+      var _temp = {};
+
+      if (str.indexOf('[') > -1){
+        var itemsArrStr = str.substring(str.indexOf('[') + 1, str.indexOf(']'));
+        var itemsArr = [];
+
+        var patt = new RegExp('(\{.*?\})', 'img');
+
+        while ((result = patt.exec(itemsArrStr)) !== null) {
+          itemsArr.push(result[1]);
+        }
+        var hash = BbaseEst.hash(itemsArrStr);
+        var items = [];
+        BbaseEst.each(itemsArr, function(item){
+            items.push(_this._getObject(item));
+        })
+        _temp[hash] = items;
+        str = str.replace('[' + itemsArrStr + ']', hash);
+      }
+
       if (str.indexOf('{') === -1) return null;
       var result = '',
         object = { fields: {} },
@@ -1366,7 +1386,10 @@
           }
         }
         var ltype = BbaseEst.typeOf(list[1]);
-        if (ltype === 'string' && list[1].indexOf('{') > -1) {
+        if (ltype === 'string' && _temp[list[1]]){
+          object[list[0]] = _temp[list[1]];
+        }
+        else if (ltype === 'string' && list[1].indexOf('{') > -1) {
           // 子对象
           var key = list.shift();
           object[key] = _this._getObject(list.join(':'));

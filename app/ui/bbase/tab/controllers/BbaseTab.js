@@ -131,6 +131,10 @@ define('BbaseTab', [], function (require, exports, module) {
         checkAppend: false
       });
     },
+    afterRender(){
+      this.$el.find('.bbase-ui-tab').append(this.$tabCont);
+      this.$('.no-result').remove();
+    },
     handleClick(type, item){
       if (this._options.handleClick){
         this._options.handleClick.call(this, type, item);
@@ -231,9 +235,6 @@ define('BbaseTab', [], function (require, exports, module) {
       this._setModels(items);
       this.$tabList = [];
       BbaseEst.each(items, this._bind(this.addTab, this));
-    },
-    afterRender: function () {
-      this.$el.find('.bbase-ui-tab').append(this.$tabCont);
     }
   });
 

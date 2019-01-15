@@ -58,12 +58,14 @@ define('BbasePhotoPanel', [], function (require, exports, module) {
         showSystem: this.options.showSystem,
         listApi: this._options.listApi,
         systemAlbumApi: this._options.systemAlbumApi,
+
         showGroup: this._options.showGroup,
         albumListApi: this._options.albumListApi,
         albumAddApi: this._options.albumAddApi,
         albumDelApi: this._options.albumDelApi,
         albumEditApi: this._options.albumEditApi,
         albumAddName: this._options.albumAddName||'name',
+
         cur: this._options.cur || CONST.PIC_NONE,
         items: this._options.listApi ? null : items // 测试数据， 真实需请求api
       }

@@ -173,6 +173,7 @@
      *      BbaseUtils.addLoading();
      */
     addLoading: function(options) {
+      if (window.layoutId && window.layoutId === '97') return;
       try {
         if (window.$loading) {
           clearTimeout(window.$loading_timer);

@@ -7,3 +7,4 @@ Bbase.ROUTE['test'] = function () {
 }
 Bbase.MODULE['TestCenter'] = 'modules/test/controllers/TestCenter.js';
 Bbase.MODULE['TestUnit1'] = 'modules/test/controllers/TestUnit1.js';
+Bbase.MODULE['TestGetObject'] = 'modules/test/controllers/TestGetObject.js';

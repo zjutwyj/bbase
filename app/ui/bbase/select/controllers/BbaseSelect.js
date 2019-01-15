@@ -223,6 +223,14 @@ define('BbaseSelect', [], function(require, exports, module) {
         '<ul class="select-ul"><div class="bui-list-item-select-inner select-div">{{text}}</div></ul> ' +
         '</div> </div>';
     },
+    afterRender: function() {
+      if (this._options.target) {
+        this._options.input = $(this._options.target);
+        this._options.inputValue = this._options.input.val();
+      }
+      if (!BbaseEst.isEmpty(this._options.cur)) this._options.inputValue = this._options.cur;
+      if (this._options.items) this.initInputValue(this._options.items);
+    },
     /**
      * 初始化下拉框
      * @method initSelect
@@ -399,14 +407,6 @@ define('BbaseSelect', [], function(require, exports, module) {
         this.selectNode._setModels(_items);
       }
       this.initInputValue(_items);
-    },
-    afterRender: function() {
-      if (this._options.target) {
-        this._options.input = $(this._options.target);
-        this._options.inputValue = this._options.input.val();
-      }
-      if (!BbaseEst.isEmpty(this._options.cur)) this._options.inputValue = this._options.cur;
-      if (this._options.items) this.initInputValue(this._options.items);
     }
   });
 

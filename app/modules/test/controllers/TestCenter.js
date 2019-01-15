@@ -21,8 +21,9 @@ define('TestCenter', [], function(require, exports, module){
     },
     init: function () {
       return {
-        cur: 'TestUnit1',
+        cur: 'TestGetObject',
         items: [
+          { text: 'getObject', moduleId: 'TestGetObject' ,oneRender: false},
           { text: 'TestUnit1', moduleId: 'TestUnit1' ,oneRender: false}
         ],
         tpl:  `

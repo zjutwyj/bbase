@@ -26,7 +26,7 @@ define('BbaseIconPanel', [], function(require, exports, module) {
                   <button class="p9c-primary cc-x-height" data-hook="replace-menu" bb-bbasecomponenticonpick="{viewId:'bbasecomponenticonpickpanel',cur:cur, font: font,iconColor: iconColor,iconColorState: iconColorState,iconType: iconType,iconTypeItems: iconTypeItems,items: items, showTypeSelect: showTypeSelect,onChange: handleIconPickChange, showSearch: showSearch}"><span class="cc-x-height font-t2 photo-panel-replace-btn" bb-watch="iconTxt:html">{{iconTxt}}</span></button>
                   <!---->
                   <!---->
-                  <button class="p9c-primary cc-x-height" data-hook="replace-menu" bb-bbasecomponentphotopick="{viewId: 'photoPanelPick', cur: cur, items: picItems, listApi: picListApi, onChange: handlePickChange,showSystem: showSystem,systemAlbumApi:systemAlbumApi}"><span class="cc-x-height font-t2 photo-panel-replace-btn" bb-watch="picTxt:html">{{picTxt}}</span></button>
+                  <button class="p9c-primary cc-x-height" data-hook="replace-menu" bb-bbasecomponentphotopick="{viewId: 'photoPanelPick', cur: cur, items: picItems, listApi: picListApi, onChange: handlePickChange,showSystem: showSystem,systemAlbumApi:systemAlbumApi,showGroup:showGroup,albumAddApi:albumAddApi,albumListApi:albumListApi,albumAddName:albumAddName,albumEditApi:albumEditApi,albumDelApi:albumDelApi}"><span class="cc-x-height font-t2 photo-panel-replace-btn" bb-watch="picTxt:html">{{picTxt}}</span></button>
                   <!---->
                 </div>
               </div>
@@ -46,6 +46,14 @@ define('BbaseIconPanel', [], function(require, exports, module) {
         showTypeSelect: this._options.showTypeSelect,
         items: this._options.items,
         showSearch: this._options.showSearch,
+
+        showGroup: this._options.showGroup,
+        albumListApi: this._options.albumListApi,
+        albumAddApi: this._options.albumAddApi,
+        albumDelApi: this._options.albumDelApi,
+        albumEditApi: this._options.albumEditApi,
+        albumAddName: this._options.albumAddName||'name',
+
         type: this._options.type || 'icon', // icon / pic
         showSettingBtn: BbaseEst.typeOf(this.options.showSettingBtn) === 'boolean' ? this.options.showSettingBtn : false,
         showCropBtn: BbaseEst.typeOf(this.options.showCropBtn) === 'boolean' ? this.options.showCropBtn : false,

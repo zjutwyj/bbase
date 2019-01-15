@@ -92,7 +92,7 @@ define('BbaseAlubmPick', [], function(require, exports, module){
             var href = this._get('manageHref') + "?albumId=" + this._get('albumId');
             this._dialog({
               title: '编辑相册',
-              content: `<iframe src="${href}" style="width:1280px;height:800px;"></iframe>`,
+              content: `<div class="dialog-iframe"><iframe src="${href}" style="width:1280px;height:800px;"></iframe></div>`,
               width: 1280,
               height: 800,
               cover: true,

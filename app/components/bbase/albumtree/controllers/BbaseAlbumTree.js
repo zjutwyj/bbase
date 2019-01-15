@@ -129,7 +129,7 @@ define('BbaseAlbumTree', [], function(require, exports, module) {
             var albumId = this._get(categoryIdPath);
             this._dialog({
         title: '相册图片管理',
-        content: `<iframe src="${adminUrl}/manage_v4/index.html?win=small&class=pic&albumId=${albumId}#/album" style="width:1080px;height:650px;"></iframe>`,
+        content: `<div class="dialog-iframe"><iframe src="${adminUrl}/manage_v4/index.html?win=small&class=pic&albumId=${albumId}#/album" style="width:1080px;height:650px;"></iframe></div>`,
         width: 1080,
         height: 650,
         cover: true,

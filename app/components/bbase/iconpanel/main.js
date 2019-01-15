@@ -28,6 +28,13 @@ Bbase.DIRECTIVE['bbasecomponenticonpanel'] = {
         picListApi: object.picListApi,
         type: object.type,
 
+        showGroup: object.showGroup,
+        albumListApi: object.albumListApi,
+        albumAddApi: object.albumAddApi,
+        albumDelApi: object.albumDelApi,
+        albumEditApi: object.albumEditApi,
+        albumAddName: object.albumAddName||'name',
+
         onChange: BbaseEst.proxy(function(result) {
           this._set(object.cur, result.icon);
           object.iconColor && this._set(object.iconColor, result.iconColor);

@@ -20,6 +20,7 @@ Bbase.DIRECTIVE['bbasecomponenticonpick'] = {
         height: object.height || 335,
         showTypeSelect: object.showTypeSelect,
         showSearch: object.showSearch,
+
         iconType: object.iconType || 'default',
         iconTypeItems: object.iconTypeItems,
         quickClose: true,
