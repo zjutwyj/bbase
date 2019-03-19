@@ -2238,7 +2238,7 @@ define('BbasePhotoPick', ['BbaseItemCheck'], function(require, exports, module) 
                 </li>
                 <li id="customGroup" bb-show="curNav!== 'system' && showGroup" bb-bbaseuitab="{viewId: 'uiComponentColorTabGroup', cur: albumId,theme:'tab-ul-line',path: 'albumId', tpl: grouptpl, items: groupitems, direction: 'v',handleClick: handleGroupClick,onChange: handleGroupChange}">
                 </li>
-                <li class="uploadPhoto" bb-show="curNav!== 'system'">
+                <li class="uploadPhoto" bb-show="curNav!== 'system'" tool-tip="图片格式：rgb模式下 jpg/png/gif;图片大小：不超过1M（过大会影响访问速度哦）">
                   <span id="uploadButton" class="uploadify" style="cursor: pointer;">上传图片
                 <a id="file_upload_1-button" href="javascript:void(0)" class="uploadify-button"></a>
                 </span>
