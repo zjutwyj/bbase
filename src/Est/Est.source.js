@@ -3109,6 +3109,80 @@
     });
   };
   BbaseEst.mixin(BbaseEst, true);
+  
+  // 文件载入
+  function loadFile(doc, obj, fn) {
+    var ctx = this;
+
+    try {
+      if (window.location.href.indexOf('https:') == 0) {
+        if (obj.href) {
+          obj.href = obj.href.replace('http:', 'https:');
+        }
+        if (obj.src) {
+          obj.src = obj.src.replace('http:', 'https:');
+        }
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+
+    this.tmpList = this.tmpList || [];
+    var item = this.getItem(doc, obj);
+    if (item) {
+      if (item.ready) {
+        fn && fn();
+      } else {
+        item.funs.push(fn)
+      }
+      return;
+    }
+    this.tmpList.push({
+      doc: doc,
+      url: obj.src || obj.href,
+      funs: [fn]
+    });
+    if (!doc.body) {
+      var html = [];
+      for (var p in obj) {
+        if (p == 'tag') continue;
+        html.push(p + '="' + obj[p] + '"')
+      }
+      doc.write('<' + obj.tag + ' ' + html.join(' ') + ' ></' + obj.tag + '>');
+      return;
+    }
+    if (obj.id && doc.getElementById(obj.id)) {
+      return;
+    }
+    var element = doc.createElement(obj.tag);
+    delete obj.tag;
+    for (var p in obj) {
+      element.setAttribute(p, obj[p]);
+    }
+    element.onload = element.onreadystatechange = function () {
+      if (!this.readyState || /loaded|complete/.test(this.readyState)) {
+        item = ctx.getItem(doc, obj);
+        if (item.funs.length > 0) {
+          item.ready = 1;
+          for (var fi; fi = item.funs.pop();) {
+            fi();
+          }
+        }
+        element.onload = element.onreadystatechange = null;
+      }
+    };
+    element.onerror = function () {
+      throw Error('The load ' + (obj.href || obj.src) + ' fails')
+    };
+    if (obj.href) {
+      doc.getElementsByTagName("head")[0].appendChild(element);
+    } else {
+      doc.getElementsByTagName("body")[0].appendChild(element);
+    }
+    //doc.getElementsByTagName("head")[0].appendChild(element);
+  }
+  BbaseEst.loadFiles = loadFile
 
   /**
    * @description For request.js
